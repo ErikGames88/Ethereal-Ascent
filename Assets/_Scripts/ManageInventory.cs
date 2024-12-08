@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class ManageInventory : MonoBehaviour
@@ -130,14 +131,34 @@ public class ManageInventory : MonoBehaviour
 
     private void EquipObject(int slotIndex)
     {
-        Slot slot = inventorySlots[slotIndex].GetComponent<Slot>();
-        if (slot == null || slot.GetStoredItem() == null)
+        if (slotIndex < 0 || slotIndex >= inventorySlots.Length)
         {
-            Debug.LogWarning("No hay ningún objeto en este slot para equipar.");
+            Debug.LogWarning($"Índice {slotIndex} fuera de los límites del inventario.");
+            return;
+        }
+
+        Slot slot = inventorySlots[slotIndex];
+        if (slot == null)
+        {
+            Debug.LogWarning($"El slot {slotIndex} no existe o es nulo.");
             return;
         }
 
         GameObject itemPrefab = slot.GetStoredItem();
+        string itemName = slot.GetStoredItemName();
+
+        if (itemPrefab == null || string.IsNullOrEmpty(itemName))
+        {
+            Debug.LogWarning($"El slot {slotIndex} está vacío o no contiene un objeto válido.");
+            return;
+        }
+
+        if (!itemPrefab.activeInHierarchy) 
+        {
+            Debug.LogWarning($"El objeto {itemName} está desactivado en la escena pero se encuentra en el inventario.");
+        }
+
+        Debug.Log($"Intentando equipar: {itemName} desde el slot {slotIndex}.");
 
         if (equippedObject != null)
         {
@@ -152,49 +173,98 @@ public class ManageInventory : MonoBehaviour
         if (playerCamera != null)
         {
             equippedObject.transform.SetParent(playerCamera);
-
-            if (itemPrefab.name.Contains("Flashlight"))
-            {
-                equippedObject.transform.localPosition = new Vector3(0.43f, -0.32f, 0.6f);
-                equippedObject.transform.localRotation = Quaternion.Euler(90f, -5.06f, 0f);
-                equippedObject.transform.localScale = new Vector3(1f, 1f, 1f);
-
-                FlashLight flashLightScript = equippedObject.GetComponent<FlashLight>();
-                if (flashLightScript != null)
-                {
-                    flashLightScript.InitializeLight();
-                    Debug.Log("Luz de la linterna inicializada al equiparla.");
-                }
-                else
-                {
-                    Debug.LogWarning("El prefab de la linterna no tiene el script FlashLight asignado.");
-                }
-            }
-            else if (itemPrefab.name.Contains("Revolver"))
-            {
-                equippedObject.transform.localPosition = new Vector3(0.34f, -0.27f, 0.44f);
-                equippedObject.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-                equippedObject.transform.localScale = new Vector3(1f, 1f, 1f);
-            }
         }
 
-        Debug.Log($"Equipado: {equippedObject.name}");
-        Debug.Log($"Posición actualizada: {equippedObject.transform.localPosition}");
+        Debug.Log($"Equipado: {itemName}.");
     }
 
     public bool AddItemToInventory(GameObject itemPrefab, Sprite itemIcon)
     {
         foreach (Slot slot in inventorySlots)
         {
-            if (slot.GetStoredItem() == null) // Busca el primer slot vacío
+            if (slot.GetStoredItem() == null) // Solo añade si el slot está vacío
             {
-                slot.StoreItem(itemPrefab, itemIcon); // Añade el objeto y el icono al slot
-                Debug.Log($"Añadido {itemPrefab.name} al inventario en el slot {System.Array.IndexOf(inventorySlots, slot)}.");
+                if (itemPrefab == null || itemIcon == null)
+                {
+                    Debug.LogError("Error: El prefab o el ícono del objeto a añadir es nulo.");
+                    return false;
+                }
+
+                slot.StoreItem(itemPrefab, itemIcon); // Asigna el prefab e ícono al slot
+
+                Debug.Log($"Añadido al inventario: {itemPrefab.name}");
                 return true;
             }
         }
 
         Debug.LogWarning("No hay espacio disponible en el inventario.");
-        return false; // No hay espacio disponible
-    }      
+        return false;
+    }
+
+    public GameObject GetEquippedItem()
+    {
+        if (selectedSlotIndex < 0 || selectedSlotIndex >= inventorySlots.Length)
+        {
+            Debug.LogWarning($"Índice de slot seleccionado ({selectedSlotIndex}) fuera de rango.");
+            return null;
+        }
+
+        Slot selectedSlot = inventorySlots[selectedSlotIndex];
+        if (selectedSlot == null)
+        {
+            Debug.LogWarning("El slot seleccionado es nulo.");
+            return null;
+        }
+
+        GameObject storedItem = selectedSlot.GetStoredItem();
+        if (storedItem == null)
+        {
+            Debug.LogWarning("El slot seleccionado no contiene ningún objeto.");
+            return null;
+        }
+
+        Debug.Log($"Objeto obtenido del inventario: {storedItem.name}");
+        return storedItem;
+    }  
+
+    public bool IsInventoryOpen()
+    {
+        return isInventoryOpen;
+    }
+    public bool HasItemByTag(string tag)
+    {
+        Debug.Log($"Buscando objeto con el tag: {tag} en el inventario..."); // Depuración
+        foreach (Slot slot in inventorySlots)
+        {
+            GameObject storedItem = slot.GetStoredItem();
+            if (storedItem != null)
+            {
+                Debug.Log($"Objeto encontrado en slot: {slot.name}, Tag: {storedItem.tag}"); // Depuración
+                if (storedItem.CompareTag(tag))
+                {
+                    Debug.Log($"Objeto con el tag {tag} encontrado en el inventario.");
+                    return true;
+                }
+            }
+        }
+
+        Debug.LogWarning($"No se encontró ningún objeto con el tag {tag} en el inventario.");
+        return false;
+    }
+
+    public void RemoveItemByTag(string tag)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            GameObject storedItem = inventorySlots[i].GetStoredItem();
+            if (storedItem != null && storedItem.CompareTag(tag))
+            {
+                inventorySlots[i].ClearSlot();
+                Debug.Log($"Eliminado objeto con Tag {tag} del slot {i}.");
+                return;
+            }
+        }
+
+        Debug.LogWarning($"Intento de eliminar objeto con Tag {tag}, pero no fue encontrado en el inventario.");
+    }
 }

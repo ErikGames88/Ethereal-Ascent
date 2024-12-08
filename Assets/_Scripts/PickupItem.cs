@@ -7,12 +7,12 @@ public class PickupItem : MonoBehaviour
     [SerializeField, Tooltip("Prefab del objeto a recoger")]
     private GameObject itemPrefab;
 
-    [SerializeField, Tooltip("Sprite del icono del objeto")]
+    [SerializeField, Tooltip("Ícono del objeto a recoger")]
     private Sprite itemIcon;
 
     private ManageInventory inventory;
 
-    void Start()
+    private void Start()
     {
         inventory = FindObjectOfType<ManageInventory>();
         if (inventory == null)
@@ -23,17 +23,20 @@ public class PickupItem : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Debug.Log($"Interacción detectada con el objeto: {name}");
+
         if (inventory != null)
         {
             bool added = inventory.AddItemToInventory(itemPrefab, itemIcon);
+
             if (added)
             {
-                Debug.Log($"{gameObject.name} recogido y añadido al inventario.");
-                Destroy(gameObject); // Destruye el objeto tras recogerlo
+                Debug.Log($"Recogido y añadido al inventario: {itemPrefab.name}");
+                gameObject.SetActive(false); // Desactiva el objeto tras recogerlo
             }
             else
             {
-                Debug.LogWarning("El inventario está lleno. No se pudo recoger el objeto.");
+                Debug.LogWarning("No se pudo añadir al inventario. Espacio insuficiente.");
             }
         }
     }

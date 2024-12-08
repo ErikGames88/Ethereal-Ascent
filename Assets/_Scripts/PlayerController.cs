@@ -64,6 +64,12 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement()
     {
+        // Si el Rigidbody está en modo Kinematic, no hacer nada
+        if (_rigidbody.isKinematic)
+        {
+            return;
+        }
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
@@ -73,12 +79,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed && direction.magnitude > 0)
         {
             currentSpeed = sprint;
-            currentSprintTime -= maxSprintTime / maxSprintTime * Time.fixedDeltaTime; 
+            currentSprintTime -= maxSprintTime / maxSprintTime * Time.fixedDeltaTime;
 
             if (currentSprintTime <= 0)
             {
-                canSprint = false; 
-                currentSprintTime = 0; 
+                canSprint = false;
+                currentSprintTime = 0;
             }
         }
         else
@@ -91,14 +97,14 @@ public class PlayerController : MonoBehaviour
 
                 if (currentSprintTime >= maxSprintTime)
                 {
-                    currentSprintTime = maxSprintTime; 
-                    canSprint = true; 
+                    currentSprintTime = maxSprintTime;
+                    canSprint = true;
                 }
             }
-        }
+        }   
 
         Vector3 finalVelocity = direction * currentSpeed;
-        finalVelocity.y = _rigidbody.velocity.y; 
+        finalVelocity.y = _rigidbody.velocity.y;
         _rigidbody.velocity = finalVelocity;
     }
 
@@ -146,5 +152,15 @@ public class PlayerController : MonoBehaviour
     public bool IsSprintAllowed()
     {
         return isSprintAllowed;
+    }
+
+    public void EnableMovement(bool enable)
+    {
+        if (_rigidbody != null)
+        {
+            _rigidbody.isKinematic = !enable; // Congela el Rigidbody cuando el movimiento está desactivado.
+        }
+
+        Debug.Log($"Movimiento del jugador {(enable ? "habilitado" : "deshabilitado")}.");
     }
 }
