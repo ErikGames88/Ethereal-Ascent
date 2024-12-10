@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 432156}
   - component: {fileID: 3362600}
   - component: {fileID: 2374378}
-  - component: {fileID: 6480296}
+  - component: {fileID: 8479142247942279513}
   m_Layer: 0
   m_Name: Chapel_1A2
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6480296
-MeshCollider:
+--- !u!65 &8479142247942279513
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300020, guid: aeba2f93f4c7d9047bdf3a9874fdc73e, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 12.474998, y: 13.100002, z: 8.800002}
+  m_Center: {x: 0.21091199, y: 1.789367, z: -0.00000047683716}
