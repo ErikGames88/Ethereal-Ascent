@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+        
+        _rigidbody.angularVelocity = Vector3.zero;
     }
 
     private void PlayerMovement()
@@ -60,6 +62,10 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 direction = transform.right * moveHorizontal + transform.forward * moveVertical;
+        if (direction.magnitude > 0)
+        {
+            direction.Normalize();
+        }
 
         float currentSpeed;
         if (Input.GetKey(KeyCode.LeftShift) && canSprint && direction.magnitude > 0)
@@ -107,5 +113,14 @@ public class PlayerController : MonoBehaviour
     public float GetMaxStamina()
     {
         return maxSprintTime;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Vector3 pushBack = collision.contacts[0].normal * 0.1f;
+            _rigidbody.AddForce(pushBack, ForceMode.VelocityChange);
+        }
     }
 }

@@ -25,9 +25,9 @@ public class CameraController : MonoBehaviour
     
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        
         xRotation -= mouseY; 
         xRotation = Mathf.Clamp(xRotation, -limitRotation, limitRotation); 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);

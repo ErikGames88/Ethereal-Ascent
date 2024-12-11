@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4610438496174133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8484992074030702152}
+  m_Layer: 0
+  m_Name: Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8484992074030702152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610438496174133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3032993861088575910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1380271831589764150
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +43,7 @@ GameObject:
   - component: {fileID: 1055293405837699372}
   - component: {fileID: 9181725984265815844}
   - component: {fileID: 7106666421586471875}
+  - component: {fileID: 2163671437735454235}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -27,8 +59,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380271831589764150}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.033184383, y: -0.15586495, z: -0.005239757, w: -0.98720694}
-  m_LocalPosition: {x: 54.861473, y: 3.1728969, z: 170.38133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137,6 +169,20 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &2163671437735454235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380271831589764150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440ebc69c1533e641b78ccddee3d8af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 100
+  player: {fileID: 3032993861088575910}
 --- !u!1 &1812509397252060555
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +216,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8007282017811254989}
+  - {fileID: 8484992074030702152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2143473566141920009
@@ -234,13 +281,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf2bd0cb7edc948af31cf809dcaf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  sprint: 0
+  speed: 5
+  sprint: 10
   maxSprintTime: 2
   sprintRechargeRate: 10
   jumpForce: 5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  groundCheck: {fileID: 0}
+    m_Bits: 64
+  groundCheck: {fileID: 8484992074030702152}
   groundCheckRadius: 0.2
