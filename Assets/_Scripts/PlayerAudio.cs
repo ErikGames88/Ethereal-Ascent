@@ -4,57 +4,71 @@ using UnityEngine;
 
 public class PlayerAudio : MonoBehaviour
 {
-    [SerializeField, Tooltip("AudioSource para reproducir sonidos")]
+    [SerializeField, Tooltip("Tiempo entre pasos normales")]
+    private float normalStepRate = 0.5f;
+
+    [SerializeField, Tooltip("Tiempo entre pasos al esprintar")]
+    private float sprintStepRate = 0.3f;
+
+    [SerializeField, Tooltip("Sonido al aterrizar")]
+    private AudioClip landingStep;
+
     private AudioSource audioSource;
-
-    [SerializeField, Tooltip("Sonido para todas las acciones")]
-    private AudioClip audioClip;
-
-    [SerializeField, Tooltip("Intervalo entre pasos al caminar (en segundos)")]
-    private float stepInterval = 0.5f;
-
     private PlayerController playerController;
-    private float stepTimer;
+
+    private float stepTimer = 0f;
+    private bool isLanded = true;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         playerController = GetComponent<PlayerController>();
-        if (audioSource == null)
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
     }
 
     void Update()
     {
-        HandleFootsteps();
+        FootstepsSound();
+        LandingSound();
     }
 
-    public void PlaySound()
+    private void FootstepsSound()
     {
-        if (audioClip != null)
+        // No reproducir pasos si no hay movimiento
+        if (playerController.GetComponent<Rigidbody>().velocity.magnitude <= 0.1f || !playerController.IsGrounded())
         {
-            audioSource.PlayOneShot(audioClip);
-        }
-    }
-
-    private void HandleFootsteps()
-    {
-        if (!playerController.isGrounded || playerController.GetCurrentSpeed() <= 0.1f)
-        {
-            stepTimer = 0; // Resetear el temporizador si no se cumplen las condiciones
+            stepTimer = 0f;
             return;
         }
 
-        // Ajustar la frecuencia de pasos según la velocidad
-        float interval = playerController.GetCurrentSpeed() > 5f ? stepInterval / 2f : stepInterval;
-
-        stepTimer += Time.deltaTime;
-
-        if (stepTimer >= interval)
+        // Determinar tiempo entre pasos
+        float stepRate;
+        if (playerController.IsSprinting())
         {
-            PlaySound();
-            stepTimer = 0;
+            stepRate = sprintStepRate;
         }
+        else
+        {
+            stepRate = normalStepRate;
+        }
+
+        // Contador para reproducir pasos
+        stepTimer += Time.deltaTime;
+        if (stepTimer >= stepRate)
+        {
+            audioSource.Play(); // Reproducir el sonido asignado en el AudioSource
+            stepTimer = 0f; // Reiniciar el contador
+        }
+    }
+
+    private void LandingSound()
+    {
+        // Verificar si aterrizó después de estar en el aire
+        if (!isLanded && playerController.IsGrounded())
+        {
+            audioSource.PlayOneShot(landingStep); // Reproducir sonido único al aterrizar
+        }
+
+        // Actualizar estado del suelo
+        isLanded = playerController.IsGrounded();
     }
 }
