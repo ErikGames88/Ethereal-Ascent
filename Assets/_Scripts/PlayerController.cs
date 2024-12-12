@@ -13,12 +13,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
 
     [SerializeField, Tooltip("Tiempo máximo de sprint en segundos")]
-    private float maxSprintTime = 2f;
+    private float maxSprintTime = 5f;
 
     [SerializeField, Tooltip("Velocidad de recarga del sprint")]
     private float sprintRechargeRate = 10f;
+
     private float currentSprintTime;
-    private bool canSprint = true;
+    public bool canSprint = true;
 
     [SerializeField, Tooltip("Fuerza del salto del Player")]
     private float jumpForce = 5f;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField, Tooltip("Radio para detectar el suelo")]
     private float groundCheckRadius = 0.2f;
+
 
     void Awake()
     {
@@ -52,7 +54,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
-        
+
+        // Evitar rotación no deseada
         _rigidbody.angularVelocity = Vector3.zero;
     }
 
@@ -62,16 +65,12 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 direction = transform.right * moveHorizontal + transform.forward * moveVertical;
-        if (direction.magnitude > 0)
-        {
-            direction.Normalize();
-        }
 
         float currentSpeed;
         if (Input.GetKey(KeyCode.LeftShift) && canSprint && direction.magnitude > 0)
         {
             currentSpeed = sprint;
-            currentSprintTime -= Time.fixedDeltaTime;
+            currentSprintTime -= maxSprintTime / maxSprintTime * Time.fixedDeltaTime;
 
             if (currentSprintTime <= 0)
             {
@@ -85,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
             if (currentSprintTime < maxSprintTime)
             {
-                currentSprintTime += sprintRechargeRate * Time.fixedDeltaTime;
+                currentSprintTime += maxSprintTime / sprintRechargeRate * Time.fixedDeltaTime;
 
                 if (currentSprintTime >= maxSprintTime)
                 {
@@ -93,7 +92,7 @@ public class PlayerController : MonoBehaviour
                     canSprint = true;
                 }
             }
-        }
+        }   
 
         Vector3 finalVelocity = direction * currentSpeed;
         finalVelocity.y = _rigidbody.velocity.y;
@@ -113,14 +112,5 @@ public class PlayerController : MonoBehaviour
     public float GetMaxStamina()
     {
         return maxSprintTime;
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Vector3 pushBack = collision.contacts[0].normal * 0.1f;
-            _rigidbody.AddForce(pushBack, ForceMode.VelocityChange);
-        }
     }
 }
