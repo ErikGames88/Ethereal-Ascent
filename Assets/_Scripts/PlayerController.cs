@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Fuerza del salto del Player")]
     private float jumpForce = 5f;
 
-    private bool isGrounded;
+    public bool isGrounded;
 
     [SerializeField, Tooltip("Capa para identificar el suelo")]
     private LayerMask groundLayer;
@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField, Tooltip("Radio para detectar el suelo")]
     private float groundCheckRadius = 0.2f;
+
+    private bool isSprintAllowed = true;
 
 
     void Awake()
@@ -53,10 +55,20 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         PlayerMovement();
+    
+        // Comprobar estado previo y actual de isGrounded
+        bool wasGrounded = isGrounded;
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
         // Evitar rotación no deseada
         _rigidbody.angularVelocity = Vector3.zero;
+
+        // Sonido al aterrizar
+        if (!wasGrounded && isGrounded)
+        {
+            Debug.Log("Aterrizaje detectado, reproduciendo sonido");
+            GetComponent<PlayerAudio>().PlaySound();
+        }
     }
 
     private void PlayerMovement()
@@ -112,5 +124,28 @@ public class PlayerController : MonoBehaviour
     public float GetMaxStamina()
     {
         return maxSprintTime;
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return _rigidbody.velocity.magnitude;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("NoSprintZone"))
+        {
+            Debug.Log("Player entró en NoSprintZone");
+            isSprintAllowed = false; // Deshabilitar sprint
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("NoSprintZone"))
+        {
+            Debug.Log("Player salió de NoSprintZone");
+            isSprintAllowed = true; // Rehabilitar sprint
+        }
     }
 }
