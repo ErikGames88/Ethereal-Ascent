@@ -33,14 +33,12 @@ public class PlayerAudio : MonoBehaviour
 
     private void FootstepsSound()
     {
-        // No reproducir pasos si no hay movimiento
         if (playerController.GetComponent<Rigidbody>().velocity.magnitude <= 0.1f || !playerController.IsGrounded())
         {
             stepTimer = 0f;
             return;
         }
 
-        // Determinar tiempo entre pasos
         float stepRate;
         if (playerController.IsSprinting())
         {
@@ -51,24 +49,21 @@ public class PlayerAudio : MonoBehaviour
             stepRate = normalStepRate;
         }
 
-        // Contador para reproducir pasos
         stepTimer += Time.deltaTime;
         if (stepTimer >= stepRate)
         {
-            audioSource.Play(); // Reproducir el sonido asignado en el AudioSource
-            stepTimer = 0f; // Reiniciar el contador
+            audioSource.Play(); 
+            stepTimer = 0f; 
         }
     }
 
     private void LandingSound()
     {
-        // Verificar si aterrizó después de estar en el aire
         if (!isLanded && playerController.IsGrounded())
         {
-            audioSource.PlayOneShot(landingStep); // Reproducir sonido único al aterrizar
+            audioSource.PlayOneShot(landingStep); 
         }
 
-        // Actualizar estado del suelo
         isLanded = playerController.IsGrounded();
     }
 }

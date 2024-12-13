@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Posición para verificar si el Player está en el suelo")]
     private Transform groundCheck;
 
+    [SerializeField, Tooltip("Altura máxima permitida para el Player")]
+    private float maxHeight = 4f; 
+
 
     void Awake()
     {
@@ -61,11 +64,17 @@ public class PlayerController : MonoBehaviour
         PlayerMovement();
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (transform.position.y > maxHeight)
+        {
+            Vector3 clampedPosition = transform.position;
+            clampedPosition.y = maxHeight;
+            transform.position = clampedPosition;
+        }
     }
 
     private void PlayerMovement()
     {
-        // Si el Rigidbody está en modo Kinematic, no hacer nada
         if (_rigidbody.isKinematic)
         {
             return;
@@ -77,6 +86,7 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = transform.right * moveHorizontal + transform.forward * moveVertical;
 
         float currentSpeed;
+
         if (Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed && direction.magnitude > 0)
         {
             currentSpeed = sprint;
@@ -102,7 +112,7 @@ public class PlayerController : MonoBehaviour
                     canSprint = true;
                 }
             }
-        }   
+        }
 
         Vector3 finalVelocity = direction * currentSpeed;
         finalVelocity.y = _rigidbody.velocity.y;
@@ -131,16 +141,27 @@ public class PlayerController : MonoBehaviour
 
     public bool IsSprinting()
     {
-        return Input.GetKey(KeyCode.LeftShift) && canSprint;
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed;
+        return isSprinting;
+    }
+
+    public bool IsSprintAllowed()
+    {
+        return isSprintAllowed;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("NoSprintZone"))
         {
-            Debug.Log("Player entró en NoSprintZone");
             isSprintAllowed = false;
             isJumpAllowed = false;
+
+            RainManager rainManager = GetComponentInChildren<RainManager>();
+            if (rainManager != null)
+            {
+                rainManager.SetRainActive(false);
+            }
         }
     }
 
@@ -148,9 +169,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("NoSprintZone"))
         {
-            Debug.Log("Player salió de NoSprintZone");
             isSprintAllowed = true;
             isJumpAllowed = true;
+
+            RainManager rainManager = GetComponentInChildren<RainManager>();
+            if (rainManager != null)
+            {
+                rainManager.SetRainActive(true);
+            }
         }
     }
 }
