@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - NoSprintZone
+  - Interactable
   layers:
   - Default
   - TransparentFX
