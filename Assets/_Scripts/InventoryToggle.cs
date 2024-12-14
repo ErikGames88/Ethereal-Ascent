@@ -7,23 +7,37 @@ public class InventoryToggle : MonoBehaviour
     [SerializeField, Tooltip("Canvas principal del inventario")]
     private GameObject inventoryCanvas;
 
-    [SerializeField, Tooltip("Referencia al script PlayerController")]
+    [SerializeField, Tooltip("Referencia al PlayerController para bloquear movimiento")]
     private PlayerController playerController;
+
+    [SerializeField, Tooltip("Referencia al script CameraController para bloquear rotación")]
+    private CameraController cameraController;
+
+    [SerializeField, Tooltip("Referencia al InventoryManager para manejar lógica del inventario")]
+    private InventoryManager inventoryManager;
 
     private bool isInventoryOpen = false;
 
     void Start()
     {
-        // Asegurarnos de que el Canvas del inventario esté oculto al inicio
         if (inventoryCanvas != null)
         {
-            inventoryCanvas.SetActive(false);
+            inventoryCanvas.SetActive(false); // Asegurarse de que el Canvas está oculto al inicio
+            Debug.Log("InventoryToggle: Canvas oculto al inicio.");
         }
+        else
+        {
+            Debug.LogWarning("InventoryToggle: Inventory Canvas no está asignado.");
+        }
+
+        // Asegurarnos de que el cursor esté siempre oculto
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
-        // Abrir/cerrar inventario con Tab
+        // Alternar el inventario con la tecla Tab
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleInventory();
@@ -32,23 +46,32 @@ public class InventoryToggle : MonoBehaviour
 
     private void ToggleInventory()
     {
-        if (inventoryCanvas == null || playerController == null)
+        if (inventoryCanvas == null || playerController == null || cameraController == null || inventoryManager == null)
         {
-            Debug.LogWarning("El Inventory Canvas o PlayerController no están asignados.");
+            Debug.LogWarning("InventoryToggle: Alguna referencia no está asignada.");
             return;
         }
 
-        // Cambiar el estado del inventario
+        // Alternar el estado del inventario
         isInventoryOpen = !isInventoryOpen;
         inventoryCanvas.SetActive(isInventoryOpen);
 
-        // Bloquear/desbloquear movimiento del jugador
+        // Bloquear movimiento y rotación del jugador
         playerController.enabled = !isInventoryOpen;
+        cameraController.enabled = !isInventoryOpen;
 
-        // Gestionar el cursor
-        Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isInventoryOpen;
+        // Notificar al InventoryManager cuando el inventario se abre
+        if (isInventoryOpen)
+        {
+            Debug.Log("InventoryToggle: Inventario abierto.");
+        }
+        else
+        {
+            Debug.Log("InventoryToggle: Inventario cerrado.");
+        }
 
-        Debug.Log($"Inventario {(isInventoryOpen ? "abierto" : "cerrado")}. Movimiento del jugador {(isInventoryOpen ? "bloqueado" : "permitido")}.");
+        // Asegurarnos de que el cursor esté siempre oculto
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
