@@ -12,6 +12,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField, Tooltip("Prefab para la linterna")]
     private GameObject flashlightPrefab;
 
+    [SerializeField, Tooltip("Icono de la linterna")]
+    private Sprite flashlightIcon;
+
     [SerializeField, Tooltip("Referencia al TextMeshPro del noveno slot (cráneos)")]
     private TextMeshProUGUI skullCounterText;
 
@@ -30,14 +33,22 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
+        // Cargar el sprite de la linterna desde los recursos o asignarlo manualmente
+        Sprite flashlightIcon = Resources.Load<Sprite>("UI/Flashlight_icon"); // Cambia la ruta según tu organización
+        if (flashlightIcon == null)
+        {
+            Debug.LogError("El icono de la linterna no se encontró en la ruta especificada.");
+            return;
+        }
+
         // Asignar la linterna al primer slot
-        AssignItemToSlot(0, "Linterna");
+        AssignItemToSlot(0, "Linterna", flashlightIcon);
 
         // Inicializar el contador de cráneos
         UpdateSkullCounter();
     }
 
-    public void AssignItemToSlot(int slotIndex, string itemName)
+    public void AssignItemToSlot(int slotIndex, string itemName, Sprite itemIcon)
     {
         if (slotIndex < 0 || slotIndex >= slots.Count)
         {
@@ -50,6 +61,14 @@ public class InventoryManager : MonoBehaviour
         if (slotText != null)
         {
             slotText.text = itemName;
+        }
+
+        // Asignar el icono al slot
+        Image slotImage = slots[slotIndex].GetComponentInChildren<Image>();
+        if (slotImage != null)
+        {
+            slotImage.sprite = itemIcon;
+            slotImage.enabled = true; // Asegurarse de que el icono esté visible
         }
     }
 
