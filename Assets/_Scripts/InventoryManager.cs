@@ -15,9 +15,6 @@ public class InventoryManager : MonoBehaviour
     [SerializeField, Tooltip("Icono de la linterna")]
     private Sprite flashlightIcon;
 
-    [SerializeField, Tooltip("Icono de las calaveras para el Slot 9")]
-    private Sprite skullIcon;
-
     [SerializeField, Tooltip("Texto para mostrar el objeto asignado al slot")]
     private TextMeshProUGUI slotText;
 
@@ -25,10 +22,10 @@ public class InventoryManager : MonoBehaviour
     private TextMeshProUGUI skullCounterText;
 
     [SerializeField, Tooltip("Color del slot seleccionado (configurable desde el Inspector)")]
-    private Color selectedSlotColor; 
+    private Color selectedSlotColor = new Color(1f, 1f, 0f, 0.5f); // Amarillo con transparencia
 
     [SerializeField, Tooltip("Color del slot no seleccionado")]
-    private Color defaultSlotColor;
+    private Color defaultSlotColor = Color.white;
 
     private int selectedSlotIndex = 0; // Índice del slot actualmente seleccionado
     private int skullCount = 0;
@@ -71,17 +68,8 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        if (skullIcon == null)
-        {
-            Debug.LogError("El icono de las calaveras no está asignado en el Inspector.");
-            return;
-        }
-
         // Asignar la linterna al primer slot
         AssignItemToSlot(0, "Flashlight", flashlightIcon);
-
-        // Asignar la calavera al Slot 9
-        AssignItemToSlot(8, "Skulls", skullIcon);
 
         // Configurar los textos dinámicos para cada slot
         for (int i = 0; i < slots.Count; i++)

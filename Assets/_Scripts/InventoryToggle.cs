@@ -30,7 +30,7 @@ public class InventoryToggle : MonoBehaviour
             Debug.LogWarning("InventoryToggle: Inventory Canvas no está asignado.");
         }
 
-        // Asegurarnos de que el cursor esté siempre oculto
+        // Asegurarnos de que el cursor esté siempre bloqueado y oculto
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -70,7 +70,7 @@ public class InventoryToggle : MonoBehaviour
             Debug.Log("InventoryToggle: Inventario cerrado.");
         }
 
-        // Asegurarnos de que el cursor esté siempre oculto
+        // Asegurarnos de que el cursor esté siempre bloqueado y oculto
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
