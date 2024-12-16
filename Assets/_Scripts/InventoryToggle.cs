@@ -16,7 +16,7 @@ public class InventoryToggle : MonoBehaviour
     [SerializeField, Tooltip("Referencia al InventoryManager para manejar lógica del inventario")]
     private InventoryManager inventoryManager;
 
-    private bool isInventoryOpen = false;
+    public static bool isInventoryOpen = false;
 
     void Start()
     {
@@ -40,11 +40,11 @@ public class InventoryToggle : MonoBehaviour
         // Alternar el inventario con la tecla Tab
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ToggleInventory();
+            ManageInventory();
         }
     }
 
-    private void ToggleInventory()
+    private void ManageInventory()
     {
         if (inventoryCanvas == null || playerController == null || cameraController == null || inventoryManager == null)
         {
@@ -53,18 +53,13 @@ public class InventoryToggle : MonoBehaviour
         }
 
         // Alternar el estado del inventario
-        isInventoryOpen = !isInventoryOpen;
+        isInventoryOpen = !isInventoryOpen; // Actualizar la variable estática
         inventoryCanvas.SetActive(isInventoryOpen);
 
-        // Bloquear movimiento y rotación del jugador (pero no las teclas globales)
+        // Bloquear movimiento y rotación del jugador
         playerController.enabled = !isInventoryOpen;
         cameraController.enabled = !isInventoryOpen;
 
-        // Notificar al InventoryManager cuando el inventario se abre o cierra (si es necesario)
-        Debug.Log(isInventoryOpen ? "InventoryToggle: Inventario abierto." : "InventoryToggle: Inventario cerrado.");
-
-        // Mantener el cursor bloqueado y oculto
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Debug.Log($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto" : "cerrado")}.");
     }
 }

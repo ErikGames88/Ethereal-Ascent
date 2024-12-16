@@ -198,9 +198,10 @@ GameObject:
   - component: {fileID: 7408621060462342249}
   - component: {fileID: 8554262449334514934}
   - component: {fileID: 9021618582600924378}
+  - component: {fileID: 2251838569659512493}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -407,6 +408,18 @@ MonoBehaviour:
   normalStepRate: 0.5
   sprintStepRate: 0.3
   landingStep: {fileID: 8300000, guid: c880c590397a8094fb7ebfe133d07039, type: 3}
+--- !u!114 &2251838569659512493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812509397252060555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07124e54773f3b4bb53b9dbcadb7e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6299743878642567275
 GameObject:
   m_ObjectHideFlags: 0

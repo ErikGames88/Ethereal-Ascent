@@ -36,6 +36,9 @@ public class InventoryManager : MonoBehaviour
 
     private Vector3 flashlightLocalPosition = new Vector3(-0.922f, 0.031f, -0.031f);
     private Vector3 flashlightLocalRotation = new Vector3(0f, 85.27f, 90f);
+
+    [SerializeField, Tooltip("Texto del objeto para el Slot 2 (llave)")]
+    private GameObject cathedralKeyText;
     private int skullCount = 0;
 
     void Start()
@@ -60,6 +63,10 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log($"InventoryManager Update ejecutándose. Inventario abierto: {InventoryToggle.isInventoryOpen}");
+        // Registrar el estado del objeto y el script
+        Debug.Log($"Estado del objeto: {gameObject.activeSelf}, Estado del script: {enabled}");
+
         // Moverse a la izquierda con A
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -76,26 +83,34 @@ public class InventoryManager : MonoBehaviour
             OnSlotSelected(newSlotIndex);
         }
 
-        // Interactuar con el Slot 1 (Linterna)
+        // Alternar la linterna (equipar/desequipar) con E mientras estás en el Slot 1
         if (Input.GetKeyDown(KeyCode.E) && selectedSlotIndex == 0)
         {
-            EquipFlashlight(); // Alternar la linterna (equipar/desequipar)
+            EquipFlashlight();
         }
 
         // Encender/Apagar la luz con F
-        if (Input.GetKeyDown(KeyCode.F) && equippedFlashlight != null)
+        if (Input.GetKeyDown(KeyCode.F))
         {
+            Debug.Log("Tecla F presionada.");
+
+            if (equippedFlashlight == null)
+            {
+                Debug.LogWarning("No hay linterna equipada. La tecla F no hará nada.");
+                return;
+            }
+
             Transform spotLightTransform = equippedFlashlight.transform.Find("Spot Light");
-            if (spotLightTransform != null)
+            if (spotLightTransform == null)
             {
-                bool isSpotLightActive = spotLightTransform.gameObject.activeSelf;
-                spotLightTransform.gameObject.SetActive(!isSpotLightActive);
-                Debug.Log(isSpotLightActive ? "Luz apagada." : "Luz encendida.");
+                Debug.LogError("No se encontró el hijo 'Spot Light' en la linterna equipada.");
+                return;
             }
-            else
-            {
-                Debug.LogWarning("No se encontró el hijo 'Spot Light' en la linterna equipada.");
-            }
+
+            bool isSpotLightActive = spotLightTransform.gameObject.activeSelf;
+            spotLightTransform.gameObject.SetActive(!isSpotLightActive);
+
+            Debug.Log(isSpotLightActive ? "Luz apagada." : "Luz encendida.");
         }
     }
 
@@ -163,6 +178,7 @@ public class InventoryManager : MonoBehaviour
 
         // Actualizar el color inicial de los slots
         UpdateSlotColors();
+
     }
 
     public void OnSlotSelected(int slotIndex)
@@ -177,6 +193,16 @@ public class InventoryManager : MonoBehaviour
 
         // Actualizar el texto dinámico del slot seleccionado
         UpdateSlotText(slotIndex);
+
+        // Controlar la visibilidad del texto de la llave
+        if (slotIndex == 1) // Slot 2 (índice 1)
+        {
+            ActivateObjectText(true); // Mostrar el texto de la llave
+        }
+        else
+        {
+            ActivateObjectText(false); // Ocultar el texto de la llave
+        }
 
         // Guardar el índice del slot seleccionado
         selectedSlotIndex = slotIndex;
@@ -325,5 +351,58 @@ public class InventoryManager : MonoBehaviour
         equippedFlashlight = flashlightInstance;
 
         Debug.Log("Linterna equipada correctamente. Spot Light desactivado.");
+    }
+
+    public bool AddItemToFirstAvailableSlot(Sprite itemIcon)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            // Verificar si el slot está vacío
+            Image slotImage = slots[i].GetComponentInChildren<Image>();
+            if (slotImage != null && slotImage.sprite == null)
+            {
+                // Asignar el ícono al slot
+                slotImage.sprite = itemIcon;
+                slotImage.enabled = true;
+
+                Debug.Log($"Objeto añadido al Slot {i + 1}");
+                return true; // Objeto añadido correctamente
+            }
+        }
+
+        Debug.LogWarning("No hay slots disponibles en el inventario.");
+        return false; // No hay espacio disponible
+    }
+
+    private void ActivateObjectText(bool isActive)
+    {
+        if (cathedralKeyText != null)
+        {
+            cathedralKeyText.SetActive(isActive);
+
+            if (isActive)
+            {
+                // Centrar el texto en el Slot correspondiente (Slot de la llave)
+                RectTransform slotRect = slots[1].GetComponent<RectTransform>(); // Índice dinámico si necesario
+                RectTransform textRect = cathedralKeyText.GetComponent<RectTransform>();
+
+                if (slotRect != null && textRect != null)
+                {
+                    textRect.SetParent(slotRect); // Hacer que el texto sea hijo del Slot
+                    textRect.localPosition = new Vector3(0f, textRect.localPosition.y, 0f); // Centrar horizontalmente, mantener altura
+                    textRect.anchoredPosition = new Vector2(0f, textRect.anchoredPosition.y); // Centrar horizontalmente, mantener altura
+                }
+
+                Debug.Log("Texto de la llave activado y centrado en el Slot correspondiente.");
+            }
+            else
+            {
+                Debug.Log("Texto de la llave desactivado.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No se ha asignado la referencia 'Cathedral Key Text' en el Inspector.");
+        }
     }
 }

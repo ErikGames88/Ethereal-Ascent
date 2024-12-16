@@ -4,32 +4,40 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    /*[SerializeField, Tooltip("Referencia al InventoryManager para manejar el inventario")]
-    private InventoryManager inventoryManager;
-
-    [SerializeField, Tooltip("Icono del objeto para añadirlo al inventario")]
+    [SerializeField, Tooltip("Ícono del objeto")]
     private Sprite itemIcon;
 
-    [SerializeField, Tooltip("Slot reservado en el inventario (opcional, usa -1 para cualquier slot disponible)")]
-    private int reservedSlot = -1;
+    [SerializeField, Tooltip("Referencia al InventoryManager")]
+    private InventoryManager inventoryManager;
+
+    public void Pickup(InventoryManager inventoryManager)
+    {
+        if (inventoryManager != null)
+        {
+            // Añadir el objeto al inventario
+            bool itemAdded = inventoryManager.AddItemToFirstAvailableSlot(itemIcon);
+
+            if (itemAdded)
+            {
+                Debug.Log("Objeto recogido y añadido al inventario.");
+                gameObject.SetActive(false); // Desactivar el objeto en escena
+            }
+            else
+            {
+                Debug.LogWarning("No hay espacio en el inventario.");
+            }
+        }
+        else
+        {
+            Debug.LogError("InventoryManager no está asignado.");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (inventoryManager != null)
-            {
-                // Añadir el objeto al inventario
-                inventoryManager.AddItemToInventory(null, itemIcon, reservedSlot);
-                Debug.Log("Objeto recogido y añadido al inventario.");
-
-                // Desactivar el objeto en la escena
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.LogWarning("No se asignó el InventoryManager en el PickupItem.");
-            }
+            Debug.Log("Trigger activado: Player ha tocado la llave.");
         }
-    }*/
+    }
 }
