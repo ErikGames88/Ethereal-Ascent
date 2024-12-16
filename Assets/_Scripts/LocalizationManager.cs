@@ -42,9 +42,25 @@ public class LocalizationManager : MonoBehaviour
         switch (currentLanguage)
         {
             case Language.Spanish:
-                return spanishTexts.ContainsKey(key) ? spanishTexts[key] : key;
+                if (spanishTexts.ContainsKey(key))
+                {
+                    return spanishTexts[key];
+                }
+                else
+                {
+                    return key;
+                }
+
             case Language.English:
-                return englishTexts.ContainsKey(key) ? englishTexts[key] : key;
+                if (englishTexts.ContainsKey(key))
+                {
+                    return englishTexts[key];
+                }
+                else
+                {
+                    return key;
+                }
+
             default:
                 return key; // Retorna la clave si no encuentra el texto
         }

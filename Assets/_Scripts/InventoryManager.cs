@@ -28,10 +28,33 @@ public class InventoryManager : MonoBehaviour
     private Color defaultSlotColor = Color.white;
 
     private int selectedSlotIndex = 0; // Índice del slot actualmente seleccionado
+    private bool isFlashlightEquipped = false; // Estado de la linterna
+
+    private Light flashlightLight; // Referencia al Spot Light
+
+    private GameObject equippedFlashlight; // Referencia al objeto de la linterna equipada
+
+    private Vector3 flashlightLocalPosition = new Vector3(-0.922f, 0.031f, -0.031f);
+    private Vector3 flashlightLocalRotation = new Vector3(0f, 85.27f, 90f);
     private int skullCount = 0;
 
     void Start()
     {
+        // Validar que el prefab de la linterna está asignado
+        if (flashlightPrefab == null)
+        {
+            Debug.LogError("El prefab de la linterna no está asignado en el InventoryManager.");
+            return;
+        }
+
+        // Validar que la lista de slots está asignada
+        if (slots == null || slots.Count != 9)
+        {
+            Debug.LogError("La lista de slots no está correctamente configurada.");
+            return;
+        }
+
+        // Inicializar el inventario
         InitializeInventory();
     }
 
@@ -51,6 +74,28 @@ public class InventoryManager : MonoBehaviour
             int newSlotIndex = selectedSlotIndex + 1;
             if (newSlotIndex >= slots.Count) newSlotIndex = 0; // Ciclar al primer slot
             OnSlotSelected(newSlotIndex);
+        }
+
+        // Interactuar con el Slot 1 (Linterna)
+        if (Input.GetKeyDown(KeyCode.E) && selectedSlotIndex == 0)
+        {
+            EquipFlashlight(); // Alternar la linterna (equipar/desequipar)
+        }
+
+        // Encender/Apagar la luz con F
+        if (Input.GetKeyDown(KeyCode.F) && equippedFlashlight != null)
+        {
+            Transform spotLightTransform = equippedFlashlight.transform.Find("Spot Light");
+            if (spotLightTransform != null)
+            {
+                bool isSpotLightActive = spotLightTransform.gameObject.activeSelf;
+                spotLightTransform.gameObject.SetActive(!isSpotLightActive);
+                Debug.Log(isSpotLightActive ? "Luz apagada." : "Luz encendida.");
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró el hijo 'Spot Light' en la linterna equipada.");
+            }
         }
     }
 
@@ -218,5 +263,67 @@ public class InventoryManager : MonoBehaviour
                 slotTextComponent.gameObject.SetActive(i == slotIndex && i != 8); // Activar solo el texto del slot seleccionado, excepto el Slot 9
             }
         }
+    }
+
+    private void EquipFlashlight()
+    {
+        // Encontrar el Player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("No se encontró un objeto con la etiqueta 'Player'.");
+            return;
+        }
+
+        Transform flashlightPoint = player.transform.Find("Main Camera/Flashlight Point");
+        if (flashlightPoint == null)
+        {
+            Debug.LogError("No se encontró el Flashlight Point en el Player.");
+            return;
+        }
+
+        // Verificar si ya hay una linterna equipada
+        if (equippedFlashlight != null)
+        {
+            // DESEQUIPAR LA LINTERNA
+            Destroy(equippedFlashlight);
+            equippedFlashlight = null; // Resetear la referencia de la linterna
+            flashlightLight = null; // Resetear la referencia de la luz
+            Debug.Log("Linterna desequipada.");
+            return;
+        }
+
+        // Instanciar la linterna como hija del Flashlight Point
+        if (flashlightPrefab == null)
+        {
+            Debug.LogError("El prefab de la linterna no está asignado en el InventoryManager.");
+            return;
+        }
+
+        GameObject flashlightInstance = Instantiate(flashlightPrefab, flashlightPoint);
+        flashlightInstance.name = "Flashlight"; // Asegurar un nombre único
+
+        // Asignar posición y rotación locales específicas
+        flashlightInstance.transform.localPosition = flashlightLocalPosition;
+        flashlightInstance.transform.localRotation = Quaternion.Euler(flashlightLocalRotation);
+
+        // Buscar el hijo "Spot Light" directamente y capturar su componente Light
+        Transform spotLightTransform = flashlightInstance.transform.Find("Spot Light");
+        if (spotLightTransform != null)
+        {
+            flashlightLight = spotLightTransform.GetComponent<Light>();
+            spotLightTransform.gameObject.SetActive(false); // Asegurar que el objeto completo está desactivado
+        }
+
+        if (flashlightLight == null)
+        {
+            Debug.LogError("No se encontró el componente Light en el hijo 'Spot Light' del prefab.");
+            return;
+        }
+
+        // Guardar la referencia de la linterna equipada
+        equippedFlashlight = flashlightInstance;
+
+        Debug.Log("Linterna equipada correctamente. Spot Light desactivado.");
     }
 }

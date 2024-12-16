@@ -56,21 +56,14 @@ public class InventoryToggle : MonoBehaviour
         isInventoryOpen = !isInventoryOpen;
         inventoryCanvas.SetActive(isInventoryOpen);
 
-        // Bloquear movimiento y rotación del jugador
+        // Bloquear movimiento y rotación del jugador (pero no las teclas globales)
         playerController.enabled = !isInventoryOpen;
         cameraController.enabled = !isInventoryOpen;
 
-        // Notificar al InventoryManager cuando el inventario se abre
-        if (isInventoryOpen)
-        {
-            Debug.Log("InventoryToggle: Inventario abierto.");
-        }
-        else
-        {
-            Debug.Log("InventoryToggle: Inventario cerrado.");
-        }
+        // Notificar al InventoryManager cuando el inventario se abre o cierra (si es necesario)
+        Debug.Log(isInventoryOpen ? "InventoryToggle: Inventario abierto." : "InventoryToggle: Inventario cerrado.");
 
-        // Asegurarnos de que el cursor esté siempre bloqueado y oculto
+        // Mantener el cursor bloqueado y oculto
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
