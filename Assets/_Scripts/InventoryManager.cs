@@ -437,4 +437,10 @@ public class InventoryManager : MonoBehaviour
     {
         OnSlotSelected(selectedSlotIndex); // Fuerza una actualización del slot seleccionado
     }
+
+    public bool IsKeySelected()
+    {
+        // Verificar si la llave ha sido recogida y está seleccionada
+        return isKeyCollected && selectedSlotIndex == keySlotIndex;
+    }
 }
