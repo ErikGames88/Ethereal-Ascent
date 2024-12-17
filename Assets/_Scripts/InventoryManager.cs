@@ -39,6 +39,16 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField, Tooltip("Texto del objeto para el Slot 2 (llave)")]
     private GameObject cathedralKeyText;
+
+    public GameObject CathedralKeyText 
+    {
+        get => cathedralKeyText;
+    }
+    
+    private bool isKeyCollected = false; // Verificar si la llave ha sido recogida
+
+    private int keySlotIndex = -1;       // Índice dinámico donde se equipa la llave
+
     private int skullCount = 0;
 
     void Start()
@@ -191,17 +201,27 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log($"Slot seleccionado: {slotIndex}.");
 
-        // Actualizar el texto dinámico del slot seleccionado
-        UpdateSlotText(slotIndex);
+        // Mostrar el texto de la linterna si estás en el Slot 1
+        Transform slot1Transform = slots[0].transform;
+        Transform slot1TextTransform = slot1Transform.Find("Slot Text");
 
-        // Controlar la visibilidad del texto de la llave
-        if (slotIndex == 1) // Slot 2 (índice 1)
+        if (slot1TextTransform != null)
         {
-            ActivateObjectText(true); // Mostrar el texto de la llave
+            TextMeshProUGUI slot1Text = slot1TextTransform.GetComponent<TextMeshProUGUI>();
+            if (slot1Text != null)
+            {
+                slot1Text.gameObject.SetActive(slotIndex == 0); // Activar solo en Slot 1
+            }
+        }
+
+        // Mostrar el texto de la llave si estás en el slot correcto
+        if (isKeyCollected && slotIndex == keySlotIndex)
+        {
+            cathedralKeyText.SetActive(true); // Activar texto de la llave
         }
         else
         {
-            ActivateObjectText(false); // Ocultar el texto de la llave
+            cathedralKeyText.SetActive(false); // Ocultar texto de la llave
         }
 
         // Guardar el índice del slot seleccionado
@@ -209,6 +229,7 @@ public class InventoryManager : MonoBehaviour
 
         // Actualizar los colores de los slots
         UpdateSlotColors();
+
     }
 
     private void UpdateSlotColors()
@@ -357,52 +378,45 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            // Verificar si el slot está vacío
             Image slotImage = slots[i].GetComponentInChildren<Image>();
             if (slotImage != null && slotImage.sprite == null)
             {
-                // Asignar el ícono al slot
+                // Asignar el ícono de la llave al slot
                 slotImage.sprite = itemIcon;
                 slotImage.enabled = true;
 
-                Debug.Log($"Objeto añadido al Slot {i + 1}");
-                return true; // Objeto añadido correctamente
+                // Marcar que la llave ha sido recogida y guardar el slot asignado
+                isKeyCollected = true;
+                keySlotIndex = i;
+
+                Debug.Log($"Llave recogida y añadida al Slot {i + 1}.");
+                return true;
             }
         }
 
         Debug.LogWarning("No hay slots disponibles en el inventario.");
-        return false; // No hay espacio disponible
+        return false;
     }
 
-    private void ActivateObjectText(bool isActive)
+    private void ActivateSlotText(bool isActive, string itemName)
     {
-        if (cathedralKeyText != null)
+        // Buscar el texto del Slot 1 (linterna)
+        Transform slot1Transform = slots[0].transform; // Slot 1 es índice 0
+        Transform slotTextTransform = slot1Transform.Find("Slot Text");
+
+        if (slotTextTransform != null)
         {
-            cathedralKeyText.SetActive(isActive);
-
-            if (isActive)
+            TextMeshProUGUI slotTextComponent = slotTextTransform.GetComponent<TextMeshProUGUI>();
+            if (slotTextComponent != null)
             {
-                // Centrar el texto en el Slot correspondiente (Slot de la llave)
-                RectTransform slotRect = slots[1].GetComponent<RectTransform>(); // Índice dinámico si necesario
-                RectTransform textRect = cathedralKeyText.GetComponent<RectTransform>();
-
-                if (slotRect != null && textRect != null)
-                {
-                    textRect.SetParent(slotRect); // Hacer que el texto sea hijo del Slot
-                    textRect.localPosition = new Vector3(0f, textRect.localPosition.y, 0f); // Centrar horizontalmente, mantener altura
-                    textRect.anchoredPosition = new Vector2(0f, textRect.anchoredPosition.y); // Centrar horizontalmente, mantener altura
-                }
-
-                Debug.Log("Texto de la llave activado y centrado en el Slot correspondiente.");
-            }
-            else
-            {
-                Debug.Log("Texto de la llave desactivado.");
+                slotTextComponent.gameObject.SetActive(isActive);
+                Debug.Log(isActive ? $"{itemName} activado." : $"{itemName} desactivado.");
             }
         }
-        else
-        {
-            Debug.LogWarning("No se ha asignado la referencia 'Cathedral Key Text' en el Inspector.");
-        }
+    }
+
+    public void ForceSlotUpdate()
+    {
+        OnSlotSelected(selectedSlotIndex); // Fuerza una actualización del slot seleccionado
     }
 }

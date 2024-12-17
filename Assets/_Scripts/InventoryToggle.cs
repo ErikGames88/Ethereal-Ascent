@@ -46,14 +46,14 @@ public class InventoryToggle : MonoBehaviour
 
     private void ManageInventory()
     {
-        if (inventoryCanvas == null || playerController == null || cameraController == null || inventoryManager == null)
+        if (inventoryCanvas == null || playerController == null || cameraController == null)
         {
             Debug.LogWarning("InventoryToggle: Alguna referencia no está asignada.");
             return;
         }
 
         // Alternar el estado del inventario
-        isInventoryOpen = !isInventoryOpen; // Actualizar la variable estática
+        isInventoryOpen = !isInventoryOpen;
         inventoryCanvas.SetActive(isInventoryOpen);
 
         // Bloquear movimiento y rotación del jugador
@@ -61,5 +61,25 @@ public class InventoryToggle : MonoBehaviour
         cameraController.enabled = !isInventoryOpen;
 
         Debug.Log($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto" : "cerrado")}.");
+
+        if (isInventoryOpen)
+        {
+            InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
+            if (inventoryManager != null)
+            {
+                inventoryManager.ForceSlotUpdate(); // Actualiza el estado del slot al abrir el inventario
+            }
+        }
+
+        // Si cierras el inventario, desactiva el texto de la llave
+        if (!isInventoryOpen)
+        {
+            InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
+            if (inventoryManager != null && inventoryManager.CathedralKeyText != null)
+            {
+                inventoryManager.CathedralKeyText.SetActive(false);
+                Debug.Log("Texto de la llave desactivado al cerrar el inventario.");
+            }
+        }
     }
 }
