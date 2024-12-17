@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
     {
         get => cathedralKeyText;
     }
-    
+
     private bool isKeyCollected = false; // Verificar si la llave ha sido recogida
 
     private int keySlotIndex = -1;       // Índice dinámico donde se equipa la llave
@@ -201,7 +201,7 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log($"Slot seleccionado: {slotIndex}.");
 
-        // Mostrar el texto de la linterna si estás en el Slot 1
+        // --- Controlar el Texto de la Linterna (Slot 1) ---
         Transform slot1Transform = slots[0].transform;
         Transform slot1TextTransform = slot1Transform.Find("Slot Text");
 
@@ -214,14 +214,32 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // Mostrar el texto de la llave si estás en el slot correcto
-        if (isKeyCollected && slotIndex == keySlotIndex)
+        // --- Controlar el Texto de la Llave ---
+        if (cathedralKeyText != null)
         {
-            cathedralKeyText.SetActive(true); // Activar texto de la llave
-        }
-        else
-        {
-            cathedralKeyText.SetActive(false); // Ocultar texto de la llave
+            if (isKeyCollected && slotIndex == keySlotIndex)
+            {
+                // Activar texto
+                cathedralKeyText.SetActive(true);
+
+                // Centrar el texto en el Slot de la llave
+                RectTransform slotRect = slots[keySlotIndex].GetComponent<RectTransform>();
+                RectTransform textRect = cathedralKeyText.GetComponent<RectTransform>();
+
+                if (slotRect != null && textRect != null)
+                {
+                    textRect.SetParent(slotRect); // Hacer que el texto sea hijo del Slot
+                    textRect.localPosition = new Vector3(0f, textRect.localPosition.y, 0f); // Centrar horizontalmente, mantener altura
+                    textRect.anchoredPosition = new Vector2(0f, textRect.anchoredPosition.y); // Ajustar horizontalmente
+                }
+
+                Debug.Log("Texto de la llave activado y centrado en el Slot.");
+            }
+            else
+            {
+                cathedralKeyText.SetActive(false); // Ocultar texto
+                Debug.Log("Texto de la llave desactivado.");
+            }
         }
 
         // Guardar el índice del slot seleccionado
