@@ -35,7 +35,7 @@ public class PlayerInteraction : MonoBehaviour
             if (pickupItem != null)
             {
                 // Llamar al método Pickup del objeto interactuado
-                pickupItem.Pickup(FindObjectOfType<InventoryManager>());
+                pickupItem.Pickup(FindObjectOfType<KeyManager>(), FindObjectOfType<InventoryManager>());
             }
         }
     }

@@ -16,6 +16,9 @@ public class InventoryToggle : MonoBehaviour
     [SerializeField, Tooltip("Referencia al InventoryManager para manejar lógica del inventario")]
     private InventoryManager inventoryManager;
 
+    [SerializeField, Tooltip("Referencia al KeyManager para manejar las llaves")]
+    private KeyManager keyManager;
+
     public static bool isInventoryOpen = false;
 
     void Start()
@@ -75,9 +78,9 @@ public class InventoryToggle : MonoBehaviour
         if (!isInventoryOpen)
         {
             InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
-            if (inventoryManager != null && inventoryManager.CathedralKeyText != null)
+            if (inventoryManager != null && keyManager.CathedralKeyText != null)
             {
-                inventoryManager.CathedralKeyText.SetActive(false);
+                keyManager.CathedralKeyText.SetActive(false);
                 Debug.Log("Texto de la llave desactivado al cerrar el inventario.");
             }
         }

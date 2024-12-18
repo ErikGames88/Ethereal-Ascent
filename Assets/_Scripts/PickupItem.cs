@@ -7,29 +7,25 @@ public class PickupItem : MonoBehaviour
     [SerializeField, Tooltip("Ícono del objeto")]
     private Sprite itemIcon;
 
-    [SerializeField, Tooltip("Referencia al InventoryManager")]
-    private InventoryManager inventoryManager;
-
-    public void Pickup(InventoryManager inventoryManager)
+    public void Pickup(KeyManager keyManager, InventoryManager inventoryManager)
     {
-        if (inventoryManager != null)
+        if (keyManager != null && inventoryManager != null)
         {
-            // Añadir el objeto al inventario
-            bool itemAdded = inventoryManager.AddItemToFirstAvailableSlot(itemIcon);
-
-            if (itemAdded)
+            int availableSlotIndex = inventoryManager.FindFirstAvailableSlot();
+            if (availableSlotIndex >= 0)
             {
-                Debug.Log("Objeto recogido y añadido al inventario.");
-                gameObject.SetActive(false); // Desactivar el objeto en escena
+                keyManager.CollectKey(inventoryManager, availableSlotIndex, itemIcon); // Ajustamos con el nuevo parámetro
+                Debug.Log($"Objeto {itemIcon.name} recogido.");
+                gameObject.SetActive(false); // Desactivar el objeto en la escena
             }
             else
             {
-                Debug.LogWarning("No hay espacio en el inventario.");
+                Debug.LogWarning("No hay slots disponibles en el inventario para este objeto.");
             }
         }
         else
         {
-            Debug.LogError("InventoryManager no está asignado.");
+            Debug.LogError("KeyManager o InventoryManager no está asignado.");
         }
     }
 

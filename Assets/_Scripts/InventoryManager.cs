@@ -9,6 +9,11 @@ public class InventoryManager : MonoBehaviour
     [SerializeField, Tooltip("Lista de botones para los slots del inventario")]
     private List<Button> slots;
 
+    public List<Button> Slots
+    {
+        get => slots;
+    }
+
     [SerializeField, Tooltip("Prefab para la linterna")]
     private GameObject flashlightPrefab;
 
@@ -22,12 +27,10 @@ public class InventoryManager : MonoBehaviour
     private TextMeshProUGUI skullCounterText;
 
     [SerializeField, Tooltip("Color del slot seleccionado (configurable desde el Inspector)")]
-    private Color selectedSlotColor = new Color(1f, 1f, 0f, 0.5f); // Amarillo con transparencia
+    private Color selectedSlotColor; 
 
     [SerializeField, Tooltip("Color del slot no seleccionado")]
     private Color defaultSlotColor = Color.white;
-
-    private int selectedSlotIndex = 0; // Índice del slot actualmente seleccionado
     private bool isFlashlightEquipped = false; // Estado de la linterna
 
     private Light flashlightLight; // Referencia al Spot Light
@@ -37,12 +40,10 @@ public class InventoryManager : MonoBehaviour
     private Vector3 flashlightLocalPosition = new Vector3(-0.922f, 0.031f, -0.031f);
     private Vector3 flashlightLocalRotation = new Vector3(0f, 85.27f, 90f);
 
-    [SerializeField, Tooltip("Texto del objeto para el Slot 2 (llave)")]
-    private GameObject cathedralKeyText;
-
-    public GameObject CathedralKeyText 
+    private int selectedSlotIndex = 0; // Índice del slot actualmente seleccionado
+    public int SelectedSlotIndex
     {
-        get => cathedralKeyText;
+        get => selectedSlotIndex;
     }
 
     private bool isKeyCollected = false; // Verificar si la llave ha sido recogida
@@ -214,32 +215,17 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // --- Controlar el Texto de la Llave ---
-        if (cathedralKeyText != null)
+        // --- Delegar lógica de la llave al KeyManager ---
+        KeyManager keyManager = FindObjectOfType<KeyManager>();
+        if (keyManager != null)
         {
-            if (isKeyCollected && slotIndex == keySlotIndex)
-            {
-                // Activar texto
-                cathedralKeyText.SetActive(true);
+            bool isKeyActive = keyManager.IsKeySelected(slotIndex);
 
-                // Centrar el texto en el Slot de la llave
-                RectTransform slotRect = slots[keySlotIndex].GetComponent<RectTransform>();
-                RectTransform textRect = cathedralKeyText.GetComponent<RectTransform>();
+            // Obtener el RectTransform del slot seleccionado
+            RectTransform slotRect = slots[slotIndex].GetComponent<RectTransform>();
 
-                if (slotRect != null && textRect != null)
-                {
-                    textRect.SetParent(slotRect); // Hacer que el texto sea hijo del Slot
-                    textRect.localPosition = new Vector3(0f, textRect.localPosition.y, 0f); // Centrar horizontalmente, mantener altura
-                    textRect.anchoredPosition = new Vector2(0f, textRect.anchoredPosition.y); // Ajustar horizontalmente
-                }
-
-                Debug.Log("Texto de la llave activado y centrado en el Slot.");
-            }
-            else
-            {
-                cathedralKeyText.SetActive(false); // Ocultar texto
-                Debug.Log("Texto de la llave desactivado.");
-            }
+            // Pasar el estado y la referencia del slot al KeyManager
+            keyManager.ActivateKeyText(isKeyActive, slotRect);
         }
 
         // Guardar el índice del slot seleccionado
@@ -247,7 +233,6 @@ public class InventoryManager : MonoBehaviour
 
         // Actualizar los colores de los slots
         UpdateSlotColors();
-
     }
 
     private void UpdateSlotColors()
@@ -277,20 +262,22 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        // Buscar el texto del Slot como hijo del slot correspondiente
-        TextMeshProUGUI slotTextComponent = slots[slotIndex].GetComponentInChildren<TextMeshProUGUI>();
-        if (slotTextComponent != null)
-        {
-            slotTextComponent.text = slotTextComponent.text; // Respetar el texto configurado en el Inspector
-        }
-
-        // Asignar el icono al slot
+        // Asignar el ícono al slot
         Image slotImage = slots[slotIndex].GetComponentInChildren<Image>();
         if (slotImage != null)
         {
             slotImage.sprite = itemIcon;
-            slotImage.enabled = true; // Asegurarse de que el icono esté visible
+            slotImage.enabled = true; // Asegurarse de que el ícono esté visible
         }
+
+        // Opcional: Asignar texto dinámico al slot (si es necesario)
+        TextMeshProUGUI slotTextComponent = slots[slotIndex].GetComponentInChildren<TextMeshProUGUI>();
+        if (slotTextComponent != null)
+        {
+            slotTextComponent.text = itemName;
+        }
+
+        Debug.Log($"Objeto {itemName} asignado al Slot {slotIndex}.");
     }
 
     public void AddSkull()
@@ -442,5 +429,18 @@ public class InventoryManager : MonoBehaviour
     {
         // Verificar si la llave ha sido recogida y está seleccionada
         return isKeyCollected && selectedSlotIndex == keySlotIndex;
+    }
+
+    public int FindFirstAvailableSlot()
+    {
+       for (int i = 0; i < slots.Count; i++)
+        {
+            Image slotImage = slots[i].GetComponentInChildren<Image>();
+            if (slotImage != null && slotImage.sprite == null)
+            {
+                return i; // Retorna el índice del primer slot disponible
+            }
+        }
+        return -1; // No hay slots disponibles
     }
 }
