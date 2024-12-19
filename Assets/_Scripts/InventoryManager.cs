@@ -36,6 +36,14 @@ public class InventoryManager : MonoBehaviour
     private int keySlotIndex = -1;       // Índice dinámico donde se equipa la llave
     private int skullCount = 0;
 
+    [SerializeField, Tooltip("Lista de prefabs para los slots del inventario")]
+    private List<GameObject> slotPrefabs = new List<GameObject>(9); 
+
+    public List<GameObject> SlotPrefabs
+    {
+        get => slotPrefabs;
+    }
+
     void Start()
     {
         // Validar que la lista de slots está asignada
@@ -89,6 +97,11 @@ public class InventoryManager : MonoBehaviour
             {
                 slotTextComponent.gameObject.SetActive(false);
             }
+
+            if (i >= slotPrefabs.Count)
+            {
+                slotPrefabs.Add(null);
+            }
         }
 
         Transform slot9Transform = slots[8].transform;
@@ -136,7 +149,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AssignItemToSlot(int slotIndex, string itemName, Sprite itemIcon)
+    public void AssignItemToSlot(int slotIndex, string itemName, Sprite itemIcon, GameObject prefab)
     {
         if (slotIndex < 0 || slotIndex >= slots.Count)
         {
@@ -157,7 +170,13 @@ public class InventoryManager : MonoBehaviour
             slotTextComponent.text = itemName;
         }
 
-        Debug.Log($"Objeto {itemName} asignado al Slot {slotIndex}.");
+        // Asegurar que se asigna el prefab al slot correspondiente
+        if (slotPrefabs != null && slotIndex < slotPrefabs.Count)
+        {
+            slotPrefabs[slotIndex] = prefab;
+        }
+
+        Debug.Log($"Objeto {itemName} asignado al Slot {slotIndex} con prefab {prefab?.name}.");
     }
 
     public void AddSkull()
@@ -194,5 +213,16 @@ public class InventoryManager : MonoBehaviour
 
         Debug.LogWarning("No hay slots disponibles en el inventario.");
         return -1;
+    }
+
+    public GameObject GetPrefabFromSlot(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= slotPrefabs.Count)
+        {
+            Debug.LogWarning($"Índice del slot {slotIndex} fuera de rango o no tiene prefab asociado.");
+            return null;
+        }
+
+        return slotPrefabs[slotIndex];
     }
 }

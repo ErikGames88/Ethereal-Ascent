@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class KeyManager : MonoBehaviour
 {   
@@ -29,7 +31,7 @@ public class KeyManager : MonoBehaviour
 
         isKeyCollected = true;
         keySlotIndex = slotIndex;
-        inventoryManager.AssignItemToSlot(slotIndex, "Cathedral Key", itemIcon);
+        inventoryManager.AssignItemToSlot(slotIndex, "Cathedral Key", itemIcon, null);
 
         Debug.Log($"Llave recogida y asignada al Slot {slotIndex}.");
     }
@@ -71,5 +73,36 @@ public class KeyManager : MonoBehaviour
     public bool IsKeySelected(int selectedSlotIndex)
     {
         return isKeyCollected && selectedSlotIndex == keySlotIndex;
+    }
+
+    // Método para eliminar la llave tras su uso
+    public void RemoveKey(InventoryManager inventoryManager)
+    {
+        if (!isKeyCollected || keySlotIndex < 0 || inventoryManager == null)
+        {
+            Debug.LogWarning("No se puede eliminar la llave: no está recogida o el inventario es inválido.");
+            return;
+        }
+
+        // Limpiar el icono del Slot
+        Image slotImage = inventoryManager.Slots[keySlotIndex].GetComponentInChildren<Image>();
+        if (slotImage != null)
+        {
+            slotImage.sprite = null;
+            slotImage.enabled = false;
+        }
+
+        // Desactivar cualquier texto asociado
+        TextMeshProUGUI slotTextComponent = inventoryManager.Slots[keySlotIndex].GetComponentInChildren<TextMeshProUGUI>();
+        if (slotTextComponent != null)
+        {
+            slotTextComponent.gameObject.SetActive(false);
+            slotTextComponent.text = "";
+        }
+
+        isKeyCollected = false;
+        keySlotIndex = -1;
+
+        Debug.Log("Llave eliminada del inventario.");
     }
 }

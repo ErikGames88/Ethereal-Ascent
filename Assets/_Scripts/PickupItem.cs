@@ -38,7 +38,7 @@ public class PickupItem : MonoBehaviour
             keyManager.CollectKey(inventoryManager, availableSlotIndex, itemIcon);
         }
 
-        inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon);
+        inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon, gameObject);
         gameObject.SetActive(false);
     }
 

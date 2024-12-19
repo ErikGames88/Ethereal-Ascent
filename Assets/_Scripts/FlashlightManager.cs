@@ -27,6 +27,14 @@ public class FlashlightManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ToggleFlashlight();
+        }
+    }
+
     public void CollectFlashlight(int slotIndex, Sprite itemIcon)
     {
         if (isFlashlightCollected)
@@ -67,22 +75,44 @@ public class FlashlightManager : MonoBehaviour
             return;
         }
 
+        // Instanciar la linterna en las coordenadas adecuadas
         equippedFlashlight = Instantiate(flashlightPrefab, flashlightPoint);
-        flashlightLight = equippedFlashlight.transform.Find("Spot Light").GetComponent<Light>();
-        flashlightLight.enabled = false;
+        equippedFlashlight.name = "Flashlight";
+        equippedFlashlight.transform.localPosition = new Vector3(-0.922f, 0.031f, -0.031f);
+        equippedFlashlight.transform.localRotation = Quaternion.Euler(0f, 85.27f, 90f);
+
+        // Buscar el componente Light incluso si el Spot Light está desactivado
+        flashlightLight = equippedFlashlight.GetComponentInChildren<Light>(true);
+        if (flashlightLight == null)
+        {
+            Debug.LogError("El prefab de la linterna no contiene un componente Light en el Spot Light.");
+        }
+        else
+        {
+            flashlightLight.enabled = false; // Asegurarse de que la luz esté apagada al equipar
+            Debug.Log("Referencia al Spot Light establecida correctamente.");
+        }
 
         Debug.Log("Linterna equipada correctamente.");
     }
 
     public void ToggleFlashlight()
     {
-        if (flashlightLight == null)
+        if (equippedFlashlight == null || flashlightLight == null)
         {
             Debug.LogWarning("No hay linterna equipada o no se encontró el Spot Light.");
             return;
         }
 
+        // Activar el objeto padre (Spot Light) si está desactivado
+        if (!flashlightLight.gameObject.activeSelf)
+        {
+            flashlightLight.gameObject.SetActive(true);
+        }
+
+        // Cambiar el estado de encendido/apagado del componente Light
         flashlightLight.enabled = !flashlightLight.enabled;
+
         Debug.Log($"Linterna {(flashlightLight.enabled ? "encendida" : "apagada")}.");
     }
 }

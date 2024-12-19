@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemInteractionManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class ItemInteractionManager : MonoBehaviour
     private LayerMask interactableLayer;
 
     private InventoryManager inventoryManager;
-    private KeyManager keyManager;
+    private FlashlightManager flashlightManager;
 
     void Start()
     {
@@ -21,10 +22,10 @@ public class ItemInteractionManager : MonoBehaviour
             Debug.LogError("No se encontró el InventoryManager en la escena.");
         }
 
-        keyManager = FindObjectOfType<KeyManager>();
-        if (keyManager == null)
+        flashlightManager = FindObjectOfType<FlashlightManager>();
+        if (flashlightManager == null)
         {
-            Debug.LogError("No se encontró el KeyManager en la escena.");
+            Debug.LogError("No se encontró el FlashlightManager en la escena.");
         }
     }
 
@@ -44,27 +45,50 @@ public class ItemInteractionManager : MonoBehaviour
             return;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        RaycastHit hit;
+        Button selectedSlot = inventoryManager.Slots[inventoryManager.SelectedSlotIndex];
+        Image slotImage = selectedSlot.GetComponentInChildren<Image>();
 
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
+        if (slotImage == null || slotImage.sprite == null)
         {
-            Debug.Log($"Interacción detectada con: {hit.collider.gameObject.name}");
+            Debug.Log("No hay objeto seleccionado en el slot actual.");
+            return;
+        }
 
-            DoorInteraction doorInteraction = hit.collider.GetComponentInParent<DoorInteraction>();
-            if (doorInteraction != null && keyManager.IsKeySelected(inventoryManager.SelectedSlotIndex))
+        Debug.Log($"Objeto seleccionado: {slotImage.sprite.name}");
+
+        GameObject slotPrefab = inventoryManager.SlotPrefabs[inventoryManager.SelectedSlotIndex];
+        if (slotPrefab == null)
+        {
+            Debug.Log("Objeto seleccionado desconocido.");
+            return;
+        }
+
+        Debug.Log($"Prefab asociado: {slotPrefab.name}");
+
+        // Comprobar si es una llave y si se está interactuando con una puerta
+        if (slotPrefab.name == "Cathedral Key")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
             {
-                Debug.Log("Llave seleccionada. Abriendo la puerta...");
-                doorInteraction.Interact();
+                Debug.Log($"Interacción detectada con: {hit.collider.gameObject.name}");
+
+                DoorInteraction doorInteraction = hit.collider.GetComponentInParent<DoorInteraction>();
+                if (doorInteraction != null)
+                {
+                    Debug.Log("Llave seleccionada. Abriendo la puerta...");
+                    doorInteraction.Interact();
+                    return;
+                }
             }
-            else
-            {
-                Debug.Log("No se pudo abrir la puerta. Asegúrate de tener la llave seleccionada.");
-            }
+
+            Debug.Log("No se pudo abrir la puerta. Asegúrate de tener la llave seleccionada.");
         }
         else
         {
-            Debug.Log("No estás mirando ningún objeto interactuable.");
+            Debug.Log("El objeto seleccionado no es una llave.");
         }
     }
 }

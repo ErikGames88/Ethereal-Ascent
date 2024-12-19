@@ -25,6 +25,8 @@ public class DoorInteraction : MonoBehaviour
     private Quaternion targetRotationL;
     private Quaternion targetRotationR;
 
+    private KeyManager keyManager;
+
     void Awake()
     {
         // Configurar el AudioSource
@@ -59,6 +61,12 @@ public class DoorInteraction : MonoBehaviour
         {
             Debug.LogError("No se encontró el objeto Gates en la jerarquía.");
         }
+
+        keyManager = FindObjectOfType<KeyManager>();
+        if (keyManager == null)
+        {
+            Debug.LogError("No se encontró el KeyManager en la escena.");
+        }
     }
 
     public void Interact()
@@ -66,6 +74,12 @@ public class DoorInteraction : MonoBehaviour
         if (!isOpen)
         {
             StartCoroutine(OpenDoor());
+
+            // Eliminar la llave tras abrir la puerta
+            if (keyManager != null)
+            {
+                keyManager.RemoveKey(FindObjectOfType<InventoryManager>());
+            }
         }
     }
 
