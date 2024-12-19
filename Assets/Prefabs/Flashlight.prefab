@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 4781256719904875616}
   - component: {fileID: 7381381101981596619}
   - component: {fileID: 9101749158941446694}
-  m_Layer: 0
+  - component: {fileID: -3001209943785774113}
+  - component: {fileID: 6233955933144139667}
+  m_Layer: 7
   m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +111,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &-3001209943785774113
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6760330717355446619}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.07204324, y: 0.42232746, z: 0.30916148}
+  m_Center: {x: -0.00000002235174, y: 0.0073752254, z: 0.000000029802322}
+--- !u!114 &6233955933144139667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6760330717355446619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d5a36be2973074799886c5b840bb7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 0}
+  isFlashlight: 1
 --- !u!1001 &7542686192029011061
 PrefabInstance:
   m_ObjectHideFlags: 0

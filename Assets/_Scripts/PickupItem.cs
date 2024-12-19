@@ -7,26 +7,39 @@ public class PickupItem : MonoBehaviour
     [SerializeField, Tooltip("Ícono del objeto")]
     private Sprite itemIcon;
 
-    public void Pickup(KeyManager keyManager, InventoryManager inventoryManager)
+    [SerializeField, Tooltip("¿Es una linterna?")]
+    private bool isFlashlight = false;
+
+    public void Pickup(KeyManager keyManager, FlashlightManager flashlightManager, InventoryManager inventoryManager)
     {
-        if (keyManager != null && inventoryManager != null)
+        if (itemIcon == null)
         {
-            int availableSlotIndex = inventoryManager.FindFirstAvailableSlot();
-            if (availableSlotIndex >= 0)
-            {
-                keyManager.CollectKey(inventoryManager, availableSlotIndex, itemIcon); // Ajustamos con el nuevo parámetro
-                Debug.Log($"Objeto {itemIcon.name} recogido.");
-                gameObject.SetActive(false); // Desactivar el objeto en la escena
-            }
-            else
-            {
-                Debug.LogWarning("No hay slots disponibles en el inventario para este objeto.");
-            }
+            Debug.LogError("El ícono del objeto no está asignado. Revisa el Inspector.");
+            return;
+        }
+
+        int availableSlotIndex = inventoryManager.FindFirstAvailableSlot();
+        if (availableSlotIndex < 0)
+        {
+            Debug.LogWarning("No hay slots disponibles en el inventario.");
+            return;
+        }
+
+        Debug.Log($"Objeto recogido: {gameObject.name}. Asignando al Slot {availableSlotIndex}");
+
+        if (isFlashlight)
+        {
+            Debug.Log("Es una linterna. Usando FlashlightManager.");
+            flashlightManager.CollectFlashlight(availableSlotIndex, itemIcon);
         }
         else
         {
-            Debug.LogError("KeyManager o InventoryManager no está asignado.");
+            Debug.Log("Es una llave. Usando KeyManager.");
+            keyManager.CollectKey(inventoryManager, availableSlotIndex, itemIcon);
         }
+
+        inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)

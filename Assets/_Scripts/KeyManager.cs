@@ -21,17 +21,17 @@ public class KeyManager : MonoBehaviour
     // Método para recoger la llave y asociarla al primer slot disponible
     public void CollectKey(InventoryManager inventoryManager, int slotIndex, Sprite itemIcon)
     {
-        if (slotIndex >= 0 && inventoryManager != null)
+        if (isKeyCollected)
         {
-            inventoryManager.AssignItemToSlot(slotIndex, "Cathedral Key", itemIcon);
-            isKeyCollected = true;
-            keySlotIndex = slotIndex; // Guardamos el índice del slot donde está la llave
-            Debug.Log("Llave recogida y asignada al inventario.");
+            Debug.LogWarning("La llave ya ha sido recogida.");
+            return;
         }
-        else
-        {
-            Debug.LogWarning("No se pudo recoger la llave. Inventario o slot inválido.");
-        }
+
+        isKeyCollected = true;
+        keySlotIndex = slotIndex;
+        inventoryManager.AssignItemToSlot(slotIndex, "Cathedral Key", itemIcon);
+
+        Debug.Log($"Llave recogida y asignada al Slot {slotIndex}.");
     }
 
     // Método para activar o desactivar el texto de la llave

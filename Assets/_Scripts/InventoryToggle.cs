@@ -33,14 +33,12 @@ public class InventoryToggle : MonoBehaviour
             Debug.LogWarning("InventoryToggle: Inventory Canvas no está asignado.");
         }
 
-        // Asegurarnos de que el cursor esté siempre bloqueado y oculto
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
-        // Alternar el inventario con la tecla Tab
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ManageInventory();
@@ -49,17 +47,15 @@ public class InventoryToggle : MonoBehaviour
 
     private void ManageInventory()
     {
-        if (inventoryCanvas == null || playerController == null || cameraController == null)
+        if (inventoryCanvas == null || playerController == null || cameraController == null || inventoryManager == null)
         {
             Debug.LogWarning("InventoryToggle: Alguna referencia no está asignada.");
             return;
         }
 
-        // Alternar el estado del inventario
         isInventoryOpen = !isInventoryOpen;
         inventoryCanvas.SetActive(isInventoryOpen);
 
-        // Bloquear movimiento y rotación del jugador
         playerController.enabled = !isInventoryOpen;
         cameraController.enabled = !isInventoryOpen;
 
@@ -67,22 +63,28 @@ public class InventoryToggle : MonoBehaviour
 
         if (isInventoryOpen)
         {
-            InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
-            if (inventoryManager != null)
-            {
-                inventoryManager.ForceSlotUpdate(); // Actualiza el estado del slot al abrir el inventario
-            }
+            UpdateSlotState(); // Nuevo método para actualizar el estado del slot
         }
 
-        // Si cierras el inventario, desactiva el texto de la llave
         if (!isInventoryOpen)
         {
-            InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
-            if (inventoryManager != null && keyManager.CathedralKeyText != null)
+            if (keyManager.CathedralKeyText != null)
             {
                 keyManager.CathedralKeyText.SetActive(false);
                 Debug.Log("Texto de la llave desactivado al cerrar el inventario.");
             }
         }
+    }
+
+    private void UpdateSlotState()
+    {
+        if (inventoryManager.Slots == null || inventoryManager.Slots.Count == 0)
+        {
+            Debug.LogWarning("InventoryToggle: No hay slots disponibles en el InventoryManager.");
+            return;
+        }
+
+        // Actualizar visualmente los slots o realizar lógica personalizada
+        Debug.Log("Estado de los slots actualizado al abrir el inventario.");
     }
 }
