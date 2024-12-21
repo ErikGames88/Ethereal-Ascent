@@ -46,14 +46,12 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
-        // Validar que la lista de slots está asignada
         if (slots == null || slots.Count != 9)
         {
             Debug.LogError("La lista de slots no está correctamente configurada.");
             return;
         }
 
-        // Inicializar el inventario
         InitializeInventory();
     }
 
@@ -84,67 +82,93 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            Transform slotTransform = slots[i].transform;
-            Transform slotTextTransform = slotTransform.Find("Slot Text");
-            TextMeshProUGUI slotTextComponent = null;
+            Image slotImage = slots[i].GetComponent<Image>();
+            Transform slotBackgroundTransform = slots[i].transform.Find("Slot Background");
+            Image slotBackground = slotBackgroundTransform?.GetComponent<Image>();
 
-            if (slotTextTransform != null)
+            if (slotImage != null)
             {
-                slotTextComponent = slotTextTransform.GetComponent<TextMeshProUGUI>();
+                slotImage.sprite = null;
+                slotImage.color = defaultSlotColor;
             }
 
-            if (slotTextComponent != null)
+            if (slotBackground != null)
             {
-                slotTextComponent.gameObject.SetActive(false);
+                Color bgColor = slotBackground.color;
+                bgColor.a = 100f / 255f;
+                slotBackground.color = bgColor;
             }
-
-            if (i >= slotPrefabs.Count)
-            {
-                slotPrefabs.Add(null);
-            }
-        }
-
-        Transform slot9Transform = slots[8].transform;
-        Transform skullCounterTransform = slot9Transform.Find("Skull Counter Text");
-        skullCounterText = null;
-
-        if (skullCounterTransform != null)
-        {
-            skullCounterText = skullCounterTransform.GetComponent<TextMeshProUGUI>();
         }
 
         if (skullCounterText != null)
         {
             skullCounterText.gameObject.SetActive(true);
+            skullCounterText.text = "0"; // Inicializar contador de cráneos
         }
 
         UpdateSlotColors();
     }
 
     public void OnSlotSelected(int slotIndex)
-{
-    if (slotIndex < 0 || slotIndex >= slots.Count)
     {
-        Debug.LogError($"Índice del slot {slotIndex} fuera de rango.");
-        return;
-    }
+        if (slotIndex < 0 || slotIndex >= slots.Count)
+        {
+            Debug.LogError($"\u00cdndice del slot {slotIndex} fuera de rango.");
+            return;
+        }
 
-    selectedSlotIndex = slotIndex;
-    UpdateSlotColors();
-}
+        selectedSlotIndex = slotIndex;
+        UpdateSlotColors();
+    }
 
     private void UpdateSlotColors()
     {
         for (int i = 0; i < slots.Count; i++)
         {
             Image slotImage = slots[i].GetComponent<Image>();
-            if (i == selectedSlotIndex)
+            Transform slotBackgroundTransform = slots[i].transform.Find("Slot Background");
+            Image slotBackground = slotBackgroundTransform != null ? slotBackgroundTransform.GetComponent<Image>() : null;
+
+            if (slotImage != null)
             {
-                slotImage.color = selectedSlotColor;
-            }
-            else
-            {
-                slotImage.color = defaultSlotColor;
+                if (i == selectedSlotIndex) // Slot seleccionado
+                {
+                    if (slotImage.sprite != null) // Con objeto
+                    {
+                        slotImage.color = new Color(0.849f, 0.230f, 0.845f, 1f); // Lila opacidad 255
+                        if (slotBackground != null)
+                        {
+                            slotBackground.color = new Color(1f, 1f, 1f, 0f); // Transparente
+                        }
+                    }
+                    else // Sin objeto
+                    {
+                        slotImage.color = new Color(0.849f, 0.230f, 0.845f, 0.8f); // Lila opacidad 204
+                        if (slotBackground != null)
+                        {
+                            slotBackground.color = new Color(1f, 1f, 1f, 0.392f); // Semitransparente
+                        }
+                    }
+                }
+                else // Slot no seleccionado
+                {
+                    if (slotImage.sprite != null) // Con objeto
+                    {
+                        slotImage.color = new Color(1f, 1f, 1f, 1f); // Blanco opacidad 255
+                        if (slotBackground != null)
+                        {
+                            slotBackground.color = new Color(1f, 1f, 1f, 0f); // Transparente
+                        }
+                    }
+                    else // Sin objeto
+                    {
+                        slotImage.color = new Color(1f, 1f, 1f, 0.392f); // Blanco opacidad 100
+                        if (slotBackground != null)
+                        {
+                            slotBackground.color = new Color(1f, 1f, 1f, 0.392f); // Semitransparente
+                        }
+                    }
+                }
             }
         }
     }
@@ -157,26 +181,68 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        Image slotImage = slots[slotIndex].GetComponentInChildren<Image>();
-        if (slotImage != null)
+        // Obtener el Slot principal
+        GameObject slot = slots[slotIndex].gameObject;
+
+        // Obtener el componente Image del Slot
+        Image slotImage = slot.GetComponent<Image>();
+        Transform slotBackgroundTransform = slot.transform.Find("Slot Background");
+        Image slotBackground = null;
+
+        if (slotBackgroundTransform != null)
         {
-            slotImage.sprite = itemIcon;
-            slotImage.enabled = true;
+            slotBackground = slotBackgroundTransform.GetComponent<Image>();
         }
 
-        TextMeshProUGUI slotTextComponent = slots[slotIndex].GetComponentInChildren<TextMeshProUGUI>();
+        if (slotImage != null)
+        {
+            // Configurar el sprite del objeto y el color del Slot
+            slotImage.sprite = itemIcon;
+            slotImage.color = selectedSlotColor; // Lila opacidad máxima
+            slotImage.enabled = true;
+
+            Debug.Log($"Slot {slotIndex} asignando objeto: {itemName} con sprite: {itemIcon?.name}");
+
+            // Configurar el Slot Background
+            if (slotBackground != null)
+            {
+                Color bgColor = slotBackground.color;
+                bgColor.a = 0f; // Ocultar el fondo blanco al asignar objeto
+                slotBackground.color = bgColor;
+                Debug.Log($"Slot {slotIndex} Background oculto al asignar objeto | Color: {bgColor}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Slot {slotIndex} no tiene un componente Image asignado.");
+        }
+
+        // Asignar texto al Slot si es necesario
+        TextMeshProUGUI slotTextComponent = slot.GetComponentInChildren<TextMeshProUGUI>();
         if (slotTextComponent != null)
         {
             slotTextComponent.text = itemName;
         }
 
-        // Asegurar que se asigna el prefab al slot correspondiente
+        // Asignar prefab al Slot correspondiente
         if (slotPrefabs != null && slotIndex < slotPrefabs.Count)
         {
             slotPrefabs[slotIndex] = prefab;
         }
 
         Debug.Log($"Objeto {itemName} asignado al Slot {slotIndex} con prefab {prefab?.name}.");
+
+        // Actualizar colores inmediatamente después de asignar
+        if (selectedSlotIndex == 0) // Asegurar que Slot 1 comienza seleccionado al abrir el inventario
+        {
+            selectedSlotIndex = 0;
+        }
+        else
+        {
+            selectedSlotIndex = slotIndex;
+        }
+
+        UpdateSlotColors();
     }
 
     public void AddSkull()
@@ -219,7 +285,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (slotIndex < 0 || slotIndex >= slotPrefabs.Count)
         {
-            Debug.LogWarning($"Índice del slot {slotIndex} fuera de rango o no tiene prefab asociado.");
+            Debug.LogWarning($"\u00cdndice del slot {slotIndex} fuera de rango o no tiene prefab asociado.");
             return null;
         }
 
