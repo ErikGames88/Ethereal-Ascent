@@ -57,5 +57,12 @@ public class InventoryToggle : MonoBehaviour
         cameraController.enabled = !isInventoryOpen;
 
         Debug.Log($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto" : "cerrado")}.");
+
+        if (!isInventoryOpen) // Cuando el inventario se cierra
+        {
+            Debug.Log("Cerrando inventario: Ocultando textos.");
+            inventoryManager.HideAllTexts(); // Oculta todos los textos del inventario
+            Debug.Log("InventoryToggle: Todos los textos desactivados al cerrar el inventario.");
+        }
     }
 }

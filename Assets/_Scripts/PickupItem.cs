@@ -10,6 +10,9 @@ public class PickupItem : MonoBehaviour
     [Tooltip("¿Es una linterna?")]
     public bool isFlashlight = false;
 
+    [SerializeField, Tooltip("Texto del objeto para el inventario")]
+    private GameObject itemText;
+
     public void Pickup(KeyManager keyManager, FlashlightManager flashlightManager, InventoryManager inventoryManager)
     {
         if (itemIcon == null)
@@ -38,7 +41,8 @@ public class PickupItem : MonoBehaviour
             keyManager.CollectKey(inventoryManager, availableSlotIndex, itemIcon);
         }
 
-        inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon, gameObject);
+        inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon, gameObject, itemText);
+
 
         // Desactiva el objeto en la escena tras recogerlo
         gameObject.SetActive(false);

@@ -31,8 +31,7 @@ public class KeyManager : MonoBehaviour
 
         isKeyCollected = true;
         keySlotIndex = slotIndex;
-        inventoryManager.AssignItemToSlot(slotIndex, "Cathedral Key", itemIcon, null);
-
+        inventoryManager.AssignItemToSlot(slotIndex, "Cathedral Key", itemIcon, null, cathedralKeyText);
         Debug.Log($"Llave recogida y asignada al Slot {slotIndex}.");
     }
 

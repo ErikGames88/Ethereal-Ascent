@@ -25,6 +25,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField, Tooltip("Referencia al borde de selección")]
     private RectTransform selectedBorder;
 
+    [SerializeField, Tooltip("Textos asociados a los Slots (ordenados)")]
+    private List<GameObject> slotTexts; // Textos correspondientes a los slots
+
     private int selectedSlotIndex = -1; // Ningún Slot seleccionado inicialmente
 
     public int SelectedSlotIndex
@@ -41,17 +44,16 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
+        if (slotTexts == null || slotTexts.Count != 9)
+        {
+            Debug.LogError("La lista de textos no está correctamente configurada.");
+            return;
+        }
+
         InitializeInventory();
 
         // Asegura que el Selected Border comience en el Slot 1
         selectedSlotIndex = 0;
-
-        // Establece el tamaño inicial desde el editor
-        RectTransform borderRectTransform = selectedBorder.GetComponent<RectTransform>();
-        if (borderRectTransform != null)
-        {
-            borderRectTransform.sizeDelta = new Vector2(241f, 160f); // Tamaño configurado en el editor
-        }
 
         UpdateSelectedBorderPosition(); // Inicializa la posición correctamente
     }
@@ -60,8 +62,8 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A)) // Mover hacia la izquierda
         {
-            int newSlotIndex = selectedSlotIndex - 1; // Permitir desplazamiento sin límite
-            if (newSlotIndex >= 0) // Validar que no salga de rango
+            int newSlotIndex = selectedSlotIndex - 1; 
+            if (newSlotIndex >= 0)
             {
                 OnSlotSelected(newSlotIndex);
             }
@@ -69,12 +71,14 @@ public class InventoryManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D)) // Mover hacia la derecha
         {
-            int newSlotIndex = selectedSlotIndex + 1; // Permitir desplazamiento sin límite
-            if (newSlotIndex < slots.Count) // Validar que no salga de rango
+            int newSlotIndex = selectedSlotIndex + 1; 
+            if (newSlotIndex < slots.Count)
             {
                 OnSlotSelected(newSlotIndex);
             }
         }
+
+        UpdateItemTextVisibility();
     }
 
     private void InitializeInventory()
@@ -89,15 +93,11 @@ public class InventoryManager : MonoBehaviour
                 continue;
             }
 
-            Image slotImage = slots[i].GetComponent<Image>();
-            if (slotImage == null)
+            // Desactiva todos los textos al inicio
+            if (slotTexts[i] != null)
             {
-                Debug.LogError($"El Slot {i + 1} no tiene un componente Image.");
-                continue;
+                slotTexts[i].SetActive(false);
             }
-
-            // Configura la opacidad inicial de todos los slots a 100
-            slotImage.color = new Color(1f, 1f, 1f, 0.392f); // Blanco opacidad 100
         }
 
         Debug.Log("Seleccionando el Slot 1...");
@@ -109,45 +109,35 @@ public class InventoryManager : MonoBehaviour
         if (slotIndex < 0 || slotIndex >= slots.Count)
         {
             Debug.LogError($"Índice del slot {slotIndex} fuera de rango.");
+            HideAllTexts(); // Oculta textos si el Slot es inválido
             return;
         }
 
         selectedSlotIndex = slotIndex;
         Debug.Log($"Slot seleccionado: {slotIndex + 1}");
         UpdateSelectedBorderPosition();
+        UpdateItemTextVisibility();
     }
 
     private void UpdateSelectedBorderPosition()
     {
         if (selectedSlotIndex >= 0 && selectedSlotIndex < slots.Count && selectedBorder != null)
         {
-            // Obtén el RectTransform del Slot seleccionado
             RectTransform targetSlot = slots[selectedSlotIndex].GetComponent<RectTransform>();
             RectTransform borderRectTransform = selectedBorder.GetComponent<RectTransform>();
 
             if (targetSlot != null && borderRectTransform != null)
             {
-                // Sincroniza la posición con un ajuste fino
-                borderRectTransform.position = targetSlot.position + new Vector3(0f, 9.5f, 0f); // Ajuste más preciso
+                borderRectTransform.position = targetSlot.position + new Vector3(0f, 9.5f, 0f);
                 borderRectTransform.anchorMin = targetSlot.anchorMin;
                 borderRectTransform.anchorMax = targetSlot.anchorMax;
                 borderRectTransform.pivot = targetSlot.pivot;
-
-                // Mantén el tamaño configurado manualmente
                 borderRectTransform.sizeDelta = new Vector2(241f, 160f);
             }
-            else
-            {
-                Debug.LogWarning($"El Slot seleccionado o el Selected Border no tienen RectTransform válido. Índice: {selectedSlotIndex}");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Selected Border o el Slot seleccionado no son válidos.");
         }
     }
 
-    public void AssignItemToSlot(int slotIndex, string itemName, Sprite itemIcon, GameObject prefab)
+    public void AssignItemToSlot(int slotIndex, string itemName, Sprite itemIcon, GameObject prefab, GameObject textObject)
     {
         if (slotIndex < 0 || slotIndex >= slots.Count)
         {
@@ -179,6 +169,9 @@ public class InventoryManager : MonoBehaviour
         {
             slotPrefabs[slotIndex] = prefab;
         }
+
+        // Asigna el texto al Slot
+        AssignTextToSlot(slotIndex, textObject);
 
         Debug.Log($"Asignado {itemName} al Slot {slotIndex + 1}");
     }
@@ -256,5 +249,86 @@ public class InventoryManager : MonoBehaviour
         }
 
         Debug.Log($"Objeto eliminado del Slot {slotIndex + 1}.");
+    }
+
+    public void AssignTextToSlot(int slotIndex, GameObject textObject)
+    {
+        if (slotIndex < 0 || slotIndex >= slotTexts.Count)
+        {
+            Debug.LogWarning("Índice del slot para texto fuera de rango.");
+            return;
+        }
+
+        slotTexts[slotIndex] = textObject;
+        Debug.Log($"Texto asignado al Slot {slotIndex + 1}");
+    }
+
+    private void UpdateItemTextVisibility()
+    {
+        if (!InventoryToggle.isInventoryOpen) // Si el inventario está cerrado
+        {
+            Debug.Log("Inventario cerrado: no mostrar textos.");
+            HideAllTexts();
+            return;
+        }
+
+        if (selectedSlotIndex < 0 || selectedSlotIndex >= slots.Count)
+        {
+            Debug.LogWarning("Índice de slot seleccionado fuera de rango.");
+            HideAllTexts();
+            return;
+        }
+
+        // Ocultar todos los textos antes de mostrar el del Slot actual
+        HideAllTexts();
+
+        Button selectedSlot = slots[selectedSlotIndex];
+        GameObject selectedPrefab = slotPrefabs[selectedSlotIndex];
+
+        if (selectedPrefab != null)
+        {
+            string prefabName = selectedPrefab.name;
+
+            if (prefabName == "Flashlight")
+            {
+                PositionText(slotTexts[selectedSlotIndex], selectedSlot.GetComponent<RectTransform>());
+            }
+            else if (prefabName == "Cathedral Key")
+            {
+                PositionText(slotTexts[selectedSlotIndex], selectedSlot.GetComponent<RectTransform>());
+            }
+        }
+
+        if (selectedSlotIndex == 8) // Slot 9 (Cráneos)
+        {
+            PositionText(slotTexts[8], slots[8].GetComponent<RectTransform>());
+        }
+    }
+
+    private void PositionText(GameObject textObject, RectTransform slotRect)
+    {
+        if (textObject == null || slotRect == null) return;
+
+        textObject.SetActive(true); // Asegúrate de que el texto esté activo
+
+        // Obtén el RectTransform del texto y ajusta su posición en relación al Slot
+        RectTransform textRect = textObject.GetComponent<RectTransform>();
+        Vector3 slotWorldPosition = slotRect.position;
+
+        // Mantén la posición configurada desde el Canvas y ajusta la posición horizontal
+        textRect.position = new Vector3(slotWorldPosition.x, textRect.position.y, slotWorldPosition.z);
+    }
+
+    public void HideAllTexts()
+    {
+        foreach (GameObject text in slotTexts)
+        {
+            if (text != null)
+            {
+                text.SetActive(false);
+                Debug.Log($"Texto {text.name} desactivado.");
+            }
+        }
+        Debug.Log("Todos los textos del inventario han sido ocultados.");
     }
 }
