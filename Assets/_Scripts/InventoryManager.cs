@@ -93,6 +93,20 @@ public class InventoryManager : MonoBehaviour
                 continue;
             }
 
+            // Configurar la opacidad inicial de los Slots
+            Image slotImage = slots[i].GetComponent<Image>();
+            if (slotImage != null)
+            {
+                if (i == 8) // Excepción para el Slot 9
+                {
+                    slotImage.color = new Color(slotImage.color.r, slotImage.color.g, slotImage.color.b, 1f); // Opacidad 255
+                }
+                else
+                {
+                    slotImage.color = new Color(slotImage.color.r, slotImage.color.g, slotImage.color.b, 0.392f); // Opacidad 100
+                }
+            }
+
             // Desactiva todos los textos al inicio
             if (slotTexts[i] != null)
             {
@@ -154,9 +168,7 @@ public class InventoryManager : MonoBehaviour
             slotImage.enabled = true;
 
             // Cambiar opacidad a 255 cuando el slot tiene un sprite
-            Color slotColor = slotImage.color;
-            slotColor.a = 1f; // Opacidad máxima
-            slotImage.color = slotColor;
+            slotImage.color = new Color(slotImage.color.r, slotImage.color.g, slotImage.color.b, 1f); // Opacidad máxima
         }
 
         TextMeshProUGUI slotTextComponent = slot.GetComponentInChildren<TextMeshProUGUI>();
