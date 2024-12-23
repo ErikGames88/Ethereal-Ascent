@@ -89,7 +89,14 @@ public class KeyManager : MonoBehaviour
         if (slotImage != null)
         {
             slotImage.sprite = null;
-            slotImage.enabled = false;
+
+            // Asegurar que el componente Image esté activado
+            slotImage.enabled = true;
+
+            // Cambiar opacidad a 100 cuando el slot queda vacío
+            Color slotColor = slotImage.color;
+            slotColor.a = 0.392f; // Opacidad 100
+            slotImage.color = slotColor;
         }
 
         // Desactivar cualquier texto asociado

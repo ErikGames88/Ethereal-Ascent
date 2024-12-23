@@ -16,13 +16,11 @@ public class SkullCounter : MonoBehaviour
 
     void Start()
     {
-        // Inicializa el contador a 0
         if (counterText != null)
         {
             counterText.text = "0";
         }
 
-        // Asegura que el icono del cráneo está visible
         if (skullIcon != null)
         {
             skullIcon.enabled = true;

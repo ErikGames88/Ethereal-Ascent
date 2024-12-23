@@ -39,6 +39,8 @@ public class PickupItem : MonoBehaviour
         }
 
         inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon, gameObject);
+
+        // Desactiva el objeto en la escena tras recogerlo
         gameObject.SetActive(false);
     }
 

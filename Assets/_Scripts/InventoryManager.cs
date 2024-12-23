@@ -14,24 +14,6 @@ public class InventoryManager : MonoBehaviour
         get => slots;
     }
 
-    [SerializeField, Tooltip("Texto para mostrar el objeto asignado al slot")]
-    private TextMeshProUGUI slotText;
-
-    [SerializeField, Tooltip("Color del slot seleccionado (configurable desde el Inspector)")]
-    private Color selectedSlotColor;
-
-    [SerializeField, Tooltip("Color del slot no seleccionado")]
-    private Color defaultSlotColor = Color.white;
-
-    private int selectedSlotIndex = 0; // Índice del slot actualmente seleccionado
-    public int SelectedSlotIndex
-    {
-        get => selectedSlotIndex;
-    }
-
-    private bool isKeyCollected = false; // Verificar si la llave ha sido recogida
-    private int keySlotIndex = -1;       // Índice dinámico donde se equipa la llave
-
     [SerializeField, Tooltip("Lista de prefabs para los slots del inventario")]
     private List<GameObject> slotPrefabs = new List<GameObject>(9);
 
@@ -40,8 +22,16 @@ public class InventoryManager : MonoBehaviour
         get => slotPrefabs;
     }
 
-    [SerializeField, Tooltip("Referencia al SkullCounter para manejar el contador de cráneos")]
-    private SkullCounter skullCounter;
+    [SerializeField, Tooltip("Referencia al borde de selección")]
+    private RectTransform selectedBorder;
+
+    private int selectedSlotIndex = -1; // Ningún Slot seleccionado inicialmente
+
+    public int SelectedSlotIndex
+    {
+        get => selectedSlotIndex;
+        set => selectedSlotIndex = value;
+    }
 
     void Start()
     {
@@ -52,26 +42,45 @@ public class InventoryManager : MonoBehaviour
         }
 
         InitializeInventory();
+
+        // Asegura que el Selected Border comience en el Slot 1
+        selectedSlotIndex = 0;
+
+        // Establece el tamaño inicial desde el editor
+        RectTransform borderRectTransform = selectedBorder.GetComponent<RectTransform>();
+        if (borderRectTransform != null)
+        {
+            borderRectTransform.sizeDelta = new Vector2(241f, 160f); // Tamaño configurado en el editor
+        }
+
+        UpdateSelectedBorderPosition(); // Inicializa la posición correctamente
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A)) // Mover hacia la izquierda
         {
-            int newSlotIndex = Mathf.Max(selectedSlotIndex - 1, 0); // Limita al primer slot
-            OnSlotSelected(newSlotIndex);
+            int newSlotIndex = selectedSlotIndex - 1; // Permitir desplazamiento sin límite
+            if (newSlotIndex >= 0) // Validar que no salga de rango
+            {
+                OnSlotSelected(newSlotIndex);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.D)) // Mover hacia la derecha
         {
-            int newSlotIndex = Mathf.Min(selectedSlotIndex + 1, 7); // Limita al último slot interactuable
-            OnSlotSelected(newSlotIndex);
+            int newSlotIndex = selectedSlotIndex + 1; // Permitir desplazamiento sin límite
+            if (newSlotIndex < slots.Count) // Validar que no salga de rango
+            {
+                OnSlotSelected(newSlotIndex);
+            }
         }
     }
 
     private void InitializeInventory()
     {
         Debug.Log("Inicializando inventario...");
+
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i] == null)
@@ -87,31 +96,18 @@ public class InventoryManager : MonoBehaviour
                 continue;
             }
 
-            Transform slotBackgroundTransform = slots[i].transform.Find("Slot Background");
-            if (slotBackgroundTransform == null)
+            if (i == 8) // Slot 9 (Cráneos)
             {
-                Debug.LogError($"El Slot {i + 1} no tiene un hijo llamado 'Slot Background'.");
-                continue;
+                slotImage.color = new Color(1f, 1f, 1f, 1f); // Blanco opacidad máxima
             }
-
-            Image slotBackground = slotBackgroundTransform.GetComponent<Image>();
-            if (slotBackground == null)
+            else
             {
-                Debug.LogError($"El 'Slot Background' del Slot {i + 1} no tiene un componente Image.");
-                continue;
+                slotImage.color = new Color(1f, 1f, 1f, 0.392f); // Blanco opacidad 100
             }
-
-            slotImage.sprite = null;
-            slotImage.color = defaultSlotColor;
-
-            Color bgColor = slotBackground.color;
-            bgColor.a = 100f / 255f;
-            slotBackground.color = bgColor;
         }
 
         Debug.Log("Seleccionando el Slot 1...");
         selectedSlotIndex = 0;
-        UpdateSlotColors();
     }
 
     public void OnSlotSelected(int slotIndex)
@@ -123,78 +119,37 @@ public class InventoryManager : MonoBehaviour
         }
 
         selectedSlotIndex = slotIndex;
-        UpdateSlotColors();
+        Debug.Log($"Slot seleccionado: {slotIndex + 1}");
+        UpdateSelectedBorderPosition();
     }
 
-    private void UpdateSlotColors()
+    private void UpdateSelectedBorderPosition()
     {
-        Debug.Log($"Actualizando colores. Índice seleccionado: {selectedSlotIndex}");
-
-        for (int i = 0; i < slots.Count; i++)
+        if (selectedSlotIndex >= 0 && selectedSlotIndex < slots.Count && selectedBorder != null)
         {
-            if (i == 8) // Ignorar el Slot 9 (índice 8)
-            {
-                Debug.Log($"Ignorando el Slot 9 (índice {i}).");
-                continue;
-            }
+            // Obtén el RectTransform del Slot seleccionado
+            RectTransform targetSlot = slots[selectedSlotIndex].GetComponent<RectTransform>();
+            RectTransform borderRectTransform = selectedBorder.GetComponent<RectTransform>();
 
-            if (slots[i] == null)
+            if (targetSlot != null && borderRectTransform != null)
             {
-                Debug.LogError($"El Slot {i + 1} está vacío en la lista.");
-                continue;
-            }
+                // Sincroniza la posición con un ajuste fino
+                borderRectTransform.position = targetSlot.position + new Vector3(0f, 9.5f, 0f); // Ajuste más preciso
+                borderRectTransform.anchorMin = targetSlot.anchorMin;
+                borderRectTransform.anchorMax = targetSlot.anchorMax;
+                borderRectTransform.pivot = targetSlot.pivot;
 
-            Image slotImage = slots[i].GetComponent<Image>();
-            if (slotImage == null)
-            {
-                Debug.LogError($"El Slot {i + 1} no tiene un componente Image.");
-                continue;
+                // Mantén el tamaño configurado manualmente
+                borderRectTransform.sizeDelta = new Vector2(241f, 160f);
             }
-
-            Transform slotBackgroundTransform = slots[i].transform.Find("Slot Background");
-            if (slotBackgroundTransform == null)
+            else
             {
-                Debug.LogError($"El Slot {i + 1} no tiene un hijo llamado 'Slot Background'.");
-                continue;
+                Debug.LogWarning($"El Slot seleccionado o el Selected Border no tienen RectTransform válido. Índice: {selectedSlotIndex}");
             }
-
-            Image slotBackground = slotBackgroundTransform.GetComponent<Image>();
-            if (slotBackground == null)
-            {
-                Debug.LogError($"El 'Slot Background' del Slot {i + 1} no tiene un componente Image.");
-                continue;
-            }
-
-            if (i == selectedSlotIndex) // Slot seleccionado
-            {
-                if (slotImage.sprite != null) // Con objeto
-                {
-                    slotImage.color = new Color(0.849f, 0.230f, 0.845f, 1f); // Lila opacidad 255
-                    slotBackground.color = new Color(1f, 1f, 1f, 0f); // Transparente
-                    Debug.Log($"Slot {i + 1} seleccionado con objeto: Lila opacidad 255, fondo transparente.");
-                }
-                else // Sin objeto
-                {
-                    slotImage.color = new Color(0.849f, 0.230f, 0.845f, 0.8f); // Lila opacidad 204
-                    slotBackground.color = new Color(1f, 1f, 1f, 0.392f); // Semitransparente
-                    Debug.Log($"Slot {i + 1} seleccionado sin objeto: Lila opacidad 204, fondo semitransparente.");
-                }
-            }
-            else // Slot no seleccionado
-            {
-                if (slotImage.sprite != null) // Con objeto
-                {
-                    slotImage.color = new Color(1f, 1f, 1f, 1f); // Blanco opacidad 255
-                    slotBackground.color = new Color(1f, 1f, 1f, 0f); // Transparente
-                    Debug.Log($"Slot {i + 1} no seleccionado con objeto: Blanco opacidad 255, fondo transparente.");
-                }
-                else // Sin objeto
-                {
-                    slotImage.color = defaultSlotColor; // Blanco opacidad 100
-                    slotBackground.color = new Color(1f, 1f, 1f, 0.392f); // Semitransparente
-                    Debug.Log($"Slot {i + 1} no seleccionado sin objeto: Blanco opacidad 100, fondo semitransparente.");
-                }
-            }
+        }
+        else
+        {
+            Debug.LogWarning("Selected Border o el Slot seleccionado no son válidos.");
         }
     }
 
@@ -209,14 +164,15 @@ public class InventoryManager : MonoBehaviour
         GameObject slot = slots[slotIndex].gameObject;
 
         Image slotImage = slot.GetComponent<Image>();
-        Transform slotBackgroundTransform = slot.transform.Find("Slot Background");
-        Image slotBackground = slotBackgroundTransform?.GetComponent<Image>();
-
         if (slotImage != null)
         {
             slotImage.sprite = itemIcon;
-            slotImage.color = selectedSlotColor; // Lila opacidad máxima
             slotImage.enabled = true;
+
+            // Cambiar opacidad a 255 cuando el slot tiene un sprite
+            Color slotColor = slotImage.color;
+            slotColor.a = 1f; // Opacidad máxima
+            slotImage.color = slotColor;
         }
 
         TextMeshProUGUI slotTextComponent = slot.GetComponentInChildren<TextMeshProUGUI>();
@@ -230,22 +186,29 @@ public class InventoryManager : MonoBehaviour
             slotPrefabs[slotIndex] = prefab;
         }
 
-        // Si no hay ningún slot seleccionado actualmente, seleccionamos el primero asignado
-        if (selectedSlotIndex == -1 || !slots[selectedSlotIndex].GetComponent<Image>().sprite)
-        {
-            selectedSlotIndex = slotIndex;
-            Debug.Log($"Seleccionando el Slot {slotIndex + 1} tras asignar objeto: {itemName}");
-        }
-
-        UpdateSlotColors();
+        Debug.Log($"Asignado {itemName} al Slot {slotIndex + 1}");
     }
 
     public int FindFirstAvailableSlot()
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            Image slotImage = slots[i].GetComponentInChildren<Image>();
-            if (slotImage != null && slotImage.sprite == null)
+            Button slotButton = slots[i];
+            if (slotButton == null)
+            {
+                Debug.Log($"Slot {i} no tiene botón asignado en la lista.");
+                continue;
+            }
+
+            Image slotImage = slotButton.GetComponent<Image>();
+            if (slotImage == null)
+            {
+                Debug.Log($"Slot {i} no tiene un componente Image.");
+                continue;
+            }
+
+            // Si el sprite del slot es nulo, el slot está disponible
+            if (slotImage.sprite == null)
             {
                 Debug.Log($"Primer slot disponible encontrado: {i}");
                 return i;
@@ -265,17 +228,5 @@ public class InventoryManager : MonoBehaviour
         }
 
         return slotPrefabs[slotIndex];
-    }
-
-    public void AddSkullToCounter()
-    {
-        if (skullCounter != null)
-        {
-            skullCounter.AddSkull();
-        }
-        else
-        {
-            Debug.LogError("No se encontró el SkullCounter para añadir un cráneo.");
-        }
     }
 }
