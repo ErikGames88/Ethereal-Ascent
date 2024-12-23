@@ -96,14 +96,8 @@ public class InventoryManager : MonoBehaviour
                 continue;
             }
 
-            if (i == 8) // Slot 9 (Cráneos)
-            {
-                slotImage.color = new Color(1f, 1f, 1f, 1f); // Blanco opacidad máxima
-            }
-            else
-            {
-                slotImage.color = new Color(1f, 1f, 1f, 0.392f); // Blanco opacidad 100
-            }
+            // Configura la opacidad inicial de todos los slots a 100
+            slotImage.color = new Color(1f, 1f, 1f, 0.392f); // Blanco opacidad 100
         }
 
         Debug.Log("Seleccionando el Slot 1...");
@@ -228,5 +222,39 @@ public class InventoryManager : MonoBehaviour
         }
 
         return slotPrefabs[slotIndex];
+    }
+
+    public void RemoveItem(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= slots.Count)
+        {
+            Debug.LogError($"Índice del slot {slotIndex} fuera de rango.");
+            return;
+        }
+
+        // Limpia el sprite del Slot
+        Image slotImage = slots[slotIndex].GetComponent<Image>();
+        if (slotImage != null)
+        {
+            slotImage.sprite = null; // Eliminar sprite
+            slotImage.enabled = true; // Asegúrate de que el Image esté visible
+            slotImage.color = new Color(1f, 1f, 1f, 0.392f); // Vuelve al color blanco opacidad 100
+        }
+
+        // Limpia el texto del Slot (si aplica)
+        TextMeshProUGUI slotTextComponent = slots[slotIndex].GetComponentInChildren<TextMeshProUGUI>();
+        if (slotTextComponent != null)
+        {
+            slotTextComponent.text = ""; // Limpia el texto
+            slotTextComponent.gameObject.SetActive(false); // Desactiva el texto si está activo
+        }
+
+        // Limpia el prefab asociado al Slot
+        if (slotPrefabs != null && slotIndex < slotPrefabs.Count)
+        {
+            slotPrefabs[slotIndex] = null;
+        }
+
+        Debug.Log($"Objeto eliminado del Slot {slotIndex + 1}.");
     }
 }

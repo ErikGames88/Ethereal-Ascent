@@ -65,7 +65,7 @@ public class ItemInteractionManager : MonoBehaviour
 
         Debug.Log($"Prefab asociado: {slotPrefab.name}");
 
-        // Comprobar si es una llave y si se está interactuando con una puerta
+        // Verificar si es una llave y abrir la puerta
         if (slotPrefab.name == "Cathedral Key")
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -80,15 +80,21 @@ public class ItemInteractionManager : MonoBehaviour
                 {
                     Debug.Log("Llave seleccionada. Abriendo la puerta...");
                     doorInteraction.Interact();
+                    inventoryManager.RemoveItem(inventoryManager.SelectedSlotIndex); // Elimina la llave del inventario
                     return;
                 }
             }
 
             Debug.Log("No se pudo abrir la puerta. Asegúrate de tener la llave seleccionada.");
         }
+        else if (slotPrefab.GetComponent<PickupItem>().isFlashlight) // Verificar si es una linterna
+        {
+            Debug.Log("Linterna seleccionada. Equipándola...");
+            flashlightManager.EquipFlashlight();
+        }
         else
         {
-            Debug.Log("El objeto seleccionado no es una llave.");
+            Debug.Log("El objeto seleccionado no es una llave ni una linterna.");
         }
     }
 }

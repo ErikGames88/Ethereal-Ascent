@@ -7,8 +7,8 @@ public class PickupItem : MonoBehaviour
     [SerializeField, Tooltip("Ícono del objeto")]
     private Sprite itemIcon;
 
-    [SerializeField, Tooltip("¿Es una linterna?")]
-    private bool isFlashlight = false;
+    [Tooltip("¿Es una linterna?")]
+    public bool isFlashlight = false;
 
     public void Pickup(KeyManager keyManager, FlashlightManager flashlightManager, InventoryManager inventoryManager)
     {

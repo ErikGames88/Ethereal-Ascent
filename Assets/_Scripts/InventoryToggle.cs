@@ -16,9 +16,6 @@ public class InventoryToggle : MonoBehaviour
     [SerializeField, Tooltip("Referencia al InventoryManager para manejar lógica del inventario")]
     private InventoryManager inventoryManager;
 
-    [SerializeField, Tooltip("Referencia al KeyManager para manejar las llaves")]
-    private KeyManager keyManager;
-
     public static bool isInventoryOpen = false;
 
     void Start()
@@ -60,31 +57,5 @@ public class InventoryToggle : MonoBehaviour
         cameraController.enabled = !isInventoryOpen;
 
         Debug.Log($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto" : "cerrado")}.");
-
-        if (isInventoryOpen)
-        {
-            UpdateSlotState(); // Nuevo método para actualizar el estado del slot
-        }
-
-        if (!isInventoryOpen)
-        {
-            if (keyManager.CathedralKeyText != null)
-            {
-                keyManager.CathedralKeyText.SetActive(false);
-                Debug.Log("Texto de la llave desactivado al cerrar el inventario.");
-            }
-        }
-    }
-
-    private void UpdateSlotState()
-    {
-        if (inventoryManager.Slots == null || inventoryManager.Slots.Count == 0)
-        {
-            Debug.LogWarning("InventoryToggle: No hay slots disponibles en el InventoryManager.");
-            return;
-        }
-
-        // Actualizar visualmente los slots o realizar lógica personalizada
-        Debug.Log("Estado de los slots actualizado al abrir el inventario.");
     }
 }
