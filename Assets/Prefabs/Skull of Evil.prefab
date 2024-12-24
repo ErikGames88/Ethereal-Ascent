@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 170371465527449912}
   - component: {fileID: 1599503417706532015}
   - component: {fileID: 3208296482623570708}
+  - component: {fileID: 4194557579439925280}
+  - component: {fileID: 4453682531430836811}
   m_Layer: 0
   m_Name: Skull of Evil
   m_TagString: Untagged
@@ -33,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8017574756903782597}
+  - {fileID: 8681069511024970107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &170371465527449912
@@ -106,6 +109,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.650177, y: 2.1718647, z: 0.80110145}
   m_Center: {x: 0, y: 2.0848641, z: -0.01079309}
+--- !u!65 &4194557579439925280
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316959205199026783}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.88654923, y: 2.4931068, z: 1.0920929}
+  m_Center: {x: 0.010744214, y: 2.0589457, z: 0.000000059604645}
+--- !u!114 &4453682531430836811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316959205199026783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0b2ddb4fefd7247b7a9b013759686f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: 1.5
+  velocity: 0.1
 --- !u!1 &3433133403002151514
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,3 +209,77 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!1001 &4743506993869496325
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8359337088529395307}
+    m_Modifications:
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184277632824153565, guid: 6243420a56dc35843922d5d0e7910196,
+        type: 3}
+      propertyPath: m_Name
+      value: 'Skull Particle Effect '
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6243420a56dc35843922d5d0e7910196, type: 3}
+--- !u!4 &8681069511024970107 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4155987666157054334, guid: 6243420a56dc35843922d5d0e7910196,
+    type: 3}
+  m_PrefabInstance: {fileID: 4743506993869496325}
+  m_PrefabAsset: {fileID: 0}

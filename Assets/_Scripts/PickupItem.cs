@@ -13,7 +13,10 @@ public class PickupItem : MonoBehaviour
     [SerializeField, Tooltip("Texto del objeto para el inventario")]
     private GameObject itemText;
 
-    public void Pickup(KeyManager keyManager, FlashlightManager flashlightManager, InventoryManager inventoryManager)
+    [SerializeField, Tooltip("Sonido al recoger el objeto")]
+    private AudioClip pickupSound;
+
+    public void Pickup(KeyManager keyManager, FlashlightManager flashlightManager, InventoryManager inventoryManager, AudioSource[] playerAudioSources)
     {
         if (itemIcon == null)
         {
@@ -32,20 +35,33 @@ public class PickupItem : MonoBehaviour
 
         if (isFlashlight)
         {
-            Debug.Log("Es una linterna. Usando FlashlightManager.");
             flashlightManager.CollectFlashlight(availableSlotIndex, itemIcon);
         }
         else
         {
-            Debug.Log("Es una llave. Usando KeyManager.");
             keyManager.CollectKey(inventoryManager, availableSlotIndex, itemIcon);
         }
 
         inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon, gameObject, itemText);
 
+        // Reproduce el sonido de recogida usando el segundo AudioSource
+        PlayPickupSound(playerAudioSources);
 
         // Desactiva el objeto en la escena tras recogerlo
         gameObject.SetActive(false);
+    }
+
+    private void PlayPickupSound(AudioSource[] playerAudioSources)
+    {
+        if (pickupSound != null && playerAudioSources.Length > 1)
+        {
+            playerAudioSources[1].PlayOneShot(pickupSound);
+            Debug.Log("Sonido de recogida reproducido.");
+        }
+        else
+        {
+            Debug.LogWarning("No se asignó un sonido de recogida o el segundo AudioSource no está configurado.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

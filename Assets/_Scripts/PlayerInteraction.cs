@@ -10,6 +10,9 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField, Tooltip("LayerMask para objetos interactuables")]
     private LayerMask interactableLayer;
 
+    [SerializeField, Tooltip("Referencia al Player con AudioSources")]
+    private GameObject player; // Asigna el Player desde el Inspector
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Click izquierdo
@@ -30,7 +33,13 @@ public class PlayerInteraction : MonoBehaviour
             PickupItem pickupItem = hit.collider.GetComponent<PickupItem>();
             if (pickupItem != null)
             {
-                pickupItem.Pickup(FindObjectOfType<KeyManager>(), FindObjectOfType<FlashlightManager>(), FindObjectOfType<InventoryManager>());
+                AudioSource[] playerAudioSources = player.GetComponents<AudioSource>();
+                pickupItem.Pickup(
+                    FindObjectOfType<KeyManager>(),
+                    FindObjectOfType<FlashlightManager>(),
+                    FindObjectOfType<InventoryManager>(),
+                    playerAudioSources
+                );
             }
             else
             {
