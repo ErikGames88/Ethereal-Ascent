@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skullCounter: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: 1293d965208b081449476174e0aef58d, type: 3}
 --- !u!1 &3433133403002151514
 GameObject:
   m_ObjectHideFlags: 0
