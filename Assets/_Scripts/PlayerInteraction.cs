@@ -30,6 +30,22 @@ public class PlayerInteraction : MonoBehaviour
         {
             Debug.Log($"Interacción con: {hit.collider.name}");
 
+            // Manejo de cráneos
+            if (hit.collider.CompareTag("Skull"))
+            {
+                PickupSkull pickupSkull = hit.collider.GetComponent<PickupSkull>();
+                if (pickupSkull != null)
+                {
+                    pickupSkull.Pickup();
+                    return;
+                }
+                else
+                {
+                    Debug.LogWarning("El objeto tiene el tag Skull pero no tiene el script PickupSkull.");
+                }
+            }
+
+            // Manejo de objetos normales
             PickupItem pickupItem = hit.collider.GetComponent<PickupItem>();
             if (pickupItem != null)
             {
@@ -40,11 +56,10 @@ public class PlayerInteraction : MonoBehaviour
                     FindObjectOfType<InventoryManager>(),
                     playerAudioSources
                 );
+                return;
             }
-            else
-            {
-                Debug.LogWarning("El objeto no tiene el script PickupItem asignado.");
-            }
+
+            Debug.LogWarning("El objeto no tiene el script PickupItem asignado.");
         }
         else
         {
