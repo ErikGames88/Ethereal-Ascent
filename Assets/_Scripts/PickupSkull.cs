@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class PickupSkull : MonoBehaviour
 {
-    [SerializeField, Tooltip("Referencia al Skull Counter")]
-    private SkullCounter skullCounter;
-
     [SerializeField, Tooltip("Sonido al recoger el cráneo")]
     private AudioClip pickupSound;
 
+    private SkullCounter skullCounter; // Ahora es privado y no editable en el Inspector
     private AudioSource pickupAudioSource; // Referencia al AudioSource dedicado para recogida
 
     private void Awake()
     {
-        // Busca automáticamente el SkullCounter en la escena
+        // Encuentra automáticamente el SkullCounter
+        skullCounter = FindObjectOfType<SkullCounter>();
         if (skullCounter == null)
         {
-            skullCounter = FindObjectOfType<SkullCounter>();
-            if (skullCounter == null)
-            {
-                Debug.LogError("No se encontró un SkullCounter en la escena. Asegúrate de que está configurado.");
-            }
+            Debug.LogError("No se encontró un SkullCounter en la escena. Asegúrate de que está configurado.");
         }
 
         // Obtén el tercer AudioSource del Player
