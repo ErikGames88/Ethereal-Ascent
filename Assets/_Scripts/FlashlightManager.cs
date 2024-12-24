@@ -81,6 +81,14 @@ public class FlashlightManager : MonoBehaviour
         equippedFlashlight.transform.localPosition = new Vector3(-0.922f, 0.031f, -0.031f);
         equippedFlashlight.transform.localRotation = Quaternion.Euler(0f, 85.27f, 90f);
 
+        // Buscar y desactivar el sistema de partículas
+        Transform particleEffect = equippedFlashlight.transform.Find("Item Particle Effect");
+        if (particleEffect != null)
+        {
+            particleEffect.gameObject.SetActive(false); // Alternativamente, puedes usar Destroy(particleEffect.gameObject);
+            Debug.Log("Sistema de partículas desactivado en la linterna instanciada.");
+        }
+
         // Buscar el componente Light incluso si el Spot Light está desactivado
         flashlightLight = equippedFlashlight.GetComponentInChildren<Light>(true);
         if (flashlightLight == null)

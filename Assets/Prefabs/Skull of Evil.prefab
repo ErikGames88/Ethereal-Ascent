@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2127148943278539833}
   - component: {fileID: 4453682531430836811}
   - component: {fileID: -1028372648439721247}
+  - component: {fileID: 8640515781469822139}
   m_Layer: 7
   m_Name: Skull of Evil
   m_TagString: Untagged
@@ -255,6 +256,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 15
+--- !u!114 &8640515781469822139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316959205199026783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b44d28fc09c2242ab5fd9fc1b8f6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skullCounter: {fileID: 0}
 --- !u!1 &3433133403002151514
 GameObject:
   m_ObjectHideFlags: 0

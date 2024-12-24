@@ -47,6 +47,14 @@ public class PickupItem : MonoBehaviour
         // Reproduce el sonido de recogida usando el segundo AudioSource
         PlayPickupSound(playerAudioSources);
 
+        // Desactiva el sistema de partículas si existe
+        Transform particleEffect = transform.Find("Item Particle Effect");
+        if (particleEffect != null)
+        {
+            particleEffect.gameObject.SetActive(false); // Alternativamente: Destroy(particleEffect.gameObject);
+            Debug.Log("Sistema de partículas desactivado.");
+        }
+
         // Desactiva el objeto en la escena tras recogerlo
         gameObject.SetActive(false);
     }
