@@ -7,26 +7,24 @@ public class PickupSkull : MonoBehaviour
     [SerializeField, Tooltip("Sonido al recoger el cráneo")]
     private AudioClip pickupSound;
 
-    private SkullCounter skullCounter; // Ahora es privado y no editable en el Inspector
-    private AudioSource pickupAudioSource; // Referencia al AudioSource dedicado para recogida
+    private SkullCounter skullCounter;
+    private AudioSource pickupAudioSource;
 
     private void Awake()
     {
-        // Encuentra automáticamente el SkullCounter
         skullCounter = FindObjectOfType<SkullCounter>();
         if (skullCounter == null)
         {
-            Debug.LogError("No se encontró un SkullCounter en la escena. Asegúrate de que está configurado.");
+            Debug.LogError("No se encontró un SkullCounter en la escena.");
         }
 
-        // Obtén el tercer AudioSource del Player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             AudioSource[] audioSources = player.GetComponents<AudioSource>();
             if (audioSources.Length >= 3)
             {
-                pickupAudioSource = audioSources[2]; // Tercer AudioSource
+                pickupAudioSource = audioSources[2];
             }
         }
 
@@ -38,18 +36,27 @@ public class PickupSkull : MonoBehaviour
 
     public void Pickup()
     {
-        if (skullCounter != null)
-        {
-            skullCounter.AddSkull(); // Incrementa el contador
-        }
+        Debug.Log($"Iniciando recogida de cráneo: {gameObject.name}");
 
-        PlayPickupSound(); // Reproduce el sonido desde el tercer AudioSource
+        // Reproduce el sonido
+        PlayPickupSound();
 
-        // Desactiva y destruye el cráneo inmediatamente
-        gameObject.SetActive(false);
+        // Notifica al SkullCounter DESPUÉS de desactivar y procesar completamente
+        NotifySkullCounter();
+
+        // Finalmente, destruye el objeto
         Destroy(gameObject);
 
-        Debug.Log($"Cráneo recogido: {gameObject.name}");
+        Debug.Log($"Cráneo recogido completamente: {gameObject.name}");
+    }
+
+    private void NotifySkullCounter()
+    {
+        if (skullCounter != null)
+        {
+            Debug.Log($"Notificando al SkullCounter: {gameObject.name}");
+            skullCounter.AddSkull();
+        }
     }
 
     private void PlayPickupSound()
@@ -57,11 +64,11 @@ public class PickupSkull : MonoBehaviour
         if (pickupSound != null && pickupAudioSource != null)
         {
             pickupAudioSource.PlayOneShot(pickupSound);
-            Debug.Log("Sonido de recogida reproducido desde el tercer AudioSource.");
+            Debug.Log("Sonido de recogida reproducido.");
         }
         else
         {
-            Debug.LogWarning("No se pudo reproducir el sonido de recogida. Verifica el AudioSource y el clip.");
+            Debug.LogWarning("No se pudo reproducir el sonido de recogida.");
         }
     }
 }

@@ -9,40 +9,62 @@ public class SkullCounter : MonoBehaviour
     [SerializeField, Tooltip("Referencia al TextMeshPro para mostrar el contador")]
     private TextMeshProUGUI counterText;
 
-    [SerializeField, Tooltip("Sprite del icono de los cráneos")]
-    private Image skullIcon;
+    [SerializeField, Tooltip("Referencia al Key Hint Text")]
+    private GameObject keyHintText;
 
-    private int skullCount = 0; // Contador interno de cráneos
+    [SerializeField, Tooltip("Referencia al TextBackground")]
+    private GameObject textBackground;
+
+    private int skullCount = 0;
+    private bool isKeyHintActive = false;
 
     void Start()
     {
-        if (counterText != null)
-        {
-            counterText.text = "0";
-        }
+        counterText.text = "0";
+        keyHintText.SetActive(false);
+        textBackground.SetActive(false);
+    }
 
-        if (skullIcon != null)
+    void Update()
+    {
+        if (isKeyHintActive && Input.GetKeyDown(KeyCode.E))
         {
-            skullIcon.enabled = true;
+            HideKeyHint();
         }
     }
 
     public void AddSkull()
     {
         skullCount++;
+        Debug.Log($"Cráneos recogidos: {skullCount}");
+
+        // Llama a ShowKeyHint solo después de confirmar que son 6 cráneos
+        if (skullCount == 6)
+        {
+            ShowKeyHint();
+        }
+
         UpdateCounter();
     }
 
     private void UpdateCounter()
     {
-        if (counterText != null)
-        {
-            counterText.text = skullCount.ToString();
+        counterText.text = skullCount.ToString();
+    }
 
-            if (skullCount >= 6)
-            {
-                Debug.Log("¡Todos los cráneos recolectados!");
-            }
-        }
+    private void ShowKeyHint()
+    {
+        keyHintText.SetActive(true);
+        textBackground.SetActive(true);
+        isKeyHintActive = true;
+        Debug.Log("Pista de la llave mostrada.");
+    }
+
+    private void HideKeyHint()
+    {
+        keyHintText.SetActive(false);
+        textBackground.SetActive(false);
+        isKeyHintActive = false;
+        Debug.Log("Pista de la llave oculta.");
     }
 }
