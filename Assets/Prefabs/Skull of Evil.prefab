@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2127148943278539833}
   - component: {fileID: 4453682531430836811}
   - component: {fileID: -1028372648439721247}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skull of Evil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
