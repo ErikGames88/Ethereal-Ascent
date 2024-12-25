@@ -15,6 +15,9 @@ public class SkullCounter : MonoBehaviour
     [SerializeField, Tooltip("Referencia al TextBackground")]
     private GameObject textBackground;
 
+    [SerializeField, Tooltip("Referencia al PlayerLocked para gestionar el bloqueo del jugador")]
+    private PlayerLocked playerLocked;
+
     private int skullCount = 0;
     private bool isKeyHintActive = false;
 
@@ -23,6 +26,15 @@ public class SkullCounter : MonoBehaviour
         counterText.text = "0";
         keyHintText.SetActive(false);
         textBackground.SetActive(false);
+
+        if (playerLocked == null)
+        {
+            playerLocked = FindObjectOfType<PlayerLocked>();
+            if (playerLocked == null)
+            {
+                Debug.LogError("PlayerLocked no asignado y no se encontró en la escena.");
+            }
+        }
     }
 
     void Update()
@@ -38,7 +50,6 @@ public class SkullCounter : MonoBehaviour
         skullCount++;
         Debug.Log($"Cráneos recogidos: {skullCount}");
 
-        // Llama a ShowKeyHint solo después de confirmar que son 6 cráneos
         if (skullCount == 6)
         {
             ShowKeyHint();
@@ -57,7 +68,14 @@ public class SkullCounter : MonoBehaviour
         keyHintText.SetActive(true);
         textBackground.SetActive(true);
         isKeyHintActive = true;
-        Debug.Log("Pista de la llave mostrada.");
+
+        Debug.Log("Pista de la llave mostrada. Bloqueando movimiento.");
+
+        // Bloquear al jugador pero mantener el cursor oculto
+        if (playerLocked != null)
+        {
+            playerLocked.LockPlayer(true, false); // No mostrar el cursor
+        }
     }
 
     private void HideKeyHint()
@@ -65,6 +83,13 @@ public class SkullCounter : MonoBehaviour
         keyHintText.SetActive(false);
         textBackground.SetActive(false);
         isKeyHintActive = false;
-        Debug.Log("Pista de la llave oculta.");
+
+        Debug.Log("Pista de la llave oculta. Restaurando movimiento.");
+
+        // Desbloquear al jugador y restaurar el estado habitual del cursor
+        if (playerLocked != null)
+        {
+            playerLocked.LockPlayer(false);
+        }
     }
 }

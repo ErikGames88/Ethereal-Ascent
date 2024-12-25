@@ -13,7 +13,26 @@ public class PlayerLocked : MonoBehaviour
     [SerializeField, Tooltip("Referencia al CrosshairManager para manejar el crosshair")]
     private CrosshairManager crosshairManager;
 
-    public void LockPlayer(bool isLocked)
+    private Rigidbody playerRigidbody;
+
+    private void Awake()
+    {
+        // Encuentra automáticamente el Rigidbody del jugador
+        if (playerController != null)
+        {
+            playerRigidbody = playerController.GetComponent<Rigidbody>();
+            if (playerRigidbody == null)
+            {
+                Debug.LogError("No se encontró un Rigidbody en el PlayerController.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PlayerController no está asignado.");
+        }
+    }
+
+    public void LockPlayer(bool isLocked, bool showCursor = false)
     {
         if (playerController != null)
         {
@@ -33,8 +52,16 @@ public class PlayerLocked : MonoBehaviour
             Debug.Log($"Crosshair {(isLocked ? "oculto" : "visible")}");
         }
 
-        // Gestión del cursor según el estado
-        if (isLocked)
+        // Detener el movimiento residual del Rigidbody al bloquear al jugador
+        if (isLocked && playerRigidbody != null)
+        {
+            playerRigidbody.velocity = Vector3.zero; // Detener cualquier movimiento
+            playerRigidbody.angularVelocity = Vector3.zero; // Detener rotación
+            Debug.Log("Rigidbody detenido.");
+        }
+
+        // Gestión del cursor según el estado y el parámetro showCursor
+        if (isLocked && showCursor)
         {
             Cursor.lockState = CursorLockMode.None; // Cursor desbloqueado
             Cursor.visible = true; // Cursor visible
@@ -45,6 +72,6 @@ public class PlayerLocked : MonoBehaviour
             Cursor.visible = false; // Cursor oculto
         }
 
-        Debug.Log($"Cursor {(isLocked ? "visible y desbloqueado" : "oculto y bloqueado")}");
+        Debug.Log($"Cursor {(Cursor.visible ? "visible" : "oculto")} y {(Cursor.lockState == CursorLockMode.Locked ? "bloqueado" : "desbloqueado")}");
     }
 }
