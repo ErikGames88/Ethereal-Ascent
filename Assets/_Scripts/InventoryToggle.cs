@@ -62,6 +62,13 @@ public class InventoryToggle : MonoBehaviour
         {
             inventoryManager.SetSlotNavigation(isInventoryOpen);
             Debug.LogError($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto, habilitando" : "cerrado, bloqueando")} navegación de slots.");
+
+            // Nueva línea: Actualizar visibilidad de los textos al abrir el inventario
+            if (isInventoryOpen)
+            {
+                inventoryManager.OnSlotSelected(inventoryManager.SelectedSlotIndex);
+                Debug.Log("InventoryToggle: Textos de inventario actualizados al abrir.");
+            }
         }
 
         if (!isInventoryOpen)
