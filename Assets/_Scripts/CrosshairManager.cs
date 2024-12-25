@@ -39,15 +39,10 @@ public class CrosshairManager : MonoBehaviour
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            if (hit.collider.CompareTag("Interactable"))
+            // Verificar si el objeto tiene el Layer "Interactable"
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
                 crosshair.color = interactColor;
-
-                /*if (Input.GetMouseButton(0))
-                {
-                    Debug.Log($"Interacted with {hit.collider.name}");
-                }*/
-
                 return;
             }
         }

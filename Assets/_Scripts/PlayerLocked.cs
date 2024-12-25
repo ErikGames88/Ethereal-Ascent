@@ -16,6 +16,9 @@ public class PlayerLocked : MonoBehaviour
     [SerializeField, Tooltip("Referencia al InventoryManager para bloquear desplazamiento de slots")]
     private InventoryManager inventoryManager;
 
+    [SerializeField, Tooltip("Referencia al StaminaUI para ocultar la barra de estamina")]
+    private StaminaUI staminaUI;
+
     private Rigidbody playerRigidbody;
 
     private void Awake()
@@ -44,8 +47,18 @@ public class PlayerLocked : MonoBehaviour
             }
             else
             {
-                inventoryManager.SetSlotNavigation(true); // Habilitar navegación de slots por defecto
+                inventoryManager.SetSlotNavigation(true);
                 Debug.LogError("PlayerLocked: Navegación de slots habilitada al inicio.");
+            }
+        }
+
+        // Configuración del StaminaUI
+        if (staminaUI == null)
+        {
+            staminaUI = FindObjectOfType<StaminaUI>();
+            if (staminaUI == null)
+            {
+                Debug.LogError("PlayerLocked: No se encontró un StaminaUI en la escena.");
             }
         }
 
@@ -79,6 +92,18 @@ public class PlayerLocked : MonoBehaviour
             Debug.LogError($"PlayerLocked: Navegación de slots {(isLocked ? "bloqueada" : "habilitada")} al {(isLocked ? "bloquear" : "desbloquear")} al jugador.");
         }
 
+        if (staminaUI != null)
+        {
+            if (isLocked)
+            {
+                staminaUI.ForceHideStaminaBar();
+            }
+            else
+            {
+                staminaUI.AllowStaminaBar();
+            }
+        }
+
         if (isLocked && playerRigidbody != null)
         {
             playerRigidbody.velocity = Vector3.zero;
@@ -86,7 +111,6 @@ public class PlayerLocked : MonoBehaviour
             Debug.Log("Rigidbody detenido.");
         }
 
-        // Gestionar el cursor
         SetCursorState(isLocked ? CursorLockMode.None : CursorLockMode.Locked, isLocked && showCursor);
     }
 

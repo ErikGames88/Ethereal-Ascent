@@ -14,6 +14,8 @@ public class StaminaUI : MonoBehaviour
     [SerializeField, Tooltip("Referencia al PlayerController para obtener la estamina")]
     private PlayerController playerController;
 
+    private bool isForcedHidden = false; // Indica si la barra debe permanecer oculta
+
     void Update()
     {
         if (playerController == null || foreground == null || staminaBar == null)
@@ -22,8 +24,17 @@ public class StaminaUI : MonoBehaviour
             return;
         }
 
+        if (isForcedHidden)
+        {
+            if (staminaBar.activeSelf)
+            {
+                staminaBar.SetActive(false);
+            }
+            return; // No hacer nada más si la barra está forzada a ocultarse
+        }
+
         float staminaPercent = playerController.GetStamina() / playerController.GetMaxStamina();
-        foreground.fillAmount = staminaPercent; 
+        foreground.fillAmount = staminaPercent;
 
         if (playerController.IsSprinting() && playerController.IsSprintAllowed() && !staminaBar.activeSelf)
         {
@@ -33,6 +44,22 @@ public class StaminaUI : MonoBehaviour
         {
             staminaBar.SetActive(false);
         }
+    }
+
+    public void ForceHideStaminaBar()
+    {
+        isForcedHidden = true;
+        if (staminaBar != null && staminaBar.activeSelf)
+        {
+            staminaBar.SetActive(false);
+            Debug.LogError("StaminaUI: Barra de estamina forzada a ocultarse.");
+        }
+    }
+
+    public void AllowStaminaBar()
+    {
+        isForcedHidden = false;
+        Debug.LogError("StaminaUI: Barra de estamina permitida nuevamente.");
     }
 }
     
