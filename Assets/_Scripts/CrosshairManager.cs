@@ -54,4 +54,16 @@ public class CrosshairManager : MonoBehaviour
 
         crosshair.color = defaultColor;
     }
+
+    public void ShowCrosshair(bool isVisible)
+    {
+        if (crosshair != null)
+        {
+            crosshair.gameObject.SetActive(isVisible);
+        }
+        else
+        {
+            Debug.LogWarning("Crosshair no está asignado.");
+        }
+    }
 }

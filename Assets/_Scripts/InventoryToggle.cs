@@ -7,11 +7,8 @@ public class InventoryToggle : MonoBehaviour
     [SerializeField, Tooltip("Canvas principal del inventario")]
     private GameObject inventoryCanvas;
 
-    [SerializeField, Tooltip("Referencia al PlayerController para bloquear movimiento")]
-    private PlayerController playerController;
-
-    [SerializeField, Tooltip("Referencia al script CameraController para bloquear rotación")]
-    private CameraController cameraController;
+    [SerializeField, Tooltip("Referencia al PlayerLocked para bloquear/desbloquear movimiento")]
+    private PlayerLocked playerLocked;
 
     [SerializeField, Tooltip("Referencia al InventoryManager para manejar lógica del inventario")]
     private InventoryManager inventoryManager;
@@ -30,8 +27,18 @@ public class InventoryToggle : MonoBehaviour
             Debug.LogWarning("InventoryToggle: Inventory Canvas no está asignado.");
         }
 
+        // Cursor siempre oculto y bloqueado
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (playerLocked == null)
+        {
+            playerLocked = FindObjectOfType<PlayerLocked>();
+            if (playerLocked == null)
+            {
+                Debug.LogError("PlayerLocked no asignado y no se encontró en la escena.");
+            }
+        }
     }
 
     void Update()
@@ -44,7 +51,7 @@ public class InventoryToggle : MonoBehaviour
 
     private void ManageInventory()
     {
-        if (inventoryCanvas == null || playerController == null || cameraController == null || inventoryManager == null)
+        if (inventoryCanvas == null || playerLocked == null || inventoryManager == null)
         {
             Debug.LogWarning("InventoryToggle: Alguna referencia no está asignada.");
             return;
@@ -53,10 +60,13 @@ public class InventoryToggle : MonoBehaviour
         isInventoryOpen = !isInventoryOpen;
         inventoryCanvas.SetActive(isInventoryOpen);
 
-        playerController.enabled = !isInventoryOpen;
-        cameraController.enabled = !isInventoryOpen;
+        playerLocked.LockPlayer(isInventoryOpen); // Bloquea o desbloquea el jugador
 
-        Debug.Log($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto" : "cerrado")}.");
+        // Cursor siempre bloqueado e invisible
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        Debug.Log($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto" : "cerrado")}. Cursor siempre oculto.");
 
         if (!isInventoryOpen) // Cuando el inventario se cierra
         {

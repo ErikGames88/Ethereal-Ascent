@@ -36,20 +36,22 @@ public class PickupSkull : MonoBehaviour
 
     public void Pickup()
     {
-        Debug.Log($"Iniciando recogida de cráneo: {gameObject.name}");
+        // Primero, desactiva el cráneo para indicar que ha sido recogido
+        gameObject.SetActive(false);
 
         // Reproduce el sonido
         PlayPickupSound();
 
-        // Notifica al SkullCounter DESPUÉS de desactivar y procesar completamente
+        // Asegurarse de que todo el proceso del cráneo está completo antes de notificar
+        Debug.Log($"Cráneo recogido completamente: {gameObject.name}");
+
+        // Notifica al SkullCounter después de que el cráneo esté completamente procesado
         NotifySkullCounter();
 
-        // Finalmente, destruye el objeto
+        // Finalmente, destruye el cráneo tras completar todo
         Destroy(gameObject);
-
-        Debug.Log($"Cráneo recogido completamente: {gameObject.name}");
     }
-
+    
     private void NotifySkullCounter()
     {
         if (skullCounter != null)
