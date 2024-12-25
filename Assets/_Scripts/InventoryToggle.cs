@@ -19,17 +19,13 @@ public class InventoryToggle : MonoBehaviour
     {
         if (inventoryCanvas != null)
         {
-            inventoryCanvas.SetActive(false); // Asegurarse de que el Canvas está oculto al inicio
+            inventoryCanvas.SetActive(false);
             Debug.Log("InventoryToggle: Canvas oculto al inicio.");
         }
         else
         {
             Debug.LogWarning("InventoryToggle: Inventory Canvas no está asignado.");
         }
-
-        // Cursor siempre oculto y bloqueado
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
         if (playerLocked == null)
         {
@@ -60,18 +56,17 @@ public class InventoryToggle : MonoBehaviour
         isInventoryOpen = !isInventoryOpen;
         inventoryCanvas.SetActive(isInventoryOpen);
 
-        playerLocked.LockPlayer(isInventoryOpen); // Bloquea o desbloquea el jugador
+        playerLocked.LockPlayer(isInventoryOpen, false); // Gestión centralizada del cursor
 
-        // Cursor siempre bloqueado e invisible
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        Debug.Log($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto" : "cerrado")}. Cursor siempre oculto.");
-
-        if (!isInventoryOpen) // Cuando el inventario se cierra
+        if (inventoryManager != null)
         {
-            Debug.Log("Cerrando inventario: Ocultando textos.");
-            inventoryManager.HideAllTexts(); // Oculta todos los textos del inventario
+            inventoryManager.SetSlotNavigation(isInventoryOpen);
+            Debug.LogError($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto, habilitando" : "cerrado, bloqueando")} navegación de slots.");
+        }
+
+        if (!isInventoryOpen)
+        {
+            inventoryManager.HideAllTexts();
             Debug.Log("InventoryToggle: Todos los textos desactivados al cerrar el inventario.");
         }
     }

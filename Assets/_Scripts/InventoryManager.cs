@@ -36,6 +36,8 @@ public class InventoryManager : MonoBehaviour
         set => selectedSlotIndex = value;
     }
 
+    private bool canNavigateSlots = true;
+
     void Start()
     {
         if (slots == null || slots.Count != 9)
@@ -52,33 +54,49 @@ public class InventoryManager : MonoBehaviour
 
         InitializeInventory();
 
-        // Asegura que el Selected Border comience en el Slot 1
         selectedSlotIndex = 0;
+        UpdateSelectedBorderPosition();
+    }
 
-        UpdateSelectedBorderPosition(); // Inicializa la posición correctamente
+    public void SetSlotNavigation(bool isEnabled)
+    {
+        canNavigateSlots = isEnabled;
+        Debug.LogError($"InventoryManager: Navegación de slots {(isEnabled ? "habilitada" : "bloqueada")}.");
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) // Mover hacia la izquierda
+        if (!canNavigateSlots)
         {
-            int newSlotIndex = selectedSlotIndex - 1; 
+            Debug.LogError("InventoryManager: Navegación bloqueada, ignorando entrada.");
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            int newSlotIndex = selectedSlotIndex - 1;
             if (newSlotIndex >= 0)
             {
                 OnSlotSelected(newSlotIndex);
             }
+            else
+            {
+                Debug.LogError("InventoryManager: Límite izquierdo alcanzado, no se puede mover más.");
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.D)) // Mover hacia la derecha
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            int newSlotIndex = selectedSlotIndex + 1; 
+            int newSlotIndex = selectedSlotIndex + 1;
             if (newSlotIndex < slots.Count)
             {
                 OnSlotSelected(newSlotIndex);
             }
+            else
+            {
+                Debug.LogError("InventoryManager: Límite derecho alcanzado, no se puede mover más.");
+            }
         }
-
-        UpdateItemTextVisibility();
     }
 
     private void InitializeInventory()
