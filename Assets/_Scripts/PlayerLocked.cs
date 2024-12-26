@@ -23,46 +23,25 @@ public class PlayerLocked : MonoBehaviour
 
     private void Awake()
     {
-        // Configuración del PlayerController y Rigidbody
         if (playerController != null)
         {
             playerRigidbody = playerController.GetComponent<Rigidbody>();
-            if (playerRigidbody == null)
-            {
-                Debug.LogError("PlayerLocked: No se encontró un Rigidbody en el PlayerController.");
-            }
-        }
-        else
-        {
-            Debug.LogError("PlayerLocked: PlayerController no está asignado.");
         }
 
-        // Configuración del InventoryManager
         if (inventoryManager == null)
         {
             inventoryManager = FindObjectOfType<InventoryManager>();
-            if (inventoryManager == null)
-            {
-                Debug.LogError("PlayerLocked: No se encontró un InventoryManager en la escena.");
-            }
-            else
+            if (inventoryManager != null)
             {
                 inventoryManager.SetSlotNavigation(true);
-                Debug.LogError("PlayerLocked: Navegación de slots habilitada al inicio.");
             }
         }
 
-        // Configuración del StaminaUI
         if (staminaUI == null)
         {
             staminaUI = FindObjectOfType<StaminaUI>();
-            if (staminaUI == null)
-            {
-                Debug.LogError("PlayerLocked: No se encontró un StaminaUI en la escena.");
-            }
         }
 
-        // Bloquear y ocultar el cursor al inicio
         SetCursorState(CursorLockMode.Locked, false);
     }
 
@@ -71,25 +50,21 @@ public class PlayerLocked : MonoBehaviour
         if (playerController != null)
         {
             playerController.enabled = !isLocked;
-            Debug.Log($"PlayerController {(isLocked ? "desactivado" : "activado")}");
         }
 
         if (cameraController != null)
         {
             cameraController.enabled = !isLocked;
-            Debug.Log($"CameraController {(isLocked ? "desactivado" : "activado")}");
         }
 
         if (crosshairManager != null)
         {
             crosshairManager.ShowCrosshair(!isLocked);
-            Debug.Log($"Crosshair {(isLocked ? "oculto" : "visible")}");
         }
 
         if (inventoryManager != null)
         {
             inventoryManager.SetSlotNavigation(!isLocked);
-            Debug.LogError($"PlayerLocked: Navegación de slots {(isLocked ? "bloqueada" : "habilitada")} al {(isLocked ? "bloquear" : "desbloquear")} al jugador.");
         }
 
         if (staminaUI != null)
@@ -108,16 +83,26 @@ public class PlayerLocked : MonoBehaviour
         {
             playerRigidbody.velocity = Vector3.zero;
             playerRigidbody.angularVelocity = Vector3.zero;
-            Debug.Log("Rigidbody detenido.");
         }
 
-        SetCursorState(isLocked ? CursorLockMode.None : CursorLockMode.Locked, isLocked && showCursor);
+        if (isLocked)
+        {
+            SetCursorState(CursorLockMode.None, showCursor);
+        }
+        else
+        {
+            SetCursorState(CursorLockMode.Locked, false);
+        }
     }
 
     private void SetCursorState(CursorLockMode lockState, bool visible)
     {
         Cursor.lockState = lockState;
         Cursor.visible = visible;
-        Debug.Log($"Cursor {(Cursor.visible ? "visible" : "oculto")} y {(Cursor.lockState == CursorLockMode.Locked ? "bloqueado" : "desbloqueado")}");
+    }
+
+    public bool IsPlayerLocked()
+    {
+        return playerController != null && !playerController.enabled; 
     }
 }

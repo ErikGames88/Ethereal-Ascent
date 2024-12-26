@@ -27,9 +27,12 @@ public class DoorInteraction : MonoBehaviour
 
     private KeyManager keyManager;
 
+    [SerializeField, Tooltip("Collider Trigger del objeto Gates que se desactivará al abrir las puertas")]
+    private Collider gatesCollider;
+    
+
     void Awake()
     {
-        // Configurar el AudioSource
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null && openSound != null)
         {
@@ -37,12 +40,13 @@ public class DoorInteraction : MonoBehaviour
             audioSource.clip = openSound;
         }
 
-        // Encontrar las puertas
         Transform gates = transform.Find("Gates");
         if (gates != null)
         {
             gateL = gates.Find("Gate L");
             gateR = gates.Find("Gate R");
+
+            gatesCollider = gates.GetComponent<Collider>();
 
             if (gateL != null && gateR != null)
             {
@@ -52,21 +56,9 @@ public class DoorInteraction : MonoBehaviour
                 targetRotationL = Quaternion.Euler(0, openAngle, 0) * initialRotationL;
                 targetRotationR = Quaternion.Euler(0, -openAngle, 0) * initialRotationR;
             }
-            else
-            {
-                Debug.LogError("No se encontraron las puertas Gate L y Gate R en Gates.");
-            }
-        }
-        else
-        {
-            Debug.LogError("No se encontró el objeto Gates en la jerarquía.");
         }
 
         keyManager = FindObjectOfType<KeyManager>();
-        if (keyManager == null)
-        {
-            Debug.LogError("No se encontró el KeyManager en la escena.");
-        }
     }
 
     public void Interact()
@@ -75,7 +67,6 @@ public class DoorInteraction : MonoBehaviour
         {
             StartCoroutine(OpenDoor());
 
-            // Eliminar la llave tras abrir la puerta
             if (keyManager != null)
             {
                 keyManager.RemoveKey(FindObjectOfType<InventoryManager>());
@@ -107,6 +98,9 @@ public class DoorInteraction : MonoBehaviour
         if (gateL != null) gateL.localRotation = targetRotationL;
         if (gateR != null) gateR.localRotation = targetRotationR;
 
-        Debug.Log("Puertas abiertas.");
+        if (gatesCollider != null)
+        {
+            gatesCollider.enabled = false;
+        }
     }
 }

@@ -32,22 +32,12 @@ public class SkullCounter : MonoBehaviour
 
         if (cathedralKey != null)
         {
-            Debug.Log($"Cathedral Key asignada: {cathedralKey.name}");
             cathedralKey.SetActive(false);
-            Debug.Log("Cathedral Key desactivada al inicio.");
-        }
-        else
-        {
-            Debug.LogError("Cathedral Key no está asignada en el Inspector.");
         }
 
         if (playerLocked == null)
         {
             playerLocked = FindObjectOfType<PlayerLocked>();
-            if (playerLocked == null)
-            {
-                Debug.LogError("PlayerLocked no asignado y no se encontró en la escena.");
-            }
         }
     }
 
@@ -62,11 +52,9 @@ public class SkullCounter : MonoBehaviour
     public void AddSkull()
     {
         skullCount++;
-        Debug.Log($"Cráneos recogidos: {skullCount}");
 
         if (skullCount == 6)
         {
-            Debug.Log("Se han recogido los 6 cráneos. Mostrando Key Hint y activando la llave.");
             ShowKeyHint();
             ActivateKey();
         }
@@ -76,7 +64,6 @@ public class SkullCounter : MonoBehaviour
 
     private void UpdateCounter()
     {
-        Debug.Log($"Actualizando contador de cráneos: {skullCount}");
         counterText.text = skullCount.ToString();
     }
 
@@ -86,16 +73,9 @@ public class SkullCounter : MonoBehaviour
         textBackground.SetActive(true);
         isKeyHintActive = true;
 
-        Debug.Log("Pista de la llave mostrada en pantalla.");
-
         if (playerLocked != null)
         {
-            playerLocked.LockPlayer(true, false); // No mostrar el cursor
-            Debug.Log("Movimiento del jugador bloqueado.");
-        }
-        else
-        {
-            Debug.LogWarning("PlayerLocked no está asignado. No se pudo bloquear al jugador.");
+            playerLocked.LockPlayer(true, false);
         }
     }
 
@@ -105,12 +85,9 @@ public class SkullCounter : MonoBehaviour
         textBackground.SetActive(false);
         isKeyHintActive = false;
 
-        Debug.Log("Pista de la llave oculta.");
-
         if (playerLocked != null)
         {
             playerLocked.LockPlayer(false);
-            Debug.Log("Movimiento del jugador restaurado.");
         }
     }
 
@@ -118,20 +95,7 @@ public class SkullCounter : MonoBehaviour
     {
         if (cathedralKey != null)
         {
-            Debug.Log($"Intentando activar la llave: {cathedralKey.name}");
             cathedralKey.SetActive(true);
-            if (cathedralKey.activeSelf)
-            {
-                Debug.Log("Cathedral Key activada correctamente.");
-            }
-            else
-            {
-                Debug.LogError("Se intentó activar la Cathedral Key pero sigue desactivada.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Cathedral Key no está asignada o no se pudo activar.");
         }
     }
 }

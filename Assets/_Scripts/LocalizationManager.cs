@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
 {
-    public static LocalizationManager Instance; // Singleton para acceso global
+    public static LocalizationManager Instance; 
 
     public enum Language { Spanish, English }
     public Language currentLanguage = Language.Spanish;
@@ -17,7 +17,7 @@ public class LocalizationManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persistir entre escenas
+            DontDestroyOnLoad(gameObject); 
             InitializeDictionaries();
         }
         else
@@ -28,11 +28,9 @@ public class LocalizationManager : MonoBehaviour
 
     private void InitializeDictionaries()
     {
-        // Textos en español
         spanishTexts.Add("Flashlight", "Linterna");
         spanishTexts.Add("Skulls", "Cráneos");
 
-        // Textos en inglés
         englishTexts.Add("Flashlight", "Flashlight");
         englishTexts.Add("Skulls", "Skulls");
     }
@@ -62,7 +60,7 @@ public class LocalizationManager : MonoBehaviour
                 }
 
             default:
-                return key; // Retorna la clave si no encuentra el texto
+                return key; 
         }
     }
 

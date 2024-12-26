@@ -16,22 +16,19 @@ public class PickupItem : MonoBehaviour
     [SerializeField, Tooltip("Sonido al recoger el objeto")]
     private AudioClip pickupSound;
 
+
     public void Pickup(KeyManager keyManager, FlashlightManager flashlightManager, InventoryManager inventoryManager, AudioSource[] playerAudioSources)
     {
         if (itemIcon == null)
         {
-            Debug.LogError("El ícono del objeto no está asignado. Revisa el Inspector.");
             return;
         }
 
         int availableSlotIndex = inventoryManager.FindFirstAvailableSlot();
         if (availableSlotIndex < 0)
         {
-            Debug.LogWarning("No hay slots disponibles en el inventario.");
             return;
         }
-
-        Debug.Log($"Objeto recogido: {gameObject.name}. Asignando al Slot {availableSlotIndex}");
 
         if (isFlashlight)
         {
@@ -44,18 +41,14 @@ public class PickupItem : MonoBehaviour
 
         inventoryManager.AssignItemToSlot(availableSlotIndex, gameObject.name, itemIcon, gameObject, itemText);
 
-        // Reproduce el sonido de recogida usando el segundo AudioSource
         PlayPickupSound(playerAudioSources);
 
-        // Desactiva el sistema de partículas si existe
         Transform particleEffect = transform.Find("Item Particle Effect");
         if (particleEffect != null)
         {
-            particleEffect.gameObject.SetActive(false); // Alternativamente: Destroy(particleEffect.gameObject);
-            Debug.Log("Sistema de partículas desactivado.");
+            particleEffect.gameObject.SetActive(false);
         }
 
-        // Desactiva el objeto en la escena tras recogerlo
         gameObject.SetActive(false);
     }
 
@@ -64,19 +57,6 @@ public class PickupItem : MonoBehaviour
         if (pickupSound != null && playerAudioSources.Length > 1)
         {
             playerAudioSources[1].PlayOneShot(pickupSound);
-            Debug.Log("Sonido de recogida reproducido.");
-        }
-        else
-        {
-            Debug.LogWarning("No se asignó un sonido de recogida o el segundo AudioSource no está configurado.");
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Trigger activado: Player ha tocado la llave.");
         }
     }
 }

@@ -11,11 +11,12 @@ public class PlayerInteraction : MonoBehaviour
     private LayerMask interactableLayer;
 
     [SerializeField, Tooltip("Referencia al Player con AudioSources")]
-    private GameObject player; // Asigna el Player desde el Inspector
+    private GameObject player; 
+    
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Click izquierdo
+        if (Input.GetMouseButtonDown(0)) 
         {
             InteractWithObject();
         }
@@ -28,9 +29,6 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
-            Debug.Log($"Interacción con: {hit.collider.name}");
-
-            // Manejo de cráneos
             if (hit.collider.CompareTag("Skull"))
             {
                 PickupSkull pickupSkull = hit.collider.GetComponent<PickupSkull>();
@@ -39,13 +37,8 @@ public class PlayerInteraction : MonoBehaviour
                     pickupSkull.Pickup();
                     return;
                 }
-                else
-                {
-                    Debug.LogWarning("El objeto tiene el tag Skull pero no tiene el script PickupSkull.");
-                }
             }
 
-            // Manejo de objetos normales
             PickupItem pickupItem = hit.collider.GetComponent<PickupItem>();
             if (pickupItem != null)
             {
@@ -56,14 +49,9 @@ public class PlayerInteraction : MonoBehaviour
                     FindObjectOfType<InventoryManager>(),
                     playerAudioSources
                 );
+
                 return;
             }
-
-            Debug.LogWarning("El objeto no tiene el script PickupItem asignado.");
-        }
-        else
-        {
-            Debug.Log("No estás mirando ningún objeto interactuable.");
         }
     }
 }

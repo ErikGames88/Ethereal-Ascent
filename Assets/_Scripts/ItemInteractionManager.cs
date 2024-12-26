@@ -17,16 +17,7 @@ public class ItemInteractionManager : MonoBehaviour
     void Start()
     {
         inventoryManager = FindObjectOfType<InventoryManager>();
-        if (inventoryManager == null)
-        {
-            Debug.LogError("No se encontró el InventoryManager en la escena.");
-        }
-
         flashlightManager = FindObjectOfType<FlashlightManager>();
-        if (flashlightManager == null)
-        {
-            Debug.LogError("No se encontró el FlashlightManager en la escena.");
-        }
     }
 
     void Update()
@@ -41,7 +32,6 @@ public class ItemInteractionManager : MonoBehaviour
     {
         if (!InventoryToggle.isInventoryOpen)
         {
-            Debug.Log("El inventario está cerrado. No se puede interactuar con objetos.");
             return;
         }
 
@@ -50,22 +40,15 @@ public class ItemInteractionManager : MonoBehaviour
 
         if (slotImage == null || slotImage.sprite == null)
         {
-            Debug.Log("No hay objeto seleccionado en el slot actual.");
             return;
         }
-
-        Debug.Log($"Objeto seleccionado: {slotImage.sprite.name}");
 
         GameObject slotPrefab = inventoryManager.SlotPrefabs[inventoryManager.SelectedSlotIndex];
         if (slotPrefab == null)
         {
-            Debug.Log("Objeto seleccionado desconocido.");
             return;
         }
 
-        Debug.Log($"Prefab asociado: {slotPrefab.name}");
-
-        // Verificar si es una llave y abrir la puerta
         if (slotPrefab.name == "Cathedral Key")
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -73,28 +56,18 @@ public class ItemInteractionManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
             {
-                Debug.Log($"Interacción detectada con: {hit.collider.gameObject.name}");
-
                 DoorInteraction doorInteraction = hit.collider.GetComponentInParent<DoorInteraction>();
                 if (doorInteraction != null)
                 {
-                    Debug.Log("Llave seleccionada. Abriendo la puerta...");
                     doorInteraction.Interact();
-                    inventoryManager.RemoveItem(inventoryManager.SelectedSlotIndex); // Elimina la llave del inventario
+                    inventoryManager.RemoveItem(inventoryManager.SelectedSlotIndex); 
                     return;
                 }
             }
-
-            Debug.Log("No se pudo abrir la puerta. Asegúrate de tener la llave seleccionada.");
         }
-        else if (slotPrefab.GetComponent<PickupItem>().isFlashlight) // Verificar si es una linterna
+        else if (slotPrefab.GetComponent<PickupItem>().isFlashlight) 
         {
-            Debug.Log("Linterna seleccionada. Equipándola...");
             flashlightManager.EquipFlashlight();
-        }
-        else
-        {
-            Debug.Log("El objeto seleccionado no es una llave ni una linterna.");
         }
     }
 }

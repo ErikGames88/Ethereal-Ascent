@@ -20,20 +20,11 @@ public class InventoryToggle : MonoBehaviour
         if (inventoryCanvas != null)
         {
             inventoryCanvas.SetActive(false);
-            Debug.Log("InventoryToggle: Canvas oculto al inicio.");
-        }
-        else
-        {
-            Debug.LogWarning("InventoryToggle: Inventory Canvas no está asignado.");
         }
 
         if (playerLocked == null)
         {
             playerLocked = FindObjectOfType<PlayerLocked>();
-            if (playerLocked == null)
-            {
-                Debug.LogError("PlayerLocked no asignado y no se encontró en la escena.");
-            }
         }
     }
 
@@ -49,32 +40,37 @@ public class InventoryToggle : MonoBehaviour
     {
         if (inventoryCanvas == null || playerLocked == null || inventoryManager == null)
         {
-            Debug.LogWarning("InventoryToggle: Alguna referencia no está asignada.");
             return;
         }
 
-        isInventoryOpen = !isInventoryOpen;
-        inventoryCanvas.SetActive(isInventoryOpen);
+        if (!isInventoryOpen && playerLocked.IsPlayerLocked())
+        {
+            return; 
+        }
 
-        playerLocked.LockPlayer(isInventoryOpen, false); // Gestión centralizada del cursor
+        isInventoryOpen = !isInventoryOpen; 
+        
+        inventoryCanvas.SetActive(isInventoryOpen); 
+        
+        if (isInventoryOpen)
+        {
+            playerLocked.LockPlayer(true, false); 
+
+            inventoryManager.UpdateItemTextVisibility();
+        }
+        else
+        {
+            playerLocked.LockPlayer(false); 
+        }
 
         if (inventoryManager != null)
         {
             inventoryManager.SetSlotNavigation(isInventoryOpen);
-            Debug.LogError($"InventoryToggle: Inventario {(isInventoryOpen ? "abierto, habilitando" : "cerrado, bloqueando")} navegación de slots.");
-
-            // Nueva línea: Actualizar visibilidad de los textos al abrir el inventario
-            if (isInventoryOpen)
-            {
-                inventoryManager.OnSlotSelected(inventoryManager.SelectedSlotIndex);
-                Debug.Log("InventoryToggle: Textos de inventario actualizados al abrir.");
-            }
         }
 
         if (!isInventoryOpen)
         {
             inventoryManager.HideAllTexts();
-            Debug.Log("InventoryToggle: Todos los textos desactivados al cerrar el inventario.");
         }
     }
 }

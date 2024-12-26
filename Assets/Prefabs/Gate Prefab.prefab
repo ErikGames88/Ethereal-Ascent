@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 397874241375037668}
   - component: {fileID: 5840125289835099400}
   - component: {fileID: 6092031713182694592}
+  - component: {fileID: 5218135707179668534}
   m_Layer: 0
   m_Name: Gate L
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5218135707179668534
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050821232533672978}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.2000005, y: 2.4500003, z: 0.10000088}
+  m_Center: {x: -1.0810043, y: 0.13015318, z: 1.1511432e-15}
 --- !u!1 &3245348515086688047
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2458463291372711623}
   - component: {fileID: 5014884491575332211}
+  - component: {fileID: 8150959711749165655}
   - component: {fileID: 6038949997562880729}
   - component: {fileID: 4830001835995497597}
   m_Layer: 0
@@ -391,8 +414,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10.503674, y: 2.484382, z: 0.47155744}
-  m_Center: {x: -0.0090408325, y: 0.01809752, z: 0.010776766}
+  m_Size: {x: 3.0336905, y: 2.484382, z: 0.47155744}
+  m_Center: {x: 3.7259517, y: 0.01809752, z: 0.010776758}
+--- !u!65 &8150959711749165655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615421766663643609}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.0818017, y: 2.3878653, z: 0.5101622}
+  m_Center: {x: -3.7758098, y: -0.040819526, z: -0.000011652708}
 --- !u!82 &6038949997562880729
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10505,6 +10549,7 @@ GameObject:
   - component: {fileID: 7123941488117195765}
   - component: {fileID: 965765745567334208}
   - component: {fileID: 258582002150575152}
+  - component: {fileID: 167999868644825210}
   m_Layer: 0
   m_Name: Gate R
   m_TagString: Untagged
@@ -10577,6 +10622,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &167999868644825210
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7659462381246624161}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.2000005, y: 2.4500003, z: 0.10000088}
+  m_Center: {x: -1.0810043, y: 0.13015318, z: -6.867195e-10}
 --- !u!1 &8590263467604990808
 GameObject:
   m_ObjectHideFlags: 0

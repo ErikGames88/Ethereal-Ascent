@@ -16,11 +16,6 @@ public class CameraController : MonoBehaviour
     [Tooltip("Límite de rotación del Player")]   
     private float limitRotation = 60f;
 
-    void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked; 
-    }
-
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
