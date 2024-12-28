@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public enum GameState { Playing, Victory, GameOver, MainMenu }
+    public enum GameState { Gameplay, Victory, GameOver, MainMenu }
     public GameState CurrentState { get; private set; }
 
     private void Awake()
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Main Menu");
             break;
 
-            case GameState.Playing:
+            case GameState.Gameplay:
                 break;
 
             case GameState.Victory:

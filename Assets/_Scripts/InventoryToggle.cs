@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryToggle : MonoBehaviour
+public class InventoryToggle : MonoBehaviour 
 {
     [SerializeField, Tooltip("Canvas principal del inventario")]
     private GameObject inventoryCanvas;
@@ -14,6 +14,8 @@ public class InventoryToggle : MonoBehaviour
     private InventoryManager inventoryManager;
 
     public static bool isInventoryOpen = false;
+
+    private bool canToggleInventory = true; // Nueva bandera para habilitar/deshabilitar el uso de Tab
 
     void Start()
     {
@@ -30,6 +32,12 @@ public class InventoryToggle : MonoBehaviour
 
     void Update()
     {
+        // Bloquear interacción si no se permite abrir el inventario
+        if (!canToggleInventory)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ManageInventory();
@@ -72,5 +80,11 @@ public class InventoryToggle : MonoBehaviour
         {
             inventoryManager.HideAllTexts();
         }
+    }
+
+    // Nuevo método para habilitar/deshabilitar el uso de Tab
+    public void EnableInventoryToggle(bool isEnabled)
+    {
+        canToggleInventory = isEnabled;
     }
 }
