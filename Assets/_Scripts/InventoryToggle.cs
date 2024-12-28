@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryToggle : MonoBehaviour 
+public class InventoryToggle : MonoBehaviour
 {
     [SerializeField, Tooltip("Canvas principal del inventario")]
     private GameObject inventoryCanvas;
@@ -12,6 +12,9 @@ public class InventoryToggle : MonoBehaviour
 
     [SerializeField, Tooltip("Referencia al InventoryManager para manejar lógica del inventario")]
     private InventoryManager inventoryManager;
+
+    [SerializeField, Tooltip("Referencia al TimerManager para pausar y reanudar el Timer")]
+    private TimerManager timerManager;
 
     public static bool isInventoryOpen = false;
 
@@ -27,6 +30,11 @@ public class InventoryToggle : MonoBehaviour
         if (playerLocked == null)
         {
             playerLocked = FindObjectOfType<PlayerLocked>();
+        }
+
+        if (timerManager == null)
+        {
+            timerManager = FindObjectOfType<TimerManager>();
         }
     }
 
@@ -46,7 +54,7 @@ public class InventoryToggle : MonoBehaviour
 
     private void ManageInventory()
     {
-        if (inventoryCanvas == null || playerLocked == null || inventoryManager == null)
+        if (inventoryCanvas == null || playerLocked == null || inventoryManager == null || timerManager == null)
         {
             return;
         }
@@ -63,12 +71,13 @@ public class InventoryToggle : MonoBehaviour
         if (isInventoryOpen)
         {
             playerLocked.LockPlayer(true, false); 
-
             inventoryManager.UpdateItemTextVisibility();
+            timerManager.StopTimer(); // Detener el Timer al abrir el inventario
         }
         else
         {
             playerLocked.LockPlayer(false); 
+            timerManager.StartTimer(); // Reanudar el Timer al cerrar el inventario
         }
 
         if (inventoryManager != null)
