@@ -14,39 +14,89 @@ public class FinalTextWriter : MonoBehaviour
     [SerializeField, Tooltip("Pausa entre párrafos (en segundos)")]
     private float paragraphPause = 3f;
 
-    [SerializeField, Tooltip("Referencia al Key E Image")]
-    private GameObject keyEImage;
+    [SerializeField, Tooltip("Pausa específica entre el tercer y cuarto párrafo (en segundos)")]
+    private float lastParagraphPause = 1f;
 
+    private string initialText = ""; // Almacenará el texto inicial
     private string[] paragraphs;
 
-    private void Start()
+    private bool isWriting = false; // Nueva bandera para evitar múltiples escrituras
+
+    private void Awake()
     {
-        // Obtener los párrafos desde el texto original
-        paragraphs = finalText.text.Split(new string[] { "\n\n" }, System.StringSplitOptions.None);
+        if (finalText != null)
+        {
+            // Guardar el texto inicial antes de limpiar o desactivar
+            initialText = finalText.text;
 
-        // Asegurarnos de que el texto esté vacío al inicio
+            // Asegurar que el texto inicial no esté vacío
+            if (string.IsNullOrWhiteSpace(initialText))
+            {
+                Debug.LogError("El texto inicial está vacío en el Inspector.");
+                return;
+            }
+
+            finalText.gameObject.SetActive(false); // Desactivar inicialmente
+            Debug.Log($"Texto inicial guardado correctamente: {initialText}");
+        }
+        else
+        {
+            Debug.LogError("No se asignó un componente TextMeshPro al Final Text.");
+        }
+    }
+
+    public void ActivateAndWriteText()
+    {
+        if (finalText == null)
+        {
+            Debug.LogError("No se puede activar el Final Text porque no está asignado.");
+            return;
+        }
+
+        if (isWriting) // Si ya está escribiendo, salir
+        {
+            Debug.LogWarning("La escritura ya ha comenzado, ignorando llamada duplicada.");
+            return;
+        }
+
+        isWriting = true; // Marcar como escribiendo
+
+        // Restaurar el texto inicial y activar el objeto
         finalText.text = "";
+        finalText.gameObject.SetActive(true);
+        Debug.Log("Final Text activado y listo para escribir.");
 
-        // Desactivar el Key E Image
-        if (keyEImage != null) keyEImage.SetActive(false);
+        // Dividir en párrafos
+        paragraphs = initialText.Split(new string[] { "\n\n" }, System.StringSplitOptions.None);
 
-        // Iniciar la escritura progresiva
+        if (paragraphs.Length == 0)
+        {
+            Debug.LogError("No se encontraron párrafos para escribir.");
+            return;
+        }
+
+        Debug.Log($"Párrafos encontrados: {paragraphs.Length}");
         StartCoroutine(WriteText());
     }
 
     private IEnumerator WriteText()
     {
-        // Escribir cada párrafo con pausas
-        foreach (string paragraph in paragraphs)
+        for (int i = 0; i < paragraphs.Length; i++)
         {
-            yield return StartCoroutine(TypeParagraph(paragraph));
-            yield return new WaitForSeconds(paragraphPause);
+            Debug.Log($"Escribiendo párrafo {i + 1}: {paragraphs[i]}");
+
+            yield return StartCoroutine(TypeParagraph(paragraphs[i]));
+
+            // Pausa específica para el tercer párrafo
+            if (i < paragraphs.Length - 1)
+            {
+                float pauseDuration = (i == 2) ? lastParagraphPause : paragraphPause;
+                Debug.Log($"Pausa entre párrafo {i + 1} y párrafo {i + 2}: {pauseDuration} segundos.");
+                yield return new WaitForSeconds(pauseDuration);
+            }
         }
 
-        // Mostrar el Key E Image al final
-        if (keyEImage != null) keyEImage.SetActive(true);
-
-        Debug.Log("Texto completo y Key E Image activado.");
+        Debug.Log("Escritura de texto completada.");
     }
 
     private IEnumerator TypeParagraph(string paragraph)
@@ -57,7 +107,8 @@ public class FinalTextWriter : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
 
-        // Añadir un salto de línea después de cada párrafo
+        // Añadir salto de línea después del párrafo
         finalText.text += "\n\n";
+        Debug.Log($"Párrafo completado: {paragraph}");
     }
 }
