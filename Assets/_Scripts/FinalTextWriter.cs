@@ -24,27 +24,24 @@ public class FinalTextWriter : MonoBehaviour
     [SerializeField, Tooltip("Duración del fade-in del Key E Image (en segundos)")]
     private float keyEFadeDuration = 2f;
 
-    private string initialText = ""; // Almacenará el texto inicial
+    private string initialText = "";
     private string[] paragraphs;
-
-    private bool isWriting = false; // Nueva bandera para evitar múltiples escrituras
+    private bool isWriting = false;
+    private bool canInteract = false; // Controla si el jugador puede pulsar E
 
     private void Awake()
     {
         if (finalText != null)
         {
-            // Guardar el texto inicial antes de limpiar o desactivar
             initialText = finalText.text;
 
-            // Asegurar que el texto inicial no esté vacío
             if (string.IsNullOrWhiteSpace(initialText))
             {
                 Debug.LogError("El texto inicial está vacío en el Inspector.");
                 return;
             }
 
-            finalText.gameObject.SetActive(false); // Desactivar inicialmente
-            Debug.Log($"Texto inicial guardado correctamente: {initialText}");
+            finalText.gameObject.SetActive(false);
         }
         else
         {
@@ -53,11 +50,21 @@ public class FinalTextWriter : MonoBehaviour
 
         if (keyEImage != null)
         {
-            keyEImage.SetActive(false); // Desactivar Key E Image inicialmente
+            keyEImage.SetActive(false);
         }
         else
         {
             Debug.LogError("No se asignó un GameObject al Key E Image.");
+        }
+    }
+
+    private void Update()
+    {
+        // Detectar si el jugador puede interactuar y ha pulsado E
+        if (canInteract && Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Interacción final detectada. Transición al Main Menu.");
+            GameManager.Instance.ChangeState(GameManager.GameState.MainMenu); // Llama al GameManager para cargar el Main Menu
         }
     }
 
@@ -69,20 +76,15 @@ public class FinalTextWriter : MonoBehaviour
             return;
         }
 
-        if (isWriting) // Si ya está escribiendo, salir
+        if (isWriting)
         {
             Debug.LogWarning("La escritura ya ha comenzado, ignorando llamada duplicada.");
             return;
         }
 
-        isWriting = true; // Marcar como escribiendo
-
-        // Restaurar el texto inicial y activar el objeto
+        isWriting = true;
         finalText.text = "";
         finalText.gameObject.SetActive(true);
-        Debug.Log("Final Text activado y listo para escribir.");
-
-        // Dividir en párrafos
         paragraphs = initialText.Split(new string[] { "\n\n" }, System.StringSplitOptions.None);
 
         if (paragraphs.Length == 0)
@@ -91,7 +93,6 @@ public class FinalTextWriter : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Párrafos encontrados: {paragraphs.Length}");
         StartCoroutine(WriteText());
     }
 
@@ -99,20 +100,15 @@ public class FinalTextWriter : MonoBehaviour
     {
         for (int i = 0; i < paragraphs.Length; i++)
         {
-            Debug.Log($"Escribiendo párrafo {i + 1}: {paragraphs[i]}");
-
             yield return StartCoroutine(TypeParagraph(paragraphs[i]));
 
-            // Pausa específica para el tercer párrafo
             if (i < paragraphs.Length - 1)
             {
                 float pauseDuration = (i == 2) ? lastParagraphPause : paragraphPause;
-                Debug.Log($"Pausa entre párrafo {i + 1} y párrafo {i + 2}: {pauseDuration} segundos.");
                 yield return new WaitForSeconds(pauseDuration);
             }
         }
 
-        Debug.Log("Escritura de texto completada.");
         ActivateKeyEImage(); // Activar Key E Image al terminar el texto
     }
 
@@ -124,16 +120,14 @@ public class FinalTextWriter : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
 
-        // Añadir salto de línea después del párrafo
         finalText.text += "\n\n";
-        Debug.Log($"Párrafo completado: {paragraph}");
     }
 
     private void ActivateKeyEImage()
     {
         if (keyEImage != null)
         {
-            keyEImage.SetActive(true); // Activar Key E Image
+            keyEImage.SetActive(true);
             StartCoroutine(FadeInKeyEImage());
         }
     }
@@ -153,7 +147,6 @@ public class FinalTextWriter : MonoBehaviour
         Color imageColor = image.color;
         Color textColor = text.color;
 
-        // Inicializar opacidad a 0
         imageColor.a = 0f;
         textColor.a = 0f;
         image.color = imageColor;
@@ -176,5 +169,6 @@ public class FinalTextWriter : MonoBehaviour
         text.color = textColor;
 
         Debug.Log("Key E Image activado completamente.");
+        canInteract = true; // Permitir interacción con E
     }
 }
