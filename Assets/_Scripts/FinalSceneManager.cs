@@ -28,46 +28,30 @@ public class FinalSceneManager : MonoBehaviour
 
     private void Start()
     {
-        // Ocultar el cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Configurar opacidad inicial
         SetOpacity(finalScenePanel, 0f);
         SetOpacity(redBackground, 0f);
 
-        // Desactivar Red Background inicialmente
         redBackground.gameObject.SetActive(false);
 
-        // Iniciar secuencia
         StartCoroutine(FadeInSequence());
     }
 
     private IEnumerator FadeInSequence()
     {
-        // Black Background permanece visible por el tiempo configurado
         yield return new WaitForSeconds(blackBackgroundDuration);
 
-        // Fade-in del Final Scene Panel
         yield return FadeInImage(finalScenePanel, panelFadeDuration);
 
-        // Activar el Red Background
         redBackground.gameObject.SetActive(true);
 
-        // Fade-in del Red Background
-        yield return FadeInImage(redBackground, redFadeDuration, 0.47f); // 0.47f es aproximadamente 120/255
-
-        Debug.Log("Secuencia completada: Red Background activo.");
-
-        // Notificar al FinalTextWriter que puede comenzar
+        yield return FadeInImage(redBackground, redFadeDuration, 0.47f); 
+        
         if (finalTextWriter != null)
         {
-            Debug.Log("Notificando al FinalTextWriter que puede comenzar.");
             finalTextWriter.ActivateAndWriteText();
-        }
-        else
-        {
-            Debug.LogError("FinalTextWriter no asignado en el Inspector.");
         }
     }
 

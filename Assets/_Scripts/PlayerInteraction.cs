@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class PlayerInteraction : MonoBehaviour
     private LayerMask interactableLayer;
 
     [SerializeField, Tooltip("Referencia al Player con AudioSources")]
-    private GameObject player; 
-    
+    private GameObject player;
 
     private void Update()
     {
@@ -29,6 +29,13 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
+            if (hit.collider.name == "Cathedral Door") 
+            {
+                Debug.Log("Interacción con la Cathedral Door. Cambiando a estado de Victoria...");
+                GameManager.Instance.ChangeState(GameManager.GameState.Victory); // Utilizamos el GameManager
+                return;
+            }
+
             if (hit.collider.CompareTag("Skull"))
             {
                 PickupSkull pickupSkull = hit.collider.GetComponent<PickupSkull>();
@@ -43,7 +50,8 @@ public class PlayerInteraction : MonoBehaviour
             if (pickupItem != null)
             {
                 AudioSource[] playerAudioSources = player.GetComponents<AudioSource>();
-                pickupItem.Pickup(
+                pickupItem.Pickup
+                (
                     FindObjectOfType<KeyManager>(),
                     FindObjectOfType<FlashlightManager>(),
                     FindObjectOfType<InventoryManager>(),
