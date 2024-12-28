@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class FinalTextWriter : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class FinalTextWriter : MonoBehaviour
 
     [SerializeField, Tooltip("Pausa específica entre el tercer y cuarto párrafo (en segundos)")]
     private float lastParagraphPause = 1f;
+
+    [SerializeField, Tooltip("Referencia al Key E Image")]
+    private GameObject keyEImage;
+
+    [SerializeField, Tooltip("Duración del fade-in del Key E Image (en segundos)")]
+    private float keyEFadeDuration = 2f;
 
     private string initialText = ""; // Almacenará el texto inicial
     private string[] paragraphs;
@@ -42,6 +49,15 @@ public class FinalTextWriter : MonoBehaviour
         else
         {
             Debug.LogError("No se asignó un componente TextMeshPro al Final Text.");
+        }
+
+        if (keyEImage != null)
+        {
+            keyEImage.SetActive(false); // Desactivar Key E Image inicialmente
+        }
+        else
+        {
+            Debug.LogError("No se asignó un GameObject al Key E Image.");
         }
     }
 
@@ -97,6 +113,7 @@ public class FinalTextWriter : MonoBehaviour
         }
 
         Debug.Log("Escritura de texto completada.");
+        ActivateKeyEImage(); // Activar Key E Image al terminar el texto
     }
 
     private IEnumerator TypeParagraph(string paragraph)
@@ -110,5 +127,54 @@ public class FinalTextWriter : MonoBehaviour
         // Añadir salto de línea después del párrafo
         finalText.text += "\n\n";
         Debug.Log($"Párrafo completado: {paragraph}");
+    }
+
+    private void ActivateKeyEImage()
+    {
+        if (keyEImage != null)
+        {
+            keyEImage.SetActive(true); // Activar Key E Image
+            StartCoroutine(FadeInKeyEImage());
+        }
+    }
+
+    private IEnumerator FadeInKeyEImage()
+    {
+        Image image = keyEImage.GetComponent<Image>();
+        TextMeshProUGUI text = keyEImage.GetComponentInChildren<TextMeshProUGUI>();
+
+        if (image == null || text == null)
+        {
+            Debug.LogError("Key E Image o su texto no tienen componentes necesarios.");
+            yield break;
+        }
+
+        float elapsedTime = 0f;
+        Color imageColor = image.color;
+        Color textColor = text.color;
+
+        // Inicializar opacidad a 0
+        imageColor.a = 0f;
+        textColor.a = 0f;
+        image.color = imageColor;
+        text.color = textColor;
+
+        while (elapsedTime < keyEFadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            imageColor.a = Mathf.Lerp(0f, 1f, elapsedTime / keyEFadeDuration);
+            textColor.a = Mathf.Lerp(0f, 1f, elapsedTime / keyEFadeDuration);
+            image.color = imageColor;
+            text.color = textColor;
+
+            yield return null;
+        }
+
+        imageColor.a = 1f;
+        textColor.a = 1f;
+        image.color = imageColor;
+        text.color = textColor;
+
+        Debug.Log("Key E Image activado completamente.");
     }
 }
