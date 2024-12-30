@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;   
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOverScene : MonoBehaviour
 {
@@ -78,7 +79,7 @@ public class GameOverScene : MonoBehaviour
 
     private void Start()
     {
-        SetCursorState(false); // Ocultar cursor al inicio
+        SetCursorVisibility(false);
 
         if (redBackground != null)
         {
@@ -101,6 +102,7 @@ public class GameOverScene : MonoBehaviour
 
         Debug.Log("Game Over Scene: Red Background activado, Game Over Panel desactivado.");
         StartCoroutine(ShowGameOverPanelWithFade());
+        ConfigureButtons();
     }
 
     private void DisablePanelChildren()
@@ -181,9 +183,14 @@ public class GameOverScene : MonoBehaviour
             {
                 button.gameObject.SetActive(true);
             }
+            else
+            {
+                Debug.LogError("Un botón no encontrado como hijo del Game Over Panel.");
+            }
         }
 
         float elapsedTime = 0f;
+
         while (elapsedTime < textFadeDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -209,6 +216,7 @@ public class GameOverScene : MonoBehaviour
                     }
                 }
             }
+
             yield return null;
         }
 
@@ -235,20 +243,62 @@ public class GameOverScene : MonoBehaviour
         }
 
         Debug.Log("Fade-in completo para todos los botones y sus textos.");
-        SetCursorState(true); // Mostrar cursor
+
+        // Mostrar el cursor tras completar el fade-in de los botones
+        SetCursorVisibility(true);
     }
 
-    private void SetCursorState(bool isVisible)
+    private void SetCursorVisibility(bool isVisible)
     {
-        Cursor.visible = isVisible;
         if (isVisible)
         {
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
         else
         {
+            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        Debug.Log($"Cursor {(isVisible ? "visible" : "oculto")}.");
+
+        Debug.Log($"Cursor {(isVisible ? "mostrado" : "oculto")}.");
+    }
+
+    private void ConfigureButtons()
+    {
+        foreach (Button button in buttons)
+        {
+            if (button.name == "Retry Button")
+            {
+                button.onClick.AddListener(RetryGame);
+                Debug.Log("Retry Button configurado para cargar la Maze Scene.");
+            }
+            else if (button.name == "Main Menu Button")
+            {
+                button.onClick.AddListener(GoToMainMenu);
+                Debug.Log("Main Menu Button configurado para cargar el Main Menu.");
+            }
+            else if (button.name == "Exit Game Button")
+            {
+                button.onClick.AddListener(ExitGame);
+                Debug.Log("Exit Game Button configurado para salir del juego.");
+            }
+        }
+    }
+
+    private void RetryGame()
+    {
+        SceneManager.LoadScene("Maze Scene");
+    }
+
+    private void GoToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    private void ExitGame()
+    {
+        Debug.Log("SALISTE DEL JUEGO");
+        Application.Quit();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FinalTextWriter : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class FinalTextWriter : MonoBehaviour
         if (canInteract && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Interacción final detectada. Transición al Main Menu.");
-            GameManager.Instance.ChangeState(GameManager.GameState.MainMenu); // Llama al GameManager para cargar el Main Menu
+            SceneManager.LoadScene("Main Menu"); // Llama al GameManager para cargar el Main Menu
         }
     }
 

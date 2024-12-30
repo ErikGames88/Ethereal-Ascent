@@ -40,15 +40,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Altura máxima permitida para el Player")]
     private float maxHeight = 4f; 
 
+    [SerializeField, Tooltip("Referencia al punto de inicio del Player")]
+    private Transform startPoint; // Objeto Start Point asignado desde el Inspector
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
-    
+
     void Start()
     {
         currentSprintTime = maxSprintTime; 
+        //MoveToStartPoint(); 
     }
 
     void Update()
@@ -141,8 +144,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsSprinting()
     {
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed;
-        return isSprinting;
+        return Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed;
     }
 
     public bool IsSprintAllowed()
@@ -177,6 +179,21 @@ public class PlayerController : MonoBehaviour
             {
                 rainManager.SetRainActive(true);
             }
+        }
+    }
+
+    // Método para mover al Player al Start Point
+    public void MoveToStartPoint()
+    {
+        if (startPoint != null)
+        {
+            transform.position = startPoint.position;
+            transform.rotation = startPoint.rotation;
+            Debug.Log("Player reposicionado al Start Point.");
+        }
+        else
+        {
+            Debug.LogError("Start Point no asignado en el Inspector.");
         }
     }
 }

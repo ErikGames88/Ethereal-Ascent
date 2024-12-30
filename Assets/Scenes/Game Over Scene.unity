@@ -1298,7 +1298,10 @@ MonoBehaviour:
   redBackground: {fileID: 438347851}
   gameOverPanel: {fileID: 897412888}
   panelFadeDuration: 3
+  textFadeDuration: 2
   panelActivationDelay: 0.5
+  textActivationDelay: 2
+  buttonsActivationDelay: 2
 --- !u!4 &1307852231
 Transform:
   m_ObjectHideFlags: 0
