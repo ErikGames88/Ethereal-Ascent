@@ -14,6 +14,9 @@ public class TimerManager : MonoBehaviour
     [SerializeField, Tooltip("Referencia al TextMeshPro para mostrar el Timer")]
     private TextMeshProUGUI timerText;
 
+    [SerializeField, Tooltip("Referencia al GameOver script")]
+    private GameOver gameOverScript; // Referencia al GameOver
+
     private float remainingTimeInSeconds;
     private bool isTimerRunning = false;
 
@@ -22,6 +25,12 @@ public class TimerManager : MonoBehaviour
         if (timerText == null)
         {
             Debug.LogError("No se asignó un TextMeshPro al Timer Manager.");
+            return;
+        }
+
+        if (gameOverScript == null)
+        {
+            Debug.LogError("No se asignó un GameOver script al Timer Manager.");
             return;
         }
 
@@ -44,6 +53,7 @@ public class TimerManager : MonoBehaviour
             {
                 remainingTimeInSeconds = 0;
                 StopTimer(); // Detener el Timer al llegar a 0
+                gameOverScript.TriggerGameOver(); // Activar la lógica de Game Over
             }
 
             // Actualizar el texto del Timer en pantalla
