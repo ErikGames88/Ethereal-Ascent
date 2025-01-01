@@ -99,11 +99,11 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 191
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -589,6 +589,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 8484992074030702152}
   maxHeight: 4
+  startPoint: {fileID: 0}
 --- !u!114 &9021618582600924378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,6 +653,8 @@ MonoBehaviour:
   playerController: {fileID: 8554262449334514934}
   cameraController: {fileID: 2163671437735454235}
   crosshairManager: {fileID: 0}
+  inventoryManager: {fileID: 0}
+  staminaUI: {fileID: 0}
 --- !u!1 &6299743878642567275
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 1943971260440528025, guid: d962960ffde19f747bb8e9b51383fbc9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2157609787397078666, guid: d962960ffde19f747bb8e9b51383fbc9,
         type: 3}
