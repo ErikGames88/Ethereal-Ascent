@@ -6,7 +6,7 @@ public class VisionOptimizer : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera; // Arrastra aquí la Main Camera
     [SerializeField] private float defaultMargin = 10f; // Margen por defecto para los Terrains
-    [SerializeField] private float maxDistance = 51f; // Límite de distancia
+    [SerializeField] private float maxDistance = 60f; // Límite de distancia
 
     private Plane[] frustumPlanes; // Define los límites del cono de visión
     private Dictionary<Terrain, float> marginLookup = new Dictionary<Terrain, float>();
@@ -26,6 +26,15 @@ public class VisionOptimizer : MonoBehaviour
         // Calcula los planos del frustum de la cámara
         frustumPlanes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
 
+        // Procesar los Terrains
+        ProcessTerrains();
+
+        // Procesar otros objetos del escenario
+        ProcessObjects();
+    }
+
+    private void ProcessTerrains()
+    {
         // Encuentra todos los Terrains en la escena
         Terrain[] terrains = FindObjectsOfType<Terrain>();
 
@@ -48,16 +57,40 @@ public class VisionOptimizer : MonoBehaviour
             bool isWithinDistance = Vector3.Distance(mainCamera.transform.position, terrainBounds.center) <= maxDistance + margin;
 
             // Renderiza o desactiva el Terrain según las condiciones
-            if (isInFrustum && isWithinDistance)
+            terrain.drawHeightmap = isInFrustum && isWithinDistance;
+        }
+    }
+
+    private void ProcessObjects()
+    {
+        // Encuentra todos los objetos en la escena
+        Renderer[] renderers = FindObjectsOfType<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            // Ignorar objetos sin padres activos o sin transformaciones válidas
+            if (renderer == null || renderer.transform == null || !renderer.gameObject.activeInHierarchy)
+                continue;
+
+            // Excluir la Red Moon
+            if (renderer.gameObject.name == "Red Moon")
             {
-                terrain.drawHeightmap = true; // Activa el renderizado del Terrain
-                Debug.Log($"Renderizando Terrain: {terrain.name} con margen {margin}");
+                renderer.enabled = true; // Asegurarse de que siempre está activa
+                continue;
             }
-            else
-            {
-                terrain.drawHeightmap = false; // Desactiva el renderizado del Terrain
-                Debug.Log($"Ocultando Terrain: {terrain.name}");
-            }
+
+            // Calcula los Bounds del objeto
+            Bounds objectBounds = renderer.bounds;
+
+            // Comprueba si el objeto está en el frustum y dentro de la distancia máxima
+            bool isInFrustum = GeometryUtility.TestPlanesAABB(frustumPlanes, objectBounds);
+            bool isWithinDistance = Vector3.Distance(mainCamera.transform.position, objectBounds.center) <= maxDistance;
+
+            // Activa o desactiva el renderizado según las condiciones
+            renderer.enabled = isInFrustum && isWithinDistance;
+
+            // Opcional: Desactiva el GameObject si no está visible
+            // renderer.gameObject.SetActive(isInFrustum && isWithinDistance);
         }
     }
 }
