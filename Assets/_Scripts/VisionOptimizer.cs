@@ -5,9 +5,21 @@ using UnityEngine;
 public class VisionOptimizer : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera; // Arrastra aquí la Main Camera
+    [SerializeField] private float defaultMargin = 10f; // Margen por defecto para los Terrains
     [SerializeField] private float maxDistance = 51f; // Límite de distancia
 
     private Plane[] frustumPlanes; // Define los límites del cono de visión
+    private Dictionary<Terrain, float> marginLookup = new Dictionary<Terrain, float>();
+
+    void Start()
+    {
+        // Asigna márgenes específicos para cada Terrain
+        marginLookup[GameObject.Find("Garden").GetComponent<Terrain>()] = 10f;
+        marginLookup[GameObject.Find("Ruins").GetComponent<Terrain>()] = 20f;
+        marginLookup[GameObject.Find("Graveyard").GetComponent<Terrain>()] = 20f;
+        marginLookup[GameObject.Find("Forest").GetComponent<Terrain>()] = 35f;
+        marginLookup[GameObject.Find("Volcano").GetComponent<Terrain>()] = 50f;
+    }
 
     void Update()
     {
@@ -23,19 +35,23 @@ public class VisionOptimizer : MonoBehaviour
             if (terrain == null || terrain.terrainData == null)
                 continue;
 
+            // Obtén el margen específico o usa el margen por defecto
+            float margin = marginLookup.ContainsKey(terrain) ? marginLookup[terrain] : defaultMargin;
+
             // Calcula los Bounds del Terrain
             Bounds terrainBounds = terrain.terrainData.bounds;
             terrainBounds.center += terrain.GetPosition();
+            terrainBounds.Expand(margin); // Aplica el margen al Bounds
 
-            // Comprueba si el Terrain está en el frustum y dentro de la distancia máxima
+            // Comprueba si el Terrain está en el frustum y dentro de la distancia máxima (con margen)
             bool isInFrustum = GeometryUtility.TestPlanesAABB(frustumPlanes, terrainBounds);
-            bool isWithinDistance = Vector3.Distance(mainCamera.transform.position, terrainBounds.center) <= maxDistance;
+            bool isWithinDistance = Vector3.Distance(mainCamera.transform.position, terrainBounds.center) <= maxDistance + margin;
 
             // Renderiza o desactiva el Terrain según las condiciones
             if (isInFrustum && isWithinDistance)
             {
                 terrain.drawHeightmap = true; // Activa el renderizado del Terrain
-                Debug.Log($"Renderizando Terrain: {terrain.name}");
+                Debug.Log($"Renderizando Terrain: {terrain.name} con margen {margin}");
             }
             else
             {
