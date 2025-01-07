@@ -226,6 +226,7 @@ Transform:
   - {fileID: 8007282017811254989}
   - {fileID: 8484992074030702152}
   - {fileID: 6070412208431401958}
+  - {fileID: 3635636994401809776}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2143473566141920009
@@ -655,6 +656,73 @@ MonoBehaviour:
   crosshairManager: {fileID: 0}
   inventoryManager: {fileID: 0}
   staminaUI: {fileID: 0}
+--- !u!1 &4541289425700628841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3635636994401809776}
+  - component: {fileID: 8049635302133642454}
+  - component: {fileID: 4367356434249022903}
+  m_Layer: 0
+  m_Name: Fog Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3635636994401809776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541289425700628841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3032993861088575910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8049635302133642454
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541289425700628841}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 40
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4367356434249022903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541289425700628841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 649bfc1946fa1114fb0476da269cd24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogSystem: {fileID: 0}
 --- !u!1 &6299743878642567275
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +770,7 @@ PrefabInstance:
     - target: {fileID: 1943971260440528025, guid: d962960ffde19f747bb8e9b51383fbc9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2157609787397078666, guid: d962960ffde19f747bb8e9b51383fbc9,
         type: 3}

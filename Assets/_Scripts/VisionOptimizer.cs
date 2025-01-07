@@ -12,14 +12,35 @@ public class VisionOptimizer : MonoBehaviour
     private Dictionary<Terrain, float> marginLookup = new Dictionary<Terrain, float>();
 
     void Start()
+{
+    // Referencia al objeto Forest
+    Transform forestTransform = GameObject.Find("Forest").transform;
+    if (forestTransform == null)
     {
-        // Asigna márgenes específicos para cada Terrain
-        marginLookup[GameObject.Find("Garden").GetComponent<Terrain>()] = 10f;
-        marginLookup[GameObject.Find("Ruins").GetComponent<Terrain>()] = 20f;
-        marginLookup[GameObject.Find("Graveyard").GetComponent<Terrain>()] = 20f;
-        marginLookup[GameObject.Find("Forest").GetComponent<Terrain>()] = 35f;
-        marginLookup[GameObject.Find("Volcano").GetComponent<Terrain>()] = 50f;
+        Debug.LogError("No se encontró el objeto Forest. Verifica la jerarquía.");
+        return;
     }
+
+    // Asigna márgenes específicos para cada Terrain
+    marginLookup[GameObject.Find("Garden").GetComponent<Terrain>()] = 10f;
+    marginLookup[GameObject.Find("Ruins").GetComponent<Terrain>()] = 20f;
+    marginLookup[GameObject.Find("Graveyard").GetComponent<Terrain>()] = 20f;
+    marginLookup[GameObject.Find("Volcano").GetComponent<Terrain>()] = 50f;
+
+    // Recorre los hijos de Forest para asignar los márgenes
+    foreach (Transform child in forestTransform)
+    {
+        var terrain = child.GetComponent<Terrain>();
+        if (terrain == null)
+        {
+            Debug.LogWarning($"Ignorando el hijo {child.name} de Forest porque no tiene componente Terrain.");
+            continue; // Salta este objeto
+        }
+
+        marginLookup[terrain] = 35f;
+        Debug.Log($"Margen asignado correctamente: {child.name} con margen 35f");
+    }
+}
 
     void Update()
     {

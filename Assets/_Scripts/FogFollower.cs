@@ -8,6 +8,8 @@ public class FogFollower : MonoBehaviour
     [SerializeField] private float fixedYPosition = 8f; // Altura fija para el contenedor
     [SerializeField] private float distance = 30f; // Distancia fija frente al Player
 
+    
+
     void LateUpdate()
     {
         if (mainCamera != null)
