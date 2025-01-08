@@ -766,6 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loreText: {fileID: 1358984568}
+  loreImage: {fileID: 401012289}
   typingSpeed: 0.075
   audioSource: {fileID: 1431340347}
 --- !u!82 &1431340347
