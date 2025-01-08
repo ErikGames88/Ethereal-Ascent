@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f65f931474c789a4da3465bc38e953d8
+guid: 2297142a9a303e449827ee1238c084dd
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Zombified
+  - OldStyle 1
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
