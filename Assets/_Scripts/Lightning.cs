@@ -27,7 +27,7 @@ public class Lightning : MonoBehaviour
 
     private void ScheduleNextLightning()
     {
-        nextLightningTime = Time.time + 10f; //Random.Range(minDelay, maxDelay);
+        nextLightningTime = Time.time + 15f; //Random.Range(minDelay, maxDelay);
     }
 
     private System.Collections.IEnumerator TriggerLightning()
