@@ -5,7 +5,7 @@ using UnityEngine;
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pauseMenu; // El panel del menú de pausa
+    private GameObject pauseMenuCanvas; // El Canvas del Pause Menu
 
     [SerializeField]
     private PlayerController playerController; // Referencia al PlayerController
@@ -34,10 +34,17 @@ public class PauseMenuManager : MonoBehaviour
     // Activar o desactivar el menú de pausa
     void ManagePauseMenu()
     {
-        bool isPaused = !pauseMenu.activeSelf;
+        bool isPaused = !pauseMenuCanvas.activeSelf;
 
         // Activar o desactivar el menú
-        pauseMenu.SetActive(isPaused);
+        pauseMenuCanvas.SetActive(isPaused);
+
+        // Activar o desactivar el hijo Pause Menu
+        Transform pauseMenu = pauseMenuCanvas.transform.Find("Pause Menu");
+        if (pauseMenu != null)
+        {
+            pauseMenu.gameObject.SetActive(isPaused);
+        }
 
         // Si el menú está activo, desactivar el movimiento del jugador
         if (isPaused)
@@ -72,6 +79,6 @@ public class PauseMenuManager : MonoBehaviour
 
     public bool IsPaused()
     {
-        return pauseMenu.activeSelf;  // Devuelve true si el menú está activo
+        return pauseMenuCanvas.activeSelf;  // Devuelve true si el menú está activo
     }
 }
