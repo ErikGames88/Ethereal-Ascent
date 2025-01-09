@@ -76,17 +76,15 @@ public class InventoryToggle : MonoBehaviour
         isInventoryOpen = !isInventoryOpen; 
         
         inventoryCanvas.SetActive(isInventoryOpen); 
-        
+
         if (isInventoryOpen)
         {
             playerLocked.LockPlayer(true, false); 
             inventoryManager.UpdateItemTextVisibility();
-            timerManager.StopTimer(); // Detener el Timer al abrir el inventario
         }
         else
         {
             playerLocked.LockPlayer(false); 
-            timerManager.StartTimer(); // Reanudar el Timer al cerrar el inventario
         }
 
         if (inventoryManager != null)
