@@ -83,7 +83,7 @@ public class InventoryToggle : MonoBehaviour
 
         if (!isInventoryOpen && playerLocked.IsPlayerLocked())
         {
-            return;
+            return; 
         }
 
         isInventoryOpen = !isInventoryOpen;
@@ -92,11 +92,17 @@ public class InventoryToggle : MonoBehaviour
 
         if (isInventoryOpen)
         {
+            // Congelar el Timer cuando se abre el inventario
+            timerManager.StopTimer();
+
             playerLocked.LockPlayer(true, false);
             inventoryManager.UpdateItemTextVisibility();
         }
         else
         {
+            // Reanudar el Timer cuando se cierra el inventario
+            timerManager.StartTimer();
+
             playerLocked.LockPlayer(false);
         }
 
