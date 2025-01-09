@@ -37,6 +37,7 @@ public class MissionManager : MonoBehaviour
 
     private bool isMissionTextActive = false;
     private bool wasInventoryOpen = false;
+    public bool isMissionTextClosed = false; // Nueva variable para controlar si el texto se ha cerrado
 
     private void Start()
     {
@@ -112,6 +113,7 @@ public class MissionManager : MonoBehaviour
             playerLocked.LockPlayer(false);
 
             isMissionTextActive = false;
+            isMissionTextClosed = true; // Marcar que el texto de misión ha sido cerrado
 
             Debug.Log("Texto de misión cerrado y jugador desbloqueado.");
 

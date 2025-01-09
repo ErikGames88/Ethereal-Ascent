@@ -23,6 +23,8 @@ public class InventoryToggle : MonoBehaviour
 
     private bool canToggleInventory = true; // Nueva bandera para habilitar/deshabilitar el uso de Tab
 
+    [SerializeField] private MissionManager missionManager;
+
     void Start()
     {
         if (inventoryCanvas != null)
@@ -39,6 +41,11 @@ public class InventoryToggle : MonoBehaviour
         {
             timerManager = FindObjectOfType<TimerManager>();
         }
+
+        if (missionManager == null)
+        {
+            missionManager = FindObjectOfType<MissionManager>(); // Obtener referencia a MissionManager
+        }
     }
 
     void Update()
@@ -47,6 +54,12 @@ public class InventoryToggle : MonoBehaviour
         if (pauseMenuManager != null && pauseMenuManager.IsPaused())
         {
             return; // Si el menú de pausa está activo, no se puede abrir el inventario
+        }
+
+        // No permitir abrir el inventario si el MissionText no ha sido cerrado
+        if (missionManager != null && !missionManager.isMissionTextClosed)
+        {
+            return; // No se puede abrir el inventario hasta que el MissionText se haya cerrado
         }
 
         // Bloquear interacción si no se permite abrir el inventario
@@ -70,21 +83,21 @@ public class InventoryToggle : MonoBehaviour
 
         if (!isInventoryOpen && playerLocked.IsPlayerLocked())
         {
-            return; 
+            return;
         }
 
-        isInventoryOpen = !isInventoryOpen; 
+        isInventoryOpen = !isInventoryOpen;
         
-        inventoryCanvas.SetActive(isInventoryOpen); 
+        inventoryCanvas.SetActive(isInventoryOpen);
 
         if (isInventoryOpen)
         {
-            playerLocked.LockPlayer(true, false); 
+            playerLocked.LockPlayer(true, false);
             inventoryManager.UpdateItemTextVisibility();
         }
         else
         {
-            playerLocked.LockPlayer(false); 
+            playerLocked.LockPlayer(false);
         }
 
         if (inventoryManager != null)
