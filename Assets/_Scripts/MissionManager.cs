@@ -118,7 +118,7 @@ public class MissionManager : MonoBehaviour
             // Mostrar el Mission Hint Text
             hintTextManager.ShowMissionHintText();
 
-            // Activar el Timer
+            // Activar el Timer SOLO después de que se haya cerrado el Mission Text
             timerObject.SetActive(true);
             timerManager.StartTimer(); // Iniciar la cuenta atrás
             Debug.Log("Cuenta atrás del Timer iniciada.");
