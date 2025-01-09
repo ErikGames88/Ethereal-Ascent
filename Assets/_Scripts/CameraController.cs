@@ -16,8 +16,17 @@ public class CameraController : MonoBehaviour
     [Tooltip("Límite de rotación del Player")]   
     private float limitRotation = 60f;
 
+    [SerializeField] private PauseMenuManager pauseMenuManager;  // Referencia al PauseMenuManager
+
     void Update()
     {
+        // Si el menú de pausa está activo, bloqueamos la rotación
+        if (pauseMenuManager != null && pauseMenuManager.IsPaused())
+        {
+            return;  // Si está en pausa, no se ejecuta la rotación
+        }
+
+        // Si el menú no está activo, permitimos la rotación normal
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 

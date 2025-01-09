@@ -6,8 +6,8 @@ public class Lightning : MonoBehaviour
 {
     [SerializeField] private Light lightningFlash; // Luz del relámpago
     [SerializeField] private AudioSource thunderSound; // Sonido del trueno
-    [SerializeField] private float minDelay = 5f; // Tiempo mínimo entre relámpagos
-    [SerializeField] private float maxDelay = 15f; // Tiempo máximo entre relámpagos
+    [SerializeField] private float minDelay = 45f; // Tiempo mínimo entre relámpagos
+    [SerializeField] private float maxDelay = 60f; // Tiempo máximo entre relámpagos
 
     private float nextLightningTime; // Tiempo del próximo relámpago
 
@@ -27,7 +27,7 @@ public class Lightning : MonoBehaviour
 
     private void ScheduleNextLightning()
     {
-        nextLightningTime = Time.time + 15f; //Random.Range(minDelay, maxDelay);
+        nextLightningTime = Time.time + Random.Range(minDelay, maxDelay);
     }
 
     private System.Collections.IEnumerator TriggerLightning()

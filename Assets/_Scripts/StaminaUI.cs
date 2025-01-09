@@ -15,6 +15,8 @@ public class StaminaUI : MonoBehaviour
     private PlayerController playerController;
 
     private bool isForcedHidden = false; 
+
+    [SerializeField] private PauseMenuManager pauseMenuManager;  // Referencia al PauseMenuManager
     
 
     void Update()
@@ -24,15 +26,17 @@ public class StaminaUI : MonoBehaviour
             return;
         }
 
-        if (isForcedHidden)
+        if (pauseMenuManager != null && pauseMenuManager.IsPaused())
         {
+            // Si el menú de pausa está activo, ocultar la barra de estamina
             if (staminaBar.activeSelf)
             {
-                staminaBar.SetActive(false);
+                staminaBar.SetActive(false);  // Desactivar la barra de estamina
             }
-            return; 
+            return;
         }
 
+        // Si el menú de pausa no está activo, proceder con la lógica de mostrar/ocultar la barra de estamina
         float staminaPercent = playerController.GetStamina() / playerController.GetMaxStamina();
         foreground.fillAmount = staminaPercent;
 

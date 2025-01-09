@@ -11,23 +11,27 @@ public class LoreScene : MonoBehaviour
     public RawImage loreImage;        // Referencia a la RawImage para el fondo (Lore Image)
     public float typingSpeed = 0.05f; // Velocidad de escritura del texto
     public AudioSource audioSource;  // Referencia al AudioSource para reproducir la voz
-
     private string fullText;         // Almacenar el texto completo
+
+    public Image loadingImage;
 
     void Start()
     {
         Cursor.visible = false;
-        
+
+        // Iniciar la carga de la Maze Scene en segundo plano
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Maze Scene");
+        asyncLoad.allowSceneActivation = false;  // No activar la escena inmediatamente
+
         fullText = loreText.text;  // Obtener el texto completo del Inspector
         loreText.text = "";        // Deja el texto vacío para escribirlo poco a poco
-        StartCoroutine(FadeInImage());  // Iniciar la corutina para el fade-in de la imagen
+        StartCoroutine(FadeInImage(asyncLoad));  // Iniciar la corutina para el fade-in de la imagen
     }
 
-    // Corutina para el fade-in de la imagen (de opacidad 0 a 1 en 2 segundos)
-    IEnumerator FadeInImage()
+    IEnumerator FadeInImage(AsyncOperation asyncLoad)
     {
         float timeElapsed = 0f;
-        float duration = 2f;  // Duración del fade-in (2 segundos)
+        float duration = 4f;  // Duración del fade-in (4 segundos)
 
         // Asegurarse de que la imagen comienza completamente transparente
         Color startColor = loreImage.color;
@@ -45,11 +49,10 @@ public class LoreScene : MonoBehaviour
 
         // Al finalizar el fade-in, comenzar a reproducir el audio y escribir el texto
         audioSource.Play();
-        StartCoroutine(TypeText());  // Iniciar el proceso de escritura del texto
+        StartCoroutine(TypeText(asyncLoad));  // Iniciar el proceso de escritura del texto
     }
 
-    // Corutina para escribir el texto lentamente
-    IEnumerator TypeText()
+    IEnumerator TypeText(AsyncOperation asyncLoad)
     {
         foreach (char letter in fullText.ToCharArray())
         {
@@ -61,11 +64,10 @@ public class LoreScene : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         // Iniciar el fade-out de la imagen (de opacidad 1 a 0 en 2 segundos)
-        StartCoroutine(FadeOutImage());
+        StartCoroutine(FadeOutImage(asyncLoad));
     }
 
-    // Corutina para el fade-out de la imagen (de opacidad 255 a 0 en 2 segundos)
-    IEnumerator FadeOutImage()
+    IEnumerator FadeOutImage(AsyncOperation asyncLoad)
     {
         // Desactivar el Lore Text cuando comience el fade-out
         loreText.text = "";  // Elimina el texto de la pantalla
@@ -85,10 +87,13 @@ public class LoreScene : MonoBehaviour
             timeElapsed += Time.deltaTime;
             float alpha = Mathf.Lerp(1, 0, timeElapsed / duration);
             loreImage.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
-            yield return null;
+            yield return null;  // Mantener el frame sin bloquear
         }
 
-        // Cuando termine el fade-out, cambiar a la Maze Scene
-        SceneManager.LoadScene("Maze Scene");
+        // Una vez que el fade-out termine, activamos el Loading Image
+        loadingImage.gameObject.SetActive(true);  // Activar el Loading Image
+
+        // Iniciar la carga de la escena
+        asyncLoad.allowSceneActivation = true;  // Activar la escena cuando termine el fade-out
     }
 }

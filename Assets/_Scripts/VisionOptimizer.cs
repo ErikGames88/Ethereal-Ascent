@@ -17,7 +17,6 @@ public class VisionOptimizer : MonoBehaviour
         Transform forestTransform = GameObject.Find("Forest").transform;
         if (forestTransform == null)
         {
-            Debug.LogError("No se encontró el objeto Forest. Verifica la jerarquía.");
             return;
         }
 
@@ -33,12 +32,10 @@ public class VisionOptimizer : MonoBehaviour
             var terrain = child.GetComponent<Terrain>();
             if (terrain == null)
             {
-                Debug.LogWarning($"Ignorando el hijo {child.name} de Forest porque no tiene componente Terrain.");
                 continue; // Salta este objeto
             }
 
             marginLookup[terrain] = 35f;
-            Debug.Log($"Margen asignado correctamente: {child.name} con margen 35f");
         }
 
         // Asignar márgenes para los hijos de Garden
@@ -50,8 +47,7 @@ public class VisionOptimizer : MonoBehaviour
                 var terrain = child.GetComponent<Terrain>();
                 if (terrain != null)
                 {
-                    marginLookup[terrain] = 10f;  // Margen específico para Garden
-                    Debug.Log($"Margen asignado correctamente: {child.name} de Garden con margen 10f");
+                    marginLookup[terrain] = 10f;
                 }
             }
         }
@@ -65,8 +61,7 @@ public class VisionOptimizer : MonoBehaviour
                 var terrain = child.GetComponent<Terrain>();
                 if (terrain != null)
                 {
-                    marginLookup[terrain] = 20f;  // Margen específico para Graveyard
-                    Debug.Log($"Margen asignado correctamente: {child.name} de Graveyard con margen 20f");
+                    marginLookup[terrain] = 20f;
                 }
             }
         }
@@ -80,8 +75,7 @@ public class VisionOptimizer : MonoBehaviour
                 var terrain = child.GetComponent<Terrain>();
                 if (terrain != null)
                 {
-                    marginLookup[terrain] = 20f;  // Margen específico para Ruins
-                    Debug.Log($"Margen asignado correctamente: {child.name} de Ruins con margen 20f");
+                    marginLookup[terrain] = 20f;
                 }
             }
         }

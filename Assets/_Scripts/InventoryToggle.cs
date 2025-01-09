@@ -16,6 +16,9 @@ public class InventoryToggle : MonoBehaviour
     [SerializeField, Tooltip("Referencia al TimerManager para pausar y reanudar el Timer")]
     private TimerManager timerManager;
 
+    [SerializeField, Tooltip("Referencia al PauseMenuManager para saber si el menú está abierto")]
+    private PauseMenuManager pauseMenuManager;
+
     public static bool isInventoryOpen = false;
 
     private bool canToggleInventory = true; // Nueva bandera para habilitar/deshabilitar el uso de Tab
@@ -40,6 +43,12 @@ public class InventoryToggle : MonoBehaviour
 
     void Update()
     {
+        // No permitir abrir el inventario si el menú de pausa está activo
+        if (pauseMenuManager != null && pauseMenuManager.IsPaused())
+        {
+            return; // Si el menú de pausa está activo, no se puede abrir el inventario
+        }
+
         // Bloquear interacción si no se permite abrir el inventario
         if (!canToggleInventory)
         {
