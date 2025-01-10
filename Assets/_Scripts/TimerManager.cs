@@ -17,6 +17,9 @@ public class TimerManager : MonoBehaviour
     [SerializeField, Tooltip("Referencia al GameOver script")]
     private GameOver gameOverScript; // Referencia al GameOver
 
+    [SerializeField, Tooltip("Referencia al TextManager para verificar si hay texto activo")]
+    private TextManager textManager;
+
     private float remainingTimeInSeconds;
     private bool isTimerRunning = false;
 
@@ -43,6 +46,25 @@ public class TimerManager : MonoBehaviour
 
     private void Update()
     {
+        // Pausar el Timer si el texto está activo
+        if (textManager != null && textManager.IsTextActive())
+        {
+            if (isTimerRunning)
+            {
+                StopTimer(); // Pausar el Timer
+                Debug.Log("Timer pausado por Letter Background.");
+            }
+            return;
+        }
+
+        // Reanudar el Timer si no hay texto activo
+        if (textManager != null && !textManager.IsTextActive() && !isTimerRunning)
+        {
+            StartTimer(); // Reanudar el Timer
+            Debug.Log("Timer reanudado.");
+        }
+
+        // Actualizar el Timer si está en ejecución
         if (isTimerRunning && remainingTimeInSeconds > 0)
         {
             // Restar tiempo en tiempo real
@@ -79,6 +101,6 @@ public class TimerManager : MonoBehaviour
     public void StopTimer()
     {
         isTimerRunning = false;
-        Debug.Log("Timer detenido. Se llegó a 00:00.");
+        Debug.Log("Timer detenido.");
     }
 }

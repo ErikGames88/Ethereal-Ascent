@@ -29,13 +29,15 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
+            // Interacción con la Cathedral Door
             if (hit.collider.name == "Cathedral Door") 
             {
                 Debug.Log("Interacción con la Cathedral Door. Cambiando a estado de Victoria...");
-                GameManager.Instance.ChangeState(GameManager.GameState.Victory); // Utilizamos el GameManager
+                GameManager.Instance.ChangeState(GameManager.GameState.Victory);
                 return;
             }
 
+            // Interacción con un Skull
             if (hit.collider.CompareTag("Skull"))
             {
                 PickupSkull pickupSkull = hit.collider.GetComponent<PickupSkull>();
@@ -46,18 +48,25 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
 
+            // Interacción con objetos recogibles
             PickupItem pickupItem = hit.collider.GetComponent<PickupItem>();
             if (pickupItem != null)
             {
                 AudioSource[] playerAudioSources = player.GetComponents<AudioSource>();
-                pickupItem.Pickup
-                (
+                pickupItem.Pickup(
                     FindObjectOfType<KeyManager>(),
                     FindObjectOfType<FlashlightManager>(),
                     FindObjectOfType<InventoryManager>(),
                     playerAudioSources
                 );
+                return;
+            }
 
+            // Interacción con la First Note
+            if (hit.collider.name == "First Note")
+            {
+                Debug.Log("Interacción con First Note. Activando First Text...");
+                FindObjectOfType<TextManager>().ShowFirstText(); // Activar el First Text
                 return;
             }
         }

@@ -39,39 +39,34 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject exitBackground; // Referencia al Exit Background
 
+    [SerializeField, Tooltip("Referencia al TextManager para verificar si hay texto activo")]
+    private TextManager textManager;
+
     private bool isControlsImageActive = false; // Estado de activación de Controls Image
 
     void Start()
     {
-        /*// Asegurarse de que el cursor está oculto al inicio
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor*/
-
-        // Asignar la función al botón Resume
+        // Asignar las funciones a los botones desde el inspector
         if (resumeButton != null)
         {
             resumeButton.onClick.AddListener(OnClickResumeButton);
         }
 
-        // Asignar la función al botón Controls
         if (controlsButton != null)
         {
             controlsButton.onClick.AddListener(OnClickControlsButton);
         }
 
-        // Asignar la función al botón Exit
         if (exitButton != null)
         {
             exitButton.onClick.AddListener(OnClickExitButton);
         }
 
-        // Asignar la función al botón Not
         if (notButton != null)
         {
             notButton.onClick.AddListener(OnClickNotButton);
         }
 
-        // Asignar la función al botón Yes
         if (yesButton != null)
         {
             yesButton.onClick.AddListener(OnClickYesButton);
@@ -80,10 +75,11 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
-        // Bloquear la apertura del Pause Menu hasta que el MissionText se haya cerrado
-        if (missionManager != null && !missionManager.isMissionTextClosed)
+        // Bloquear la apertura del Pause Menu si el MissionText no está cerrado o el texto del Letter Background está activo
+        if ((missionManager != null && !missionManager.isMissionTextClosed) || 
+            (textManager != null && textManager.IsTextActive()))
         {
-            return; // No se puede abrir el Pause Menu hasta que el MissionText esté cerrado
+            return; // No se puede abrir el Pause Menu en estas condiciones
         }
 
         // Activar el menú de pausa solo con Esc si no está abierto
@@ -138,7 +134,7 @@ public class PauseMenuManager : MonoBehaviour
     // Método llamado por el Resume Button desde el inspector
     public void OnClickResumeButton()
     {
-        ClosePauseMenu(); // Llama al método existente para cerrar el menú
+        ClosePauseMenu();
     }
 
     // Método llamado por el Controls Button desde el inspector
@@ -147,7 +143,7 @@ public class PauseMenuManager : MonoBehaviour
         if (controlsImage != null)
         {
             controlsImage.SetActive(true);
-            isControlsImageActive = true; // Marcar que el Controls Image está activo
+            isControlsImageActive = true;
         }
 
         Debug.Log("Controls Image ACTIVADO");
@@ -158,7 +154,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         if (exitBackground != null)
         {
-            exitBackground.SetActive(true); // Activar el Exit Background
+            exitBackground.SetActive(true);
         }
 
         Debug.Log("Exit Background ACTIVADO");
@@ -169,7 +165,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         if (exitBackground != null)
         {
-            exitBackground.SetActive(false); // Desactivar el Exit Background
+            exitBackground.SetActive(false);
         }
 
         Debug.Log("Exit Background DESACTIVADO");
@@ -179,7 +175,7 @@ public class PauseMenuManager : MonoBehaviour
     public void OnClickYesButton()
     {
         Debug.Log("Cambiando a la escena Main Menu...");
-        SceneManager.LoadScene("Main Menu"); // Cambiar a la escena Main Menu
+        SceneManager.LoadScene("Main Menu");
     }
 
     // Cerrar el menú de pausa
@@ -197,7 +193,7 @@ public class PauseMenuManager : MonoBehaviour
 
         // Ocultar el cursor cuando el Pause Menu no está activo
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Desactivar el Controls Image
@@ -206,7 +202,7 @@ public class PauseMenuManager : MonoBehaviour
         if (controlsImage != null)
         {
             controlsImage.SetActive(false);
-            isControlsImageActive = false; // Marcar que el Controls Image está desactivado
+            isControlsImageActive = false;
         }
 
         Debug.Log("Controls Image DESACTIVADO");
@@ -215,6 +211,6 @@ public class PauseMenuManager : MonoBehaviour
     // Método para comprobar si el menú de pausa está activo
     public bool IsPaused()
     {
-        return pauseMenuCanvas.activeSelf; // Devuelve true si el menú está activo
+        return pauseMenuCanvas.activeSelf;
     }
 }
