@@ -21,6 +21,9 @@ public class SkullCounter : MonoBehaviour
     [SerializeField, Tooltip("Referencia a la llave de la catedral")]
     private GameObject cathedralKey;
 
+    [SerializeField, Tooltip("Referencia a la Boss Door que bloquea la catedral")]
+    private GameObject bossDoor;
+
     private int skullCount = 0;
     private bool isKeyHintActive = false;
 
@@ -33,6 +36,11 @@ public class SkullCounter : MonoBehaviour
         if (cathedralKey != null)
         {
             cathedralKey.SetActive(false);
+        }
+
+        if (bossDoor != null)
+        {
+            bossDoor.SetActive(true); // La puerta está activa por defecto
         }
 
         if (playerLocked == null)
@@ -57,6 +65,7 @@ public class SkullCounter : MonoBehaviour
         {
             ShowKeyHint();
             ActivateKey();
+            DeactivateBossDoor(); // Desactivar la Boss Door
         }
 
         UpdateCounter();
@@ -96,6 +105,15 @@ public class SkullCounter : MonoBehaviour
         if (cathedralKey != null)
         {
             cathedralKey.SetActive(true);
+        }
+    }
+
+    private void DeactivateBossDoor()
+    {
+        if (bossDoor != null)
+        {
+            bossDoor.SetActive(false);
+            Debug.Log("Boss Door desactivada. Acceso liberado.");
         }
     }
 }

@@ -20,6 +20,12 @@ public class TextManager : MonoBehaviour
     [SerializeField, Tooltip("Texto de la Cathedral Board")]
     private GameObject cathedralBoardText;
 
+    [SerializeField, Tooltip("Referencia al Text Background")]
+    private GameObject textBackground;
+
+    [SerializeField, Tooltip("Texto de la Hospital Door")]
+    private GameObject hospitalDoorText;
+
     [Header("Otros")]
     [SerializeField, Tooltip("Referencia al Crosshair Manager")]
     private CrosshairManager crosshairManager;
@@ -58,6 +64,16 @@ public class TextManager : MonoBehaviour
         if (cathedralBoardText != null)
         {
             cathedralBoardText.SetActive(false);
+        }
+
+        if (textBackground != null)
+        {
+            textBackground.SetActive(false);
+        }
+
+        if (hospitalDoorText != null)
+        {
+            hospitalDoorText.SetActive(false);
         }
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -105,8 +121,26 @@ public class TextManager : MonoBehaviour
         Debug.Log("Cathedral Board Text y Key E Dismiss ACTIVADOS.");
     }
 
+    public void ShowHospitalDoorText()
+    {
+        if (textBackground == null || keyEDismiss == null || hospitalDoorText == null)
+        {
+            Debug.LogError("Alguna referencia está sin asignar en el TextManager.");
+            return;
+        }
+
+        textBackground.SetActive(true);
+        keyEDismiss.SetActive(true);
+        hospitalDoorText.SetActive(true);
+
+        // Bloquear la interfaz sin reproducir sonido
+        LockUI();
+        Debug.Log("Hospital Door Text y Key E Dismiss ACTIVADOS.");
+    }
+
     public void HideText()
     {
+        // Desactivar Letter Background y Noticeboard Background si están activos
         if (letterBackground != null)
         {
             letterBackground.SetActive(false);
@@ -115,6 +149,12 @@ public class TextManager : MonoBehaviour
         if (noticeboardBackground != null)
         {
             noticeboardBackground.SetActive(false);
+        }
+
+        // Desactivar Text Background y sus hijos
+        if (textBackground != null)
+        {
+            textBackground.SetActive(false);
         }
 
         if (keyEDismiss != null)
@@ -132,6 +172,11 @@ public class TextManager : MonoBehaviour
             cathedralBoardText.SetActive(false);
         }
 
+        if (hospitalDoorText != null)
+        {
+            hospitalDoorText.SetActive(false);
+        }
+
         UnlockUI();
         Debug.Log("Textos y fondos DESACTIVADOS.");
     }
@@ -143,6 +188,11 @@ public class TextManager : MonoBehaviour
             audioSource.Play();
         }
 
+        LockUI();
+    }
+
+    private void LockUI()
+    {
         if (crosshairManager != null)
         {
             crosshairManager.ShowCrosshair(false);
@@ -152,10 +202,6 @@ public class TextManager : MonoBehaviour
         {
             playerLocked.LockPlayer(true, false); // Congelar al jugador pero no mostrar el cursor
         }
-
-        // Comentamos estas líneas para evitar que el cursor se active
-        // Cursor.lockState = CursorLockMode.None;
-        // Cursor.visible = true;
 
         isTextActive = true;
     }

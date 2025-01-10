@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
             // Interacción con la Cathedral Door
-            if (hit.collider.name == "Cathedral Door") 
+            if (hit.collider.name == "Cathedral Door")
             {
                 Debug.Log("Interacción con la Cathedral Door. Cambiando a estado de Victoria...");
                 GameManager.Instance.ChangeState(GameManager.GameState.Victory);
@@ -74,7 +74,15 @@ public class PlayerInteraction : MonoBehaviour
             if (hit.collider.name == "Cathedral Board")
             {
                 Debug.Log("Interacción con Cathedral Board. Activando Cathedral Board Text...");
-                FindObjectOfType<TextManager>().ShowCathedralBoardText(); // Activar el texto del Cathedral Board
+                FindObjectOfType<TextManager>().ShowCathedralBoardText();
+                return;
+            }
+
+            // Interacción con la Hospital Door
+            if (hit.collider.name == "Hospital Door")
+            {
+                Debug.Log("Interacción con Hospital Door. Activando Hospital Door Text...");
+                FindObjectOfType<TextManager>().ShowHospitalDoorText();
                 return;
             }
         }
