@@ -66,7 +66,15 @@ public class PlayerInteraction : MonoBehaviour
             if (hit.collider.name == "First Note")
             {
                 Debug.Log("Interacción con First Note. Activando First Text...");
-                FindObjectOfType<TextManager>().ShowFirstText(); // Activar el First Text
+                FindObjectOfType<TextManager>().ShowFirstText();
+                return;
+            }
+
+            // Interacción con la Cathedral Board
+            if (hit.collider.name == "Cathedral Board")
+            {
+                Debug.Log("Interacción con Cathedral Board. Activando Cathedral Board Text...");
+                FindObjectOfType<TextManager>().ShowCathedralBoardText(); // Activar el texto del Cathedral Board
                 return;
             }
         }

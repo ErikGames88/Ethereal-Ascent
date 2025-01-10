@@ -14,6 +14,12 @@ public class TextManager : MonoBehaviour
     [SerializeField, Tooltip("Texto de la First Note")]
     private GameObject firstText;
 
+    [SerializeField, Tooltip("Referencia al Noticeboard Background")]
+    private GameObject noticeboardBackground;
+
+    [SerializeField, Tooltip("Texto de la Cathedral Board")]
+    private GameObject cathedralBoardText;
+
     [Header("Otros")]
     [SerializeField, Tooltip("Referencia al Crosshair Manager")]
     private CrosshairManager crosshairManager;
@@ -28,7 +34,7 @@ public class TextManager : MonoBehaviour
 
     void Start()
     {
-        // Asegurarse de que el Letter Background y sus hijos estén desactivados al inicio
+        // Desactivar elementos al inicio
         if (letterBackground != null)
         {
             letterBackground.SetActive(false);
@@ -44,8 +50,18 @@ public class TextManager : MonoBehaviour
             firstText.SetActive(false);
         }
 
-        // Asegurarse de que el cursor esté oculto al inicio
-        SetCursorState(CursorLockMode.Locked, false);
+        if (noticeboardBackground != null)
+        {
+            noticeboardBackground.SetActive(false);
+        }
+
+        if (cathedralBoardText != null)
+        {
+            cathedralBoardText.SetActive(false);
+        }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -65,81 +81,105 @@ public class TextManager : MonoBehaviour
             return;
         }
 
-        // Activar el Letter Background
         letterBackground.SetActive(true);
-
-        // Activar el texto de "SALTAR TEXTO"
         keyEDismiss.SetActive(true);
-
-        // Activar el texto de la First Note
         firstText.SetActive(true);
 
-        // Reproducir el sonido de pasar página
-        if (audioSource != null)
+        PlaySoundAndLockUI();
+        Debug.Log("First Text y Key E Dismiss ACTIVADOS.");
+    }
+
+    public void ShowCathedralBoardText()
+    {
+        if (noticeboardBackground == null || keyEDismiss == null || cathedralBoardText == null)
         {
-            audioSource.Play();
-            Debug.Log("Reproduciendo sonido de pasar página.");
+            Debug.LogError("Alguna referencia está sin asignar en el TextManager.");
+            return;
         }
 
-        // Desactivar el crosshair mientras se muestra el texto
-        if (crosshairManager != null)
-        {
-            crosshairManager.ShowCrosshair(false);
-        }
+        noticeboardBackground.SetActive(true);
+        keyEDismiss.SetActive(true);
+        cathedralBoardText.SetActive(true);
 
-        // Congelar al jugador, pero mantener el cursor oculto
-        if (playerLocked != null)
-        {
-            playerLocked.LockPlayer(true, false); // Congelar al jugador pero mantener el cursor oculto
-        }
-
-        isTextActive = true;
-
-        Debug.Log("First Text y Key E Dismiss ACTIVADOS. Jugador congelado, cursor oculto.");
+        PlaySoundAndLockUI();
+        Debug.Log("Cathedral Board Text y Key E Dismiss ACTIVADOS.");
     }
 
     public void HideText()
     {
-        if (letterBackground == null || keyEDismiss == null)
+        if (letterBackground != null)
         {
-            Debug.LogError("Letter Background o Key E Dismiss no están asignados en el TextManager.");
-            return;
+            letterBackground.SetActive(false);
         }
 
-        // Desactivar el Letter Background y sus hijos
-        letterBackground.SetActive(false);
-        keyEDismiss.SetActive(false);
+        if (noticeboardBackground != null)
+        {
+            noticeboardBackground.SetActive(false);
+        }
+
+        if (keyEDismiss != null)
+        {
+            keyEDismiss.SetActive(false);
+        }
 
         if (firstText != null)
         {
             firstText.SetActive(false);
         }
 
-        // Reactivar el crosshair
+        if (cathedralBoardText != null)
+        {
+            cathedralBoardText.SetActive(false);
+        }
+
+        UnlockUI();
+        Debug.Log("Textos y fondos DESACTIVADOS.");
+    }
+
+    private void PlaySoundAndLockUI()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+
+        if (crosshairManager != null)
+        {
+            crosshairManager.ShowCrosshair(false);
+        }
+
+        if (playerLocked != null)
+        {
+            playerLocked.LockPlayer(true, false); // Congelar al jugador pero no mostrar el cursor
+        }
+
+        // Comentamos estas líneas para evitar que el cursor se active
+        // Cursor.lockState = CursorLockMode.None;
+        // Cursor.visible = true;
+
+        isTextActive = true;
+    }
+
+    private void UnlockUI()
+    {
         if (crosshairManager != null)
         {
             crosshairManager.ShowCrosshair(true);
         }
 
-        // Descongelar al jugador
         if (playerLocked != null)
         {
-            playerLocked.LockPlayer(false, false); // Descongelar y mantener el cursor oculto
+            playerLocked.LockPlayer(false, false);
         }
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         isTextActive = false;
-
-        Debug.Log("Texto y Letter Background DESACTIVADOS. Jugador descongelado, cursor oculto.");
-    }
-
-    private void SetCursorState(CursorLockMode lockMode, bool isVisible)
-    {
-        Cursor.lockState = lockMode;
-        Cursor.visible = isVisible;
     }
 
     public bool IsTextActive()
     {
-        return isTextActive; // Devuelve el estado actual del texto
+        return isTextActive;
     }
 }
