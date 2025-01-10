@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
@@ -11,10 +13,70 @@ public class PauseMenuManager : MonoBehaviour
     private PlayerController playerController; // Referencia al PlayerController
 
     [SerializeField]
-    private MissionManager missionManager; // Referencia al MissionManager para comprobar si el MissionText se ha cerrado
+    private MissionManager missionManager; // Referencia al MissionManager para comprobar si el MissionText se haya cerrado
 
     [SerializeField]
     private TimerManager timerManager; // Referencia al TimerManager para congelar el timer
+
+    [SerializeField]
+    private Button resumeButton; // Referencia al Resume Button
+
+    [SerializeField]
+    private Button controlsButton; // Referencia al Controls Button
+
+    [SerializeField]
+    private Button exitButton; // Referencia al Exit Button
+
+    [SerializeField]
+    private Button notButton; // Referencia al Not Button
+
+    [SerializeField]
+    private Button yesButton; // Referencia al Yes Button
+
+    [SerializeField]
+    private GameObject controlsImage; // Referencia al Controls Image
+
+    [SerializeField]
+    private GameObject exitBackground; // Referencia al Exit Background
+
+    private bool isControlsImageActive = false; // Estado de activación de Controls Image
+
+    void Start()
+    {
+        /*// Asegurarse de que el cursor está oculto al inicio
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor*/
+
+        // Asignar la función al botón Resume
+        if (resumeButton != null)
+        {
+            resumeButton.onClick.AddListener(OnClickResumeButton);
+        }
+
+        // Asignar la función al botón Controls
+        if (controlsButton != null)
+        {
+            controlsButton.onClick.AddListener(OnClickControlsButton);
+        }
+
+        // Asignar la función al botón Exit
+        if (exitButton != null)
+        {
+            exitButton.onClick.AddListener(OnClickExitButton);
+        }
+
+        // Asignar la función al botón Not
+        if (notButton != null)
+        {
+            notButton.onClick.AddListener(OnClickNotButton);
+        }
+
+        // Asignar la función al botón Yes
+        if (yesButton != null)
+        {
+            yesButton.onClick.AddListener(OnClickYesButton);
+        }
+    }
 
     void Update()
     {
@@ -24,61 +86,135 @@ public class PauseMenuManager : MonoBehaviour
             return; // No se puede abrir el Pause Menu hasta que el MissionText esté cerrado
         }
 
-        // Solo activar el menú de pausa si no está abierto el inventario
-        if (Input.GetKeyDown(KeyCode.Escape) && !InventoryToggle.isInventoryOpen)
+        // Activar el menú de pausa solo con Esc si no está abierto
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenuCanvas.activeSelf && !InventoryToggle.isInventoryOpen)
         {
-            ManagePauseMenu(); // Llamamos a la función para activar o desactivar el menú
+            OpenPauseMenu(); // Abrir el menú de pausa
+        }
+
+        // Desactivar el Controls Image con la tecla E
+        if (isControlsImageActive && Input.GetKeyDown(KeyCode.E))
+        {
+            CloseControlsImage();
         }
     }
 
-    // Activar o desactivar el menú de pausa
-    void ManagePauseMenu()
+    // Abrir el menú de pausa
+    public void OpenPauseMenu()
     {
-        bool isPaused = !pauseMenuCanvas.activeSelf;
+        pauseMenuCanvas.SetActive(true);
 
-        // Activar o desactivar el menú
-        pauseMenuCanvas.SetActive(isPaused);
-
-        // Activar o desactivar el hijo Pause Menu
+        // Activar el hijo Pause Menu
         Transform pauseMenu = pauseMenuCanvas.transform.Find("Pause Menu");
         if (pauseMenu != null)
         {
-            pauseMenu.gameObject.SetActive(isPaused);
+            pauseMenu.gameObject.SetActive(true);
         }
 
-        // Si el menú está activo, desactivar el movimiento del jugador
-        if (isPaused)
+        // Desactivar los otros hijos: Exit Background y Controls Image
+        if (exitBackground != null)
         {
-            Debug.Log("Pause Menu ACTIVADO");
-
-            // Congelar el movimiento del jugador
-            playerController.GetComponent<Rigidbody>().isKinematic = true;
-
-            // Congelar el Timer
-            timerManager.StopTimer();
-
-            // Mostrar el cursor cuando el Pause Menu está activo
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None; // Liberar el cursor
+            exitBackground.SetActive(false);
         }
-        else
+
+        if (controlsImage != null)
         {
-            Debug.Log("Pause Menu DESACTIVADO");
-
-            // Reactivar el movimiento del jugador
-            playerController.GetComponent<Rigidbody>().isKinematic = false;
-
-            // Reactivar el Timer
-            timerManager.StartTimer();
-
-            // Ocultar el cursor cuando el Pause Menu no está activo
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor
+            controlsImage.SetActive(false);
         }
+
+        Debug.Log("Pause Menu ACTIVADO");
+
+        // Congelar el movimiento del jugador
+        playerController.GetComponent<Rigidbody>().isKinematic = true;
+
+        // Congelar el Timer
+        timerManager.StopTimer();
+
+        // Mostrar el cursor cuando el Pause Menu está activo
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None; // Liberar el cursor
     }
 
+    // Método llamado por el Resume Button desde el inspector
+    public void OnClickResumeButton()
+    {
+        ClosePauseMenu(); // Llama al método existente para cerrar el menú
+    }
+
+    // Método llamado por el Controls Button desde el inspector
+    public void OnClickControlsButton()
+    {
+        if (controlsImage != null)
+        {
+            controlsImage.SetActive(true);
+            isControlsImageActive = true; // Marcar que el Controls Image está activo
+        }
+
+        Debug.Log("Controls Image ACTIVADO");
+    }
+
+    // Método llamado por el Exit Button desde el inspector
+    public void OnClickExitButton()
+    {
+        if (exitBackground != null)
+        {
+            exitBackground.SetActive(true); // Activar el Exit Background
+        }
+
+        Debug.Log("Exit Background ACTIVADO");
+    }
+
+    // Método llamado por el Not Button desde el inspector
+    public void OnClickNotButton()
+    {
+        if (exitBackground != null)
+        {
+            exitBackground.SetActive(false); // Desactivar el Exit Background
+        }
+
+        Debug.Log("Exit Background DESACTIVADO");
+    }
+
+    // Método llamado por el Yes Button desde el inspector
+    public void OnClickYesButton()
+    {
+        Debug.Log("Cambiando a la escena Main Menu...");
+        SceneManager.LoadScene("Main Menu"); // Cambiar a la escena Main Menu
+    }
+
+    // Cerrar el menú de pausa
+    void ClosePauseMenu()
+    {
+        pauseMenuCanvas.SetActive(false);
+
+        Debug.Log("Pause Menu DESACTIVADO");
+
+        // Reactivar el movimiento del jugador
+        playerController.GetComponent<Rigidbody>().isKinematic = false;
+
+        // Reactivar el Timer
+        timerManager.StartTimer();
+
+        // Ocultar el cursor cuando el Pause Menu no está activo
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor
+    }
+
+    // Desactivar el Controls Image
+    public void CloseControlsImage()
+    {
+        if (controlsImage != null)
+        {
+            controlsImage.SetActive(false);
+            isControlsImageActive = false; // Marcar que el Controls Image está desactivado
+        }
+
+        Debug.Log("Controls Image DESACTIVADO");
+    }
+
+    // Método para comprobar si el menú de pausa está activo
     public bool IsPaused()
     {
-        return pauseMenuCanvas.activeSelf;  // Devuelve true si el menú está activo
+        return pauseMenuCanvas.activeSelf; // Devuelve true si el menú está activo
     }
 }
