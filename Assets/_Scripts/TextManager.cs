@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class TextManager : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class TextManager : MonoBehaviour
 
     [SerializeField, Tooltip("Referencia al AudioSource para reproducir sonidos")]
     private AudioSource audioSource;
+
+    public static event Action OnTextHidden;
 
     void Start()
     {
@@ -179,6 +182,11 @@ public class TextManager : MonoBehaviour
 
         UnlockUI();
         Debug.Log("Textos y fondos DESACTIVADOS.");
+
+        if (OnTextHidden != null)
+        {
+            OnTextHidden.Invoke(); // Aquí usamos .Invoke() para ejecutar el evento.
+        }
     }
 
     private void PlaySoundAndLockUI()
