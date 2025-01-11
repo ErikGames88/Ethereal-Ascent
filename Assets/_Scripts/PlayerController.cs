@@ -91,14 +91,15 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal = Input.GetAxis("Horizontal"); // A/D
+        float moveVertical = Input.GetAxis("Vertical");     // W/S
 
         Vector3 direction = transform.right * moveHorizontal + transform.forward * moveVertical;
 
         float currentSpeed;
 
-        if (Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed && direction.magnitude > 0)
+        // Sprint solo funciona si se está presionando W y no hay movimiento hacia los lados o atrás
+        if (Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed && moveVertical > 0 && moveHorizontal == 0)
         {
             currentSpeed = sprint;
             currentSprintTime -= maxSprintTime / maxSprintTime * Time.fixedDeltaTime;
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            // Si no se cumple la condición de sprint, usar velocidad normal y recargar estamina
             currentSpeed = speed;
 
             if (currentSprintTime < maxSprintTime)
