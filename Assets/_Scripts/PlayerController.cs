@@ -162,31 +162,39 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("NoSprintZone"))
+        // Verifica si el objeto activador pertenece a la capa NoSprintZone
+        if (other.gameObject.layer == LayerMask.NameToLayer("NoSprintZone"))
         {
             isSprintAllowed = false;
             isJumpAllowed = false;
 
+            // Desactiva la lluvia si el RainManager está presente
             RainManager rainManager = GetComponentInChildren<RainManager>();
             if (rainManager != null)
             {
                 rainManager.SetRainActive(false);
             }
+
+            Debug.Log("Entrando en NoSprintZone: Sprint y lluvia desactivados.");
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("NoSprintZone"))
+        // Verifica si el objeto saliendo pertenece a la capa NoSprintZone
+        if (other.gameObject.layer == LayerMask.NameToLayer("NoSprintZone"))
         {
             isSprintAllowed = true;
             isJumpAllowed = true;
 
+            // Reactiva la lluvia si el RainManager está presente
             RainManager rainManager = GetComponentInChildren<RainManager>();
             if (rainManager != null)
             {
                 rainManager.SetRainActive(true);
             }
+
+            Debug.Log("Saliendo de NoSprintZone: Sprint y lluvia reactivados.");
         }
     }
 
