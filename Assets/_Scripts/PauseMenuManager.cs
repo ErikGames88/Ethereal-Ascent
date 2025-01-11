@@ -44,6 +44,7 @@ public class PauseMenuManager : MonoBehaviour
 
     private bool isControlsImageActive = false; // Estado de activación de Controls Image
 
+
     void Start()
     {
         // Asignar las funciones a los botones desde el inspector
@@ -123,7 +124,7 @@ public class PauseMenuManager : MonoBehaviour
         // Congelar el movimiento del jugador
         playerController.GetComponent<Rigidbody>().isKinematic = true;
 
-        // Congelar el Timer
+        // Detener el Timer
         timerManager.StopTimer();
 
         // Mostrar el cursor cuando el Pause Menu está activo
@@ -188,7 +189,7 @@ public class PauseMenuManager : MonoBehaviour
         // Reactivar el movimiento del jugador
         playerController.GetComponent<Rigidbody>().isKinematic = false;
 
-        // Reactivar el Timer
+        // Reanudar el Timer
         timerManager.StartTimer();
 
         // Ocultar el cursor cuando el Pause Menu no está activo

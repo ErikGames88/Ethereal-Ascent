@@ -20,23 +20,14 @@ public class TimerManager : MonoBehaviour
     [SerializeField, Tooltip("Referencia al TextManager para verificar si hay texto activo")]
     private TextManager textManager;
 
+    [SerializeField, Tooltip("Referencia al PauseMenuManager para verificar si el Pause Menu está activo")]
+    private PauseMenuManager pauseMenuManager;
+
     private float remainingTimeInSeconds;
-    private bool isTimerRunning = false;
+    private bool isTimerRunning = false; // Controla si el Timer está en ejecución
 
     private void Start()
     {
-        if (timerText == null)
-        {
-            Debug.LogError("No se asignó un TextMeshPro al Timer Manager.");
-            return;
-        }
-
-        if (gameOverScript == null)
-        {
-            Debug.LogError("No se asignó un GameOver script al Timer Manager.");
-            return;
-        }
-
         // Convertir el tiempo inicial a segundos
         remainingTimeInSeconds = (initialMinutes * 60) + initialSeconds;
 
@@ -46,39 +37,49 @@ public class TimerManager : MonoBehaviour
 
     private void Update()
     {
-        // Pausar el Timer si el texto está activo
+        // *** PRIORIDAD 1: Detener toda lógica si el Pause Menu está activo ***
+        if (pauseMenuManager != null && pauseMenuManager.IsPaused())
+        {
+            if (isTimerRunning)
+            {
+                StopTimer(); // Garantizamos que el Timer no siga corriendo
+                Debug.Log("Pause Menu activo: Timer detenido.");
+            }
+            return; // Salir de Update completamente
+        }
+
+        // *** PRIORIDAD 2: Detener el Timer si hay textos activos ***
         if (textManager != null && textManager.IsTextActive())
         {
             if (isTimerRunning)
             {
-                StopTimer(); // Pausar el Timer
-                Debug.Log("Timer pausado por Letter Background.");
+                StopTimer();
+                Debug.Log("Timer pausado por texto activo.");
             }
-            return;
+            return; // Salir de Update completamente
         }
 
-        // Reanudar el Timer si no hay texto activo
-        if (textManager != null && !textManager.IsTextActive() && !isTimerRunning)
+        // *** Reanudar el Timer solo si no hay textos y el Pause Menu no está activo ***
+        if (!isTimerRunning && (textManager == null || !textManager.IsTextActive()))
         {
-            StartTimer(); // Reanudar el Timer
+            StartTimer();
             Debug.Log("Timer reanudado.");
         }
 
-        // Actualizar el Timer si está en ejecución
+        // Actualizar el Timer si está corriendo
         if (isTimerRunning && remainingTimeInSeconds > 0)
         {
-            // Restar tiempo en tiempo real
             remainingTimeInSeconds -= Time.deltaTime;
 
-            // Evitar valores negativos
+            // Si el tiempo llega a 0, activar Game Over
             if (remainingTimeInSeconds <= 0)
             {
                 remainingTimeInSeconds = 0;
-                StopTimer(); // Detener el Timer al llegar a 0
-                gameOverScript.TriggerGameOver(); // Activar la lógica de Game Over
+                StopTimer();
+                gameOverScript.TriggerGameOver();
             }
 
-            // Actualizar el texto del Timer en pantalla
+            // Actualizar el texto del Timer
             UpdateTimerDisplay();
         }
     }
