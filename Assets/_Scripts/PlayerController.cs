@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
         // Combinar las capas Ground y Terrain
         combinedLayers = groundLayer | terrainLayer;
+
+        //MoveToStartPoint();
     }
 
     void Update()

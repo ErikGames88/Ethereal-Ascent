@@ -23,22 +23,22 @@ public class FogController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Terrain") && other.gameObject.layer != LayerMask.NameToLayer("Volcano"))
     {
-        if (other.CompareTag("Terrain"))
-        {
-            activeTerrains.Add(other);
-            UpdateFogState();
-        }
+        activeTerrains.Add(other);
+        UpdateFogState();
     }
+}
 
-    private void OnTriggerExit(Collider other)
+private void OnTriggerExit(Collider other)
+{
+    if (other.CompareTag("Terrain") && other.gameObject.layer != LayerMask.NameToLayer("Volcano"))
     {
-        if (other.CompareTag("Terrain"))
-        {
-            activeTerrains.Remove(other);
-            UpdateFogState();
-        }
+        activeTerrains.Remove(other);
+        UpdateFogState();
     }
+}
 
     private void UpdateFogState()
     {
