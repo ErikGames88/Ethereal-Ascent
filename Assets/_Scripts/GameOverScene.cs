@@ -28,6 +28,9 @@ public class GameOverScene : MonoBehaviour
     [SerializeField, Tooltip("Tiempo antes de que los botones comiencen a mostrarse")]
     private float buttonsActivationDelay = 2f;
 
+    [SerializeField, Tooltip("Referencia al Loading Image")]
+    private GameObject loadingImage; // Nueva referencia al Loading Image
+
     private Image panelImage; // Componente Image del Game Over Panel
     private TextMeshProUGUI gameOverText; // Componente TextMeshPro del Game Over Text
     private List<Button> buttons = new List<Button>(); // Lista de botones
@@ -75,6 +78,15 @@ public class GameOverScene : MonoBehaviour
                 Debug.LogError($"Faltan botones en el Game Over Panel. Encontrados: {buttons.Count}. Esperados: 3.");
             }
         }
+
+        if (loadingImage != null)
+        {
+            loadingImage.SetActive(false); // Asegurarse de que el Loading Image está desactivado al inicio
+        }
+        else
+        {
+            Debug.LogError("Loading Image no asignado en el Inspector.");
+        }
     }
 
     private void Start()
@@ -102,7 +114,6 @@ public class GameOverScene : MonoBehaviour
 
         Debug.Log("Game Over Scene: Red Background activado, Game Over Panel desactivado.");
         StartCoroutine(ShowGameOverPanelWithFade());
-        ConfigureButtons();
     }
 
     private void DisablePanelChildren()
@@ -199,6 +210,7 @@ public class GameOverScene : MonoBehaviour
             {
                 if (button != null)
                 {
+                    // Cambiar la opacidad del fondo del botón
                     Image buttonImage = button.GetComponent<Image>();
                     if (buttonImage != null)
                     {
@@ -207,6 +219,7 @@ public class GameOverScene : MonoBehaviour
                         buttonImage.color = buttonColor;
                     }
 
+                    // Cambiar la opacidad del texto del botón
                     TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                     if (buttonText != null)
                     {
@@ -224,6 +237,7 @@ public class GameOverScene : MonoBehaviour
         {
             if (button != null)
             {
+                // Asegurarse de que la opacidad final sea 1
                 Image buttonImage = button.GetComponent<Image>();
                 if (buttonImage != null)
                 {
@@ -264,41 +278,38 @@ public class GameOverScene : MonoBehaviour
         Debug.Log($"Cursor {(isVisible ? "mostrado" : "oculto")}.");
     }
 
-    private void ConfigureButtons()
+    // Métodos para asignar manualmente en el OnClick de cada botón
+    public void OnClickRetryButton()
     {
-        foreach (Button button in buttons)
-        {
-            if (button.name == "Retry Button")
-            {
-                button.onClick.AddListener(RetryGame);
-                Debug.Log("Retry Button configurado para cargar la Maze Scene.");
-            }
-            else if (button.name == "Main Menu Button")
-            {
-                button.onClick.AddListener(GoToMainMenu);
-                Debug.Log("Main Menu Button configurado para cargar el Main Menu.");
-            }
-            else if (button.name == "Exit Game Button")
-            {
-                button.onClick.AddListener(ExitGame);
-                Debug.Log("Exit Game Button configurado para salir del juego.");
-            }
-        }
-    }
-
-    private void RetryGame()
-    {
+        ActivateLoadingImage();
         SceneManager.LoadScene("Maze Scene");
     }
 
-    private void GoToMainMenu()
+    public void OnClickMainMenuButton()
     {
+        ActivateLoadingImage();
         SceneManager.LoadScene("Main Menu");
     }
 
-    private void ExitGame()
+    public void OnClickExitGameButton()
     {
         Debug.Log("SALISTE DEL JUEGO");
         Application.Quit();
+    }
+
+    private void ActivateLoadingImage()
+    {
+        if (loadingImage != null)
+        {
+            if (!loadingImage.activeSelf)
+            {
+                loadingImage.SetActive(true);
+                Debug.Log("Loading Image activado.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Loading Image no está asignado.");
+        }
     }
 }
