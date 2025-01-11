@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 30
   player: {fileID: 3032993861088575910}
+  pauseMenuManager: {fileID: 0}
 --- !u!1 &1812509397252060555
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +589,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 0
   groundCheck: {fileID: 8484992074030702152}
   maxHeight: 4
   startPoint: {fileID: 0}
@@ -723,6 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fogSystem: {fileID: 0}
+  fadeDuration: 4
 --- !u!1 &6299743878642567275
 GameObject:
   m_ObjectHideFlags: 0

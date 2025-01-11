@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private float currentSprintTime = 0;
     private bool canSprint = true;
 
-    private bool isSprintAllowed = true; 
+    private bool isSprintAllowed = true;
     private bool isJumpAllowed = true;
 
     [SerializeField, Tooltip("Fuerza del salto del Player")]
@@ -29,8 +29,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Radio para detectar el suelo")]
     private float groundCheckRadius = 0.2f;
 
-    [SerializeField, Tooltip("Capa para identificar el suelo")]
+    [SerializeField, Tooltip("Capa para identificar el suelo (Ground)")]
     private LayerMask groundLayer;
+
+    [SerializeField, Tooltip("Capa para identificar el Terrain")]
+    private LayerMask terrainLayer;
 
     private bool isGrounded;
 
@@ -38,10 +41,12 @@ public class PlayerController : MonoBehaviour
     private Transform groundCheck;
 
     [SerializeField, Tooltip("Altura máxima permitida para el Player")]
-    private float maxHeight = 4f; 
+    private float maxHeight = 4f;
 
     [SerializeField, Tooltip("Referencia al punto de inicio del Player")]
-    private Transform startPoint; // Objeto Start Point asignado desde el Inspector
+    private Transform startPoint;
+
+    private LayerMask combinedLayers; // Capas combinadas para Ground y Terrain
 
     void Awake()
     {
@@ -50,8 +55,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        currentSprintTime = maxSprintTime; 
-        //MoveToStartPoint(); 
+        currentSprintTime = maxSprintTime;
+
+        // Combinar las capas Ground y Terrain
+        combinedLayers = groundLayer | terrainLayer;
     }
 
     void Update()
@@ -66,7 +73,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+        // Verificar si el Player está en el suelo usando las capas combinadas
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, combinedLayers);
 
         if (transform.position.y > maxHeight)
         {
@@ -182,7 +190,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Método para mover al Player al Start Point
     public void MoveToStartPoint()
     {
         if (startPoint != null)
