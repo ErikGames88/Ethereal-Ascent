@@ -5,9 +5,10 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
     [SerializeField] private Sprite itemIcon;
-    [SerializeField] private bool isFlashlight = false;
     [SerializeField] private GameObject itemText;
     [SerializeField] private AudioClip pickupSound;
+    
+    public bool isFlashlight = false;
 
 
 
