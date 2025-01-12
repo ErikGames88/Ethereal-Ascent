@@ -9,14 +9,20 @@ public class SkullCounter : MonoBehaviour
     [SerializeField, Tooltip("Referencia al TextMeshPro para mostrar el contador")]
     private TextMeshProUGUI counterText;
 
-    [SerializeField, Tooltip("Referencia al Key Hint Text")]
-    private GameObject keyHintText;
+    [SerializeField, Tooltip("Referencia al Cathedral Key Text")]
+    private GameObject cathedralKeyText;
+
+    [SerializeField, Tooltip("Referencia al Cathedral Key Hint Text")]
+    private GameObject cathedralKeyHintText; // Nueva referencia
 
     [SerializeField, Tooltip("Referencia al TextBackground")]
     private GameObject textBackground;
 
     [SerializeField, Tooltip("Referencia al PlayerLocked para gestionar el bloqueo del jugador")]
     private PlayerLocked playerLocked;
+
+    [SerializeField, Tooltip("Referencia al HintTextManager para manejar textos con fade-in y fade-out")]
+    private HintTextManager hintTextManager; // Nueva referencia
 
     [SerializeField, Tooltip("Referencia a la llave de la catedral")]
     private GameObject cathedralKey;
@@ -30,8 +36,13 @@ public class SkullCounter : MonoBehaviour
     void Start()
     {
         counterText.text = "0";
-        keyHintText.SetActive(false);
+        cathedralKeyText.SetActive(false);
         textBackground.SetActive(false);
+
+        if (cathedralKeyHintText != null)
+        {
+            cathedralKeyHintText.SetActive(false); // Asegurarse de que empieza desactivado
+        }
 
         if (cathedralKey != null)
         {
@@ -78,7 +89,7 @@ public class SkullCounter : MonoBehaviour
 
     private void ShowKeyHint()
     {
-        keyHintText.SetActive(true);
+        cathedralKeyText.SetActive(true);
         textBackground.SetActive(true);
         isKeyHintActive = true;
 
@@ -90,13 +101,24 @@ public class SkullCounter : MonoBehaviour
 
     private void HideKeyHint()
     {
-        keyHintText.SetActive(false);
+        cathedralKeyText.SetActive(false);
         textBackground.SetActive(false);
         isKeyHintActive = false;
 
         if (playerLocked != null)
         {
             playerLocked.LockPlayer(false);
+        }
+
+        // Activar el Cathedral Key Hint Text con fade-in y fade-out
+        if (hintTextManager != null)
+        {
+            hintTextManager.ShowCathedralHintText();
+            Debug.Log("Llamando a ShowCathedralHintText desde SkullCounter.");
+        }
+        else
+        {
+            Debug.LogError("HintTextManager no está asignado en SkullCounter.");
         }
     }
 

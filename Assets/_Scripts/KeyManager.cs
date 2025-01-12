@@ -15,12 +15,14 @@ public class KeyManager : MonoBehaviour
     [SerializeField, Tooltip("Texto de la llave (Cathedral Key Text)")]
     private GameObject cathedralKeyText;
 
+    [SerializeField, Tooltip("Referencia al HintTextManager para manejar textos de pista")]
+    private HintTextManager hintTextManager; // Nueva referencia
+
     public GameObject CathedralKeyText 
     {
         get => cathedralKeyText;
     }
 
-    
     public void CollectKey(InventoryManager inventoryManager, int slotIndex, Sprite itemIcon)
     {
         if (isKeyCollected)
@@ -32,6 +34,17 @@ public class KeyManager : MonoBehaviour
         keySlotIndex = slotIndex;
 
         inventoryManager.AssignItemToSlot(slotIndex, "Cathedral Key", itemIcon, null, cathedralKeyText);
+
+        // Activar el Scape Hint Text al recoger la llave
+        if (hintTextManager != null)
+        {
+            hintTextManager.ShowScapeHintText();
+            Debug.Log("Scape Hint Text activado tras recoger la llave.");
+        }
+        else
+        {
+            Debug.LogError("HintTextManager no está asignado en el KeyManager.");
+        }
     }
 
     public void ActivateKeyText(bool isActive, RectTransform slotRect = null)
