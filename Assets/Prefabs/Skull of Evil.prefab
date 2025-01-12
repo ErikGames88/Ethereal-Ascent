@@ -268,7 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b44d28fc09c2242ab5fd9fc1b8f6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skullCounter: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: 1293d965208b081449476174e0aef58d, type: 3}
 --- !u!1 &3433133403002151514
 GameObject:
@@ -286,7 +285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8017574756903782597
 Transform:
   m_ObjectHideFlags: 0

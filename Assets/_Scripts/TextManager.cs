@@ -34,6 +34,9 @@ public class TextManager : MonoBehaviour
     [SerializeField, Tooltip("Referencia al PlayerLocked para congelar/descongelar al jugador")]
     private PlayerLocked playerLocked;
 
+    [SerializeField, Tooltip("Referencia al TimerManager para pausar/reanudar el Timer")]
+    private TimerManager timerManager; // Añadida referencia al TimerManager
+
     private bool isTextActive = false; // Estado para saber si el texto está activo
 
     [SerializeField, Tooltip("Referencia al AudioSource para reproducir sonidos")]
@@ -105,6 +108,7 @@ public class TextManager : MonoBehaviour
         firstText.SetActive(true);
 
         PlaySoundAndLockUI();
+        PauseTimer(); // Congelar el Timer
         Debug.Log("First Text y Key E Dismiss ACTIVADOS.");
     }
 
@@ -121,6 +125,7 @@ public class TextManager : MonoBehaviour
         cathedralBoardText.SetActive(true);
 
         PlaySoundAndLockUI();
+        PauseTimer(); // Congelar el Timer
         Debug.Log("Cathedral Board Text y Key E Dismiss ACTIVADOS.");
     }
 
@@ -138,6 +143,7 @@ public class TextManager : MonoBehaviour
 
         // Bloquear la interfaz sin reproducir sonido
         LockUI();
+        PauseTimer(); // Congelar el Timer
         Debug.Log("Hospital Door Text y Key E Dismiss ACTIVADOS.");
     }
 
@@ -181,6 +187,7 @@ public class TextManager : MonoBehaviour
         }
 
         UnlockUI();
+        ResumeTimer(); // Reanudar el Timer
         Debug.Log("Textos y fondos DESACTIVADOS.");
 
         if (OnTextHidden != null)
@@ -230,6 +237,22 @@ public class TextManager : MonoBehaviour
         Cursor.visible = false;
 
         isTextActive = false;
+    }
+
+    private void PauseTimer()
+    {
+        if (timerManager != null)
+        {
+            timerManager.PauseTimerGlobally();
+        }
+    }
+
+    private void ResumeTimer()
+    {
+        if (timerManager != null)
+        {
+            timerManager.ResumeTimerGlobally();
+        }
     }
 
     public bool IsTextActive()

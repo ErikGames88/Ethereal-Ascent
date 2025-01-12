@@ -24,6 +24,9 @@ public class SkullCounter : MonoBehaviour
     [SerializeField, Tooltip("Referencia al HintTextManager para manejar textos con fade-in y fade-out")]
     private HintTextManager hintTextManager; // Nueva referencia
 
+    [SerializeField, Tooltip("Referencia al Timer Manager para controlar el Timer")]
+    private TimerManager timerManager; // Nueva referencia para el Timer Manager
+
     [SerializeField, Tooltip("Referencia a la llave de la catedral")]
     private GameObject cathedralKey;
 
@@ -91,6 +94,18 @@ public class SkullCounter : MonoBehaviour
     {
         cathedralKeyText.SetActive(true);
         textBackground.SetActive(true);
+
+        // Congelar el Timer al activar el Cathedral Key Text
+        if (timerManager != null)
+        {
+            timerManager.StopTimer();
+            Debug.Log("Timer detenido al activar Cathedral Key Text.");
+        }
+        else
+        {
+            Debug.LogError("TimerManager no está asignado en SkullCounter.");
+        }
+
         isKeyHintActive = true;
 
         if (playerLocked != null)

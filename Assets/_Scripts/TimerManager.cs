@@ -16,46 +16,31 @@ public class TimerManager : MonoBehaviour
     private TextMeshProUGUI timerText;
 
     [SerializeField, Tooltip("Referencia al GameOver script")]
-    private GameOver gameOverScript; // Referencia al GameOver
+    private GameOver gameOverScript;
 
     [SerializeField, Tooltip("Referencia al PauseMenuManager para verificar si el Pause Menu está activo")]
     private PauseMenuManager pauseMenuManager;
 
     private float remainingTimeInSeconds;
-    private bool isTimerRunning = false; // Controla si el Timer está en ejecución
+    private bool isTimerRunning = false;
+
+    // Nuevo flag para pausar el Timer globalmente
+    private bool isGloballyPaused = false;
 
     private void Start()
     {
-        // Convertir el tiempo inicial a segundos
         remainingTimeInSeconds = (initialMinutes * 60) + initialSeconds;
-
-        // Actualizar el texto inicial del Timer
         UpdateTimerDisplay();
-
-        // Suscribirse al evento de cierre del texto inicial
-        TextManager.OnTextHidden += StartTimer;
-    }
-
-    private void OnDestroy()
-    {
-        // Desuscribirse del evento al destruir este objeto
-        TextManager.OnTextHidden -= StartTimer;
     }
 
     private void Update()
     {
-        // Pausar el Timer si el Pause Menu está activo
-        if (pauseMenuManager != null && pauseMenuManager.IsPaused())
+        if (isGloballyPaused || (pauseMenuManager != null && pauseMenuManager.IsPaused()))
         {
-            if (isTimerRunning)
-            {
-                StopTimer();
-                Debug.Log("Pause Menu activo: Timer detenido.");
-            }
+            StopTimer(); // Asegurarse de detener el Timer si está globalmente pausado o en el menú de pausa
             return;
         }
 
-        // Actualizar el Timer si está corriendo
         if (isTimerRunning && remainingTimeInSeconds > 0)
         {
             remainingTimeInSeconds -= Time.deltaTime;
@@ -81,7 +66,7 @@ public class TimerManager : MonoBehaviour
 
     public void StartTimer()
     {
-        if (!isTimerRunning)
+        if (!isTimerRunning && !isGloballyPaused)
         {
             isTimerRunning = true;
             Debug.Log("Timer iniciado.");
@@ -92,5 +77,20 @@ public class TimerManager : MonoBehaviour
     {
         isTimerRunning = false;
         Debug.Log("Timer detenido.");
+    }
+
+    // Métodos para gestionar la pausa global
+    public void PauseTimerGlobally()
+    {
+        isGloballyPaused = true;
+        StopTimer();
+        Debug.Log("Timer pausado globalmente.");
+    }
+
+    public void ResumeTimerGlobally()
+    {
+        isGloballyPaused = false;
+        StartTimer();
+        Debug.Log("Timer reanudado globalmente.");
     }
 }
