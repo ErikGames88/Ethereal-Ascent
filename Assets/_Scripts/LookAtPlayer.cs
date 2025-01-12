@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    [SerializeField, Tooltip("Referencia al Player")]
-    private Transform player;
+    [SerializeField] private Transform player;
 
-    private void Start()
+
+    private void Awake()
     {
         if (player == null)
         {
@@ -15,10 +15,6 @@ public class LookAtPlayer : MonoBehaviour
             if (playerObject != null)
             {
                 player = playerObject.transform;
-            }
-            else
-            {
-                Debug.LogError("No se encontró un objeto con la etiqueta 'Player'. Asigna la referencia manualmente en el Inspector.");
             }
         }
     }

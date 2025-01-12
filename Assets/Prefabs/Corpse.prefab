@@ -3411,7 +3411,6 @@ GameObject:
   - component: {fileID: 650766167948880867}
   - component: {fileID: 5119603636294649146}
   - component: {fileID: 5358120802667832231}
-  - component: {fileID: -2799507765882777060}
   m_Layer: 0
   m_Name: Corpse
   m_TagString: Untagged
@@ -3472,27 +3471,6 @@ MonoBehaviour:
   BodyMaterials:
   - {fileID: 2100000, guid: cde7794b72ba29b4fbab0dc5d3c3faf0, type: 2}
   eyesGlow: 0
---- !u!65 &-2799507765882777060
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7567952128996171544}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.50372803, y: 1.7140628, z: 0.38033217}
-  m_Center: {x: 0.006251931, y: 0.86737746, z: 0.01822552}
 --- !u!1 &7585190693401444043
 GameObject:
   m_ObjectHideFlags: 0

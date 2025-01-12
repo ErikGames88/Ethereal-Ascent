@@ -3,32 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorInteraction : MonoBehaviour
-{
-    [SerializeField, Tooltip("Ángulo de apertura de las puertas")]
+{   
     private float openAngle = 90f;
-
-    [SerializeField, Tooltip("Duración de la animación de apertura")]
     private float openDuration = 2f;
-
-    [SerializeField, Tooltip("Sonido al abrir la puerta")]
-    private AudioClip openSound;
-
     private AudioSource audioSource;
     private bool isOpen = false;
-
     private Transform gateL;
     private Transform gateR;
-
     private Quaternion initialRotationL;
     private Quaternion initialRotationR;
-
     private Quaternion targetRotationL;
     private Quaternion targetRotationR;
-
     private KeyManager keyManager;
-
-    [SerializeField, Tooltip("Collider Trigger del objeto Gates que se desactivará al abrir las puertas")]
-    private Collider gatesCollider;
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private Collider gatesCollider;
     
 
     void Awake()

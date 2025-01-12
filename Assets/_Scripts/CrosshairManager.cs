@@ -5,17 +5,10 @@ using UnityEngine.UI;
 
 public class CrosshairManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("Referencia al puntero (Image)")]
-    private Image crosshair;
-
-    [SerializeField, Tooltip("Color normal del puntero")]
-    private Color defaultColor = Color.white;
-
+    [SerializeField] private Image crosshair;
+    [SerializeField] private Color defaultColor = Color.white;
+    [SerializeField] private Color interactColor = Color.green;
     private float interactionDistance = 5f;
-
-    [SerializeField, Tooltip("Color al apuntar a un objeto interactuable")]
-    private Color interactColor = Color.green;
-
     private Camera mainCamera;
 
     void Awake()

@@ -11,9 +11,6 @@ public class GameOver : MonoBehaviour
     [SerializeField, Tooltip("Referencia al GameManager")]
     private GameManager gameManager;
 
-    [SerializeField, Tooltip("AudioSource para la música de Game Over")]
-    private AudioSource audioSource;
-
     private bool isGameOverHandled = false;
 
     private void Awake()
@@ -21,26 +18,6 @@ public class GameOver : MonoBehaviour
         if (gameManager == null)
         {
             gameManager = GameManager.Instance;
-        }
-
-        if (audioSource == null)
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
-
-        if (audioSource == null && gameManager != null)
-        {
-            audioSource = gameManager.GetComponent<AudioSource>();
-        }
-
-        // Asegurarse de que el AudioSource persista entre escenas
-        if (audioSource != null)
-        {
-            DontDestroyOnLoad(audioSource.gameObject);
-        }
-        else
-        {
-            Debug.LogError("AudioSource no asignado. La música de Game Over no podrá reproducirse.");
         }
     }
 
@@ -52,27 +29,12 @@ public class GameOver : MonoBehaviour
 
         Debug.Log("Game Over Triggered");
 
-        PlayGameOverMusic();
-
         if (gameManager != null)
         {
             gameManager.ChangeState(GameManager.GameState.GameOver);
         }
 
         StartCoroutine(HandleGameOverSequence());
-    }
-
-    private void PlayGameOverMusic()
-    {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            audioSource.Play();
-            Debug.Log("Música de Game Over iniciada.");
-        }
-        else
-        {
-            Debug.LogError("AudioSource no asignado o ya está reproduciéndose.");
-        }
     }
 
     private IEnumerator HandleGameOverSequence()

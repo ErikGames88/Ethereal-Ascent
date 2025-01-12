@@ -30,10 +30,11 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.MainMenu:
-            SceneManager.LoadScene("Main Menu");
-            break;
+                SceneManager.LoadScene("Main Menu");
+                break;
 
             case GameState.Gameplay:
+                SceneManager.LoadScene("Maze Scene");
                 break;
 
             case GameState.Victory:
