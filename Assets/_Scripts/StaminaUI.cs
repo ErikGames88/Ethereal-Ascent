@@ -5,22 +5,13 @@ using UnityEngine.UI;
 
 public class StaminaUI : MonoBehaviour
 {
-    [SerializeField, Tooltip("Referencia al GameObject de la barra de estamina")]
-    private GameObject staminaBar;
-
-    [SerializeField, Tooltip("Referencia a la imagen de la barra de progreso")]
-    private Image foreground;
-
-    [SerializeField, Tooltip("Referencia al PlayerController para obtener la estamina")]
-    private PlayerController playerController;
-
-    [SerializeField, Tooltip("Referencia al TextManager para verificar si hay texto activo")]
-    private TextManager textManager;
-
+    [SerializeField] private GameObject staminaBar;
+    [SerializeField] private Image foreground;
+    [SerializeField]private PlayerController playerController;
+    [SerializeField] private TextManager textManager;
+    [SerializeField] private PauseMenuManager pauseMenuManager;
     private bool isForcedHidden = false;
-
-    [SerializeField, Tooltip("Referencia al PauseMenuManager")]
-    private PauseMenuManager pauseMenuManager;
+    
 
     void Update()
     {
@@ -29,7 +20,6 @@ public class StaminaUI : MonoBehaviour
             return;
         }
 
-        // Ocultar la barra de estamina si el menú de pausa está activo
         if (pauseMenuManager != null && pauseMenuManager.IsPaused())
         {
             if (staminaBar.activeSelf)
@@ -39,7 +29,6 @@ public class StaminaUI : MonoBehaviour
             return;
         }
 
-        // Ocultar la barra de estamina si el Letter Background y Key E Dismiss están activos
         if (textManager != null && textManager.IsTextActive())
         {
             if (staminaBar.activeSelf)
@@ -49,7 +38,6 @@ public class StaminaUI : MonoBehaviour
             return;
         }
 
-        // Lógica de la barra de estamina
         float staminaPercent = playerController.GetStamina() / playerController.GetMaxStamina();
         foreground.fillAmount = staminaPercent;
 

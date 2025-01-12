@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class FogController : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem fogSystem; // Sistema de partículas de la niebla
-    [SerializeField] private float fadeDuration = 4f; // Tiempo para transiciones suaves
+    [SerializeField] private ParticleSystem fogSystem; 
+    [SerializeField] private float fadeDuration = 4f; 
     private HashSet<Collider> activeTerrains = new HashSet<Collider>();
     private Coroutine currentFadeCoroutine;
-    private ParticleSystem.EmissionModule emissionModule; // Referencia al módulo de emisión
+    private ParticleSystem.EmissionModule emissionModule; 
+    
 
     private void Start()
     {
         if (fogSystem != null)
         {
-            emissionModule = fogSystem.emission; // Obtener el módulo de emisión una vez al inicio
-        }
-        else
-        {
-            Debug.LogError("Fog System no asignado en el Inspector.");
+            emissionModule = fogSystem.emission; 
         }
     }
 
@@ -44,11 +41,11 @@ private void OnTriggerExit(Collider other)
     {
         if (activeTerrains.Count > 0)
         {
-            AdjustFogVisibility(false); // Oculta la niebla
+            AdjustFogVisibility(false); 
         }
         else
         {
-            AdjustFogVisibility(true); // Muestra la niebla
+            AdjustFogVisibility(true); 
         }
     }
 
@@ -66,12 +63,20 @@ private void OnTriggerExit(Collider other)
     {
         if (fogSystem == null)
         {
-            Debug.LogError("Fog System no está asignado en el Inspector.");
             yield break;
         }
 
         float startRate = emissionModule.rateOverTime.constant;
-        float targetRate = isVisible ? 50f : 0f;
+        float targetRate;
+        if (isVisible)
+        {
+            targetRate = 50f;
+        }
+        else
+        {
+            targetRate = 0f;
+        }
+
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
@@ -79,7 +84,6 @@ private void OnTriggerExit(Collider other)
             elapsedTime += Time.deltaTime;
             float newRate = Mathf.Lerp(startRate, targetRate, elapsedTime / fadeDuration);
 
-            // Asigna directamente al módulo inicializado
             var rate = emissionModule.rateOverTime;
             rate.constant = newRate;
             emissionModule.rateOverTime = rate;
@@ -87,12 +91,10 @@ private void OnTriggerExit(Collider other)
             yield return null;
         }
 
-        // Establece el valor final
         var finalRate = emissionModule.rateOverTime;
         finalRate.constant = targetRate;
         emissionModule.rateOverTime = finalRate;
 
-        // Detén o reproduce el sistema según el estado
         if (targetRate == 0f && fogSystem.isPlaying)
         {
             fogSystem.Stop();

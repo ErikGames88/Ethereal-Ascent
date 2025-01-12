@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PickupSkull : MonoBehaviour
 {
-    [SerializeField, Tooltip("Sonido al recoger el cráneo")]
-    private AudioClip pickupSound;
-
+    [SerializeField] private AudioClip pickupSound;
     private SkullCounter skullCounter;
     private AudioSource pickupAudioSource;
+    
 
     private void Awake()
     {

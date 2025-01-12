@@ -5,48 +5,24 @@ using System;
 
 public class TextManager : MonoBehaviour
 {
-    [Header("Referencias del Text Canvas")]
-    [SerializeField, Tooltip("Referencia al Letter Background")]
-    private GameObject letterBackground;
-
-    [SerializeField, Tooltip("Texto para cerrar (Key E Dismiss)")]
-    private GameObject keyEDismiss;
-
-    [SerializeField, Tooltip("Texto de la First Note")]
-    private GameObject firstText;
-
-    [SerializeField, Tooltip("Referencia al Noticeboard Background")]
-    private GameObject noticeboardBackground;
-
-    [SerializeField, Tooltip("Texto de la Cathedral Board")]
-    private GameObject cathedralBoardText;
-
-    [SerializeField, Tooltip("Referencia al Text Background")]
-    private GameObject textBackground;
-
-    [SerializeField, Tooltip("Texto de la Hospital Door")]
-    private GameObject hospitalDoorText;
-
-    [Header("Otros")]
-    [SerializeField, Tooltip("Referencia al Crosshair Manager")]
-    private CrosshairManager crosshairManager;
-
-    [SerializeField, Tooltip("Referencia al PlayerLocked para congelar/descongelar al jugador")]
-    private PlayerLocked playerLocked;
-
-    [SerializeField, Tooltip("Referencia al TimerManager para pausar/reanudar el Timer")]
-    private TimerManager timerManager; // Añadida referencia al TimerManager
-
-    private bool isTextActive = false; // Estado para saber si el texto está activo
-
-    [SerializeField, Tooltip("Referencia al AudioSource para reproducir sonidos")]
-    private AudioSource audioSource;
+    [SerializeField] private GameObject letterBackground;
+    [SerializeField] private GameObject keyEDismiss;
+    [SerializeField] private GameObject firstText;
+    [SerializeField] private GameObject noticeboardBackground;
+    [SerializeField] private GameObject cathedralBoardText;
+    [SerializeField] private GameObject textBackground;
+    [SerializeField] private GameObject hospitalDoorText;
+    [SerializeField] private CrosshairManager crosshairManager;
+    [SerializeField] private PlayerLocked playerLocked;
+    [SerializeField]private TimerManager timerManager; 
+    [SerializeField] private AudioSource audioSource;
+    private bool isTextActive = false;
 
     public static event Action OnTextHidden;
 
+
     void Start()
     {
-        // Desactivar elementos al inicio
         if (letterBackground != null)
         {
             letterBackground.SetActive(false);
@@ -88,7 +64,6 @@ public class TextManager : MonoBehaviour
 
     void Update()
     {
-        // Detectar si se presiona la tecla E para cerrar el texto activo
         if (isTextActive && Input.GetKeyDown(KeyCode.E))
         {
             HideText();
@@ -99,7 +74,6 @@ public class TextManager : MonoBehaviour
     {
         if (letterBackground == null || keyEDismiss == null || firstText == null)
         {
-            Debug.LogError("Alguna referencia está sin asignar en el TextManager.");
             return;
         }
 
@@ -108,15 +82,13 @@ public class TextManager : MonoBehaviour
         firstText.SetActive(true);
 
         PlaySoundAndLockUI();
-        PauseTimer(); // Congelar el Timer
-        Debug.Log("First Text y Key E Dismiss ACTIVADOS.");
+        PauseTimer(); 
     }
 
     public void ShowCathedralBoardText()
     {
         if (noticeboardBackground == null || keyEDismiss == null || cathedralBoardText == null)
         {
-            Debug.LogError("Alguna referencia está sin asignar en el TextManager.");
             return;
         }
 
@@ -125,15 +97,13 @@ public class TextManager : MonoBehaviour
         cathedralBoardText.SetActive(true);
 
         PlaySoundAndLockUI();
-        PauseTimer(); // Congelar el Timer
-        Debug.Log("Cathedral Board Text y Key E Dismiss ACTIVADOS.");
+        PauseTimer();
     }
 
     public void ShowHospitalDoorText()
     {
         if (textBackground == null || keyEDismiss == null || hospitalDoorText == null)
         {
-            Debug.LogError("Alguna referencia está sin asignar en el TextManager.");
             return;
         }
 
@@ -141,15 +111,12 @@ public class TextManager : MonoBehaviour
         keyEDismiss.SetActive(true);
         hospitalDoorText.SetActive(true);
 
-        // Bloquear la interfaz sin reproducir sonido
         LockUI();
-        PauseTimer(); // Congelar el Timer
-        Debug.Log("Hospital Door Text y Key E Dismiss ACTIVADOS.");
+        PauseTimer(); 
     }
 
     public void HideText()
     {
-        // Desactivar Letter Background y Noticeboard Background si están activos
         if (letterBackground != null)
         {
             letterBackground.SetActive(false);
@@ -160,7 +127,6 @@ public class TextManager : MonoBehaviour
             noticeboardBackground.SetActive(false);
         }
 
-        // Desactivar Text Background y sus hijos
         if (textBackground != null)
         {
             textBackground.SetActive(false);
@@ -187,12 +153,11 @@ public class TextManager : MonoBehaviour
         }
 
         UnlockUI();
-        ResumeTimer(); // Reanudar el Timer
-        Debug.Log("Textos y fondos DESACTIVADOS.");
+        ResumeTimer(); 
 
         if (OnTextHidden != null)
         {
-            OnTextHidden.Invoke(); // Aquí usamos .Invoke() para ejecutar el evento.
+            OnTextHidden.Invoke(); 
         }
     }
 
@@ -215,7 +180,7 @@ public class TextManager : MonoBehaviour
 
         if (playerLocked != null)
         {
-            playerLocked.LockPlayer(true, false); // Congelar al jugador pero no mostrar el cursor
+            playerLocked.LockPlayer(true, false); 
         }
 
         isTextActive = true;

@@ -6,35 +6,18 @@ using TMPro;
 
 public class SkullCounter : MonoBehaviour
 {
-    [SerializeField, Tooltip("Referencia al TextMeshPro para mostrar el contador")]
-    private TextMeshProUGUI counterText;
-
-    [SerializeField, Tooltip("Referencia al Cathedral Key Text")]
-    private GameObject cathedralKeyText;
-
-    [SerializeField, Tooltip("Referencia al Cathedral Key Hint Text")]
-    private GameObject cathedralKeyHintText; // Nueva referencia
-
-    [SerializeField, Tooltip("Referencia al TextBackground")]
-    private GameObject textBackground;
-
-    [SerializeField, Tooltip("Referencia al PlayerLocked para gestionar el bloqueo del jugador")]
-    private PlayerLocked playerLocked;
-
-    [SerializeField, Tooltip("Referencia al HintTextManager para manejar textos con fade-in y fade-out")]
-    private HintTextManager hintTextManager; // Nueva referencia
-
-    [SerializeField, Tooltip("Referencia al Timer Manager para controlar el Timer")]
-    private TimerManager timerManager; // Nueva referencia para el Timer Manager
-
-    [SerializeField, Tooltip("Referencia a la llave de la catedral")]
-    private GameObject cathedralKey;
-
-    [SerializeField, Tooltip("Referencia a la Boss Door que bloquea la catedral")]
-    private GameObject bossDoor;
-
+    [SerializeField] private TextMeshProUGUI counterText;
+    [SerializeField] private GameObject cathedralKeyText;
+    [SerializeField] private GameObject cathedralKeyHintText; 
+    [SerializeField] private GameObject textBackground;
+    [SerializeField] private PlayerLocked playerLocked;
+    [SerializeField]private HintTextManager hintTextManager; 
+    [SerializeField] private TimerManager timerManager; 
+    [SerializeField] private GameObject cathedralKey;
+    [SerializeField] private GameObject bossDoor;
     private int skullCount = 0;
     private bool isKeyHintActive = false;
+
 
     void Start()
     {
@@ -44,7 +27,7 @@ public class SkullCounter : MonoBehaviour
 
         if (cathedralKeyHintText != null)
         {
-            cathedralKeyHintText.SetActive(false); // Asegurarse de que empieza desactivado
+            cathedralKeyHintText.SetActive(false); 
         }
 
         if (cathedralKey != null)
@@ -54,7 +37,7 @@ public class SkullCounter : MonoBehaviour
 
         if (bossDoor != null)
         {
-            bossDoor.SetActive(true); // La puerta está activa por defecto
+            bossDoor.SetActive(true); 
         }
 
         if (playerLocked == null)
@@ -79,7 +62,7 @@ public class SkullCounter : MonoBehaviour
         {
             ShowKeyHint();
             ActivateKey();
-            DeactivateBossDoor(); // Desactivar la Boss Door
+            DeactivateBossDoor(); 
         }
 
         UpdateCounter();
@@ -95,15 +78,9 @@ public class SkullCounter : MonoBehaviour
         cathedralKeyText.SetActive(true);
         textBackground.SetActive(true);
 
-        // Congelar el Timer al activar el Cathedral Key Text
         if (timerManager != null)
         {
             timerManager.StopTimer();
-            Debug.Log("Timer detenido al activar Cathedral Key Text.");
-        }
-        else
-        {
-            Debug.LogError("TimerManager no está asignado en SkullCounter.");
         }
 
         isKeyHintActive = true;
@@ -125,15 +102,9 @@ public class SkullCounter : MonoBehaviour
             playerLocked.LockPlayer(false);
         }
 
-        // Activar el Cathedral Key Hint Text con fade-in y fade-out
         if (hintTextManager != null)
         {
             hintTextManager.ShowCathedralHintText();
-            Debug.Log("Llamando a ShowCathedralHintText desde SkullCounter.");
-        }
-        else
-        {
-            Debug.LogError("HintTextManager no está asignado en SkullCounter.");
         }
     }
 
@@ -150,7 +121,6 @@ public class SkullCounter : MonoBehaviour
         if (bossDoor != null)
         {
             bossDoor.SetActive(false);
-            Debug.Log("Boss Door desactivada. Acceso liberado.");
         }
     }
 }

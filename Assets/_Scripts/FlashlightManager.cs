@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class FlashlightManager : MonoBehaviour
 {
-    private bool isFlashlightCollected = false; 
-    private int flashlightSlotIndex = -1;       
-
-    [SerializeField, Tooltip("Prefab de la linterna")]
-    private GameObject flashlightPrefab;
-
-    [SerializeField, Tooltip("Icono de la linterna para el inventario")]
-    private Sprite flashlightIcon;
+    [SerializeField] private GameObject flashlightPrefab;
+    [SerializeField] private Sprite flashlightIcon;
 
     private InventoryManager inventoryManager;
     private GameObject equippedFlashlight; 
     private Light flashlightLight; 
+    private bool isFlashlightCollected = false; 
+    private int flashlightSlotIndex = -1;
 
     void Start()
     {

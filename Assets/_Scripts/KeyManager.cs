@@ -6,22 +6,19 @@ using TMPro;
 
 public class KeyManager : MonoBehaviour
 {   
-    private bool isKeyCollected = false; 
-    private int keySlotIndex = -1;       
-
-    [SerializeField, Tooltip("Icono de la llave")]
-    private Sprite keyIcon;
-
-    [SerializeField, Tooltip("Texto de la llave (Cathedral Key Text)")]
-    private GameObject cathedralKeyText;
-
-    [SerializeField, Tooltip("Referencia al HintTextManager para manejar textos de pista")]
-    private HintTextManager hintTextManager; // Nueva referencia
-
+    [SerializeField] private Sprite keyIcon;
+    [SerializeField] private HintTextManager hintTextManager; 
+    [SerializeField] private GameObject cathedralKeyText;
     public GameObject CathedralKeyText 
     {
         get => cathedralKeyText;
     }
+
+    private bool isKeyCollected = false; 
+    private int keySlotIndex = -1;       
+
+
+
 
     public void CollectKey(InventoryManager inventoryManager, int slotIndex, Sprite itemIcon)
     {

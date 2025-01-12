@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class PlayerAudio : MonoBehaviour
 {
-    [SerializeField, Tooltip("Tiempo entre pasos normales")]
-    private float normalStepRate = 0.5f;
-
-    [SerializeField, Tooltip("Tiempo entre pasos al esprintar")]
-    private float sprintStepRate = 0.3f;
-
-    [SerializeField, Tooltip("Sonido al aterrizar")]
-    private AudioClip landingStep;
-
+    [SerializeField]private float normalStepRate = 0.5f;
+    [SerializeField] private float sprintStepRate = 0.3f;
+    [SerializeField] private AudioClip landingStep;
     private AudioSource audioSource;
     private PlayerController playerController;
-
     private float stepTimer = 0f;
     private bool isLanded = true;
+    
 
     void Awake()
     {

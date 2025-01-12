@@ -7,6 +7,7 @@ public class SkullAudio : MonoBehaviour
     [SerializeField] private float maxDistance = 10f; 
     private Transform player; 
     private AudioSource audioSource;
+    
 
     void Awake()
     {

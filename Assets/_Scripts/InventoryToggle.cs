@@ -4,26 +4,16 @@ using UnityEngine;
 
 public class InventoryToggle : MonoBehaviour
 {
-    [SerializeField, Tooltip("Canvas principal del inventario")]
-    private GameObject inventoryCanvas;
-
-    [SerializeField, Tooltip("Referencia al PlayerLocked para bloquear/desbloquear movimiento")]
-    private PlayerLocked playerLocked;
-
-    [SerializeField, Tooltip("Referencia al InventoryManager para manejar lógica del inventario")]
-    private InventoryManager inventoryManager;
-
-    [SerializeField, Tooltip("Referencia al TimerManager para pausar y reanudar el Timer")]
-    private TimerManager timerManager;
-
-    [SerializeField, Tooltip("Referencia al PauseMenuManager para saber si el menú está abierto")]
-    private PauseMenuManager pauseMenuManager;
-
-    public static bool isInventoryOpen = false;
-
-    private bool canToggleInventory = true; // Nueva bandera para habilitar/deshabilitar el uso de Tab
-
+    [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private PlayerLocked playerLocked;
+    [SerializeField] private InventoryManager inventoryManager;
+    [SerializeField] private TimerManager timerManager;
+    [SerializeField] private PauseMenuManager pauseMenuManager;
     [SerializeField] private MissionManager missionManager;
+    public static bool isInventoryOpen = false;
+    private bool canToggleInventory = true; 
+
+    
 
     void Start()
     {
@@ -44,25 +34,22 @@ public class InventoryToggle : MonoBehaviour
 
         if (missionManager == null)
         {
-            missionManager = FindObjectOfType<MissionManager>(); // Obtener referencia a MissionManager
+            missionManager = FindObjectOfType<MissionManager>(); 
         }
     }
 
     void Update()
     {
-        // No permitir abrir el inventario si el menú de pausa está activo
         if (pauseMenuManager != null && pauseMenuManager.IsPaused())
         {
-            return; // Si el menú de pausa está activo, no se puede abrir el inventario
+            return; 
         }
 
-        // No permitir abrir el inventario si el MissionText no ha sido cerrado
         if (missionManager != null && !missionManager.isMissionTextClosed)
         {
-            return; // No se puede abrir el inventario hasta que el MissionText se haya cerrado
+            return; 
         }
 
-        // Bloquear interacción si no se permite abrir el inventario
         if (!canToggleInventory)
         {
             return;
@@ -92,7 +79,6 @@ public class InventoryToggle : MonoBehaviour
 
         if (isInventoryOpen)
         {
-            // Congelar el Timer cuando se abre el inventario
             timerManager.StopTimer();
 
             playerLocked.LockPlayer(true, false);
@@ -100,7 +86,6 @@ public class InventoryToggle : MonoBehaviour
         }
         else
         {
-            // Reanudar el Timer cuando se cierra el inventario
             timerManager.StartTimer();
 
             playerLocked.LockPlayer(false);
@@ -117,7 +102,6 @@ public class InventoryToggle : MonoBehaviour
         }
     }
 
-    // Nuevo método para habilitar/deshabilitar el uso de Tab
     public void EnableInventoryToggle(bool isEnabled)
     {
         canToggleInventory = isEnabled;

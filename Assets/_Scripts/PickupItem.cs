@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    [SerializeField, Tooltip("Ícono del objeto")]
-    private Sprite itemIcon;
+    [SerializeField] private Sprite itemIcon;
+    [SerializeField] private bool isFlashlight = false;
+    [SerializeField] private GameObject itemText;
+    [SerializeField] private AudioClip pickupSound;
 
-    [Tooltip("¿Es una linterna?")]
-    public bool isFlashlight = false;
-
-    [SerializeField, Tooltip("Texto del objeto para el inventario")]
-    private GameObject itemText;
-
-    [SerializeField, Tooltip("Sonido al recoger el objeto")]
-    private AudioClip pickupSound;
 
 
     public void Pickup(KeyManager keyManager, FlashlightManager flashlightManager, InventoryManager inventoryManager, AudioSource[] playerAudioSources)

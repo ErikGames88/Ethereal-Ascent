@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class PlayerLocked : MonoBehaviour
 {
-    [SerializeField, Tooltip("Referencia al PlayerController para bloquear movimiento")]
-    private PlayerController playerController;
-
-    [SerializeField, Tooltip("Referencia al CameraController para bloquear rotación")]
-    private CameraController cameraController;
-
-    [SerializeField, Tooltip("Referencia al CrosshairManager para manejar el crosshair")]
-    private CrosshairManager crosshairManager;
-
-    [SerializeField, Tooltip("Referencia al InventoryManager para bloquear desplazamiento de slots")]
-    private InventoryManager inventoryManager;
-
-    [SerializeField, Tooltip("Referencia al StaminaUI para ocultar la barra de estamina")]
-    private StaminaUI staminaUI;
-
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private CameraController cameraController;
+    [SerializeField] private CrosshairManager crosshairManager;
+    [SerializeField] private InventoryManager inventoryManager;
+    [SerializeField] private StaminaUI staminaUI;
     private Rigidbody playerRigidbody;
+    
 
     private void Awake()
     {

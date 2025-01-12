@@ -5,14 +5,11 @@ using UnityEngine.UI;
 
 public class ItemInteractionManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("Distancia máxima de interacción")]
-    private float interactionDistance = 3f;
-
-    [SerializeField, Tooltip("Layer de los objetos interactuables")]
-    private LayerMask interactableLayer;
-
+    [SerializeField] private float interactionDistance = 3f;
+    [SerializeField] private LayerMask interactableLayer;
     private InventoryManager inventoryManager;
     private FlashlightManager flashlightManager;
+    
 
     void Start()
     {

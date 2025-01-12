@@ -25,7 +25,7 @@ public class LookAtPlayer : MonoBehaviour
         {
             Vector3 directionToPlayer = player.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Suaviza el giro
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 5f); 
         }
     }
 }

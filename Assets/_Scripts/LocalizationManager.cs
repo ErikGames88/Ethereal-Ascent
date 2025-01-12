@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
 {
+    // TODO: Two lnguages in Final Version: Spanish and English
     public static LocalizationManager Instance; 
-
     public enum Language { Spanish, English }
     public Language currentLanguage = Language.Spanish;
-
     private Dictionary<string, string> spanishTexts = new Dictionary<string, string>();
     private Dictionary<string, string> englishTexts = new Dictionary<string, string>();
+    
 
     void Awake()
     {
@@ -60,6 +60,7 @@ public class LocalizationManager : MonoBehaviour
                 }
 
             default:
+
                 return key; 
         }
     }

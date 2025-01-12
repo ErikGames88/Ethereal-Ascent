@@ -6,7 +6,6 @@ public class SkullMovement : MonoBehaviour
 {
     [SerializeField] private float velocity = 0.1f; 
     [SerializeField] private float movement = 1.5f; 
-
     private Vector3 startPosition;
 
     void Start()

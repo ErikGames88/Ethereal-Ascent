@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public enum GameState { Gameplay, Victory, GameOver, MainMenu }
+    
     public GameState CurrentState { get; private set; }
 
     private void Awake()

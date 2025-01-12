@@ -5,14 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField, Tooltip("Distancia máxima de interacción")]
-    private float interactionDistance = 3f;
+    [SerializeField] private float interactionDistance = 3f;
+    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private GameObject player;
 
-    [SerializeField, Tooltip("LayerMask para objetos interactuables")]
-    private LayerMask interactableLayer;
-
-    [SerializeField, Tooltip("Referencia al Player con AudioSources")]
-    private GameObject player;
 
     private void Update()
     {
@@ -29,15 +25,12 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
-            // Interacción con la Cathedral Door
             if (hit.collider.name == "Cathedral Door")
             {
-                Debug.Log("Interacción con la Cathedral Door. Cambiando a estado de Victoria...");
                 GameManager.Instance.ChangeState(GameManager.GameState.Victory);
                 return;
             }
 
-            // Interacción con un Skull
             if (hit.collider.CompareTag("Skull"))
             {
                 PickupSkull pickupSkull = hit.collider.GetComponent<PickupSkull>();
@@ -48,7 +41,6 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
 
-            // Interacción con objetos recogibles
             PickupItem pickupItem = hit.collider.GetComponent<PickupItem>();
             if (pickupItem != null)
             {
@@ -59,29 +51,24 @@ public class PlayerInteraction : MonoBehaviour
                     FindObjectOfType<InventoryManager>(),
                     playerAudioSources
                 );
+                
                 return;
             }
 
-            // Interacción con la First Note
             if (hit.collider.name == "First Note")
             {
-                Debug.Log("Interacción con First Note. Activando First Text...");
                 FindObjectOfType<TextManager>().ShowFirstText();
                 return;
             }
 
-            // Interacción con la Cathedral Board
             if (hit.collider.name == "Cathedral Board")
             {
-                Debug.Log("Interacción con Cathedral Board. Activando Cathedral Board Text...");
                 FindObjectOfType<TextManager>().ShowCathedralBoardText();
                 return;
             }
 
-            // Interacción con la Hospital Door
             if (hit.collider.name == "Hospital Door")
             {
-                Debug.Log("Interacción con Hospital Door. Activando Hospital Door Text...");
                 FindObjectOfType<TextManager>().ShowHospitalDoorText();
                 return;
             }

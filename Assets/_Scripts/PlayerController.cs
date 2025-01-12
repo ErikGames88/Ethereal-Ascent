@@ -4,49 +4,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField, Tooltip("Velocidad normal del Player")]
-    private float speed;
-
-    [SerializeField, Tooltip("Velocidad de sprint del Player")]
-    private float sprint;
+    [SerializeField,] private float speed;
+    [SerializeField] private float sprint;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float maxHeight = 4f;
+    [SerializeField] private float maxSprintTime = 2f;
+    [SerializeField] private float sprintRechargeRate = 10f;
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask terrainLayer;
+    [SerializeField] private Transform startPoint;
 
     private Rigidbody _rigidbody;
-
-    [SerializeField, Tooltip("Tiempo máximo de sprint en segundos")]
-    private float maxSprintTime = 2f;
-
-    [SerializeField, Tooltip("Velocidad de recarga del sprint")]
-    private float sprintRechargeRate = 10f;
     private float currentSprintTime = 0;
     private bool canSprint = true;
-
     private bool isSprintAllowed = true;
     private bool isJumpAllowed = true;
-
-    [SerializeField, Tooltip("Fuerza del salto del Player")]
-    private float jumpForce = 5f;
-
-    [SerializeField, Tooltip("Radio para detectar el suelo")]
-    private float groundCheckRadius = 0.2f;
-
-    [SerializeField, Tooltip("Capa para identificar el suelo (Ground)")]
-    private LayerMask groundLayer;
-
-    [SerializeField, Tooltip("Capa para identificar el Terrain")]
-    private LayerMask terrainLayer;
-
     private bool isGrounded;
+    private LayerMask combinedLayers; 
 
-    [SerializeField, Tooltip("Posición para verificar si el Player está en el suelo")]
-    private Transform groundCheck;
 
-    [SerializeField, Tooltip("Altura máxima permitida para el Player")]
-    private float maxHeight = 4f;
-
-    [SerializeField, Tooltip("Referencia al punto de inicio del Player")]
-    private Transform startPoint;
-
-    private LayerMask combinedLayers; // Capas combinadas para Ground y Terrain
 
     void Awake()
     {
@@ -56,8 +34,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         currentSprintTime = maxSprintTime;
-
-        // Combinar las capas Ground y Terrain
         combinedLayers = groundLayer | terrainLayer;
 
         MoveToStartPoint();
@@ -75,9 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
 
-        // Verificar si el Player está en el suelo usando las capas combinadas
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, combinedLayers);
-
         if (transform.position.y > maxHeight)
         {
             Vector3 clampedPosition = transform.position;
@@ -93,14 +67,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        float moveHorizontal = Input.GetAxis("Horizontal"); // A/D
-        float moveVertical = Input.GetAxis("Vertical");     // W/S
+        float moveHorizontal = Input.GetAxis("Horizontal"); 
+        float moveVertical = Input.GetAxis("Vertical");     
 
         Vector3 direction = transform.right * moveHorizontal + transform.forward * moveVertical;
 
         float currentSpeed;
 
-        // Sprint solo funciona si se está presionando W y no hay movimiento hacia los lados o atrás
         if (Input.GetKey(KeyCode.LeftShift) && canSprint && isSprintAllowed && moveVertical > 0 && moveHorizontal == 0)
         {
             currentSpeed = sprint;
@@ -114,7 +87,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // Si no se cumple la condición de sprint, usar velocidad normal y recargar estamina
             currentSpeed = speed;
 
             if (currentSprintTime < maxSprintTime)
@@ -166,39 +138,31 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Verifica si el objeto activador pertenece a la capa NoSprintZone
         if (other.gameObject.layer == LayerMask.NameToLayer("NoSprintZone"))
         {
             isSprintAllowed = false;
             isJumpAllowed = false;
 
-            // Desactiva la lluvia si el RainManager está presente
             RainManager rainManager = GetComponentInChildren<RainManager>();
             if (rainManager != null)
             {
                 rainManager.SetRainActive(false);
             }
-
-            Debug.Log("Entrando en NoSprintZone: Sprint y lluvia desactivados.");
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        // Verifica si el objeto saliendo pertenece a la capa NoSprintZone
         if (other.gameObject.layer == LayerMask.NameToLayer("NoSprintZone"))
         {
             isSprintAllowed = true;
             isJumpAllowed = true;
 
-            // Reactiva la lluvia si el RainManager está presente
             RainManager rainManager = GetComponentInChildren<RainManager>();
             if (rainManager != null)
             {
                 rainManager.SetRainActive(true);
             }
-
-            Debug.Log("Saliendo de NoSprintZone: Sprint y lluvia reactivados.");
         }
     }
 
@@ -208,11 +172,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = startPoint.position;
             transform.rotation = startPoint.rotation;
-            Debug.Log("Player reposicionado al Start Point.");
-        }
-        else
-        {
-            Debug.LogError("Start Point no asignado en el Inspector.");
         }
     }
 }

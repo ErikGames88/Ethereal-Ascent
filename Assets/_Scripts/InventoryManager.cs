@@ -6,27 +6,20 @@ using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("Lista de botones para los slots del inventario")]
-    private List<Button> slots;
-
+    [SerializeField] private List<Button> slots;
     public List<Button> Slots
     {
         get => slots;
     }
 
-    [SerializeField, Tooltip("Lista de prefabs para los slots del inventario")]
-    private List<GameObject> slotPrefabs = new List<GameObject>(9);
-
+    [SerializeField] private List<GameObject> slotPrefabs = new List<GameObject>(9);
     public List<GameObject> SlotPrefabs
     {
         get => slotPrefabs;
     }
 
-    [SerializeField, Tooltip("Referencia al borde de selección")]
-    private RectTransform selectedBorder;
-
-    [SerializeField, Tooltip("Textos asociados a los Slots (ordenados)")]
-    private List<GameObject> slotTexts; 
+    [SerializeField] private RectTransform selectedBorder;
+    [SerializeField] private List<GameObject> slotTexts; 
 
     private int selectedSlotIndex = -1; 
 

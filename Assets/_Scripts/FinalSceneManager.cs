@@ -5,26 +5,14 @@ using UnityEngine.UI;
 
 public class FinalSceneManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("Black Background")]
-    private GameObject blackBackground;
-
-    [SerializeField, Tooltip("Final Scene Panel")]
-    private Image finalScenePanel;
-
-    [SerializeField, Tooltip("Red Background")]
-    private Image redBackground;
-
-    [SerializeField, Tooltip("Final Text Writer")]
-    private FinalTextWriter finalTextWriter;
-
-    [SerializeField, Tooltip("Duración del Black Background (en segundos)")]
-    private float blackBackgroundDuration = 2f;
-
-    [SerializeField, Tooltip("Duración del fade-in del Final Scene Panel (en segundos)")]
-    private float panelFadeDuration = 3f;
-
-    [SerializeField, Tooltip("Duración del fade-in del Red Background (en segundos)")]
-    private float redFadeDuration = 3f;
+    [SerializeField] private GameObject blackBackground;
+    [SerializeField] private Image finalScenePanel;
+    [SerializeField] private Image redBackground;
+    [SerializeField] private FinalTextWriter finalTextWriter;
+    [SerializeField] private float blackBackgroundDuration = 2f;
+    [SerializeField] private float panelFadeDuration = 3f;
+    [SerializeField] private float redFadeDuration = 3f;
+    
 
     private void Start()
     {

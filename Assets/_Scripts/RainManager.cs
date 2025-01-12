@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class RainManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("Referencia al sistema de partículas de lluvia")]
-    private ParticleSystem rainParticles;
-
-    [SerializeField, Tooltip("Referencia al AudioSource de la lluvia")]
-    private AudioSource rainAudio;
-
-    [SerializeField, Tooltip("Volumen de lluvia para exteriores")]
-    private float outdoorVolume = 0.6f;
-
-    [SerializeField, Tooltip("Volumen de lluvia para interiores")]
-    private float indoorVolume = 0.2f;
-
+    [SerializeField] private ParticleSystem rainParticles;
+    [SerializeField] private AudioSource rainAudio;
+    [SerializeField] private float outdoorVolume = 0.6f;
+    [SerializeField] private float indoorVolume = 0.2f;
     private bool isActive = true; 
+    
 
     void Awake()
     {
