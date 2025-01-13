@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     private bool isControlsActive = false;
     
 
+    void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
     
     void Update()
     {
