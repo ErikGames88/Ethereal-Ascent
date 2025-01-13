@@ -18,10 +18,11 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField]private GameObject controlsImage; 
     [SerializeField] private GameObject exitBackground; 
     [SerializeField] private TextManager textManager;
+    [SerializeField] private PlayerInteraction playerInteraction; 
+    [SerializeField] private LayerMask pauseMenuLayerMask; 
+    [SerializeField] private LayerMask defaultInteractionLayerMask; 
 
     private bool isControlsImageActive = false; 
-
-
 
     void Start()
     {
@@ -95,7 +96,12 @@ public class PauseMenuManager : MonoBehaviour
         timerManager.StopTimer();
 
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None; 
+        Cursor.lockState = CursorLockMode.None;
+
+        if (playerInteraction != null)
+        {
+            playerInteraction.SetInteractionLayerMask(pauseMenuLayerMask);
+        }
     }
 
     public void OnClickResumeButton()
@@ -141,6 +147,11 @@ public class PauseMenuManager : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (playerInteraction != null)
+        {
+            playerInteraction.SetInteractionLayerMask(defaultInteractionLayerMask);
+        }
     }
 
     public void CloseControlsImage()

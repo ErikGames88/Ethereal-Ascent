@@ -16,6 +16,7 @@ public class TextManager : MonoBehaviour
     [SerializeField] private PlayerLocked playerLocked;
     [SerializeField]private TimerManager timerManager; 
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private PauseMenuManager pauseMenuManager;
     private bool isTextActive = false;
 
     public static event Action OnTextHidden;

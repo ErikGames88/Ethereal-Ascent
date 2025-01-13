@@ -8,7 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float interactionDistance = 3f;
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private GameObject player;
-
+    
 
     private void Update()
     {
@@ -73,5 +73,10 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void SetInteractionLayerMask(LayerMask newLayerMask)
+    {
+        interactableLayer = newLayerMask;
     }
 }
