@@ -18,19 +18,19 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 100
   intensity:
     m_OverrideState: 1
     m_Value: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.087
   clamp:
     m_OverrideState: 1
-    m_Value: 65472
+    m_Value: 7.88
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.4056604, g: 0.27044025, b: 0.27044025, a: 1}
+    m_Value: {r: 1, g: 0.1977588, b: 0.03459108, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 0
@@ -59,22 +59,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: -1.5
+    m_Value: 1
   contrast:
     m_OverrideState: 1
-    m_Value: 23
+    m_Value: 58
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1.0133111, g: 1.1761056, b: 2.641254, a: 1}
+    m_Value: {r: 1, g: 0.08998339, b: 0.03459108, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: -1
   saturation:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 1
 --- !u!114 &-7011558710299706105
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -87,16 +87,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   color:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
+    m_Value: {r: 0.05707842, g: 0.24528301, b: 0.1023234, a: 1}
   center:
     m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.177
+    m_Value: 0.235
   smoothness:
     m_OverrideState: 1
     m_Value: 0.171
@@ -203,13 +203,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.99983126, y: 1, z: 0.96034306, w: -0.19515991}
+    m_Value: {x: 1, y: 0.44562313, z: 0.20717663, w: 0.053564105}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.18540423}
+    m_Value: {x: 1, y: 0.47191554, z: 0.41380334, w: 0.8446644}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.44327608}
+    m_Value: {x: 1, y: 0.7411935, z: 0.97477454, w: -0.070045754}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
