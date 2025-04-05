@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 51b74d7bad397457d883c5940f7664d8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.27105862, g: 0.23301606, b: 0.23300663, a: 1}
+  m_IndirectSpecularColor: {r: 0.008987492, g: 0.0130709205, b: 0.020466536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2991,8 +2991,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.7830189, g: 0.69140595, b: 0.669752, a: 1}
-  m_Intensity: 3
+  m_Color: {r: 0.5471698, g: 0.48166606, b: 0.46801943, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4133,10 +4133,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2705793870598066740, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.18959887
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705793870598066740, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.18959887
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705793870598066740, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705793870598066740, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6650173299125575116, guid: 77d98e64604b8df45bad981c15b88fa0,
         type: 3}
       propertyPath: m_Name
       value: Red Moon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704693143002686083, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2863082
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704693143002686083, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.8831042
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704693143002686083, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.114631005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704693143002686083, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3535738
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704693143002686083, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 144.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704693143002686083, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 43.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704693143002686083, guid: 77d98e64604b8df45bad981c15b88fa0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
