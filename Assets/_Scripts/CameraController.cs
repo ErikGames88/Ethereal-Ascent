@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraController : MonoBehaviour
+{
+    private float mouseX;
+    private float mouseY;
+    private float rotLimit;
+    private float xRotation;
+    private bool invertVertical;
+    [SerializeField] GameObject _player;
+
+    void Start()
+    {
+        rotLimit = 80f;
+    }
+
+    void Update()
+    {
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
+
+        if (!invertVertical)
+        {
+            xRotation -= mouseY;
+        }
+        else
+        {
+            xRotation += mouseY;
+        }
+        
+
+        xRotation = Mathf.Clamp(xRotation, -rotLimit, rotLimit);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        _player.transform.Rotate(0f, mouseX, 0f);
+    }
+}

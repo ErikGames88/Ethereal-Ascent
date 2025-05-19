@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 4781256719904875616}
   - component: {fileID: 7381381101981596619}
   - component: {fileID: -3001209943785774113}
-  - component: {fileID: 6233955933144139667}
   m_Layer: 7
   m_Name: Flashlight
   m_TagString: Untagged
@@ -229,22 +228,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18978898, y: 0.51063687, z: 0.36803436}
   m_Center: {x: 0.05887285, y: 0.012281209, z: 0}
---- !u!114 &6233955933144139667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6760330717355446619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83d5a36be2973074799886c5b840bb7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 37004bfd136a1264797629ff198517bd, type: 3}
-  isFlashlight: 1
-  itemText: {fileID: 0}
-  pickupSound: {fileID: 8300000, guid: 7ba27c6279ca37a4fb2440614c08b308, type: 3}
 --- !u!1001 &7110707212728404395
 PrefabInstance:
   m_ObjectHideFlags: 0

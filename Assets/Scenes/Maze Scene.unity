@@ -14636,7 +14636,6 @@ Transform:
   - {fileID: 1247293101}
   - {fileID: 1560513363}
   - {fileID: 433589229}
-  - {fileID: 1288594031}
   m_Father: {fileID: 1363766444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &355240535
@@ -52616,12 +52615,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1286515613}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1288594031 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1521599972}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1290774589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63137,74 +63130,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1520447317}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1521599972
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 355044303}
-    m_Modifications:
-    - target: {fileID: 516265959919383050, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_Name
-      value: Hospital Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.71325046
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.70090926
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 89
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451680705757858467, guid: 969d16e595dec6746908a10b9a264e8e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 969d16e595dec6746908a10b9a264e8e, type: 3}
 --- !u!1001 &1525595597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85051,7 +84976,7 @@ GameObject:
   - component: {fileID: 2004597138}
   - component: {fileID: 2004597137}
   - component: {fileID: 2004597136}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Garden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90677,6 +90602,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1088866357807791291, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419905127672278, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 5a9f7c1370689124cbb1c25178987136,
+        type: 2}
     - target: {fileID: 1812509397252060555, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: m_Name
@@ -90690,7 +90626,7 @@ PrefabInstance:
     - target: {fileID: 3032993861088575910, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.95
+      value: 0.043
       objectReference: {fileID: 0}
     - target: {fileID: 3032993861088575910, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
@@ -90734,13 +90670,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: sprintSpeed
-      value: 30
+      propertyPath: jumpForce
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
