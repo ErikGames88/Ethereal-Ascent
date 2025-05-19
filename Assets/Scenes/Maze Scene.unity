@@ -9552,7 +9552,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470879475}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: OnClickResumeButton
         m_Mode: 1
@@ -11435,7 +11435,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470879475}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: OnClickNotButton
         m_Mode: 1
@@ -18141,10 +18141,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 427512239}
-  - component: {fileID: 427512241}
-  - component: {fileID: 427512240}
-  - component: {fileID: 427512242}
-  - component: {fileID: 427512243}
   m_Layer: 0
   m_Name: Inventory Manager
   m_TagString: Untagged
@@ -18167,97 +18163,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &427512240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427512238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80b137d8ed064f54b8f19b8bc63d70a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryCanvas: {fileID: 1406845995}
-  playerLocked: {fileID: 1084851606}
-  inventoryManager: {fileID: 427512241}
-  timerManager: {fileID: 1211820164}
-  pauseMenuManager: {fileID: 1470879475}
-  missionManager: {fileID: 1211820161}
---- !u!114 &427512241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427512238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16c1911b36be4394e9e6707f5029483b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 1488666277}
-  - {fileID: 1362716746}
-  - {fileID: 1821006462}
-  - {fileID: 1045604791}
-  - {fileID: 1033324591}
-  - {fileID: 2113153689}
-  - {fileID: 465535446}
-  - {fileID: 1796058480}
-  - {fileID: 1889287109}
-  slotPrefabs:
-  - {fileID: 1488666273}
-  - {fileID: 1362716742}
-  - {fileID: 1821006458}
-  - {fileID: 1045604787}
-  - {fileID: 1033324587}
-  - {fileID: 2113153685}
-  - {fileID: 465535442}
-  - {fileID: 1796058476}
-  - {fileID: 0}
-  selectedBorder: {fileID: 1074508227}
-  slotTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 405947163}
---- !u!114 &427512242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427512238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89431e2f09f079548b876b6d1a2d6cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyIcon: {fileID: 21300000, guid: 8dd85a3695eeab740806f9ca2d2d2065, type: 3}
-  hintTextManager: {fileID: 1211820165}
-  cathedralKeyText: {fileID: 926256881}
---- !u!114 &427512243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427512238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca7f1a0c0576cb43bf2bc9702455ea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashlightPrefab: {fileID: 6760330717355446619, guid: 87b0948760bac094ab2e92adf4928e56,
-    type: 3}
-  flashlightIcon: {fileID: 21300000, guid: 37004bfd136a1264797629ff198517bd, type: 3}
 --- !u!1001 &428371237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21554,7 +21459,6 @@ GameObject:
   m_Component:
   - component: {fileID: 487840620}
   - component: {fileID: 487840622}
-  - component: {fileID: 487840621}
   m_Layer: 0
   m_Name: Text Manager
   m_TagString: Untagged
@@ -21579,30 +21483,6 @@ Transform:
   - {fileID: 8796376760105472267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &487840621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487840619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49ba2d1a2283b847bc980c6e6f3db04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  letterBackground: {fileID: 1935626565}
-  keyEDismiss: {fileID: 442356256}
-  firstText: {fileID: 787338559}
-  noticeboardBackground: {fileID: 1763263756}
-  cathedralBoardText: {fileID: 1996232143}
-  textBackground: {fileID: 2040358637}
-  hospitalDoorText: {fileID: 1501056041}
-  crosshairManager: {fileID: 2103408163}
-  playerLocked: {fileID: 1084851606}
-  timerManager: {fileID: 1211820164}
-  audioSource: {fileID: 487840622}
-  pauseMenuManager: {fileID: 1470879475}
 --- !u!82 &487840622
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25448,7 +25328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &611696801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27762,7 +27642,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6233955933144139667, guid: 87b0948760bac094ab2e92adf4928e56, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -32059,8 +31940,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 795286969}
-  - component: {fileID: 795286968}
-  - component: {fileID: 795286970}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -32068,18 +31947,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &795286968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 795286967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 238e5536ae4527645b9e72ab933b52a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &795286969
 Transform:
   m_ObjectHideFlags: 0
@@ -32095,20 +31962,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &795286970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 795286967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3688ef183e920409713bee90499401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  freezeDuration: 0.3
-  gameManager: {fileID: 795286968}
 --- !u!1001 &795799487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33150,7 +33003,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 828729009}
-  - component: {fileID: 828729008}
   m_Layer: 0
   m_Name: Enemy Manager
   m_TagString: Untagged
@@ -33158,44 +33010,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &828729008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828729007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2df60f9109d9a74c853d311a942d307, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5671702093144297362, guid: ac7b3cd90f7e13145a0568977e499b3b,
-    type: 3}
-  spawnPoints:
-  - {fileID: 762136156}
-  - {fileID: 1447711109}
-  - {fileID: 1171930783}
-  - {fileID: 1364118301}
-  patrolRoutes:
-  - patrolPoints:
-    - {fileID: 345958335}
-    - {fileID: 936480596}
-    - {fileID: 542367029}
-  - patrolPoints:
-    - {fileID: 1119631878}
-    - {fileID: 1451762623}
-    - {fileID: 726819908}
-  - patrolPoints:
-    - {fileID: 1736342490}
-    - {fileID: 1040737763}
-    - {fileID: 533389551}
-  - patrolPoints:
-    - {fileID: 865945181}
-    - {fileID: 2051761425}
-    - {fileID: 1520248365}
-  detectionRange: 10
-  attackRange: 2
 --- !u!4 &828729009
 Transform:
   m_ObjectHideFlags: 0
@@ -42897,30 +42711,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1084764347}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1084851596 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8554262449334514934, guid: a1c84b63184220f48acd0185a9a9b681,
-    type: 3}
-  m_PrefabInstance: {fileID: 718737869100664794}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63bf2bd0cb7edc948af31cf809dcaf70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1084851606 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7139743061575712653, guid: a1c84b63184220f48acd0185a9a9b681,
-    type: 3}
-  m_PrefabInstance: {fileID: 718737869100664794}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9daeb64baf6fba4188a0b749f9318e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1093590200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46888,9 +46678,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1211820162}
-  - component: {fileID: 1211820161}
-  - component: {fileID: 1211820164}
-  - component: {fileID: 1211820165}
   m_Layer: 0
   m_Name: Mission Manager
   m_TagString: Untagged
@@ -46898,29 +46685,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1211820161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211820160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a1fedfb9af03bc41a83900b4c19a6ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textBackground: {fileID: 2040358637}
-  missionText: {fileID: 1774470947}
-  dismissText: {fileID: 442356258}
-  showDelay: 5
-  playerLocked: {fileID: 1084851606}
-  inventoryCanvas: {fileID: 1406845995}
-  inventoryToggle: {fileID: 427512240}
-  hintTextManager: {fileID: 1211820165}
-  timerObject: {fileID: 1883758487}
-  timerManager: {fileID: 1211820164}
-  isMissionTextClosed: 0
 --- !u!4 &1211820162
 Transform:
   m_ObjectHideFlags: 0
@@ -46936,42 +46700,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1211820164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211820160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed983cbc0042e204a857235a3876b063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialMinutes: 20
-  initialSeconds: 0
-  timerText: {fileID: 1883758489}
-  gameOverScript: {fileID: 795286970}
-  pauseMenuManager: {fileID: 1470879475}
---- !u!114 &1211820165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211820160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce7ed20893c7ad42ba356ac69535796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missionHintTextDirect: {fileID: 663976193}
-  cathedralHintTextDirect: {fileID: 1343061863}
-  scapeHintTextDirect: {fileID: 231371893}
-  hintTextContainer: {fileID: 1199677373}
-  fadeInDuration: 2
-  displayDuration: 5
-  fadeOutDuration: 2
 --- !u!1001 &1212296839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57630,7 +57358,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470879475}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: OnClickYesButton
         m_Mode: 1
@@ -57968,7 +57696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1406845996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60222,7 +59950,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1466836093}
-  - component: {fileID: 1466836092}
   m_Layer: 0
   m_Name: Skull Manager
   m_TagString: Untagged
@@ -60230,27 +59957,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1466836092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466836091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ea5bff48d48d04f8ae6f6ee8e70ab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  counterText: {fileID: 342838727}
-  cathedralKeyText: {fileID: 1000768699}
-  cathedralKeyHintText: {fileID: 1343061861}
-  textBackground: {fileID: 2040358637}
-  playerLocked: {fileID: 1084851606}
-  hintTextManager: {fileID: 1211820165}
-  timerManager: {fileID: 1211820164}
-  cathedralKey: {fileID: 1878108058}
-  bossDoor: {fileID: 1804349522}
 --- !u!4 &1466836093
 Transform:
   m_ObjectHideFlags: 0
@@ -60439,7 +60145,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1470879476}
-  - component: {fileID: 1470879475}
   m_Layer: 0
   m_Name: Pause Menu Manager
   m_TagString: Untagged
@@ -60447,37 +60152,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1470879475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470879474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200ae5c1f5663ee44a99dc37be383ff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuCanvas: {fileID: 1229584480}
-  playerController: {fileID: 1084851596}
-  missionManager: {fileID: 1211820161}
-  timerManager: {fileID: 1211820164}
-  resumeButton: {fileID: 233092223}
-  controlsButton: {fileID: 2123614452}
-  exitButton: {fileID: 1900712667}
-  notButton: {fileID: 267254060}
-  yesButton: {fileID: 1399735200}
-  controlsImage: {fileID: 2010431568}
-  exitBackground: {fileID: 474973921}
-  textManager: {fileID: 487840621}
-  playerInteraction: {fileID: 718737869100664795}
-  pauseMenuLayerMask:
-    serializedVersion: 2
-    m_Bits: 32
-  defaultInteractionLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!4 &1470879476
 Transform:
   m_ObjectHideFlags: 0
@@ -70126,7 +69800,6 @@ GameObject:
   - component: {fileID: 1709208263}
   - component: {fileID: 1709208262}
   - component: {fileID: 1709208261}
-  - component: {fileID: 1709208264}
   m_Layer: 0
   m_Name: 'Lightning '
   m_TagString: Untagged
@@ -70234,22 +69907,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 7, y: 45, z: 0}
---- !u!114 &1709208264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709208260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c7f59b5a805ee4cb5c1c8eb608d055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightningFlash: {fileID: 1709208262}
-  thunderSound: {fileID: 689560391}
-  minDelay: 30
-  maxDelay: 45
 --- !u!1001 &1715161109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72889,12 +72546,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1781503630}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &1789858000 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4979892225166330042, guid: b17fcd23f9247ea49b5aa0e7410fb5e3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8816402462753268761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1794371264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73358,12 +73009,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4714893686490820043, guid: 9fc8fc548b861dc479f7d3d644fa501d,
     type: 3}
   m_PrefabInstance: {fileID: 1801231484}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1804349522 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8771124345901483685, guid: 12cd63fc7de855d4490200f72abcd2ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 5956389317720268307}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1804349524 stripped
 Transform:
@@ -79726,12 +79371,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1877451755}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1878108058 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9150476017904789269, guid: 320f3bb0ddd7d4844b3f0955d9ee2959,
-    type: 3}
-  m_PrefabInstance: {fileID: 3621211129804002145}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1880306849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80755,7 +80394,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470879475}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: OnClickExitButton
         m_Mode: 1
@@ -87815,12 +87454,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 718737869100664794}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &2070948029 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 1055293405837699372, guid: a1c84b63184220f48acd0185a9a9b681,
-    type: 3}
-  m_PrefabInstance: {fileID: 718737869100664794}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2072282872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88940,8 +88573,6 @@ GameObject:
   - component: {fileID: 2103408160}
   - component: {fileID: 2103408159}
   - component: {fileID: 2103408158}
-  - component: {fileID: 2103408162}
-  - component: {fileID: 2103408163}
   m_Layer: 5
   m_Name: Main Canvas
   m_TagString: Untagged
@@ -89034,38 +88665,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2103408162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103408157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e273082530ccb84a84de07955594b68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staminaBar: {fileID: 402063611}
-  foreground: {fileID: 376570107}
-  playerController: {fileID: 1084851596}
-  textManager: {fileID: 487840621}
-  pauseMenuManager: {fileID: 1470879475}
---- !u!114 &2103408163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103408157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d348c9b612c6fe840a915982e19a531b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crosshair: {fileID: 1239001279}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  interactColor: {r: 0.99859977, g: 1, b: 0, a: 1}
 --- !u!1001 &2103907702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89255,7 +88854,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2106161422}
-  - component: {fileID: 2106161423}
   m_Layer: 0
   m_Name: Optimizer Manager
   m_TagString: Untagged
@@ -89278,21 +88876,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2106161423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2106161420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1daf6a0d847c51d419895d555d777d65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 2070948029}
-  defaultMargin: 10
-  maxDistance: 51
 --- !u!1001 &2107126161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90164,7 +89747,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1470879475}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: OnClickControlsButton
         m_Mode: 1
@@ -91094,35 +90677,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1088866357807791291, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1212156351090997900, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: interactionDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1812509397252060555, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812509397252060555, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2163671437735454235, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: pauseMenuManager
-      value: 
-      objectReference: {fileID: 1470879475}
-    - target: {fileID: 2251838569659512493, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: interactionDistance
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3032993861088575910, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
@@ -91137,7 +90695,7 @@ PrefabInstance:
     - target: {fileID: 3032993861088575910, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39.5
+      value: -37.3
       objectReference: {fileID: 0}
     - target: {fileID: 3032993861088575910, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
@@ -91174,83 +90732,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4367356434249022903, guid: a1c84b63184220f48acd0185a9a9b681,
+    - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
-      propertyPath: fogSystem
-      value: 
-      objectReference: {fileID: 1789858000}
-    - target: {fileID: 4367356434249022903, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: fadeDuration
-      value: 1
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 4541289425700628841, guid: a1c84b63184220f48acd0185a9a9b681,
+    - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541289425700628841, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6212929515751441590, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: outdoorVolume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7139743061575712653, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: staminaUI
-      value: 
-      objectReference: {fileID: 2103408162}
-    - target: {fileID: 7139743061575712653, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: crosshairManager
-      value: 
-      objectReference: {fileID: 2103408163}
-    - target: {fileID: 7139743061575712653, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: inventoryManager
-      value: 
-      objectReference: {fileID: 427512241}
-    - target: {fileID: 7233886726492059697, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8049635302133642454, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_Radius
+      propertyPath: sprintSpeed
       value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8554262449334514934, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: startPoint
-      value: 
-      objectReference: {fileID: 476209098}
-    - target: {fileID: 8554262449334514934, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: terrainLayer.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1c84b63184220f48acd0185a9a9b681, type: 3}
---- !u!114 &718737869100664795 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2251838569659512493, guid: a1c84b63184220f48acd0185a9a9b681,
-    type: 3}
-  m_PrefabInstance: {fileID: 718737869100664794}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c07124e54773f3b4bb53b9dbcadb7e8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1305425743511145417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91645,7 +91141,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4453682531430836811, guid: b59f67d083684fc46a34ee3c696be0b4, type: 3}
+    - {fileID: -1028372648439721247, guid: b59f67d083684fc46a34ee3c696be0b4, type: 3}
+    - {fileID: 8640515781469822139, guid: b59f67d083684fc46a34ee3c696be0b4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -92174,7 +91673,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6959546654931302642, guid: 320f3bb0ddd7d4844b3f0955d9ee2959, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -92638,7 +92138,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 89.593
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5803662745004577577, guid: 77d98e64604b8df45bad981c15b88fa0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -94342,7 +93843,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fog
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4333275816172775253, guid: b17fcd23f9247ea49b5aa0e7410fb5e3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
