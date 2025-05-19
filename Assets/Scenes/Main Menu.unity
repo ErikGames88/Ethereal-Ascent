@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1159,7 +1159,8 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: d217a552c093a794a8d57e536ca2bd4b, type: 2}
   m_sharedMaterial: {fileID: -6892876583920062312, guid: d217a552c093a794a8d57e536ca2bd4b,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -6892876583920062312, guid: d217a552c093a794a8d57e536ca2bd4b, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1294,7 +1295,8 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: 377284c00b3286045a2838712cc80d10, type: 2}
   m_sharedMaterial: {fileID: -418950138610239035, guid: 377284c00b3286045a2838712cc80d10,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -418950138610239035, guid: 377284c00b3286045a2838712cc80d10, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1429,7 +1431,8 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: c98778a184a03f8479c3c696cc007e43, type: 2}
   m_sharedMaterial: {fileID: -43528938566408583, guid: c98778a184a03f8479c3c696cc007e43,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -43528938566408583, guid: c98778a184a03f8479c3c696cc007e43, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1677,7 +1680,8 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: 377284c00b3286045a2838712cc80d10, type: 2}
   m_sharedMaterial: {fileID: -418950138610239035, guid: 377284c00b3286045a2838712cc80d10,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -418950138610239035, guid: 377284c00b3286045a2838712cc80d10, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1812,7 +1816,8 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: 377284c00b3286045a2838712cc80d10, type: 2}
   m_sharedMaterial: {fileID: -418950138610239035, guid: 377284c00b3286045a2838712cc80d10,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -418950138610239035, guid: 377284c00b3286045a2838712cc80d10, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

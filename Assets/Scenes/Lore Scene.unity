@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -859,7 +859,8 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: f573c0a90835b7f478009564e7047775, type: 2}
   m_sharedMaterial: {fileID: 3923927296624384695, guid: f573c0a90835b7f478009564e7047775,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3923927296624384695, guid: f573c0a90835b7f478009564e7047775, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -977,11 +978,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cde0fe651731041ae015263a3b4054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingImage: {fileID: 220789964}
   loreText: {fileID: 1358984568}
   loreImage: {fileID: 401012289}
   typingSpeed: 0.075
   audioSource: {fileID: 1431340347}
-  loadingImage: {fileID: 220789964}
 --- !u!82 &1431340347
 AudioSource:
   m_ObjectHideFlags: 0
