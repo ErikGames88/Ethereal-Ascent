@@ -12,16 +12,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float sprintSpeed;
     private Rigidbody _rigidbody;
-    bool isGrounded;
+    [SerializeField] private bool isGrounded;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
-    bool isJumping;
+    private bool isJumping;
+
+    [Header("Crouch")]
+    [SerializeField] private float crouchSpeed;
+    private Vector3 colliderCenter;
+    private float colliderHeight;
+    private bool isCrouching;
+    private CapsuleCollider _collider;
+    [SerializeField] private Transform _camera;
+    private Vector3 originalCameraPosition = new Vector3(0f, 1.8f, 0f);
 
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _collider = GetComponent<CapsuleCollider>();
+    }
+
+    void Start()
+    {
+        colliderCenter = _collider.center;
+        colliderHeight = _collider.height;
+        _camera.transform.localPosition = originalCameraPosition;
     }
 
 
@@ -37,7 +54,10 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
         }
+
+        PlayerCrouch();
     }
+
     void FixedUpdate()
     {
         PlayerMovement();
@@ -53,8 +73,8 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         float yVelocity = _rigidbody.velocity.y;
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         bool constrainDirections = vertical < 0 || horizontal != 0;
         bool playerQuiet = horizontal == 0 && vertical == 0;
         float modifier = 0.5f;
@@ -63,29 +83,21 @@ public class PlayerController : MonoBehaviour
 
         if (!playerQuiet)
         {
-            if (constrainDirections)
+            if (!constrainDirections && !isSprinting)
             {
-                currentSpeed = currentSpeed * modifier;
+                currentSpeed = speed;
+            }
+            else if (!constrainDirections && isSprinting)
+            {
+                currentSpeed = sprintSpeed;
+            }
+            else if (constrainDirections && !isSprinting)
+            {
+                currentSpeed = speed * modifier;
             }
             else
             {
-                if (!isSprinting)
-                {
-                    currentSpeed = speed;
-                }
-                else
-                {
-                    currentSpeed = sprintSpeed;
-                }
-                // if (!isSprinting)
-                // {
-                //     currentSpeed = speed * modifier;
-                // }
-                // else
-                // {
-                //     currentSpeed = sprintSpeed * modifier;
-                // }
-                
+                currentSpeed = sprintSpeed * modifier;
             }
         }
 
@@ -94,12 +106,36 @@ public class PlayerController : MonoBehaviour
             _rigidbody.velocity = new Vector3(movement.x * currentSpeed, yVelocity, movement.z * currentSpeed);
             Debug.Log($"Current Speed: {currentSpeed}");
         }
-
     }
 
     void PlayerJump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void PlayerCrouch()
+    {
+        float crouchColliderHeight = 1f;
+        bool crouchInput = Input.GetKey(KeyCode.LeftControl);
+        Vector3 crouchCameraPosition = new Vector3(0f, 0.6f, 0f);
+
+        if (crouchInput)
+        {
+            isCrouching = true;
+
+            _collider.center = new Vector3(0f, 0.6f, 0f);
+            _collider.height = crouchColliderHeight;
+            _camera.transform.localPosition = crouchCameraPosition;
+
+        }
+        else
+        {
+            isCrouching = false;
+
+            _collider.center = colliderCenter;
+            _collider.height = colliderHeight;
+            _camera.transform.localPosition = originalCameraPosition;
+        }
     }
 
     void OnCollisionEnter(Collision other)
