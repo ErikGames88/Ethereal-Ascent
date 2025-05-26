@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -11,8 +12,10 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
     [SerializeField] private float speed;
     [SerializeField] private float sprintSpeed;
+    [SerializeField] GameObject _checkGround;
     private Rigidbody _rigidbody;
     [SerializeField] private bool isGrounded;
+    [SerializeField] private LayerMask groundMask;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
@@ -21,24 +24,37 @@ public class PlayerController : MonoBehaviour
     [Header("Crouch")]
     [SerializeField] private float crouchSpeed;
     private Vector3 colliderCenter;
+    private Vector3 cameraPosition;
     private float colliderHeight;
-    private bool isCrouching;
+    private bool isCrouched;
+    private Vector3 originalColliderCenter;
+    private float originalColliderHeight;
+    private Vector3 originalCameraPosition;
     private CapsuleCollider _collider;
     [SerializeField] private Transform _camera;
-    private Vector3 originalCameraPosition = new Vector3(0f, 1.8f, 0f);
+
+    [Header("Dodge")]
+    [SerializeField] private float dodgeForce;
+    private bool isDodging;
+    private bool canDodge;
+    private Vector3 dodgeDirection;
 
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<CapsuleCollider>();
+
+        colliderCenter = _collider.center;
+        colliderHeight = _collider.height;
+        cameraPosition = _camera.transform.localPosition;
     }
 
     void Start()
     {
-        colliderCenter = _collider.center;
-        colliderHeight = _collider.height;
-        _camera.transform.localPosition = originalCameraPosition;
+        originalColliderCenter = colliderCenter;
+        originalColliderHeight = colliderHeight;
+        originalCameraPosition = cameraPosition;
     }
 
 
@@ -46,25 +62,48 @@ public class PlayerController : MonoBehaviour
     {
         bool inputJump = Input.GetKeyDown(KeyCode.Space);
 
-        if (isGrounded && inputJump)
+        if (isGrounded && inputJump && !isCrouched)
         {
             isJumping = true;
         }
-        else
-        {
-            isJumping = false;
-        }
 
         PlayerCrouch();
+
+        bool leftInput = Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.LeftAlt);
+        bool rightInput = Input.GetKey(KeyCode.D) && Input.GetKeyDown(KeyCode.LeftAlt);
+        bool backInput = Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.LeftAlt);
+
+        if (isGrounded && !isJumping && !isCrouched && leftInput)
+        {
+            isDodging = true;
+            dodgeDirection = -transform.right;
+        }
+        else if (isGrounded && !isJumping && !isCrouched && rightInput)
+        {
+            isDodging = true;
+            dodgeDirection = transform.right;
+        }
+        else if (isGrounded && !isJumping && !isCrouched && backInput)
+        {
+            isDodging = true;
+            dodgeDirection = -transform.forward;
+        }
     }
 
     void FixedUpdate()
     {
+        CheckGround();
         PlayerMovement();
 
         if (isJumping)
         {
             PlayerJump();
+            isJumping = false;
+        }
+
+        if (isDodging)
+        {
+            PlayerDodge();
         }
     }
 
@@ -83,22 +122,36 @@ public class PlayerController : MonoBehaviour
 
         if (!playerQuiet)
         {
-            if (!constrainDirections && !isSprinting)
+
+            if (!constrainDirections && !isSprinting && !isCrouched)
             {
                 currentSpeed = speed;
             }
-            else if (!constrainDirections && isSprinting)
+            else if (!constrainDirections && isSprinting && !isCrouched)
             {
                 currentSpeed = sprintSpeed;
             }
-            else if (constrainDirections && !isSprinting)
+            else if (constrainDirections && !isSprinting && !isCrouched)
             {
                 currentSpeed = speed * modifier;
             }
-            else
+            else if (constrainDirections && isSprinting && !isCrouched)
             {
                 currentSpeed = sprintSpeed * modifier;
             }
+            else if (!constrainDirections && isCrouched)
+            {
+                currentSpeed = crouchSpeed;
+            }
+            else
+            {
+                currentSpeed = crouchSpeed * modifier;
+            }
+        
+        }
+        else
+        {
+            currentSpeed = 0f;
         }
 
         if (isGrounded)
@@ -115,43 +168,53 @@ public class PlayerController : MonoBehaviour
 
     void PlayerCrouch()
     {
+        Vector3 crouchColliderCenter = new Vector3(0f, 0.6f, 0f);
         float crouchColliderHeight = 1f;
-        bool crouchInput = Input.GetKey(KeyCode.LeftControl);
         Vector3 crouchCameraPosition = new Vector3(0f, 0.6f, 0f);
 
-        if (crouchInput)
-        {
-            isCrouching = true;
+        Vector3 globalColliderCenter = transform.position + _collider.center;
+        float halfHeight = _collider.height / 2 - _collider.radius;
 
-            _collider.center = new Vector3(0f, 0.6f, 0f);
+        Vector3 lowPoint = globalColliderCenter - Vector3.up * halfHeight;
+        Vector3 topPoint = globalColliderCenter + Vector3.up * halfHeight;
+
+        bool crouchCeiling = Physics.CapsuleCast(lowPoint, topPoint, _collider.radius, Vector3.up, 0.5f,
+        LayerMask.GetMask("CrouchCeiling"));
+
+        bool crouchInput = Input.GetKey(KeyCode.LeftControl);
+
+        if (isGrounded && crouchInput)
+        {
+            isCrouched = true;
+            isJumping = false;
+
+            _collider.center = crouchColliderCenter;
             _collider.height = crouchColliderHeight;
             _camera.transform.localPosition = crouchCameraPosition;
-
         }
-        else
-        {
-            isCrouching = false;
 
-            _collider.center = colliderCenter;
-            _collider.height = colliderHeight;
+        if (!crouchInput && isGrounded && isCrouched && !crouchCeiling)
+        {
+            isCrouched = false;
+
+            _collider.center = originalColliderCenter;
+            _collider.height = originalColliderHeight;
             _camera.transform.localPosition = originalCameraPosition;
+
         }
     }
 
-    void OnCollisionEnter(Collision other)
+    void PlayerDodge()
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = true;
-        }
+        _rigidbody.AddForce(dodgeDirection * dodgeForce, ForceMode.Impulse);
+        isDodging = false;
     }
 
-    void OnCollisionExit(Collision other)
+    void CheckGround()
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+        isGrounded = Physics.Raycast(_checkGround.transform.position, -Vector3.up, 0.2f, groundMask);
 
+        Debug.DrawRay(_checkGround.transform.position, -Vector3.up * 0.5f, Color.red);
+    }
+    
 }
