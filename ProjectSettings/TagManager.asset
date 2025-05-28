@@ -11,6 +11,8 @@ TagManager:
   - Terrain
   - RecordingCamera
   - Ground
+  - Mud
+  - IceSurface
   layers:
   - Default
   - TransparentFX

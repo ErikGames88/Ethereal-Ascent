@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mud Surface
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b7f350e6acb90bb4dad79aa6ae7bcd20,
+        type: 3}
+      propertyPath: m_TagString
+      value: Mud
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

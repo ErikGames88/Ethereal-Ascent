@@ -31,19 +31,33 @@ public class PlayerController : MonoBehaviour
     private float originalColliderHeight;
     private Vector3 originalCameraPosition;
     private CapsuleCollider _collider;
-    [SerializeField] private Transform _camera;
-
+    
     [Header("Dodge")]
     [SerializeField] private float dodgeForce;
     private bool isDodging;
     private bool canDodge;
     private Vector3 dodgeDirection;
 
+    [Header("Mud")]
+    [SerializeField] private float mudSpeed;
+    private bool isOnMud;
+
+    [Header("Ice")]
+    [SerializeField] private float iceForce;
+    [SerializeField] private float iceBrakeFactor;
+    Vector3 lastMoveDirection;
+    private bool isOnIce;
+
+    [Header("Dependencies")]
+    [SerializeField] private Transform _camera;
+    private PlayerStamina _playerStamina;
+
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<CapsuleCollider>();
+        _playerStamina = GetComponent<PlayerStamina>();
 
         colliderCenter = _collider.center;
         colliderHeight = _collider.height;
@@ -52,6 +66,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        canDodge = true;
+        
         originalColliderCenter = colliderCenter;
         originalColliderHeight = colliderHeight;
         originalCameraPosition = cameraPosition;
@@ -62,28 +78,31 @@ public class PlayerController : MonoBehaviour
     {
         bool inputJump = Input.GetKeyDown(KeyCode.Space);
 
-        if (isGrounded && inputJump && !isCrouched)
+        if (isGrounded && inputJump && !isCrouched && !isOnMud)
         {
             isJumping = true;
         }
 
-        PlayerCrouch();
+        if (!isOnMud)
+        {
+            PlayerCrouch();
+        }
 
         bool leftInput = Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.LeftAlt);
         bool rightInput = Input.GetKey(KeyCode.D) && Input.GetKeyDown(KeyCode.LeftAlt);
         bool backInput = Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.LeftAlt);
 
-        if (isGrounded && !isJumping && !isCrouched && leftInput)
+        if (leftInput && isGrounded && !isJumping && !isCrouched)
         {
             isDodging = true;
             dodgeDirection = -transform.right;
         }
-        else if (isGrounded && !isJumping && !isCrouched && rightInput)
+        else if (rightInput && isGrounded && !isJumping && !isCrouched)
         {
             isDodging = true;
             dodgeDirection = transform.right;
         }
-        else if (isGrounded && !isJumping && !isCrouched && backInput)
+        else if (backInput && isGrounded && !isJumping && !isCrouched)
         {
             isDodging = true;
             dodgeDirection = -transform.forward;
@@ -101,12 +120,15 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-        if (isDodging)
+        if (isDodging && canDodge && !isOnMud)
         {
             PlayerDodge();
         }
     }
 
+    /// <summary>
+    /// Handles all player movement logic: walking, sprinting, crouching, mud slowdown, and ice sliding.
+    /// </summary>
     void PlayerMovement()
     {
         horizontal = Input.GetAxis("Horizontal");
@@ -117,55 +139,79 @@ public class PlayerController : MonoBehaviour
         bool constrainDirections = vertical < 0 || horizontal != 0;
         bool playerQuiet = horizontal == 0 && vertical == 0;
         float modifier = 0.5f;
-
+        
+        
         Vector3 movement = (transform.right * horizontal + transform.forward * vertical).normalized;
+
+        if (movement != Vector3.zero)
+        {
+            lastMoveDirection = movement;
+        }
 
         if (!playerQuiet)
         {
 
-            if (!constrainDirections && !isSprinting && !isCrouched)
+            if (!constrainDirections && !isSprinting && !isCrouched && !isOnMud)
             {
                 currentSpeed = speed;
             }
-            else if (!constrainDirections && isSprinting && !isCrouched)
+            else if (!constrainDirections && isSprinting && !isCrouched && !isOnMud && _playerStamina.CanSprint)
             {
                 currentSpeed = sprintSpeed;
             }
-            else if (constrainDirections && !isSprinting && !isCrouched)
+            else if (constrainDirections && !isSprinting && !isCrouched && !isOnMud)
             {
                 currentSpeed = speed * modifier;
             }
-            else if (constrainDirections && isSprinting && !isCrouched)
+            else if (constrainDirections && isSprinting && !isCrouched && !isOnMud && _playerStamina.CanSprint)
             {
                 currentSpeed = sprintSpeed * modifier;
             }
-            else if (!constrainDirections && isCrouched)
+            else if (!constrainDirections && isCrouched && !isOnMud)
             {
                 currentSpeed = crouchSpeed;
             }
-            else
+            else if (constrainDirections && isCrouched && !isOnMud)
             {
                 currentSpeed = crouchSpeed * modifier;
             }
-        
+            else if (isOnMud)
+            {
+                currentSpeed = mudSpeed;
+            }
         }
         else
         {
             currentSpeed = 0f;
         }
 
-        if (isGrounded)
+        if (isGrounded && !isOnIce)
         {
             _rigidbody.velocity = new Vector3(movement.x * currentSpeed, yVelocity, movement.z * currentSpeed);
             Debug.Log($"Current Speed: {currentSpeed}");
         }
+        else if (lastMoveDirection != Vector3.zero)
+        {
+            if (playerQuiet)
+            {
+                lastMoveDirection = Vector3.Lerp(lastMoveDirection, Vector3.zero, iceBrakeFactor);
+            }
+
+            _rigidbody.AddForce(lastMoveDirection * iceForce, ForceMode.Acceleration);
+        }
     }
 
+    /// <summary>
+    /// Makes the player jump by applying upward force.
+    /// </summary>
     void PlayerJump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
+    /// <summary>
+    /// Changes the player collider and camera when crouching. Prevents standing under ceilings.
+    /// </summary>
     void PlayerCrouch()
     {
         Vector3 crouchColliderCenter = new Vector3(0f, 0.6f, 0f);
@@ -204,17 +250,81 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Applies an impulse in the dodge direction and starts a cooldown.
+    /// </summary>
     void PlayerDodge()
     {
         _rigidbody.AddForce(dodgeDirection * dodgeForce, ForceMode.Impulse);
+        canDodge = false;
         isDodging = false;
+        StartCoroutine(TimeBetweenDodges());
     }
 
+    /// <summary>
+    /// Uses a Raycast downward to check if the player is touching the ground.
+    /// </summary>
     void CheckGround()
     {
         isGrounded = Physics.Raycast(_checkGround.transform.position, -Vector3.up, 0.2f, groundMask);
 
         Debug.DrawRay(_checkGround.transform.position, -Vector3.up * 0.5f, Color.red);
     }
-    
+
+    /// <summary>
+    /// When entering a trigger with tag "Mud" or "IceSurface", sets movement conditions.
+    /// </summary>
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Mud"))
+        {
+            isOnMud = true;
+        }
+
+        if (other.CompareTag("IceSurface"))
+        {
+            isOnIce = true;
+        }
+    }
+
+    /// <summary>
+    /// Maintains mud or ice state while inside trigger area.
+    /// </summary>
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Mud"))
+        {
+            isOnMud = true;
+        }
+
+        if (other.CompareTag("IceSurface"))
+        {
+            isOnIce = true;
+        }
+    }
+
+    /// <summary>
+    /// Resets mud or ice condition when exiting the trigger area.
+    /// </summary>
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Mud"))
+        {
+            isOnMud = false;
+        }
+
+        if (other.CompareTag("IceSurface"))
+        {
+            isOnIce = false;
+        }
+    }
+
+    /// <summary>
+    /// Waits for a cooldown before allowing the player to dodge again.
+    /// </summary>
+    IEnumerator TimeBetweenDodges()
+    {
+        yield return new WaitForSeconds(1.2f);
+        canDodge = true;
+    }
 }

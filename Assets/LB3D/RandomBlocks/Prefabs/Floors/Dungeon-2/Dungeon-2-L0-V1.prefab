@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1158596377610943788}
   - component: {fileID: 4030965817127274982}
   - component: {fileID: 1579140706401790128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dungeon-2-L0-V1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
