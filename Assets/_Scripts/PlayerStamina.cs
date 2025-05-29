@@ -12,6 +12,7 @@ public class PlayerStamina : MonoBehaviour
     private float staminaDrainRate;
     private float staminaRecoveryRate;
     private bool canSprint;
+    private bool sprintActive;
     public bool CanSprint { get => canSprint; }
 
 
@@ -40,39 +41,33 @@ public class PlayerStamina : MonoBehaviour
 
     void HandleStamina()
     {
-
-        
-        if (currentStamina >= minStamina)
+        if (canSprint && sprintActive)
         {
-            // BAJAR ESTAMINA
-            canSprint = true;
             currentStamina -= staminaDrainRate * Time.deltaTime;
 
             if (currentStamina <= minStamina)
             {
-                canSprint = false;
                 currentStamina = minStamina;
+                canSprint = false;
+                sprintActive = false;
             }
         }
-    
-    
-        if (currentStamina < maxStamina)
+        else
         {
-            // RELLENAR ESTAMINA
-
             currentStamina += staminaRecoveryRate * Time.deltaTime;
-            if (currentStamina > minStamina)
-            {
-                canSprint = true;
-            }
-            
+
             if (currentStamina >= maxStamina)
             {
                 currentStamina = maxStamina;
+                canSprint = true;
             }
         }
-        
 
         Debug.Log($"Current Stamina: {currentStamina}");
+    }
+    
+    public void SetSprintState(bool sprinting)
+    {
+        sprintActive = sprinting;
     }
 }

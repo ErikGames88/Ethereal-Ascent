@@ -7,8 +7,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    private float horizontal;
-    private float vertical;
     private float currentSpeed;
     [SerializeField] private float speed;
     [SerializeField] private float sprintSpeed;
@@ -51,6 +49,13 @@ public class PlayerController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private Transform _camera;
     private PlayerStamina _playerStamina;
+
+    [Header("Inputs")]
+    private float horizontal;
+    private float vertical;
+    bool isSprinting;
+    bool constrainDirections;
+    bool playerQuiet;
 
 
     void Awake()
@@ -126,6 +131,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // void ReadInputStates()
+    // {
+    //     isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    //     constrainDirections = vertical < 0 || horizontal != 0;
+    //     playerQuiet = horizontal == 0 && vertical == 0;
+    // }
+
     /// <summary>
     /// Handles all player movement logic: walking, sprinting, crouching, mud slowdown, and ice sliding.
     /// </summary>
@@ -133,13 +145,11 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-
+        isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        constrainDirections = vertical < 0 || horizontal != 0;
+        playerQuiet = horizontal == 0 && vertical == 0;
         float yVelocity = _rigidbody.velocity.y;
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        bool constrainDirections = vertical < 0 || horizontal != 0;
-        bool playerQuiet = horizontal == 0 && vertical == 0;
         float modifier = 0.5f;
-        
         
         Vector3 movement = (transform.right * horizontal + transform.forward * vertical).normalized;
 
@@ -157,6 +167,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (!constrainDirections && isSprinting && !isCrouched && !isOnMud && _playerStamina.CanSprint)
             {
+                _playerStamina.SetSprintState(isSprinting);
                 currentSpeed = sprintSpeed;
             }
             else if (constrainDirections && !isSprinting && !isCrouched && !isOnMud)
@@ -165,6 +176,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (constrainDirections && isSprinting && !isCrouched && !isOnMud && _playerStamina.CanSprint)
             {
+                _playerStamina.SetSprintState(isSprinting);
                 currentSpeed = sprintSpeed * modifier;
             }
             else if (!constrainDirections && isCrouched && !isOnMud)
