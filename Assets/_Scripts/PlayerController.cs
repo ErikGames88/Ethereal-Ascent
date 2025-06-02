@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour
     {
         bool inputJump = Input.GetKeyDown(KeyCode.Space);
 
+       _playerStamina.SetSprintState(isSprinting);
+
         if (isGrounded && inputJump && !isCrouched && !isOnMud)
         {
             isJumping = true;
@@ -131,13 +133,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // void ReadInputStates()
-    // {
-    //     isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-    //     constrainDirections = vertical < 0 || horizontal != 0;
-    //     playerQuiet = horizontal == 0 && vertical == 0;
-    // }
-
     /// <summary>
     /// Handles all player movement logic: walking, sprinting, crouching, mud slowdown, and ice sliding.
     /// </summary>
@@ -160,24 +155,29 @@ public class PlayerController : MonoBehaviour
 
         if (!playerQuiet)
         {
-
             if (!constrainDirections && !isSprinting && !isCrouched && !isOnMud)
             {
                 currentSpeed = speed;
             }
-            else if (!constrainDirections && isSprinting && !isCrouched && !isOnMud && _playerStamina.CanSprint)
+            else if (!constrainDirections && _playerStamina.SprintActive && !isCrouched && !isOnMud && _playerStamina.CanSprint)
             {
-                _playerStamina.SetSprintState(isSprinting);
                 currentSpeed = sprintSpeed;
+            }
+            else if (!constrainDirections && !_playerStamina.CanSprint)
+            {
+                currentSpeed = speed; 
             }
             else if (constrainDirections && !isSprinting && !isCrouched && !isOnMud)
             {
                 currentSpeed = speed * modifier;
             }
-            else if (constrainDirections && isSprinting && !isCrouched && !isOnMud && _playerStamina.CanSprint)
+            else if (constrainDirections && _playerStamina.SprintActive && !isCrouched && !isOnMud && _playerStamina.CanSprint)
             {
-                _playerStamina.SetSprintState(isSprinting);
                 currentSpeed = sprintSpeed * modifier;
+            }
+            else if (constrainDirections && !_playerStamina.CanSprint)
+            {
+                currentSpeed = speed * modifier; 
             }
             else if (!constrainDirections && isCrouched && !isOnMud)
             {
