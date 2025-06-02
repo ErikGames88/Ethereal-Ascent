@@ -91730,7 +91730,7 @@ GameObject:
   - component: {fileID: 2103408159}
   - component: {fileID: 2103408158}
   m_Layer: 5
-  m_Name: Main Canvas
+  m_Name: Player Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93888,11 +93888,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
+    - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
+      propertyPath: _greenBar
+      value: 
+      objectReference: {fileID: 376570107}
+    - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _staminaBar
+      value: 
+      objectReference: {fileID: 402063611}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

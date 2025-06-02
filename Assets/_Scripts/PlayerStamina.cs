@@ -13,7 +13,7 @@ public class PlayerStamina : MonoBehaviour
     private float staminaRecoveryRate;
     private bool canSprint;
     private bool sprintActive;
-    public bool SprintActive{ get => sprintActive;}
+    public bool SprintActive { get => sprintActive; }
     public bool CanSprint { get => canSprint; }
 
 
@@ -50,7 +50,7 @@ public class PlayerStamina : MonoBehaviour
             {
                 currentStamina = minStamina;
                 canSprint = false;
-                sprintActive = false; 
+                sprintActive = false;
             }
         }
         else
@@ -75,7 +75,12 @@ public class PlayerStamina : MonoBehaviour
         }
         else
         {
-            sprintActive = false; 
+            sprintActive = false;
         }
+    }
+
+    public float GetStaminaNormalized()
+    {
+        return currentStamina / maxStamina;
     }
 }

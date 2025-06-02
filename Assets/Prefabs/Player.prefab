@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 7408621060462342249}
   - component: {fileID: 5004468242427466515}
   - component: {fileID: 5346877772470664114}
+  - component: {fileID: 7314455882741989972}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -381,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf2bd0cb7edc948af31cf809dcaf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
   sprintSpeed: 10
   _checkGround: {fileID: 4610438496174133}
   isGrounded: 0
@@ -405,6 +406,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 153e645be0e0f5c4b937c3600ebfcef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7314455882741989972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812509397252060555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a944e485c68e24c89928d9b4fd9841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4541289425700628841

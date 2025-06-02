@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [Header("Mud")]
     [SerializeField] private float mudSpeed;
     private bool isOnMud;
+    public bool IsOnMud { get => isOnMud; set => isOnMud = value; }
 
     [Header("Ice")]
     [SerializeField] private float iceForce;
