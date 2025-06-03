@@ -68,7 +68,7 @@ public class PlayerStamina : MonoBehaviour
             }
         }
 
-        Debug.Log($"Current Stamina: {currentStamina}");
+        //Debug.Log($"Current Stamina: {currentStamina}");
     }
 
     /// <summary>
