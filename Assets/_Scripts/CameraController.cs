@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles first-person camera rotation based on mouse input.
+/// Controls vertical look (with optional inversion) and horizontal player rotation.
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     private float mouseX;
@@ -29,7 +33,7 @@ public class CameraController : MonoBehaviour
         {
             xRotation += mouseY;
         }
-        
+
 
         xRotation = Mathf.Clamp(xRotation, -rotLimit, rotLimit);
 

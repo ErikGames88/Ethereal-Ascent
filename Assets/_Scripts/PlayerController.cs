@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(PlayerStamina))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -84,7 +85,13 @@ public class PlayerController : MonoBehaviour
     {
         bool inputJump = Input.GetKeyDown(KeyCode.Space);
 
-       _playerStamina.SetSprintState(isSprinting);
+        if (isOnMud || isOnIce)
+        {
+            isSprinting = false;
+            _playerStamina.CanSprint = false;
+        }
+
+        _playerStamina.SetSprintState(isSprinting);
 
         if (isGrounded && inputJump && !isCrouched && !isOnMud)
         {
@@ -135,7 +142,9 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles all player movement logic: walking, sprinting, crouching, mud slowdown, and ice sliding.
+    /// Handles all player movement logic: walking, sprinting (only if allowed),
+    /// crouching, mud slowdown, and ice sliding. Automatically adjusts current speed
+    /// based on terrain conditions and input state.
     /// </summary>
     void PlayerMovement()
     {
@@ -166,7 +175,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (!constrainDirections && !_playerStamina.CanSprint)
             {
-                currentSpeed = speed; 
+                currentSpeed = speed;
             }
             else if (constrainDirections && !isSprinting && !isCrouched && !isOnMud)
             {
@@ -178,7 +187,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (constrainDirections && !_playerStamina.CanSprint)
             {
-                currentSpeed = speed * modifier; 
+                currentSpeed = speed * modifier;
             }
             else if (!constrainDirections && isCrouched && !isOnMud)
             {
@@ -216,6 +225,7 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>
     /// Makes the player jump by applying upward force.
+    /// Jumping is disabled while on mud.
     /// </summary>
     void PlayerJump()
     {
@@ -223,7 +233,8 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Changes the player collider and camera when crouching. Prevents standing under ceilings.
+    /// Changes the player collider and camera when crouching.
+    /// Prevents standing under ceilings. Crouching is disabled while on mud.
     /// </summary>
     void PlayerCrouch()
     {
@@ -265,6 +276,7 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>
     /// Applies an impulse in the dodge direction and starts a cooldown.
+    /// Dodging is disabled while on mud.
     /// </summary>
     void PlayerDodge()
     {

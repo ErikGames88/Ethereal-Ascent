@@ -14,7 +14,7 @@ public class PlayerStamina : MonoBehaviour
     private bool canSprint;
     private bool sprintActive;
     public bool SprintActive { get => sprintActive; }
-    public bool CanSprint { get => canSprint; }
+    public bool CanSprint { get => canSprint; set => canSprint = value; }
 
 
     void Awake()
@@ -40,6 +40,10 @@ public class PlayerStamina : MonoBehaviour
         HandleStamina();
     }
 
+    /// <summary>
+    /// Controls stamina logic for sprinting. Depletes stamina when sprinting and 
+    /// recovers it over time when not sprinting. Disables sprinting if stamina reaches zero.
+    /// </summary>
     public void HandleStamina()
     {
         if (sprintActive && canSprint)
@@ -67,6 +71,10 @@ public class PlayerStamina : MonoBehaviour
         Debug.Log($"Current Stamina: {currentStamina}");
     }
 
+    /// <summary>
+    /// Enables or disables the stamina-draining state depending on whether the player
+    /// is attempting to sprint and sprinting is currently allowed.
+    /// </summary>
     public void SetSprintState(bool sprinting)
     {
         if (canSprint && sprinting)
@@ -79,6 +87,10 @@ public class PlayerStamina : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the current stamina as a normalized value between 0 and 1, 
+    /// useful for UI representation.
+    /// </summary>
     public float GetStaminaNormalized()
     {
         return currentStamina / maxStamina;
