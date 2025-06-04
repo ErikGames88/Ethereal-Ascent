@@ -24,7 +24,7 @@ TagManager:
   - Interactable
   - Terrain
   - FogTrigger
-  - NoSprintZone
+  - ConstrainZone
   - CrouchCeiling
   - 
   - 
