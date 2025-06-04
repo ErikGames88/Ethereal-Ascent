@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     
     [Header("Dodge")]
     [SerializeField] private float dodgeForce;
+    [SerializeField] private float dodgeJumpForce;
     private bool isDodging;
     private bool canDodge;
     private Vector3 dodgeDirection;
@@ -129,15 +130,19 @@ public class PlayerController : MonoBehaviour
         CheckGround();
         PlayerMovement();
 
-        if (isJumping)
+        bool checkJumpCost = _playerStamina.CurrentStamina >= _playerStamina.JumpStaminaCost;
+        if (isJumping && checkJumpCost)
         {
             PlayerJump();
+            _playerStamina.JumpStamina();
             isJumping = false;
         }
 
-        if (isDodging && canDodge && !isOnMud)
+        bool checkDodgeCost = _playerStamina.CurrentStamina >= _playerStamina.DodgeStaminaCost;
+        if (isDodging && canDodge && !isOnMud && !isOnIce && !isSprinting && checkDodgeCost)
         {
             PlayerDodge();
+            _playerStamina.DodgeStamina();
         }
     }
 
@@ -165,11 +170,15 @@ public class PlayerController : MonoBehaviour
 
         if (!playerQuiet)
         {
-            if (!constrainDirections && !isSprinting && !isCrouched && !isOnMud)
+            if (isOnMud)
+            {
+                currentSpeed = mudSpeed;
+            }
+            else if (!constrainDirections && !isSprinting && !isCrouched) 
             {
                 currentSpeed = speed;
             }
-            else if (!constrainDirections && _playerStamina.SprintActive && !isCrouched && !isOnMud && _playerStamina.CanSprint)
+            else if (!constrainDirections && _playerStamina.SprintActive && !isCrouched && _playerStamina.CanSprint) //&& !isOnMud)
             {
                 currentSpeed = sprintSpeed;
             }
@@ -177,11 +186,11 @@ public class PlayerController : MonoBehaviour
             {
                 currentSpeed = speed;
             }
-            else if (constrainDirections && !isSprinting && !isCrouched && !isOnMud)
+            else if (constrainDirections && !isSprinting && !isCrouched) 
             {
                 currentSpeed = speed * modifier;
             }
-            else if (constrainDirections && _playerStamina.SprintActive && !isCrouched && !isOnMud && _playerStamina.CanSprint)
+            else if (constrainDirections && _playerStamina.SprintActive && !isCrouched && _playerStamina.CanSprint) //&& !isOnMud )
             {
                 currentSpeed = sprintSpeed * modifier;
             }
@@ -189,17 +198,13 @@ public class PlayerController : MonoBehaviour
             {
                 currentSpeed = speed * modifier;
             }
-            else if (!constrainDirections && isCrouched && !isOnMud)
+            else if (!constrainDirections && isCrouched) 
             {
                 currentSpeed = crouchSpeed;
             }
-            else if (constrainDirections && isCrouched && !isOnMud)
+            else if (constrainDirections && isCrouched) 
             {
                 currentSpeed = crouchSpeed * modifier;
-            }
-            else if (isOnMud)
-            {
-                currentSpeed = mudSpeed;
             }
         }
         else
@@ -230,6 +235,9 @@ public class PlayerController : MonoBehaviour
     void PlayerJump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        
+        // canDodge = false;
     }
 
     /// <summary>
@@ -280,9 +288,13 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void PlayerDodge()
     {
-        _rigidbody.AddForce(dodgeDirection * dodgeForce, ForceMode.Impulse);
+        Vector3 dodgeJump = Vector3.up;
+
+        _rigidbody.AddForce((dodgeDirection * dodgeForce) + (dodgeJump * dodgeJumpForce), ForceMode.Impulse);
+
         canDodge = false;
         isDodging = false;
+
         StartCoroutine(TimeBetweenDodges());
     }
 
@@ -293,7 +305,11 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics.Raycast(_checkGround.transform.position, -Vector3.up, 0.2f, groundMask);
 
-        Debug.DrawRay(_checkGround.transform.position, -Vector3.up * 0.5f, Color.red);
+        // if (isGrounded)
+        // {
+        //     isSprinting = true;
+        //     canDodge = true;
+        // }
     }
 
     /// <summary>

@@ -367,7 +367,6 @@ GameObject:
   - component: {fileID: 5014884491575332211}
   - component: {fileID: 8150959711749165655}
   - component: {fileID: 6038949997562880729}
-  - component: {fileID: 4830001835995497597}
   m_Layer: 0
   m_Name: Gate Prefab
   m_TagString: Untagged
@@ -533,21 +532,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4830001835995497597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4615421766663643609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549b6f46d2ed4dc40a94361c2694ec61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openAngle: 90
-  openDuration: 2
-  openSound: {fileID: 8300000, guid: d1cea67817e70004999ca9759713425f, type: 3}
 --- !u!1 &4746755618421145746
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,15 @@ public class PlayerStamina : MonoBehaviour
     private float currentStamina;
     private float staminaDrainRate;
     private float staminaRecoveryRate;
+    private float jumpStaminaCost;
+    private float dodgeStaminaCost;
     private bool canSprint;
     private bool sprintActive;
+    
+    
+    public float CurrentStamina { get => currentStamina; }
+    public float JumpStaminaCost { get => jumpStaminaCost; }
+    public float DodgeStaminaCost { get => dodgeStaminaCost; }
     public bool SprintActive { get => sprintActive; }
     public bool CanSprint { get => canSprint; set => canSprint = value; }
 
@@ -27,6 +34,9 @@ public class PlayerStamina : MonoBehaviour
 
         staminaDrainRate = 20f;
         staminaRecoveryRate = 10f;
+
+        jumpStaminaCost = 35f;
+        dodgeStaminaCost = 49f;
     }
 
     void Start()
@@ -85,6 +95,16 @@ public class PlayerStamina : MonoBehaviour
         {
             sprintActive = false;
         }
+    }
+
+    public float JumpStamina()
+    {
+        return currentStamina -= jumpStaminaCost;
+    }
+
+    public float DodgeStamina()
+    {
+        return currentStamina -= dodgeStaminaCost;
     }
 
     /// <summary>
