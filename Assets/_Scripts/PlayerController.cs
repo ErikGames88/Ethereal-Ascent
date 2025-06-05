@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
         }
 
         bool checkDodgeCost = _playerStamina.CurrentStamina >= _playerStamina.DodgeStaminaCost;
-        if (isDodging && canDodge && !isOnMud && !isOnIce && !isSprinting && checkDodgeCost)
+        if (isGrounded && isDodging && canDodge && !isOnMud && !isOnIce && !isSprinting && checkDodgeCost)
         {
             PlayerDodge();
             _playerStamina.DodgeStamina();
@@ -235,9 +235,6 @@ public class PlayerController : MonoBehaviour
     void PlayerJump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-        
-        // canDodge = false;
     }
 
     /// <summary>
@@ -304,12 +301,6 @@ public class PlayerController : MonoBehaviour
     void CheckGround()
     {
         isGrounded = Physics.Raycast(_checkGround.transform.position, -Vector3.up, 0.2f, groundMask);
-
-        // if (isGrounded)
-        // {
-        //     isSprinting = true;
-        //     canDodge = true;
-        // }
     }
 
     /// <summary>

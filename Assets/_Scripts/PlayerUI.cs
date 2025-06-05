@@ -11,14 +11,42 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     private float maxFillAmount;
-    [SerializeField] private Image _greenBar;
-    [SerializeField] private GameObject _staminaBar;
-    private PlayerStamina _playerStamina;
 
+    [Header("Life")]
+    private PlayerHealth _playerHealth;
+    [SerializeField] private GameObject _healthBlood;
+    [SerializeField] private Image _bloodLayer1;
+    [SerializeField] private Image _bloodLayer2;
+    [SerializeField] private Image _bloodBackground;
+
+
+    [Header("Stamina")]
+    private PlayerStamina _playerStamina;
+    [SerializeField] private GameObject _staminaBar;
+    [SerializeField] private Image _greenBar;
+
+    public struct HealthData
+    {
+        public int threshold;
+        public float alpha1;
+        public float alpha2;
+        public float alphaBackground;
+
+        public HealthData(int threshold, float alpha1, float alpha2, float alphaBackground)
+        {
+            this.threshold = threshold;
+            this.alpha1 = alpha1;
+            this.alpha2 = alpha2;
+            this.alphaBackground = alphaBackground;
+        }
+    }
+    
 
     void Awake()
     {
+        _playerHealth = GetComponent<PlayerHealth>();
         _playerStamina = GetComponent<PlayerStamina>();
+
         maxFillAmount = 1f;
     }
 
@@ -30,6 +58,122 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
+        Color backgroundAlpha = _bloodBackground.color;
+        Color layerAlpha1 = _bloodLayer1.color;
+        Color layerAlpha2 = _bloodLayer2.color;
+
+        if (_playerHealth.CurrentHealth < 90)
+        {
+            _healthBlood.SetActive(true);
+
+            layerAlpha1.a = (float)20 / 255;
+            _bloodLayer1.color = layerAlpha1;
+
+            if (_playerHealth.CurrentHealth < 70)
+            {
+                layerAlpha1.a = (float)50 / 255;
+                _bloodLayer1.color = layerAlpha1;
+            }
+            else if (_playerHealth.CurrentHealth < 50)
+            {
+                layerAlpha1.a = (float)70 / 255;
+                _bloodLayer1.color = layerAlpha1;
+
+                backgroundAlpha.a = (float)10 / 255;
+                _bloodBackground.color = backgroundAlpha;
+            }
+            else if (_playerHealth.CurrentHealth < 35)
+            {
+                layerAlpha1.a = (float)100 / 255;
+                _bloodLayer1.color = layerAlpha1;
+
+                layerAlpha2.a = (float)20 / 255;
+                _bloodLayer2.color = layerAlpha2;
+
+                backgroundAlpha.a = (float)10 / 255;
+                _bloodBackground.color = backgroundAlpha;
+            }
+            else if (_playerHealth.CurrentHealth < 20)
+            {
+                layerAlpha1.a = (float)120 / 255;
+                _bloodLayer1.color = layerAlpha1;
+
+                layerAlpha2.a = (float)30 / 255;
+                _bloodLayer2.color = layerAlpha2;
+
+                backgroundAlpha.a = (float)10 / 255;
+                _bloodBackground.color = backgroundAlpha;
+            }
+            else if (_playerHealth.CurrentHealth < 10)
+            {
+                layerAlpha1.a = (float)150 / 255;
+                _bloodLayer1.color = layerAlpha1;
+
+                layerAlpha2.a = (float)70 / 255;
+                _bloodLayer2.color = layerAlpha2;
+
+                backgroundAlpha.a = (float)50 / 255;
+                _bloodBackground.color = backgroundAlpha;
+            }
+        }
+        else
+        {
+            _healthBlood.SetActive(false);
+        }
+        // if (_playerHealth.CurrentHealth < 90)
+        // {
+        //     _healthBlood.SetActive(true);
+
+        //     layerAlpha1.a = (float)20 / 255;
+        //     _bloodLayer1.color = layerAlpha1;
+        // }
+        // else if (_playerHealth.CurrentHealth < 70)
+        // {
+        //     layerAlpha1.a = (float)50 / 255;
+        //     _bloodLayer1.color = layerAlpha1;
+        // }
+        // else if (_playerHealth.CurrentHealth < 50)
+        // {
+        //     layerAlpha1.a = (float)70 / 255;
+        //     _bloodLayer1.color = layerAlpha1;
+
+        //     backgroundAlpha.a = (float)10 / 255;
+        //     _bloodBackground.color = backgroundAlpha;
+        // }
+        // else if (_playerHealth.CurrentHealth < 35)
+        // {
+        //     layerAlpha1.a = (float)100 / 255;
+        //     _bloodLayer1.color = layerAlpha1;
+
+        //     layerAlpha2.a = (float)20 / 255;
+        //     _bloodLayer2.color = layerAlpha2;
+
+        //     backgroundAlpha.a = (float)10 / 255;
+        //     _bloodBackground.color = backgroundAlpha;
+        // }
+        // else if (_playerHealth.CurrentHealth < 20)
+        // {
+        //     layerAlpha1.a = (float)120 / 255;
+        //     _bloodLayer1.color = layerAlpha1;
+
+        //     layerAlpha2.a = (float)30 / 255;
+        //     _bloodLayer2.color = layerAlpha2;
+
+        //     backgroundAlpha.a = (float)10 / 255;
+        //     _bloodBackground.color = backgroundAlpha;
+        // }
+        // else if (_playerHealth.CurrentHealth < 10)
+        // {
+        //     layerAlpha1.a = (float)150 / 255;
+        //     _bloodLayer1.color = layerAlpha1;
+
+        //     layerAlpha2.a = (float)70 / 255;
+        //     _bloodLayer2.color = layerAlpha2;
+
+        //     backgroundAlpha.a = (float)50 / 255;
+        //     _bloodBackground.color = backgroundAlpha;
+        // }
+
         if (_playerStamina.SprintActive || _greenBar.fillAmount < maxFillAmount)
         {
             _staminaBar.SetActive(true);
