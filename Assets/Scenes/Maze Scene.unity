@@ -34084,7 +34084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &796922942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34842,7 +34842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &819222442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39626,7 +39626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &944680091
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54745,7 +54745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1269859308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -95364,21 +95364,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: jumpForce
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: dodgeForce
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 5004468242427466515, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: dodgeJumpForce
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: _greenBar
@@ -95391,19 +95376,19 @@ PrefabInstance:
       objectReference: {fileID: 402063611}
     - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
-      propertyPath: _healthBlood
-      value: 
-      objectReference: {fileID: 944680090}
-    - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: _layerBlood1
+      propertyPath: _bloodLayer1
       value: 
       objectReference: {fileID: 796922944}
     - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
-      propertyPath: _layerBlood2
+      propertyPath: _bloodLayer2
       value: 
       objectReference: {fileID: 1269859310}
+    - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _healthBlood
+      value: 
+      objectReference: {fileID: 944680090}
     - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: _bloodBackground

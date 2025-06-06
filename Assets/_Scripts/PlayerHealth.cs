@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private float currentHealth;
+    [SerializeField, Range(0, 100)] private float currentHealth;
     public float CurrentHealth { get => currentHealth; }
     private float maxHeatlh;
-
-   
+    private bool getDamage;
+    public bool GetDamage { get => getDamage; set => getDamage = value; }
 
 
     void Awake()
@@ -18,14 +18,17 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHeatlh;
     }
 
-    void Start()
-    {
-        
-    }
 
-    
-    void Update()
+    public void SubtractPlayerHealth(float damage)
     {
+        getDamage = true;
+        currentHealth -= damage;
         
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+
+            // TODO: ESTADO DE GAME OVER
+        }
     }
 }

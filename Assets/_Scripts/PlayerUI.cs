@@ -18,6 +18,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Image _bloodLayer1;
     [SerializeField] private Image _bloodLayer2;
     [SerializeField] private Image _bloodBackground;
+    private List<HealthData> healthStages = new List<HealthData>();
+    private bool healthStageFound;
 
 
     [Header("Stamina")]
@@ -32,7 +34,7 @@ public class PlayerUI : MonoBehaviour
         public float alpha2;
         public float alphaBackground;
 
-        public HealthData(int threshold, float alpha1, float alpha2, float alphaBackground)
+        public HealthData(int threshold, float alpha1, float alpha2, float alphaBackground) // CONSTRUCTOR  
         {
             this.threshold = threshold;
             this.alpha1 = alpha1;
@@ -40,7 +42,7 @@ public class PlayerUI : MonoBehaviour
             this.alphaBackground = alphaBackground;
         }
     }
-    
+
 
     void Awake()
     {
@@ -53,127 +55,54 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         _greenBar.fillAmount = maxFillAmount;
-    }
 
+        healthStages.Add(new HealthData(90, 20, 0, 0));
+        healthStages.Add(new HealthData(70, 50, 0, 0));
+        healthStages.Add(new HealthData(50, 70, 0, 10));
+        healthStages.Add(new HealthData(35, 100, 20, 10));
+        healthStages.Add(new HealthData(20, 120, 30, 20));
+        healthStages.Add(new HealthData(10, 150, 70, 50));
+    }
 
     void Update()
     {
-        Color backgroundAlpha = _bloodBackground.color;
+        UpdateHealthUI();
+        UpdateStaminaUI();
+    }
+
+    private void UpdateHealthUI()
+    {
+        healthStageFound = false;
+
         Color layerAlpha1 = _bloodLayer1.color;
         Color layerAlpha2 = _bloodLayer2.color;
+        Color backgroundAlpha = _bloodBackground.color;
 
-        if (_playerHealth.CurrentHealth < 90)
+        for (int i = 0; i < healthStages.Count; i++)
         {
-            _healthBlood.SetActive(true);
-
-            layerAlpha1.a = (float)20 / 255;
-            _bloodLayer1.color = layerAlpha1;
-
-            if (_playerHealth.CurrentHealth < 70)
+            if (_playerHealth.CurrentHealth < healthStages[i].threshold)
             {
-                layerAlpha1.a = (float)50 / 255;
-                _bloodLayer1.color = layerAlpha1;
-            }
-            else if (_playerHealth.CurrentHealth < 50)
-            {
-                layerAlpha1.a = (float)70 / 255;
-                _bloodLayer1.color = layerAlpha1;
+                _healthBlood.SetActive(true);
+                healthStageFound = true;
 
-                backgroundAlpha.a = (float)10 / 255;
-                _bloodBackground.color = backgroundAlpha;
-            }
-            else if (_playerHealth.CurrentHealth < 35)
-            {
-                layerAlpha1.a = (float)100 / 255;
-                _bloodLayer1.color = layerAlpha1;
+                layerAlpha1.a = healthStages[i].alpha1 / 255f;
+                layerAlpha2.a = healthStages[i].alpha2 / 255f;
+                backgroundAlpha.a = healthStages[i].alphaBackground / 255f;
 
-                layerAlpha2.a = (float)20 / 255;
+                _bloodLayer1.color = layerAlpha1;
                 _bloodLayer2.color = layerAlpha2;
-
-                backgroundAlpha.a = (float)10 / 255;
-                _bloodBackground.color = backgroundAlpha;
-            }
-            else if (_playerHealth.CurrentHealth < 20)
-            {
-                layerAlpha1.a = (float)120 / 255;
-                _bloodLayer1.color = layerAlpha1;
-
-                layerAlpha2.a = (float)30 / 255;
-                _bloodLayer2.color = layerAlpha2;
-
-                backgroundAlpha.a = (float)10 / 255;
-                _bloodBackground.color = backgroundAlpha;
-            }
-            else if (_playerHealth.CurrentHealth < 10)
-            {
-                layerAlpha1.a = (float)150 / 255;
-                _bloodLayer1.color = layerAlpha1;
-
-                layerAlpha2.a = (float)70 / 255;
-                _bloodLayer2.color = layerAlpha2;
-
-                backgroundAlpha.a = (float)50 / 255;
                 _bloodBackground.color = backgroundAlpha;
             }
         }
-        else
+
+        if (!healthStageFound)
         {
             _healthBlood.SetActive(false);
         }
-        // if (_playerHealth.CurrentHealth < 90)
-        // {
-        //     _healthBlood.SetActive(true);
+    }
 
-        //     layerAlpha1.a = (float)20 / 255;
-        //     _bloodLayer1.color = layerAlpha1;
-        // }
-        // else if (_playerHealth.CurrentHealth < 70)
-        // {
-        //     layerAlpha1.a = (float)50 / 255;
-        //     _bloodLayer1.color = layerAlpha1;
-        // }
-        // else if (_playerHealth.CurrentHealth < 50)
-        // {
-        //     layerAlpha1.a = (float)70 / 255;
-        //     _bloodLayer1.color = layerAlpha1;
-
-        //     backgroundAlpha.a = (float)10 / 255;
-        //     _bloodBackground.color = backgroundAlpha;
-        // }
-        // else if (_playerHealth.CurrentHealth < 35)
-        // {
-        //     layerAlpha1.a = (float)100 / 255;
-        //     _bloodLayer1.color = layerAlpha1;
-
-        //     layerAlpha2.a = (float)20 / 255;
-        //     _bloodLayer2.color = layerAlpha2;
-
-        //     backgroundAlpha.a = (float)10 / 255;
-        //     _bloodBackground.color = backgroundAlpha;
-        // }
-        // else if (_playerHealth.CurrentHealth < 20)
-        // {
-        //     layerAlpha1.a = (float)120 / 255;
-        //     _bloodLayer1.color = layerAlpha1;
-
-        //     layerAlpha2.a = (float)30 / 255;
-        //     _bloodLayer2.color = layerAlpha2;
-
-        //     backgroundAlpha.a = (float)10 / 255;
-        //     _bloodBackground.color = backgroundAlpha;
-        // }
-        // else if (_playerHealth.CurrentHealth < 10)
-        // {
-        //     layerAlpha1.a = (float)150 / 255;
-        //     _bloodLayer1.color = layerAlpha1;
-
-        //     layerAlpha2.a = (float)70 / 255;
-        //     _bloodLayer2.color = layerAlpha2;
-
-        //     backgroundAlpha.a = (float)50 / 255;
-        //     _bloodBackground.color = backgroundAlpha;
-        // }
-
+    private void UpdateStaminaUI()
+    {
         if (_playerStamina.SprintActive || _greenBar.fillAmount < maxFillAmount)
         {
             _staminaBar.SetActive(true);
@@ -184,6 +113,5 @@ public class PlayerUI : MonoBehaviour
         }
 
         _greenBar.fillAmount = _playerStamina.GetStaminaNormalized();
-
     }
 }
