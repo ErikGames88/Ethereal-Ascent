@@ -77129,6 +77129,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1805209241}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1808569974 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 458427871582029742, guid: a1c84b63184220f48acd0185a9a9b681,
+    type: 3}
+  m_PrefabInstance: {fileID: 718737869100664794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1808654377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95309,6 +95315,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 458427871582029742, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1812509397252060555, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: m_Name
@@ -95364,6 +95375,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _heartBeatsAudio
+      value: 
+      objectReference: {fileID: 1808569974}
     - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: _greenBar
