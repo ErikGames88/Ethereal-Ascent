@@ -77,8 +77,6 @@ public class PlayerStamina : MonoBehaviour
                 canSprint = true;
             }
         }
-
-        //Debug.Log($"Current Stamina: {currentStamina}");
     }
 
     /// <summary>
@@ -97,11 +95,17 @@ public class PlayerStamina : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Subtracts the stamina cost of jumping from the current stamina.
+    /// </summary>
     public float JumpStamina()
     {
         return currentStamina -= jumpStaminaCost;
     }
 
+    /// <summary>
+    /// Subtracts the stamina cost of dodging from the current stamina.
+    /// </summary>
     public float DodgeStamina()
     {
         return currentStamina -= dodgeStaminaCost;

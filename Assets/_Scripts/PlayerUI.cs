@@ -70,6 +70,11 @@ public class PlayerUI : MonoBehaviour
         UpdateStaminaUI();
     }
 
+    /// <summary>
+    /// Updates the UI visuals for player's health.
+    /// Changes blood layers and background alpha depending on current health level.
+    /// Activates the health blood UI when health is below thresholds.
+    /// </summary>
     private void UpdateHealthUI()
     {
         healthStageFound = false;
@@ -101,6 +106,10 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the stamina bar UI.
+    /// Shows the bar when sprinting or recovering stamina, hides it when full and not sprinting.
+    /// </summary>
     private void UpdateStaminaUI()
     {
         if (_playerStamina.SprintActive || _greenBar.fillAmount < maxFillAmount)
