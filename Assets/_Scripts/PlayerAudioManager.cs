@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class PlayerAudioManager : MonoBehaviour
 {
-    [Header("Heartbeats")]
+    private PlayerController _playerController;
     [SerializeField] private GameObject _playerAudio;
+    [SerializeField] private GameObject _groundCheck;
+
+    [Header("Footsteps")]
+    [SerializeField] private AudioSource _mazeFootstepsAudio;
+    [SerializeField] private AudioSource _gardenFootstepsAudio;
+    [SerializeField] private AudioSource _woodFootstepsAudio;
+    private bool isSteppingOnMaze;
+    private bool isSteppingOnGarden;
+    private bool isSteppingOnWood;
+    private float stepTimer = 0.5f;
+    private float stepInterval = 0.5f;
+
+    [Header("Heartbeats")]
     [SerializeField] private AudioSource _heartBeatsAudio;
     private PlayerHealth _playerHealth;
     private bool heartIsBeating;
@@ -13,18 +26,45 @@ public class PlayerAudioManager : MonoBehaviour
 
     void Awake()
     {
+        _playerController = GetComponent<PlayerController>();
         _playerHealth = GetComponent<PlayerHealth>();
     }
 
     void Start()
     {
-        _playerAudio.SetActive(false);
+        _playerAudio.SetActive(true);
+        stepTimer = stepInterval;
     }
 
 
     void Update()
     {
+        stepTimer -= Time.deltaTime;
+
+        if (stepTimer <= 0)
+        {
+            UpdateFootsteps();
+            stepTimer = stepInterval;
+        }
+
         UpdateHeartbeats();
+    }
+
+    private void UpdateFootsteps()
+    {
+        Vector3 raycastOrigin = _groundCheck.transform.position;
+    
+        if (Physics.Raycast(raycastOrigin, Vector3.down, 0.5f, LayerMask.GetMask("MazeFloor")))
+        {
+            isSteppingOnMaze = true;
+
+            if (!_mazeFootstepsAudio.isPlaying && _playerController.IsGrounded && !_playerController.PlayerQuiet
+            && !_playerController.IsSprinting)
+            {
+                _mazeFootstepsAudio.Play();
+            }
+        }
+        
     }
 
     /// <summary>
@@ -37,7 +77,6 @@ public class PlayerAudioManager : MonoBehaviour
         if (_playerHealth.GetDamage && _playerHealth.CurrentHealth <= 35)
         {
             heartIsBeating = true;
-            _playerAudio.SetActive(true);
 
             if (_playerHealth.CurrentHealth <= 35 && _playerHealth.CurrentHealth > 10)
             {
@@ -52,7 +91,6 @@ public class PlayerAudioManager : MonoBehaviour
         {
             heartIsBeating = false;
             _heartBeatsAudio.Stop();
-            _playerAudio.SetActive(false);
         }
 
         if (heartIsBeating && !_heartBeatsAudio.isPlaying)

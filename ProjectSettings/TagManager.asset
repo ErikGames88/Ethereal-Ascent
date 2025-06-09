@@ -13,6 +13,9 @@ TagManager:
   - Ground
   - Mud
   - IceSurface
+  - WoodFloor
+  - GardenFloor
+  - MazeFloor
   layers:
   - Default
   - TransparentFX

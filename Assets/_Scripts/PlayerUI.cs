@@ -56,7 +56,7 @@ public class PlayerUI : MonoBehaviour
     {
         _greenBar.fillAmount = maxFillAmount;
 
-        healthStages.Add(new HealthData(90, 20, 0, 0));
+        healthStages.Add(new HealthData(80, 20, 0, 0));
         healthStages.Add(new HealthData(70, 50, 0, 0));
         healthStages.Add(new HealthData(50, 70, 0, 10));
         healthStages.Add(new HealthData(35, 100, 20, 10));

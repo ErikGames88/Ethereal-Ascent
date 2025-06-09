@@ -56,9 +56,13 @@ public class PlayerController : MonoBehaviour
     [Header("Inputs")]
     private float horizontal;
     private float vertical;
-    bool isSprinting;
     bool constrainDirections;
-    bool playerQuiet;
+    private bool playerQuiet;
+    private bool isSprinting;
+
+    public bool IsGrounded { get => isGrounded; }
+    public bool PlayerQuiet { get => playerQuiet; }
+    public bool IsSprinting { get => isSprinting; }
 
 
     void Awake()

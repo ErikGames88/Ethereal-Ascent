@@ -396,6 +396,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7930133}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &8160577 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
+    type: 3}
+  m_PrefabInstance: {fileID: 718737869100664794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &10582968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,6 +469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -1159,6 +1170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -2381,6 +2397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -2783,6 +2804,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -2954,6 +2980,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -4010,6 +4041,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -5418,6 +5454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -5592,6 +5633,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -5673,6 +5719,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -5769,6 +5820,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -6213,6 +6269,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -7637,6 +7698,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -9536,6 +9602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -10525,6 +10596,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon-2-L0-V1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10693,6 +10769,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -13007,6 +13088,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -13357,6 +13443,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -13820,6 +13911,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -13901,6 +13997,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
         type: 3}
@@ -13991,6 +14092,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16854,6 +16960,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -16935,6 +17046,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -17457,6 +17573,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -17776,6 +17897,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -18220,6 +18346,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -18768,6 +18899,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -19187,6 +19323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -20071,6 +20212,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -20602,6 +20748,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -20863,6 +21014,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -22928,6 +23084,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -24233,6 +24394,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
@@ -25913,6 +26079,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -26130,6 +26301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4934157842760691737, guid: 7d4bd6436e0df0c4ca06a283e2b34fe9,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 4934157842760691737, guid: 7d4bd6436e0df0c4ca06a283e2b34fe9,
         type: 3}
@@ -26422,6 +26598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -28245,6 +28426,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -28416,6 +28602,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -29437,6 +29628,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -30567,6 +30763,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -31138,6 +31339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -31309,6 +31515,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -31687,6 +31898,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -33360,6 +33576,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -33932,6 +34153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -33955,6 +34181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 795286969}
+  - component: {fileID: 795286970}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -33977,6 +34204,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &795286970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795286967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608b4da01890cd24abfbb650f2976eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &795799487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34390,6 +34629,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34462,6 +34706,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -35383,7 +35632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &832575518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36034,6 +36283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -36851,6 +37105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -36932,6 +37191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -37939,6 +38203,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 901258835}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &902458075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4610438496174133, guid: a1c84b63184220f48acd0185a9a9b681,
+    type: 3}
+  m_PrefabInstance: {fileID: 718737869100664794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &903366802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38456,6 +38726,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -39042,6 +39317,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 928311221}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &928803553 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6528695732753922249, guid: a1c84b63184220f48acd0185a9a9b681,
+    type: 3}
+  m_PrefabInstance: {fileID: 718737869100664794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &933082465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39109,6 +39390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569923193155129258, guid: 95364e1019ed0b048aa026e4df53fade,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 8569923193155129258, guid: 95364e1019ed0b048aa026e4df53fade,
         type: 3}
@@ -39507,6 +39793,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -39716,6 +40007,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -40343,6 +40639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -40591,6 +40892,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -40672,6 +40978,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -41187,6 +41498,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -41364,6 +41680,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -41768,6 +42089,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -41967,6 +42293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
         type: 3}
@@ -42324,6 +42655,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -42570,6 +42906,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -43047,6 +43388,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -43162,6 +43508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -43243,6 +43594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
         type: 3}
@@ -43990,6 +44346,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -44419,6 +44780,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -44797,6 +45163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -45244,6 +45615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -45508,6 +45884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -45769,6 +46150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -47194,6 +47580,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -47981,6 +48372,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -48780,6 +49176,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -48951,6 +49352,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -49533,6 +49939,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -50483,6 +50894,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -50564,6 +50980,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -54714,6 +55135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -55374,6 +55800,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -57859,6 +58290,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -58782,6 +59218,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -59598,6 +60039,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -59862,6 +60308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -60070,6 +60521,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -60151,6 +60607,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -60500,6 +60961,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Floor-V9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: d84335de85cf185469cb4288e94c7490,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61353,6 +61819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -61434,6 +61905,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -62481,6 +62957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -63553,6 +64034,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -63634,6 +64120,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -64691,6 +65182,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -66055,6 +66551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -66530,6 +67031,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -66611,6 +67117,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -66785,6 +67296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -67216,6 +67732,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -67387,6 +67908,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -68295,6 +68821,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -68739,6 +69270,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -68937,6 +69473,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -69548,6 +70089,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -69992,6 +70538,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -70079,6 +70630,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -70433,6 +70989,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
@@ -71245,6 +71806,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -71493,6 +72059,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -71664,6 +72235,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -72029,6 +72605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -72476,6 +73057,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -72557,6 +73143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
@@ -72840,11 +73431,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2358f3a1273644c4bb0b9c567ca771d3, type: 3}
+--- !u!82 &1683403454 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9087156799626653850, guid: a1c84b63184220f48acd0185a9a9b681,
+    type: 3}
+  m_PrefabInstance: {fileID: 718737869100664794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1687385700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73709,6 +74311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -74115,6 +74722,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -74753,6 +75365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
@@ -75429,6 +76046,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -75510,6 +76132,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -77115,6 +77742,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -77270,6 +77902,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -81559,6 +82196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -82882,6 +83524,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
         type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -83863,6 +84510,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -85968,6 +86620,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -86136,6 +86793,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -86217,6 +86879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -86559,6 +87226,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -86631,6 +87303,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -87258,6 +87935,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -87816,6 +88498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -88646,6 +89333,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -89299,6 +89991,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -91064,6 +91761,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -91628,6 +92330,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -92470,6 +93177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -92551,6 +93263,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -92905,6 +93622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -94505,6 +95227,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -95287,6 +96014,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4066058893614700728, guid: 05ad1aeb473b9294ab9fc65c34ad24c9,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066058893614700728, guid: 05ad1aeb473b9294ab9fc65c34ad24c9,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -95309,26 +96041,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 458427871582029742, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_Pitch
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 458427871582029742, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: e9924bee92f760e49ba9b001dd79ec35, type: 3}
-    - target: {fileID: 458427871582029742, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1735361148263476731, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: getDamage
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1812509397252060555, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: m_Name
@@ -95384,6 +96096,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _groundCheck
+      value: 
+      objectReference: {fileID: 902458075}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _mazeFootstepsAudio
+      value: 
+      objectReference: {fileID: 8160577}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _woodFootstepsAudio
+      value: 
+      objectReference: {fileID: 1683403454}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _gardenFootstepsAudio
+      value: 
+      objectReference: {fileID: 928803553}
+    - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: _greenBar
@@ -95414,11 +96161,6 @@ PrefabInstance:
       propertyPath: _bloodBackground
       value: 
       objectReference: {fileID: 819222442}
-    - target: {fileID: 9084985849378028739, guid: a1c84b63184220f48acd0185a9a9b681,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95896,6 +96638,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 67f36fc2f5eed5340993efbf17c98694,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 67f36fc2f5eed5340993efbf17c98694,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -96067,6 +96814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: 3a3f84abfbf1e044bbc073343b4a798e,
         type: 3}
@@ -96419,6 +97171,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon-2-L0-V1
       objectReference: {fileID: 0}
+    - target: {fileID: 3238126054647441459, guid: 2358f3a1273644c4bb0b9c567ca771d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: WoodFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96565,6 +97322,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: f6ee86f8a03fb324c987fa46adbe95c0,
         type: 3}
@@ -97794,6 +98556,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8569923193155129258, guid: 95364e1019ed0b048aa026e4df53fade,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569923193155129258, guid: 95364e1019ed0b048aa026e4df53fade,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -98598,6 +99365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914731596578472708, guid: b49129a63a0346d42b473c15fd036bde,
         type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914731596578472708, guid: b49129a63a0346d42b473c15fd036bde,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -98763,6 +99535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815287715129476368, guid: 87234c13a39afac43bf8918750f60b34,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeFloor
       objectReference: {fileID: 0}
     - target: {fileID: 6815287715129476368, guid: 87234c13a39afac43bf8918750f60b34,
         type: 3}

@@ -4,15 +4,56 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool isAlive;
+    private bool isDead;
+    private PlayerHealth _playerHealth;
+
+    private GameStates _gameStates;
+    private enum GameStates
     {
-        
+        Playing,
+        Pause,
+        GameOver,
     }
 
-    // Update is called once per frame
+    void Awake()
+    {
+        _playerHealth = FindObjectOfType<PlayerHealth>();
+
+        _gameStates = GameStates.Playing;
+        isAlive = true;
+        isDead = false;
+    }
+
+    void Start()
+    {
+
+    }
+
     void Update()
     {
-        
+        GameOver();
+    }
+
+    private void GameOver()
+    {
+        if (_playerHealth.CurrentHealth <= 0)
+        {
+            if (!isDead)
+            {
+                _gameStates = GameStates.GameOver;
+                isDead = true;
+                isAlive = false;
+            }
+        }
+        else
+        {
+            if (!isAlive)
+            {
+                _gameStates = GameStates.Playing;
+                isDead = false;
+                isAlive = true;
+            }
+        }
     }
 }
