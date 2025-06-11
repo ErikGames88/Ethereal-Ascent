@@ -18,6 +18,7 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private AudioSource _mazeFootstepsAudio;
     [SerializeField] private AudioClip _mazeFootstepsClip;
     [SerializeField] private AudioSource _gardenFootstepsAudio;
+    [SerializeField] private AudioClip _gardenFootstepsClip;
     [SerializeField] private AudioSource _woodFootstepsAudio;
     private bool isSteppingOnMaze;
     private bool isSteppingOnGarden;
@@ -55,9 +56,16 @@ public class PlayerAudioManager : MonoBehaviour
             stepTimer = stepInterval;
         }
 
+        UpdateFallenSteps();
         UpdateHeartbeats();
     }
 
+    /// <summary>
+    /// Updates the footsteps sound logic.
+    /// Plays appropriate footstep sounds depending on the surface type, player movement state,
+    /// and whether the player is sprinting or walking.
+    /// The step interval is dynamically adjusted based on sprint state and direction.
+    /// </summary>
     private void UpdateFootsteps()
     {
         Vector3 raycastOrigin = _groundCheck.transform.position;
@@ -67,12 +75,9 @@ public class PlayerAudioManager : MonoBehaviour
         {
             isSteppingOnMaze = true;
 
-            if (_playerController.IsGrounded && !_playerController.PlayerQuiet
-            && hit.collider.tag == "MazeFloor")
+            if (_playerController.IsGrounded && !_playerController.PlayerQuiet && hit.collider.tag == "MazeFloor")
             {
-                wasGrounded = true;
-
-                if (_playerStamina.CanSprint && _playerStamina.SprintActive)
+                if (_playerStamina.CanSprint && _playerStamina.SprintActive && !_playerController.ConstrainDirections)
                 {
                     stepInterval = 0.3f;
                 }
@@ -84,10 +89,6 @@ public class PlayerAudioManager : MonoBehaviour
                 _mazeFootstepsAudio.pitch = 1.6f;
                 _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
 
-                if (!wasGrounded && _playerController.IsGrounded)
-                {
-                    wasGrounded = true;
-                }
             }
         }
         else
@@ -97,9 +98,25 @@ public class PlayerAudioManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Updates the fallen step sound logic.
+    /// Plays a single footstep sound when the player lands on the Maze floor after being in the air.
+    /// Works independently of the regular step interval to ensure an immediate landing sound.
+    /// </summary>
+    private void UpdateFallenSteps()
+    {
+        if (!wasGrounded && _playerController.IsGrounded && isSteppingOnMaze)
+        {
+            wasGrounded = true;
+            _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
+        }
+
+        wasGrounded = _playerController.IsGrounded;
+    }
+
+    /// <summary>
     /// Updates the heartbeats audio logic.
     /// Plays heartbeat sound when the player is damaged and has low health.
-    /// Adjusts pitch depending on the current health level.
+    /// Dynamically adjusts the heartbeat pitch depending on the player's current health level.
     /// </summary>
     private void UpdateHeartbeats()
     {
