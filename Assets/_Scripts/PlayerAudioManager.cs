@@ -20,9 +20,17 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private AudioSource _gardenFootstepsAudio;
     [SerializeField] private AudioClip _gardenFootstepsClip;
     [SerializeField] private AudioSource _woodFootstepsAudio;
+    [SerializeField] private AudioClip _woodFootstepsClip;
+    [SerializeField] private AudioSource _grassFootstepsAudio;
+    [SerializeField] private AudioClip _grassFootstepsClip;
+    [SerializeField] private AudioSource _rockFootstepsAudio;
+    [SerializeField] private AudioClip _rockFootstepsClip;
+    [SerializeField] private AudioSource _dungeonFootstepsAudio;
+    [SerializeField] private AudioClip _dungeonFootstepsClip;
     private bool isSteppingOnMaze;
     private bool isSteppingOnGarden;
     private bool isSteppingOnWood;
+    private string currentFloorTag;
     private float stepTimer = 0.5f;
     private float stepInterval;
 
@@ -70,13 +78,51 @@ public class PlayerAudioManager : MonoBehaviour
     {
         Vector3 raycastOrigin = _groundCheck.transform.position;
         RaycastHit hit;
-
+        
         if (Physics.Raycast(raycastOrigin, Vector3.down, out hit, 0.5f, LayerMask.GetMask("Ground")))
         {
-            isSteppingOnMaze = true;
+            currentFloorTag = hit.collider.tag;
 
-            if (_playerController.IsGrounded && !_playerController.PlayerQuiet && hit.collider.tag == "MazeFloor")
+            if (_playerController.IsGrounded && !_playerController.PlayerQuiet)
             {
+                switch (currentFloorTag)
+                {
+                    case "MazeFloor":
+                        isSteppingOnMaze = true;
+
+                        _mazeFootstepsAudio.pitch = 1.6f;
+                        _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
+                        break;
+                    case "GardenFloor":
+                        isSteppingOnGarden = true;
+
+                        _gardenFootstepsAudio.pitch = 1.6f;
+                        _gardenFootstepsAudio.PlayOneShot(_gardenFootstepsClip);
+                        break;
+                    case "WoodFloor":
+                        isSteppingOnWood = true;
+
+                        _woodFootstepsAudio.pitch = 1.6f;
+                        _woodFootstepsAudio.PlayOneShot(_woodFootstepsClip);
+                        break;
+                    case "GrassFloor":
+                        _grassFootstepsAudio.pitch = 1.6f;
+                        _grassFootstepsAudio.PlayOneShot(_grassFootstepsClip);
+                        break;
+                    case "RockFloor":
+                        _rockFootstepsAudio.pitch = 1f;
+                        _rockFootstepsAudio.PlayOneShot(_rockFootstepsClip);
+                        break;
+                    case "DungeonFloor":
+                        //_dungeonFootstepsAudio.pitch = 1.6f;
+                        //_dungeonFootstepsAudio.reverbZoneMix = 1.0f;
+                        _dungeonFootstepsAudio.PlayOneShot(_dungeonFootstepsClip);
+                        break;
+                    default:
+                        break;
+
+                }
+
                 if (_playerStamina.CanSprint && _playerStamina.SprintActive && !_playerController.ConstrainDirections)
                 {
                     stepInterval = 0.3f;
@@ -85,15 +131,7 @@ public class PlayerAudioManager : MonoBehaviour
                 {
                     stepInterval = 0.5f;
                 }
-
-                _mazeFootstepsAudio.pitch = 1.6f;
-                _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
-
             }
-        }
-        else
-        {
-            isSteppingOnMaze = false;
         }
     }
 
@@ -104,10 +142,35 @@ public class PlayerAudioManager : MonoBehaviour
     /// </summary>
     private void UpdateFallenSteps()
     {
-        if (!wasGrounded && _playerController.IsGrounded && isSteppingOnMaze)
+        if (!wasGrounded && _playerController.IsGrounded)
         {
             wasGrounded = true;
-            _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
+
+            switch (currentFloorTag)
+            {
+                case "MazeFloor":
+                    _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
+                    break;
+                case "GardenFloor":
+                    _gardenFootstepsAudio.PlayOneShot(_gardenFootstepsClip);
+                    break;
+                case "WoodFloor":
+                    _woodFootstepsAudio.PlayOneShot(_woodFootstepsClip);
+                    break;
+                case "GrassFloor":
+                    _grassFootstepsAudio.PlayOneShot(_grassFootstepsClip);
+                    break;
+                case "RockFloor":
+                    _rockFootstepsAudio.PlayOneShot(_rockFootstepsClip);
+                    break;
+                case "DungeonFloor":
+                    _dungeonFootstepsAudio.reverbZoneMix = 1.0f;
+                    _rockFootstepsAudio.PlayOneShot(_dungeonFootstepsClip);
+                    break;
+                default:
+                    break;
+
+            }
         }
 
         wasGrounded = _playerController.IsGrounded;

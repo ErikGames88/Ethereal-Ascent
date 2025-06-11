@@ -16,6 +16,9 @@ TagManager:
   - WoodFloor
   - GardenFloor
   - MazeFloor
+  - GrassFloor
+  - RockFloor
+  - DungeonFloor
   layers:
   - Default
   - TransparentFX
