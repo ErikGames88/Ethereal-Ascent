@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(PlayerStamina))]
 public class PlayerAudioManager : MonoBehaviour
 {
+    [Header("Dependences")]
     private PlayerController _playerController;
+    private PlayerStamina _playerStamina;
     [SerializeField] private GameObject _playerAudio;
     [SerializeField] private GameObject _groundCheck;
+    private bool wasGrounded;
 
     [Header("Footsteps")]
     [SerializeField] private AudioSource _mazeFootstepsAudio;
+    [SerializeField] private AudioClip _mazeFootstepsClip;
     [SerializeField] private AudioSource _gardenFootstepsAudio;
     [SerializeField] private AudioSource _woodFootstepsAudio;
     private bool isSteppingOnMaze;
     private bool isSteppingOnGarden;
     private bool isSteppingOnWood;
     private float stepTimer = 0.5f;
-    private float stepInterval = 0.5f;
+    private float stepInterval;
 
     [Header("Heartbeats")]
     [SerializeField] private AudioSource _heartBeatsAudio;
@@ -28,6 +35,7 @@ public class PlayerAudioManager : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _playerHealth = GetComponent<PlayerHealth>();
+        _playerStamina = GetComponent<PlayerStamina>();
     }
 
     void Start()
@@ -53,18 +61,39 @@ public class PlayerAudioManager : MonoBehaviour
     private void UpdateFootsteps()
     {
         Vector3 raycastOrigin = _groundCheck.transform.position;
-    
-        if (Physics.Raycast(raycastOrigin, Vector3.down, 0.5f, LayerMask.GetMask("MazeFloor")))
+        RaycastHit hit;
+
+        if (Physics.Raycast(raycastOrigin, Vector3.down, out hit, 0.5f, LayerMask.GetMask("Ground")))
         {
             isSteppingOnMaze = true;
 
-            if (!_mazeFootstepsAudio.isPlaying && _playerController.IsGrounded && !_playerController.PlayerQuiet
-            && !_playerController.IsSprinting)
+            if (_playerController.IsGrounded && !_playerController.PlayerQuiet
+            && hit.collider.tag == "MazeFloor")
             {
-                _mazeFootstepsAudio.Play();
+                wasGrounded = true;
+
+                if (_playerStamina.CanSprint && _playerStamina.SprintActive)
+                {
+                    stepInterval = 0.3f;
+                }
+                else
+                {
+                    stepInterval = 0.5f;
+                }
+
+                _mazeFootstepsAudio.pitch = 1.6f;
+                _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
+
+                if (!wasGrounded && _playerController.IsGrounded)
+                {
+                    wasGrounded = true;
+                }
             }
         }
-        
+        else
+        {
+            isSteppingOnMaze = false;
+        }
     }
 
     /// <summary>

@@ -96103,6 +96103,21 @@ PrefabInstance:
       objectReference: {fileID: 902458075}
     - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
+      propertyPath: stepInterval
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _mazeFootstepClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c880c590397a8094fb7ebfe133d07039, type: 3}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _mazeFootstepsClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c880c590397a8094fb7ebfe133d07039, type: 3}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
       propertyPath: _mazeFootstepsAudio
       value: 
       objectReference: {fileID: 8160577}
@@ -96116,6 +96131,21 @@ PrefabInstance:
       propertyPath: _gardenFootstepsAudio
       value: 
       objectReference: {fileID: 928803553}
+    - target: {fileID: 3796306950147676083, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_Name
+      value: Footsteps Maze
+      objectReference: {fileID: 0}
+    - target: {fileID: 5880672611777733715, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_Name
+      value: Footsteps Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 6528695732753922249, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: Loop
@@ -96123,8 +96153,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
+      propertyPath: m_Pitch
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
       propertyPath: m_Volume
-      value: 0.6
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6668544215155585548, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
@@ -96161,6 +96201,11 @@ PrefabInstance:
       propertyPath: _bloodBackground
       value: 
       objectReference: {fileID: 819222442}
+    - target: {fileID: 7729888814045380424, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: m_Name
+      value: Footsteps Garden
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

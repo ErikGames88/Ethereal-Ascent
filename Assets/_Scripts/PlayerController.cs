@@ -159,9 +159,11 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+
         isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         constrainDirections = vertical < 0 || horizontal != 0;
         playerQuiet = horizontal == 0 && vertical == 0;
+        
         float yVelocity = _rigidbody.velocity.y;
         float modifier = 0.5f;
         
