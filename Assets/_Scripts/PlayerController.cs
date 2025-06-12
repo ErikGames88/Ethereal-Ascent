@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float iceBrakeFactor;
     Vector3 lastMoveDirection;
     private bool isOnIce;
+    public bool IsOnIce { get => isOnIce; set => isOnIce = value; }
 
     [Header("Dependencies")]
     [SerializeField] private Transform _camera;

@@ -11,22 +11,38 @@ public class PlayerAudioManager : MonoBehaviour
     private PlayerController _playerController;
     private PlayerStamina _playerStamina;
     [SerializeField] private GameObject _playerAudio;
+    [SerializeField] private GameObject _footstepsAudio;
     [SerializeField] private GameObject _groundCheck;
     private bool wasGrounded;
 
-    [Header("Footsteps")]
+    [Header("Footsteps Audio Sources")]
     [SerializeField] private AudioSource _mazeFootstepsAudio;
-    [SerializeField] private AudioClip _mazeFootstepsClip;
     [SerializeField] private AudioSource _gardenFootstepsAudio;
-    [SerializeField] private AudioClip _gardenFootstepsClip;
     [SerializeField] private AudioSource _woodFootstepsAudio;
-    [SerializeField] private AudioClip _woodFootstepsClip;
     [SerializeField] private AudioSource _grassFootstepsAudio;
-    [SerializeField] private AudioClip _grassFootstepsClip;
     [SerializeField] private AudioSource _rockFootstepsAudio;
-    [SerializeField] private AudioClip _rockFootstepsClip;
     [SerializeField] private AudioSource _dungeonFootstepsAudio;
+    [SerializeField] private AudioSource _mudAudio;
+    [SerializeField] private AudioSource _iceAudio;
+
+
+    [Header("Footsteps Audio Clips")]
+    [SerializeField] private AudioClip _mazeFootstepsClip;
+    [SerializeField] private AudioClip _gardenFootstepsClip;
+    [SerializeField] private AudioClip _woodFootstepsClip;
+    
+    [SerializeField] private AudioClip _grassFootstepsClip;
+    [SerializeField] private AudioClip _rockFootstepsClip;
     [SerializeField] private AudioClip _dungeonFootstepsClip;
+    [SerializeField] private AudioClip _mudClip;
+    [SerializeField] private AudioClip _iceClip;
+
+
+    [Header("Heartbeats")]
+    [SerializeField] private AudioSource _heartBeatsAudio;
+    private PlayerHealth _playerHealth;
+    private bool heartIsBeating;
+
     private bool isSteppingOnMaze;
     private bool isSteppingOnGarden;
     private bool isSteppingOnWood;
@@ -34,10 +50,7 @@ public class PlayerAudioManager : MonoBehaviour
     private float stepTimer = 0.5f;
     private float stepInterval;
 
-    [Header("Heartbeats")]
-    [SerializeField] private AudioSource _heartBeatsAudio;
-    private PlayerHealth _playerHealth;
-    private bool heartIsBeating;
+    
 
 
     void Awake()
@@ -60,7 +73,16 @@ public class PlayerAudioManager : MonoBehaviour
 
         if (stepTimer <= 0)
         {
-            UpdateFootsteps();
+            if (_playerController.IsOnMud && !_playerController.PlayerQuiet)
+            {
+                _mudAudio.PlayOneShot(_mudClip);
+            }
+            else
+            {
+                _mudAudio.Stop();
+                UpdateFootsteps();
+            }
+
             stepTimer = stepInterval;
         }
 
@@ -78,7 +100,7 @@ public class PlayerAudioManager : MonoBehaviour
     {
         Vector3 raycastOrigin = _groundCheck.transform.position;
         RaycastHit hit;
-        
+
         if (Physics.Raycast(raycastOrigin, Vector3.down, out hit, 0.5f, LayerMask.GetMask("Ground")))
         {
             currentFloorTag = hit.collider.tag;
@@ -114,8 +136,6 @@ public class PlayerAudioManager : MonoBehaviour
                         _rockFootstepsAudio.PlayOneShot(_rockFootstepsClip);
                         break;
                     case "DungeonFloor":
-                        //_dungeonFootstepsAudio.pitch = 1.6f;
-                        //_dungeonFootstepsAudio.reverbZoneMix = 1.0f;
                         _dungeonFootstepsAudio.PlayOneShot(_dungeonFootstepsClip);
                         break;
                     default:
@@ -123,7 +143,8 @@ public class PlayerAudioManager : MonoBehaviour
 
                 }
 
-                if (_playerStamina.CanSprint && _playerStamina.SprintActive && !_playerController.ConstrainDirections)
+                if (_playerStamina.CanSprint && _playerStamina.SprintActive
+                && !_playerController.ConstrainDirections)
                 {
                     stepInterval = 0.3f;
                 }
@@ -164,8 +185,7 @@ public class PlayerAudioManager : MonoBehaviour
                     _rockFootstepsAudio.PlayOneShot(_rockFootstepsClip);
                     break;
                 case "DungeonFloor":
-                    _dungeonFootstepsAudio.reverbZoneMix = 1.0f;
-                    _rockFootstepsAudio.PlayOneShot(_dungeonFootstepsClip);
+                    _dungeonFootstepsAudio.PlayOneShot(_dungeonFootstepsClip);
                     break;
                 default:
                     break;
@@ -205,6 +225,46 @@ public class PlayerAudioManager : MonoBehaviour
         if (heartIsBeating && !_heartBeatsAudio.isPlaying)
         {
             _heartBeatsAudio.Play();
+        }
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Mud"))
+        {
+            _playerController.IsOnMud = true;
+        }
+
+        if (other.CompareTag("Ice"))
+        {
+            _playerController.IsOnIce = true;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Mud"))
+        {
+            _playerController.IsOnMud = true;
+        }
+
+        if (other.CompareTag("Ice"))
+        {
+            _playerController.IsOnIce = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Mud"))
+        {
+            _playerController.IsOnMud = false;
+        }
+
+        if (other.CompareTag("Ice"))
+        {
+            _playerController.IsOnIce = false;
         }
     }
 }
