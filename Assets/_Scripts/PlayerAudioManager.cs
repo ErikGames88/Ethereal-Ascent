@@ -14,6 +14,7 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private GameObject _footstepsAudio;
     [SerializeField] private GameObject _groundCheck;
     private bool wasGrounded;
+    private bool isPlayingIceSlide;
 
     [Header("Footsteps Audio Sources")]
     [SerializeField] private AudioSource _mazeFootstepsAudio;
@@ -24,18 +25,19 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private AudioSource _dungeonFootstepsAudio;
     [SerializeField] private AudioSource _mudAudio;
     [SerializeField] private AudioSource _iceAudio;
+    [SerializeField] private AudioSource _iceSlideAudio;
 
 
     [Header("Footsteps Audio Clips")]
     [SerializeField] private AudioClip _mazeFootstepsClip;
     [SerializeField] private AudioClip _gardenFootstepsClip;
     [SerializeField] private AudioClip _woodFootstepsClip;
-    
     [SerializeField] private AudioClip _grassFootstepsClip;
     [SerializeField] private AudioClip _rockFootstepsClip;
     [SerializeField] private AudioClip _dungeonFootstepsClip;
     [SerializeField] private AudioClip _mudClip;
     [SerializeField] private AudioClip _iceClip;
+    [SerializeField] private AudioClip _iceSlideClip;
 
 
     [Header("Heartbeats")]
@@ -73,14 +75,20 @@ public class PlayerAudioManager : MonoBehaviour
 
         if (stepTimer <= 0)
         {
-            if (_playerController.IsOnMud && !_playerController.PlayerQuiet)
+            if (!_playerController.PlayerQuiet)
             {
-                _mudAudio.PlayOneShot(_mudClip);
-            }
-            else
-            {
-                _mudAudio.Stop();
-                UpdateFootsteps();
+                if (_playerController.IsOnMud)
+                {
+                    UpdateMudSteps();
+                }
+                else if (_playerController.IsOnIce)
+                {
+                    UpdateIceSteps();
+                }
+                else
+                {
+                    UpdateFootsteps();
+                }
             }
 
             stepTimer = stepInterval;
@@ -228,6 +236,42 @@ public class PlayerAudioManager : MonoBehaviour
         }
     }
 
+    private void UpdateMudSteps()
+    {
+        if (_playerController.IsOnMud)
+        {
+            _mudAudio.PlayOneShot(_mudClip);
+        }
+        else
+        {
+            _mudAudio.Stop();
+        }
+    }
+
+    private void UpdateIceSteps()
+    {
+        if (!_playerController.IsSlidingOnIce)
+        {
+            isPlayingIceSlide = false;
+
+            if (_playerController.IsOnIce)
+            {
+                _iceAudio.PlayOneShot(_iceClip);
+            }
+            else
+            {
+                _iceAudio.Stop();
+            }
+        }
+        else
+        {
+            if (!isPlayingIceSlide)
+            {
+                isPlayingIceSlide = true;
+                _iceSlideAudio.PlayOneShot(_iceSlideClip);
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -236,7 +280,7 @@ public class PlayerAudioManager : MonoBehaviour
             _playerController.IsOnMud = true;
         }
 
-        if (other.CompareTag("Ice"))
+        if (other.CompareTag("IceSurface"))
         {
             _playerController.IsOnIce = true;
         }
@@ -249,7 +293,7 @@ public class PlayerAudioManager : MonoBehaviour
             _playerController.IsOnMud = true;
         }
 
-        if (other.CompareTag("Ice"))
+        if (other.CompareTag("IceSurface"))
         {
             _playerController.IsOnIce = true;
         }
@@ -262,7 +306,7 @@ public class PlayerAudioManager : MonoBehaviour
             _playerController.IsOnMud = false;
         }
 
-        if (other.CompareTag("Ice"))
+        if (other.CompareTag("IceSurface"))
         {
             _playerController.IsOnIce = false;
         }

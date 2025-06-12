@@ -48,7 +48,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float iceBrakeFactor;
     Vector3 lastMoveDirection;
     private bool isOnIce;
+    private bool isSlidingOnIce;
     public bool IsOnIce { get => isOnIce; set => isOnIce = value; }
+    public bool IsSlidingOnIce { get => isSlidingOnIce; set => IsSlidingOnIce = value; }
 
     [Header("Dependencies")]
     [SerializeField] private Transform _camera;
@@ -229,7 +231,12 @@ public class PlayerController : MonoBehaviour
         {
             if (playerQuiet)
             {
+                isSlidingOnIce = true; // DECIMOS QUE ES TRUE SI ESTÁ QUIETO
                 lastMoveDirection = Vector3.Lerp(lastMoveDirection, Vector3.zero, iceBrakeFactor);
+            }
+            else
+            {
+                isSlidingOnIce = false;
             }
 
             _rigidbody.AddForce(lastMoveDirection * iceForce, ForceMode.Acceleration);
