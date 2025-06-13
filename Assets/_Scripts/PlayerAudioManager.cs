@@ -14,7 +14,7 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private GameObject _footstepsAudio;
     [SerializeField] private GameObject _groundCheck;
     private bool wasGrounded;
-    private bool isPlayingIceSlide;
+    private bool isPlayingIceSlideAudio;
 
     [Header("Footsteps Audio Sources")]
     [SerializeField] private AudioSource _mazeFootstepsAudio;
@@ -75,7 +75,7 @@ public class PlayerAudioManager : MonoBehaviour
 
         if (stepTimer <= 0)
         {
-            if (!_playerController.PlayerQuiet)
+            if (!_playerController.PlayerQuiet || _playerController.IsSlidingOnIce)
             {
                 if (_playerController.IsOnMud)
                 {
@@ -252,7 +252,7 @@ public class PlayerAudioManager : MonoBehaviour
     {
         if (!_playerController.IsSlidingOnIce)
         {
-            isPlayingIceSlide = false;
+            isPlayingIceSlideAudio = false;
 
             if (_playerController.IsOnIce)
             {
@@ -265,10 +265,22 @@ public class PlayerAudioManager : MonoBehaviour
         }
         else
         {
-            if (!isPlayingIceSlide)
+            if (!isPlayingIceSlideAudio)
             {
-                isPlayingIceSlide = true;
-                _iceSlideAudio.PlayOneShot(_iceSlideClip);
+                isPlayingIceSlideAudio = true;
+                
+                if (_playerController.IsOnIce || _playerController.PlayerQuiet)
+                {
+                    _iceSlideAudio.PlayOneShot(_iceSlideClip);
+                }
+            }
+            else
+            {
+                if (!_playerController.IsOnIce || !_playerController.PlayerQuiet || !_playerController.IsSlidingOnIce)
+                {
+                    _iceSlideAudio.Stop();
+                    isPlayingIceSlideAudio = false;
+                }
             }
         }
     }
@@ -309,6 +321,8 @@ public class PlayerAudioManager : MonoBehaviour
         if (other.CompareTag("IceSurface"))
         {
             _playerController.IsOnIce = false;
+            isPlayingIceSlideAudio = false;
+            _iceSlideAudio.Stop();
         }
     }
 }

@@ -167,10 +167,10 @@ public class PlayerController : MonoBehaviour
         isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         constrainDirections = vertical < 0 || horizontal != 0;
         playerQuiet = horizontal == 0 && vertical == 0;
-        
+
         float yVelocity = _rigidbody.velocity.y;
         float modifier = 0.5f;
-        
+
         Vector3 movement = (transform.right * horizontal + transform.forward * vertical).normalized;
 
         if (movement != Vector3.zero)
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentSpeed = mudSpeed;
             }
-            else if (!constrainDirections && !isSprinting && !isCrouched) 
+            else if (!constrainDirections && !isSprinting && !isCrouched)
             {
                 currentSpeed = speed;
             }
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentSpeed = speed;
             }
-            else if (constrainDirections && !isSprinting && !isCrouched) 
+            else if (constrainDirections && !isSprinting && !isCrouched)
             {
                 currentSpeed = speed * modifier;
             }
@@ -208,11 +208,11 @@ public class PlayerController : MonoBehaviour
             {
                 currentSpeed = speed * modifier;
             }
-            else if (!constrainDirections && isCrouched) 
+            else if (!constrainDirections && isCrouched)
             {
                 currentSpeed = crouchSpeed;
             }
-            else if (constrainDirections && isCrouched) 
+            else if (constrainDirections && isCrouched)
             {
                 currentSpeed = crouchSpeed * modifier;
             }
@@ -226,19 +226,16 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.velocity = new Vector3(movement.x * currentSpeed, yVelocity, movement.z * currentSpeed);
             Debug.Log($"Current Speed: {currentSpeed}");
+            isSlidingOnIce = false;
         }
-        else if (lastMoveDirection != Vector3.zero)
+        else if (lastMoveDirection != Vector3.zero && IsOnIce)
         {
             if (playerQuiet)
             {
-                isSlidingOnIce = true; // DECIMOS QUE ES TRUE SI ESTÁ QUIETO
+                isSlidingOnIce = true;
                 lastMoveDirection = Vector3.Lerp(lastMoveDirection, Vector3.zero, iceBrakeFactor);
             }
-            else
-            {
-                isSlidingOnIce = false;
-            }
-
+            
             _rigidbody.AddForce(lastMoveDirection * iceForce, ForceMode.Acceleration);
         }
     }
