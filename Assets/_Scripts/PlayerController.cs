@@ -16,9 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private LayerMask groundMask;
 
+
     [Header("Jump")]
     [SerializeField] private float jumpForce;
     private bool isJumping;
+    public bool IsJumping { get => isJumping; }
+
 
     [Header("Crouch")]
     [SerializeField] private float crouchSpeed;
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private float originalColliderHeight;
     private Vector3 originalCameraPosition;
     private CapsuleCollider _collider;
+    public bool IsCrouched { get => isCrouched; }
+
     
     [Header("Dodge")]
     [SerializeField] private float dodgeForce;
@@ -37,11 +42,14 @@ public class PlayerController : MonoBehaviour
     private bool isDodging;
     private bool canDodge;
     private Vector3 dodgeDirection;
+    public bool IsDodging { get => isDodging; }
+
 
     [Header("Mud")]
     [SerializeField] private float mudSpeed;
     private bool isOnMud;
     public bool IsOnMud { get => isOnMud; set => isOnMud = value; }
+
 
     [Header("Ice")]
     [SerializeField] private float iceForce;
@@ -52,9 +60,11 @@ public class PlayerController : MonoBehaviour
     public bool IsOnIce { get => isOnIce; set => isOnIce = value; }
     public bool IsSlidingOnIce { get => isSlidingOnIce; set => IsSlidingOnIce = value; }
 
+
     [Header("Dependencies")]
     [SerializeField] private Transform _camera;
     private PlayerStamina _playerStamina;
+
 
     [Header("Inputs")]
     private float horizontal;
@@ -107,10 +117,11 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
         }
 
-        if (!isOnMud)
-        {
-            PlayerCrouch();
-        }
+        // if (!isOnMud)
+        // {
+        //     PlayerCrouch();
+        // }
+        PlayerCrouch();
 
         bool leftInput = Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.LeftAlt);
         bool rightInput = Input.GetKey(KeyCode.D) && Input.GetKeyDown(KeyCode.LeftAlt);
@@ -131,6 +142,8 @@ public class PlayerController : MonoBehaviour
             isDodging = true;
             dodgeDirection = -transform.forward;
         }
+
+        //Debug.Log($"[ICE DEBUG] IsOnIce: {isOnIce}, IsSlidingOnIce: {isSlidingOnIce}, PlayerQuiet: {playerQuiet}");
     }
 
     void FixedUpdate()
@@ -235,6 +248,10 @@ public class PlayerController : MonoBehaviour
                 isSlidingOnIce = true;
                 lastMoveDirection = Vector3.Lerp(lastMoveDirection, Vector3.zero, iceBrakeFactor);
             }
+            else
+            {
+                isSlidingOnIce = false;
+            }
             
             _rigidbody.AddForce(lastMoveDirection * iceForce, ForceMode.Acceleration);
         }
@@ -280,7 +297,7 @@ public class PlayerController : MonoBehaviour
             _camera.transform.localPosition = crouchCameraPosition;
         }
 
-        if (!crouchInput && isGrounded && isCrouched && !crouchCeiling)
+        if ((!crouchInput && isGrounded && isCrouched && !crouchCeiling) || isOnIce || isOnMud)
         {
             isCrouched = false;
 

@@ -22,10 +22,15 @@ public class PlayerStamina : MonoBehaviour
     public float DodgeStaminaCost { get => dodgeStaminaCost; }
     public bool SprintActive { get => sprintActive; }
     public bool CanSprint { get => canSprint; set => canSprint = value; }
+    public float MaxStamina { get => maxStamina; }
+
+    private PlayerController _playerController;
 
 
     void Awake()
     {
+        _playerController = GetComponent<PlayerController>();
+
         maxStamina = 100f;
         minStamina = 0f;
 
@@ -56,7 +61,7 @@ public class PlayerStamina : MonoBehaviour
     /// </summary>
     public void HandleStamina()
     {
-        if (sprintActive && canSprint)
+        if (sprintActive && canSprint && !_playerController.PlayerQuiet)
         {
             currentStamina -= staminaDrainRate * Time.deltaTime;
 

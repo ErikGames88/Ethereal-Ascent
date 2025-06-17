@@ -112,7 +112,8 @@ public class PlayerUI : MonoBehaviour
     /// </summary>
     private void UpdateStaminaUI()
     {
-        if (_playerStamina.SprintActive || _greenBar.fillAmount < maxFillAmount)
+        if ((_playerStamina.SprintActive || _greenBar.fillAmount < maxFillAmount)
+        && _playerStamina.CurrentStamina < _playerStamina.MaxStamina) 
         {
             _staminaBar.SetActive(true);
         }
