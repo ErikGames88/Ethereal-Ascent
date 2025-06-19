@@ -53,6 +53,8 @@ public class PlayerAudioManager : MonoBehaviour
     private bool isSteppingOnGarden;
     private bool isSteppingOnWood;
     private bool isCrawling;
+    private bool hasPlayedJumpGrunt;
+    private bool hasPlayedDodgeGrunt;
 
     private string currentFloorTag;
     private float stepTimer = 0.5f;
@@ -61,9 +63,8 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private float sprintStepInterval = 0.3f;
     [SerializeField] private float iceStepInterval = 0.25f;
     [SerializeField] private float crawlInterval;
-    [SerializeField] private float gruntInterval;
 
-    
+
 
 
     void Awake()
@@ -71,6 +72,12 @@ public class PlayerAudioManager : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _playerHealth = GetComponent<PlayerHealth>();
         _playerStamina = GetComponent<PlayerStamina>();
+    }
+
+    void OnEnable()
+    {
+        _playerController.OnJump += UpdateGruntAudio;
+        _playerController.OnDodge += UpdateGruntAudio;
     }
 
     void Start()
@@ -96,15 +103,11 @@ public class PlayerAudioManager : MonoBehaviour
         {
             stepInterval = crawlInterval;
         }
-        else if (_playerController.IsJumping || _playerController.IsDodging)
-        {
-            stepInterval = gruntInterval;
-        }
         else
         {
             stepInterval = normalStepInterval;
         }
-        
+
         if (stepTimer <= 0)
         {
             if (!_playerController.PlayerQuiet || _playerController.IsSlidingOnIce)
@@ -126,11 +129,6 @@ public class PlayerAudioManager : MonoBehaviour
                 else if (_playerController.IsCrouched)
                 {
                     UpdateCrawlAudio();
-                    stepTimer = stepInterval;
-                }
-                else if (_playerController.IsJumping || _playerController.IsDodging)
-                {
-                    UpdateGruntAudio();
                     stepTimer = stepInterval;
                 }
                 else
@@ -156,7 +154,7 @@ public class PlayerAudioManager : MonoBehaviour
         if (_playerController.IsGrounded && !_playerController.PlayerQuiet)
         {
             UpdateCurrentFloorTag();
-        
+
             switch (currentFloorTag)
             {
                 case "MazeFloor":
@@ -203,7 +201,7 @@ public class PlayerAudioManager : MonoBehaviour
                 stepInterval = normalStepInterval;
             }
         }
-        
+
     }
 
     /// <summary>
@@ -325,7 +323,7 @@ public class PlayerAudioManager : MonoBehaviour
                 isPlayingIceSlideAudio = true;
             }
         }
-        else 
+        else
         {
             if (_iceSlideAudio.isPlaying)
             {
@@ -356,14 +354,7 @@ public class PlayerAudioManager : MonoBehaviour
 
     private void UpdateGruntAudio()
     {
-        if (_playerController.IsJumping || _playerController.IsDodging)
-        {
-            _gruntAudio.PlayOneShot(_crawlClip);
-        }
-        else
-        {
-            _gruntAudio.Stop();
-        }
+        _gruntAudio.PlayOneShot(_gruntClip);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -406,5 +397,11 @@ public class PlayerAudioManager : MonoBehaviour
             _iceStepsAudio.Stop();
             _iceSlideAudio.Stop();
         }
+    }
+
+    void OnDisable()
+    {
+        _playerController.OnJump -= UpdateGruntAudio;
+        _playerController.OnDodge -= UpdateGruntAudio;
     }
 }

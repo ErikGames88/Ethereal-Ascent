@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpForce;
     private bool isJumping;
+    public event Action OnJump;
     public bool IsJumping { get => isJumping; }
 
 
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private bool isDodging;
     private bool canDodge;
     private Vector3 dodgeDirection;
+    public event Action OnDodge;
     public bool IsDodging { get => isDodging; }
 
 
@@ -117,10 +120,6 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
         }
 
-        // if (!isOnMud)
-        // {
-        //     PlayerCrouch();
-        // }
         PlayerCrouch();
 
         bool leftInput = Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.LeftAlt);
@@ -263,6 +262,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void PlayerJump()
     {
+        OnJump?.Invoke(); // The same ----->  if(OnJump != null) { OnJump(); }
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
@@ -316,6 +316,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 dodgeJump = Vector3.up;
 
+        OnDodge?.Invoke(); // The same ------>  if(OnDodge != null { OnDodge(); })
         _rigidbody.AddForce((dodgeDirection * dodgeForce) + (dodgeJump * dodgeJumpForce), ForceMode.Impulse);
 
         canDodge = false;
