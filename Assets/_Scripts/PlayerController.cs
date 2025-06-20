@@ -14,14 +14,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sprintSpeed;
     [SerializeField] GameObject _checkGround;
     private Rigidbody _rigidbody;
-    [SerializeField] private bool isGrounded;
+    private bool isGrounded;
+    private bool wasGrounded;
     [SerializeField] private LayerMask groundMask;
+    public event Action OnPlayerLands;
 
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
     private bool isJumping;
-    public event Action OnJump;
+    public event Action OnPlayerJump;
     public bool IsJumping { get => isJumping; }
 
 
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
     private bool isDodging;
     private bool canDodge;
     private Vector3 dodgeDirection;
-    public event Action OnDodge;
+    public event Action OnPlayerDodge;
     public bool IsDodging { get => isDodging; }
 
 
@@ -96,6 +98,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         canDodge = true;
+        wasGrounded = isGrounded;
         
         originalColliderCenter = colliderCenter;
         originalColliderHeight = colliderHeight;
@@ -262,7 +265,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void PlayerJump()
     {
-        OnJump?.Invoke(); // The same ----->  if(OnJump != null) { OnJump(); }
+        OnPlayerJump?.Invoke(); // The same ----->  if(OnJump != null) { OnJump(); }
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
@@ -316,7 +319,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 dodgeJump = Vector3.up;
 
-        OnDodge?.Invoke(); // The same ------>  if(OnDodge != null { OnDodge(); })
+        OnPlayerDodge?.Invoke(); // The same ------>  if(OnDodge != null { OnDodge(); })
         _rigidbody.AddForce((dodgeDirection * dodgeForce) + (dodgeJump * dodgeJumpForce), ForceMode.Impulse);
 
         canDodge = false;
@@ -330,7 +333,13 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void CheckGround()
     {
+        wasGrounded = isGrounded;
         isGrounded = Physics.Raycast(_checkGround.transform.position, -Vector3.up, 0.2f, groundMask);
+
+        if (!wasGrounded && isGrounded)
+        {
+            OnPlayerLands?.Invoke();
+        }
     }
 
     /// <summary>

@@ -10,10 +10,10 @@ public class PlayerAudioManager : MonoBehaviour
     [Header("Dependences")]
     private PlayerController _playerController;
     private PlayerStamina _playerStamina;
+    private PlayerHealth _playerHealth;
     [SerializeField] private GameObject _playerAudio;
     [SerializeField] private GameObject _footstepsAudio;
     [SerializeField] private GameObject _groundCheck;
-    private bool wasGrounded;
     private bool isPlayingIceSlideAudio;
 
     [Header("Footsteps Audio Sources")]
@@ -28,6 +28,8 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private AudioSource _iceSlideAudio;
     [SerializeField] private AudioSource _crawlAudio;
     [SerializeField] private AudioSource _gruntAudio;
+    [SerializeField] private AudioSource _hurtScreamAudio;
+    [SerializeField] private AudioSource _deathScreamAudio;
 
 
     [Header("Footsteps Audio Clips")]
@@ -42,11 +44,12 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField] private AudioClip _iceSlideClip;
     [SerializeField] private AudioClip _crawlClip;
     [SerializeField] private AudioClip _gruntClip;
+    [SerializeField] private AudioClip _hurtScreamClip;
+    [SerializeField] private AudioClip _deathScreamClip;
 
 
     [Header("Heartbeats")]
     [SerializeField] private AudioSource _heartBeatsAudio;
-    private PlayerHealth _playerHealth;
     private bool heartIsBeating;
 
     private bool isSteppingOnMaze;
@@ -76,8 +79,12 @@ public class PlayerAudioManager : MonoBehaviour
 
     void OnEnable()
     {
-        _playerController.OnJump += UpdateGruntAudio;
-        _playerController.OnDodge += UpdateGruntAudio;
+        _playerController.OnPlayerJump += PlayGruntAudio;
+        _playerController.OnPlayerDodge += PlayGruntAudio;
+        _playerController.OnPlayerLands += PlayLandingSounds;
+        _playerHealth.OnPlayerHurt += PlayHurtScreamAudio;
+        _playerHealth.OnPlayerDies += PlayDeathScreamAudio;
+
     }
 
     void Start()
@@ -139,7 +146,6 @@ public class PlayerAudioManager : MonoBehaviour
             }
         }
 
-        UpdateFallenSteps();
         UpdateHeartbeats();
     }
 
@@ -204,48 +210,37 @@ public class PlayerAudioManager : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Updates the fallen step sound logic.
-    /// Plays a single footstep sound when the player lands on the Maze floor after being in the air.
-    /// Works independently of the regular step interval to ensure an immediate landing sound.
-    /// </summary>
-    private void UpdateFallenSteps()
+    private void PlayLandingSounds()
     {
-        if (!wasGrounded && _playerController.IsGrounded)
+        UpdateCurrentFloorTag();
+
+        switch (currentFloorTag)
         {
-            wasGrounded = true;
-            UpdateCurrentFloorTag();
+            case "MazeFloor":
+                _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
+                break;
+            case "GardenFloor":
+                _gardenFootstepsAudio.PlayOneShot(_gardenFootstepsClip);
+                break;
+            case "WoodFloor":
+                _woodFootstepsAudio.PlayOneShot(_woodFootstepsClip);
+                break;
+            case "GrassFloor":
+                _grassFootstepsAudio.PlayOneShot(_grassFootstepsClip);
+                break;
+            case "RockFloor":
+                _rockFootstepsAudio.PlayOneShot(_rockFootstepsClip);
+                break;
+            case "DungeonFloor":
+                _dungeonFootstepsAudio.PlayOneShot(_dungeonFootstepsClip);
+                break;
+            case "IceSurface":
+                _iceStepsAudio.PlayOneShot(_iceStepsClip);
+                break;
+            default:
+                break;
 
-            switch (currentFloorTag)
-            {
-                case "MazeFloor":
-                    _mazeFootstepsAudio.PlayOneShot(_mazeFootstepsClip);
-                    break;
-                case "GardenFloor":
-                    _gardenFootstepsAudio.PlayOneShot(_gardenFootstepsClip);
-                    break;
-                case "WoodFloor":
-                    _woodFootstepsAudio.PlayOneShot(_woodFootstepsClip);
-                    break;
-                case "GrassFloor":
-                    _grassFootstepsAudio.PlayOneShot(_grassFootstepsClip);
-                    break;
-                case "RockFloor":
-                    _rockFootstepsAudio.PlayOneShot(_rockFootstepsClip);
-                    break;
-                case "DungeonFloor":
-                    _dungeonFootstepsAudio.PlayOneShot(_dungeonFootstepsClip);
-                    break;
-                case "IceSurface":
-                    _iceStepsAudio.PlayOneShot(_iceStepsClip);
-                    break;
-                default:
-                    break;
-
-            }
         }
-
-        wasGrounded = _playerController.IsGrounded;
     }
 
     private void UpdateCurrentFloorTag()
@@ -257,6 +252,21 @@ public class PlayerAudioManager : MonoBehaviour
         {
             currentFloorTag = hit.collider.tag;
         }
+    }
+
+    private void PlayGruntAudio()
+    {
+        _gruntAudio.PlayOneShot(_gruntClip);
+    }
+
+    private void PlayHurtScreamAudio()
+    {
+        _hurtScreamAudio.PlayOneShot(_hurtScreamClip);
+    }
+    
+    private void PlayDeathScreamAudio()
+    {
+        _deathScreamAudio.PlayOneShot(_deathScreamClip);
     }
 
     /// <summary>
@@ -352,11 +362,6 @@ public class PlayerAudioManager : MonoBehaviour
         }
     }
 
-    private void UpdateGruntAudio()
-    {
-        _gruntAudio.PlayOneShot(_gruntClip);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Mud"))
@@ -401,7 +406,10 @@ public class PlayerAudioManager : MonoBehaviour
 
     void OnDisable()
     {
-        _playerController.OnJump -= UpdateGruntAudio;
-        _playerController.OnDodge -= UpdateGruntAudio;
+        _playerController.OnPlayerJump -= PlayGruntAudio;
+        _playerController.OnPlayerDodge -= PlayGruntAudio;
+        _playerController.OnPlayerLands -= PlayLandingSounds;
+        _playerHealth.OnPlayerHurt -= PlayHurtScreamAudio;
+        _playerHealth.OnPlayerDies -= PlayDeathScreamAudio;
     }
 }

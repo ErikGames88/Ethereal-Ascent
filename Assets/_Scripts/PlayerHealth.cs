@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,13 +10,32 @@ public class PlayerHealth : MonoBehaviour
     public float CurrentHealth { get => currentHealth; }
     private float maxHeatlh;
     [SerializeField] private bool getDamage; // TODO: ONLY FOR TESTING, REMOVE [SerializeField] LATER
+    public event Action OnPlayerHurt;
+    public event Action OnPlayerDies;
     public bool GetDamage { get => getDamage; set => getDamage = value; }
 
+    
 
     void Awake()
     {
         maxHeatlh = 100f;
         currentHealth = maxHeatlh;
+    }
+
+    void Update() // TEMPORALLY UPDATE!!!!!
+    {
+        // TEMPORALLY!!! JUST TO TEST THE HURT CLIP. REMOVE IT WHEN THERE ARE THINGS WHICH HURTS TO PLAYER
+
+        if (getDamage)
+        {
+            OnPlayerHurt?.Invoke();
+            getDamage = false;
+        }
+
+        if (currentHealth <= 0)
+        {
+            OnPlayerDies?.Invoke();
+        }
     }
 
     /// <summary>
@@ -26,10 +46,13 @@ public class PlayerHealth : MonoBehaviour
     {
         getDamage = true;
         currentHealth -= damage;
-        
+
+        OnPlayerHurt?.Invoke();
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;
+            OnPlayerDies?.Invoke();
 
             // TODO: ESTADO DE GAME OVER
         }

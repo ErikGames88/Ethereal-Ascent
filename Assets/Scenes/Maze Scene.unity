@@ -5806,6 +5806,7 @@ GameObject:
   - component: {fileID: 129317046}
   - component: {fileID: 129317045}
   - component: {fileID: 129317044}
+  - component: {fileID: 129317048}
   m_Layer: 0
   m_Name: Ice (6)
   m_TagString: IceSurface
@@ -5899,6 +5900,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &129317048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129317043}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &129329806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2280040095405436763, guid: da759bc2835e9e042a389946126fba05,
@@ -8735,6 +8757,7 @@ GameObject:
   - component: {fileID: 194025461}
   - component: {fileID: 194025460}
   - component: {fileID: 194025459}
+  - component: {fileID: 194025463}
   m_Layer: 0
   m_Name: Ice (5)
   m_TagString: IceSurface
@@ -8828,6 +8851,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &194025463
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194025458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &194277706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9604,6 +9648,7 @@ GameObject:
   - component: {fileID: 221177867}
   - component: {fileID: 221177866}
   - component: {fileID: 221177865}
+  - component: {fileID: 221177869}
   m_Layer: 0
   m_Name: Ice (8)
   m_TagString: IceSurface
@@ -9697,6 +9742,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &221177869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221177864}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &223498425
 GameObject:
   m_ObjectHideFlags: 0
@@ -23644,6 +23710,7 @@ GameObject:
   - component: {fileID: 483876713}
   - component: {fileID: 483876712}
   - component: {fileID: 483876711}
+  - component: {fileID: 483876715}
   m_Layer: 0
   m_Name: Ice (3)
   m_TagString: IceSurface
@@ -23737,6 +23804,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &483876715
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483876710}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &487840619
 GameObject:
   m_ObjectHideFlags: 0
@@ -37543,6 +37631,7 @@ GameObject:
   - component: {fileID: 847879410}
   - component: {fileID: 847879409}
   - component: {fileID: 847879408}
+  - component: {fileID: 847879412}
   m_Layer: 0
   m_Name: Ice (2)
   m_TagString: IceSurface
@@ -37636,6 +37725,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &847879412
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847879407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &848443715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38169,6 +38279,134 @@ Transform:
   m_Children: []
   m_Father: {fileID: 743771919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &868198904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868198905}
+  - component: {fileID: 868198906}
+  m_Layer: 3
+  m_Name: 'Death Scream Audio   '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &868198905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868198904}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1360095704}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &868198906
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868198904}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &868600986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39814,6 +40052,134 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 901258835}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &902834317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 902834318}
+  - component: {fileID: 902834319}
+  m_Layer: 3
+  m_Name: 'Hurt Audio  '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &902834318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902834317}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1360095704}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &902834319
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902834317}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &903366802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44501,6 +44867,7 @@ GameObject:
   - component: {fileID: 1026138702}
   - component: {fileID: 1026138701}
   - component: {fileID: 1026138700}
+  - component: {fileID: 1026138704}
   m_Layer: 0
   m_Name: Ice (1)
   m_TagString: IceSurface
@@ -44594,6 +44961,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1026138704
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026138699}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &1030165968
 Mesh:
   m_ObjectHideFlags: 0
@@ -61405,6 +61793,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8382320891859694918, guid: 72fa8000b39d6084bb57a0aebfbfab50,
     type: 3}
   m_PrefabInstance: {fileID: 1356531951}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1360095704 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1874301181681686818, guid: a1c84b63184220f48acd0185a9a9b681,
+    type: 3}
+  m_PrefabInstance: {fileID: 718737869100664794}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1361763701 stripped
 GameObject:
@@ -79455,6 +79849,7 @@ GameObject:
   - component: {fileID: 1786832844}
   - component: {fileID: 1786832843}
   - component: {fileID: 1786832842}
+  - component: {fileID: 1786832846}
   m_Layer: 0
   m_Name: Ice (7)
   m_TagString: IceSurface
@@ -79548,6 +79943,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1786832846
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786832841}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1794371264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87354,6 +87770,7 @@ GameObject:
   - component: {fileID: 1896108067}
   - component: {fileID: 1896108066}
   - component: {fileID: 1896108065}
+  - component: {fileID: 1896108069}
   m_Layer: 0
   m_Name: Ice (4)
   m_TagString: IceSurface
@@ -87447,6 +87864,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1896108069
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896108064}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1897217638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99015,6 +99453,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _hurtClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ff6414ada3aecc04ea412be00da7ab76, type: 3}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _hurtAudio
+      value: 
+      objectReference: {fileID: 902834319}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _hurtScreamClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ff6414ada3aecc04ea412be00da7ab76, type: 3}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _deathScreamClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bb97b6bfbc24151479ec3f99d1048381, type: 3}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _hurtScreamAudio
+      value: 
+      objectReference: {fileID: 902834319}
+    - target: {fileID: 3713489431233264795, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      propertyPath: _deathScreamAudio
+      value: 
+      objectReference: {fileID: 868198906}
     - target: {fileID: 7314455882741989972, guid: a1c84b63184220f48acd0185a9a9b681,
         type: 3}
       propertyPath: _greenBar
@@ -99047,7 +99515,15 @@ PrefabInstance:
       objectReference: {fileID: 819222442}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1874301181681686818, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 902834318}
+    - targetCorrespondingSourceObject: {fileID: 1874301181681686818, guid: a1c84b63184220f48acd0185a9a9b681,
+        type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 868198905}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1c84b63184220f48acd0185a9a9b681, type: 3}
 --- !u!1001 &1305425743511145417
