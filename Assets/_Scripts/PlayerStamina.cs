@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerStamina : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class PlayerStamina : MonoBehaviour
     public float MaxStamina { get => maxStamina; }
 
     private PlayerController _playerController;
+
+
+    public event Action OnStaminaBlocked;
+    public event Action OnStaminaRecovered;
 
 
     void Awake()
@@ -68,7 +73,7 @@ public class PlayerStamina : MonoBehaviour
             if (currentStamina <= minStamina)
             {
                 currentStamina = minStamina;
-                canSprint = false;
+                OnStaminaBlocked?.Invoke();
                 sprintActive = false;
             }
         }
@@ -79,7 +84,7 @@ public class PlayerStamina : MonoBehaviour
             if (currentStamina >= maxStamina)
             {
                 currentStamina = maxStamina;
-                canSprint = true;
+                OnStaminaRecovered?.Invoke();
             }
         }
     }

@@ -145,7 +145,7 @@ public class PlayerAudioManager : MonoBehaviour
                 }
             }
         }
-
+        //Debug.Log("HEARTBEATS SOUNDING");
         UpdateHeartbeats();
     }
 

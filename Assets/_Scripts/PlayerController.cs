@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider _collider;
     public bool IsCrouched { get => isCrouched; }
 
-    
+
     [Header("Dodge")]
     [SerializeField] private float dodgeForce;
     [SerializeField] private float dodgeJumpForce;
@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private Transform _camera;
     private PlayerStamina _playerStamina;
+    private bool isSprintRecovered;
 
 
     [Header("Inputs")]
@@ -95,11 +96,17 @@ public class PlayerController : MonoBehaviour
         cameraPosition = _camera.transform.localPosition;
     }
 
+    void OnEnable()
+    {
+        _playerStamina.OnStaminaRecovered += HandleStaminaRecovered;
+        _playerStamina.OnStaminaBlocked += HandleStaminaBlocked;
+    }
+
     void Start()
     {
         canDodge = true;
         wasGrounded = isGrounded;
-        
+
         originalColliderCenter = colliderCenter;
         originalColliderHeight = colliderHeight;
         originalCameraPosition = cameraPosition;
@@ -116,8 +123,11 @@ public class PlayerController : MonoBehaviour
             _playerStamina.CanSprint = false;
         }
 
-        _playerStamina.SetSprintState(isSprinting);
-
+        if (isSprintRecovered)
+        {
+            _playerStamina.SetSprintState(isSprinting);
+        }
+        
         if (isGrounded && inputJump && !isCrouched && !isOnMud)
         {
             isJumping = true;
@@ -203,7 +213,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentSpeed = speed;
             }
-            else if (!constrainDirections && _playerStamina.SprintActive && !isCrouched && _playerStamina.CanSprint) //&& !isOnMud)
+            else if (!constrainDirections && _playerStamina.SprintActive && !isCrouched && isSprintRecovered) //&& !isOnMud)
             {
                 currentSpeed = sprintSpeed;
             }
@@ -254,7 +264,7 @@ public class PlayerController : MonoBehaviour
             {
                 isSlidingOnIce = false;
             }
-            
+
             _rigidbody.AddForce(lastMoveDirection * iceForce, ForceMode.Acceleration);
         }
     }
@@ -342,6 +352,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleStaminaRecovered()
+    {
+        isSprintRecovered = true;
+    }
+
+    private void HandleStaminaBlocked()
+    {
+        isSprintRecovered = false;
+    }
+
     /// <summary>
     /// When entering a trigger with tag "Mud" or "IceSurface", sets movement conditions.
     /// </summary>
@@ -397,5 +417,11 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.2f);
         canDodge = true;
+    }
+
+    void OnDisable()
+    {
+        _playerStamina.OnStaminaRecovered -= HandleStaminaRecovered;
+        _playerStamina.OnStaminaBlocked -= HandleStaminaBlocked;
     }
 }

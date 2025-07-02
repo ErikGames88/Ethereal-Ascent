@@ -26,16 +26,16 @@ public class PlayerHealth : MonoBehaviour
     {
         // TEMPORALLY!!! JUST TO TEST THE HURT CLIP. REMOVE IT WHEN THERE ARE THINGS WHICH HURTS TO PLAYER
 
-        if (getDamage)
-        {
-            OnPlayerHurt?.Invoke();
-            getDamage = false;
-        }
+        // if (getDamage)
+        // {
+        //     OnPlayerHurt?.Invoke();
+        //     getDamage = false;
+        // }
 
-        if (currentHealth <= 0)
-        {
-            OnPlayerDies?.Invoke();
-        }
+        // if (currentHealth <= 0)
+        // {
+        //     OnPlayerDies?.Invoke();
+        // }
     }
 
     /// <summary>
