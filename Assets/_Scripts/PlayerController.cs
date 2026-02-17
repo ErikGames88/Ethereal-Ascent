@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
     public bool IsSprinting { get => isSprinting; }
     public bool ConstrainDirections { get => constrainDirections; }
 
-
+    
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
