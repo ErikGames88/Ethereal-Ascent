@@ -8,6 +8,8 @@ using System;
 [RequireComponent(typeof(PlayerStamina))]
 public class PlayerController : MonoBehaviour
 {
+    // BACKUP BEFORE UNITY 6
+    
     [Header("Movement")]
     private float currentSpeed;
     [SerializeField] private float speed;
