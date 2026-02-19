@@ -23,7 +23,6 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log()
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
 
