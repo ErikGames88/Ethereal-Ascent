@@ -129,4 +129,5 @@ public class PlayerStamina : MonoBehaviour
     {
         return currentStamina / maxStamina;
     }
+    
 }

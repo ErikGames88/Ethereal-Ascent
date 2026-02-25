@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,12 +33,10 @@ public class CameraController : MonoBehaviour
         {
             xRotation += mouseY;
         }
-
-
+        
         xRotation = Mathf.Clamp(xRotation, -rotLimit, rotLimit);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         _player.transform.Rotate(0f, mouseX, 0f);
     }
-    
 }

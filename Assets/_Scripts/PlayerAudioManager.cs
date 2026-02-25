@@ -412,4 +412,5 @@ public class PlayerAudioManager : MonoBehaviour
         _playerHealth.OnPlayerHurt -= PlayHurtScreamAudio;
         _playerHealth.OnPlayerDies -= PlayDeathScreamAudio;
     }
+    
 }

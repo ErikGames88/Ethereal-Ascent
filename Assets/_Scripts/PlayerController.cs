@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
         constrainDirections = vertical < 0 || horizontal != 0;
         playerQuiet = horizontal == 0 && vertical == 0;
 
-        float yVelocity = _rigidbody.velocity.y;
+        float yVelocity = _rigidbody.linearVelocity.y;
         float modifier = 0.5f;
 
         Vector3 movement = (transform.right * horizontal + transform.forward * vertical).normalized;
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && !isOnIce)
         {
-            _rigidbody.velocity = new Vector3(movement.x * currentSpeed, yVelocity, movement.z * currentSpeed);
+            _rigidbody.linearVelocity = new Vector3(movement.x * currentSpeed, yVelocity, movement.z * currentSpeed);
             Debug.Log($"Current Speed: {currentSpeed}");
             isSlidingOnIce = false;
         }
@@ -426,4 +426,5 @@ public class PlayerController : MonoBehaviour
         _playerStamina.OnStaminaRecovered -= HandleStaminaRecovered;
         _playerStamina.OnStaminaBlocked -= HandleStaminaBlocked;
     }
+    
 }
